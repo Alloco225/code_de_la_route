@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "483754442098",
+    "project_id": "code-de-la-route-c41d0",
+    "storage_bucket": "code-de-la-route-c41d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483754442098:android:577eb67ea35e15384171eb",
+        "android_client_info": {
+          "package_name": "dev.amane.codedelaroute"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYo7a8OwmSCTjrpL9FCVcPCyS-9ANIsXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
