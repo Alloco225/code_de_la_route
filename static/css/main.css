@@ -1,9 +1,0 @@
-html,
-body,
-#app,
-#__nuxt,
-#__layout,
-#login-page,
-#register-page {
-  height: 100vh !important;
-}
