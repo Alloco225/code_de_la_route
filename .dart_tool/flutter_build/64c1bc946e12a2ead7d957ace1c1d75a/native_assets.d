@@ -1,0 +1,1 @@
+ /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/.dart_tool/flutter_build/64c1bc946e12a2ead7d957ace1c1d75a/native_assets.yaml: 

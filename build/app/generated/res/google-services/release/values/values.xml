@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">483754442098</string>
+    <string name="google_api_key" translatable="false">AIzaSyCYo7a8OwmSCTjrpL9FCVcPCyS-9ANIsXg</string>
+    <string name="google_app_id" translatable="false">1:483754442098:android:577eb67ea35e15384171eb</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCYo7a8OwmSCTjrpL9FCVcPCyS-9ANIsXg</string>
+    <string name="google_storage_bucket" translatable="false">code-de-la-route-c41d0.appspot.com</string>
+    <string name="project_id" translatable="false">code-de-la-route-c41d0</string>
+</resources>

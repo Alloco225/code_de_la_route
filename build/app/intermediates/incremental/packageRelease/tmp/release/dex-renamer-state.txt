@@ -1,0 +1,4 @@
+#Sat Mar 30 00:18:25 GMT 2024
+base.0=/Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

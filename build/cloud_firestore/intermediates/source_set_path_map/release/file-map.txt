@@ -1,0 +1,16 @@
+io.flutter.plugins.firebase.firestore.cloud_firestore-jetified-window-java-1.0.0-beta04-0 /Users/amane/.gradle/caches/transforms-3/297b8caba905b407ec163da52ec549bc/transformed/jetified-window-java-1.0.0-beta04/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-jetified-firebase-common-20.4.2-1 /Users/amane/.gradle/caches/transforms-3/2ac1886cc7fa19cd13ffe1a07da61f70/transformed/jetified-firebase-common-20.4.2/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-core-1.6.0-2 /Users/amane/.gradle/caches/transforms-3/48c080545087e18535dda2f49b69c49f/transformed/core-1.6.0/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-jetified-play-services-basement-18.1.0-3 /Users/amane/.gradle/caches/transforms-3/5acce594a4d69a9214987f316758b9f4/transformed/jetified-play-services-basement-18.1.0/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-jetified-annotation-experimental-1.1.0-4 /Users/amane/.gradle/caches/transforms-3/613ac54db8a291cdfcd3f19def5594a2/transformed/jetified-annotation-experimental-1.1.0/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-jetified-window-1.0.0-beta04-5 /Users/amane/.gradle/caches/transforms-3/768f74a9029751ad6680571d32613ab7/transformed/jetified-window-1.0.0-beta04/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-jetified-play-services-base-18.0.1-6 /Users/amane/.gradle/caches/transforms-3/d0e9f2c7a09fb63c01cef861f7163045/transformed/jetified-play-services-base-18.0.1/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-main-7 /Users/amane/.pub-cache/hosted/pub.dev/cloud_firestore-4.15.7/android/src/main/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-release-8 /Users/amane/.pub-cache/hosted/pub.dev/cloud_firestore-4.15.7/android/src/release/res
+io.flutter.plugins.firebase.firestore.cloud_firestore-pngs-9 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/cloud_firestore/generated/res/pngs/release
+io.flutter.plugins.firebase.firestore.cloud_firestore-resValues-10 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/cloud_firestore/generated/res/resValues/release
+io.flutter.plugins.firebase.firestore.cloud_firestore-rs-11 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/cloud_firestore/generated/res/rs/release
+io.flutter.plugins.firebase.firestore.cloud_firestore-mergeReleaseResources-12 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/cloud_firestore/intermediates/incremental/release/mergeReleaseResources/merged.dir
+io.flutter.plugins.firebase.firestore.cloud_firestore-mergeReleaseResources-13 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/cloud_firestore/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+io.flutter.plugins.firebase.firestore.cloud_firestore-merged_res-14 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/cloud_firestore/intermediates/merged_res/release
+io.flutter.plugins.firebase.firestore.cloud_firestore-packaged_res-15 /Users/amane/Documents/A++/MINI_APPS/code_de_la_route/build/firebase_core/intermediates/packaged_res/release
