@@ -1,0 +1,86 @@
+[
+    {
+        "category": "signals",
+        "questions": [
+            {
+                "type": "image",
+                "question": "De quel signe s'agit-il ?",
+                "imageUrl": "https://assets.stickpng.com/thumbs/585f9250cb11b227491c357d.png",
+                "answers": [
+                    {
+                        "key": "A",
+                        "value": "Panneau Stop"
+                    },
+                    {
+                        "key": "B",
+                        "value": "Panneau Céder le passage"
+                    },
+                    {
+                        "key": "C",
+                        "value": "Panneau Arrêt et stationnement interdits"
+                    },
+                    {
+                        "key": "D",
+                        "value": "Panneau Rond Point"
+                    }
+                ],
+                "correctAnswerKey": "D"
+            },
+            {
+                "type": "reverse_image",
+                "question": "Selectionnez le panneau Stop",
+                "answers": [
+                    {
+                        "key": "A",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/585f8f74cb11b227491c355d.png"
+                    },
+                    {
+                        "key": "B",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/585f8f29cb11b227491c3555.png"
+                    },
+                    {
+                        "key": "C",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/58595b324f6ae202fedf2838.png"
+                    },
+                    {
+                        "key": "D",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/585f8effcb11b227491c3551.png"
+                    }
+                ],
+                "correctAnswerKey": "C"
+                
+            },
+            {
+                "type": "reverse_sound",
+                "question": "De quel signe s'agit-il ?",
+                "imageUrl": "https://assets.stickpng.com/thumbs/585f9250cb11b227491c357d.png",
+                
+                "correctAnswer": "Panneau Rond Point"
+            },
+            {
+                "type": "sound",
+                "question": "Panneau Stop",
+                "answers": [
+                    {
+                        "key": "A",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/585f8f74cb11b227491c355d.png"
+                    },
+                    {
+                        "key": "B",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/585f8f29cb11b227491c3555.png"
+                    },
+                    {
+                        "key": "C",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/58595b324f6ae202fedf2838.png"
+                    },
+                    {
+                        "key": "D",
+                        "imageUrl": "https://assets.stickpng.com/thumbs/585f8effcb11b227491c3551.png"
+                    }
+                ],
+                "correctAnswerKey": "C"
+                
+            }
+        ]
+    }
+]

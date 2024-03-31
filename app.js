@@ -19,6 +19,18 @@ app.get('/scrape', async (req, res) => {
     }
 });
 
+app.get('/import', async (req, res) => {
+    try {
+        const totalPages = await getTotalPages();
+        const allProducts = await scrapeAllPages(totalPages);
+        await saveDataToFile(allProducts, 'panneaux.json');
+        res.json({ message: 'Scraping complete' });
+    } catch (error) {
+        console.error('Error scraping data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 async function getTotalPages() {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
