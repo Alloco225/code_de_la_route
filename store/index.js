@@ -10,20 +10,20 @@ new Vuex.Store({
     }
   },
   modules: {
-    todos: {
+    quizzes: {
       namespaced: true,
       state: () => ({
-        list: []
+        questions: []
       }),
       mutations: {
         add(state, { text }) {
-          state.list.push({
+          state.questions.push({
             text,
             done: false
           })
         },
         remove(state, { todo }) {
-          state.list.splice(state.list.indexOf(todo), 1)
+          state.questions.splice(state.questions.indexOf(todo), 1)
         },
         toggle(state, { todo }) {
           todo.done = !todo.done

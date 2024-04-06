@@ -23,6 +23,9 @@
 <script>
 export default {
   name: 'QuestionTimer',
+  props: {
+    pause: { type: Boolean, default: false,}
+  },
   data() {
     return {
       START_TIME: 10, // seconds
@@ -46,6 +49,7 @@ export default {
       this.time = this.START_TIME
 
       this.timer = setInterval(() => {
+        if(this.pause) return;
         this.time -= .1
         if (this.time < 0.2) {
           clearInterval(this.timer)
