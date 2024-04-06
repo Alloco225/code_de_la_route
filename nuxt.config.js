@@ -14,7 +14,14 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '/main.css' },
-      ],
+
+      
+
+    ],
+    script: [
+      { type:"module", src:"https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"},
+      { nomodule: true, src:"https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"},
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

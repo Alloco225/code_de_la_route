@@ -55,6 +55,7 @@ export default {
           //
 
           clearInterval(this.timer)
+          
           this.$emit('time-expired', this.time);
         }
       }, 100) // 1 second

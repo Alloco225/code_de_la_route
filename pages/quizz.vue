@@ -7,7 +7,7 @@
     <div class="p-2">
       <h2 class="text-xl">Question {{currentQuestionIndex+1}}/{{questions?.length}}</h2>
 
-      <question-timer :pause="pauseTimer || isLoading" @time-expired="onTimeExpired"></question-timer>
+      <question-timer :pause="pauseTimer || isLoading || isQuizzOver" @time-expired="onTimeExpired"></question-timer>
     </div>
 
     <div
@@ -37,20 +37,13 @@
           v-for="(answer, i) in currentQuestion?.answers"
           :key="i"
           @click="toggleSelectAnswer(answer)"
-          class="relative rounded text-gray-800 shadow px-2 py-1"
-          :class="[
-            selectedAnswer == answer
-              ? 'bg-orange-500 text-white'
-              : 'bg-gray-200',
-            showCorrectAnswer
-              ? selectedAnswer == answer
-                ? selectedAnswer.isCorrect
-                  ? 'bg-green-500 text-white'
-                  : 'bg-red-500 text-white'
-                : 'bg-gray-700'
-              : '',
-            showCorrectAnswer ? (answer?.isCorrect ? 'bg-green-500 text-white' : '') : '',
-          ]"
+          class="relative rounded text-gray-800 bg-gray-200 shadow px-2 py-1"
+          :class="{
+              'bg-orange-500 text-white': !showCorrectAnswer && selectedAnswer == answer,
+              'bg-green-500 text-white': showCorrectAnswer && answer?.isCorrect,
+              'bg-red-500 text-white': showCorrectAnswer && answer == selectedAnswer && !answer?.isCorrect,
+              'bg-gray-600': showCorrectAnswer && answer != selectedAnswer,
+          }"
         >
           <span class="absolute left-3">{{ i + 1 }}</span>
           <span>{{ answer.content }}</span>
@@ -70,6 +63,9 @@
         Continuer
       </button>
     </div>
+
+
+    <quizz-ended v-if="isQuizzOver" :questionCount="questions.length" :correctAnswerCount="answersList?.filter(item => item.isCorrect).length"></quizz-ended>
   </div>
 </template>
 
@@ -81,9 +77,11 @@ export default {
   name: 'Quizz',
   data() {
     return {
+      answersList: [],
       currentQuestionIndex: 0,
 
       isLoading: true,
+      isQuizzOver: false,
       pauseTimer: false,
       questions: [],
 
@@ -95,15 +93,24 @@ export default {
     this.initQuizz()
   },
   computed: {
+
     currentQuestion() {
       return this.questions[this.currentQuestionIndex] ?? null
     },
+    isLastQuestion(){
+      return this.currentQuestionIndex == this.questions.length -1;
+    }
   },
   methods: {
     clearLoading() {
       setTimeout(() => {
         this.isLoading = false
       }, 300)
+    },
+
+    endQuizz(){
+      this.isQuizzOver = true;
+      // TODO save results on server
     },
     initQuizz() {
       this.setLoading();
@@ -114,12 +121,19 @@ export default {
       this.clearLoading()
     },
     loadNextQuestion() {
-      this.isLoading = true
+      if(this.isLastQuestion){
+        // show end screen;
+        this.endQuizz();
+        return;
+      }
       this.currentQuestionIndex++
+
     },
+
     onTimeExpired(){
-      // game over, show results;
-      alert('Temps écoulé')
+      // TODO add popup
+      // go to next question
+      this.loadNextQuestion();
     },
     submitAnswer() {
       if(!this.selectedAnswer) return;
