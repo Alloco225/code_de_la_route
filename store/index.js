@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import quizzes from './quizzes'
 
 new Vuex.Store({
   state: () => ({
@@ -10,7 +11,8 @@ new Vuex.Store({
     }
   },
   modules: {
-    quizzes: {
+    quizzes,
+    todos: {
       namespaced: true,
       state: () => ({
         questions: []

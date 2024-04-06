@@ -5,9 +5,9 @@
     <!-- <countdown></countdown> -->
 
     <div class="p-2">
-      <h2 class="text-xl">Question 2/10</h2>
+      <h2 class="text-xl">Question {{currentQuestionIndex+1}}/{{questions?.length}}</h2>
 
-      <question-timer :pause="pauseTimer || isLoading"></question-timer>
+      <question-timer :pause="pauseTimer || isLoading" @time-expired="onTimeExpired"></question-timer>
     </div>
 
     <div
@@ -85,28 +85,8 @@ export default {
 
       isLoading: true,
       pauseTimer: false,
-      questions: [
-        {
-          question: 'Quel est le nom de ce signe ?',
-          image: '/degagement.jpg',
-          answers: [
-            {
-              isCorrect: true,
+      questions: [],
 
-              content: 'Panneau stop',
-            },
-            {
-              content: 'Panneau passage piéton',
-            },
-            {
-              content: 'Panneau chaussée glissante',
-            },
-            {
-              content: 'Panneau arrêt obligatoire',
-            },
-          ],
-        },
-      ],
       selectedAnswer: null,
       showCorrectAnswer: false,
     }
@@ -126,12 +106,20 @@ export default {
       }, 300)
     },
     initQuizz() {
+      this.setLoading();
+      // load questions
+      this.questions = this.$store.state.quizzes.questions;
+      console.log("initQuizz", this.questions);
       this.currentQuestionIndex = 0
       this.clearLoading()
     },
     loadNextQuestion() {
       this.isLoading = true
       this.currentQuestionIndex++
+    },
+    onTimeExpired(){
+      // game over, show results;
+      alert('Temps écoulé')
     },
     submitAnswer() {
       if(!this.selectedAnswer) return;

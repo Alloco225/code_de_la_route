@@ -52,7 +52,10 @@ export default {
         if(this.pause) return;
         this.time -= .1
         if (this.time < 0.2) {
+          //
+
           clearInterval(this.timer)
+          this.$emit('time-expired', this.time);
         }
       }, 100) // 1 second
     },
