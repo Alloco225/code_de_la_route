@@ -4,7 +4,7 @@
     <!-- <countdown></countdown> -->
 
     <div class="p-2">
-      Timer
+      <h2>Question 2/10</h2>
 
       <question-timer></question-timer>
     </div>

@@ -1,20 +1,20 @@
 <template>
   <div class="flex gap-2 mt-3 items-center">
     <div class="relative w-full">
-      <div class="h-5 p-0.5 w-full rounded-xl bg-gray-200">
+      <div class="h-3 p-0.5 w-full rounded-xl bg-gray-200">
         <div
           v-show="percentage >= 3"
-          class="z-10 h-full rounded-xl bg-blue-500 transition-all duration-200 ease-out"
+          class="z-10 h-full rounded-xl bg-blue-500 transition-all duration-300 ease-in-out"
           :style="'width:' + percentage + '%;'"
           :class="{
-            'bg-yellow-500': percentage <= 70,
-            'bg-orange-500' : percentage <= 40,
-            'bg-red-500': percentage <= 20,
+            'bg-yellow-500': percentage <= 80,
+            'bg-orange-500' : percentage <= 50,
+            'bg-red-500': percentage <= 30,
             }"
         ></div>
       </div>
     </div>
-    <span class="w-10 h-10 flex justify-center items-center font-semibold text-xl">
+    <span class="w-5 h-5 flex justify-center items-center font-semibold text-xl">
       {{time.toFixed(0)}}
     </span>
   </div>
