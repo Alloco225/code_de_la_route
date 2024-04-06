@@ -1,5 +1,5 @@
 <template lang="pug">
-  landing
+  landing.h-full
 </template>
 
 <script>
