@@ -44,28 +44,28 @@
         ></div>
       </div>
       <section v-else class="flex flex-col justify-around h-full">
-        <div class="p-2 mb-5">
+        <div class="flex flex-col gap-3 h-full p-2 mb-5">
           <h2 class="font-medium p-5 mb-5 text-2xl">
             {{ currentQuestion?.question }}
           </h2>
 
           <div
-            class="rounded flex items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800 p-2"
+            class="rounded flex h-full items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800 p-2"
           >
             <img
               :src="currentQuestion?.image"
-              class="w-full object-contain h-32"
+              class="w-full object-contain h-36 md:h-32"
               alt="Image de la question"
             />
           </div>
         </div>
 
-        <div class="grid grid-cols-1 p-2 mt-5 gap-2">
+        <div class="grid grid-cols-1 p-2 mt-5 gap-3">
           <button
             v-for="(answer, i) in currentQuestion?.answers"
             :key="i"
             @click="toggleSelectAnswer(answer)"
-            class="relative rounded text-gray-800 bg-gray-200 shadow px-2 py-1"
+            class="relative rounded text-gray-800 bg-gray-200 shadow p-3"
             :class="{
               'bg-orange-500 text-white':
                 !showCorrectAnswer && selectedAnswer == answer,

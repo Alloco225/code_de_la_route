@@ -3,7 +3,7 @@
 
     <div class="mt-5 md:my-10 text-white text-center">
       <h1 class="text-xl md:text-4xl">Quizz code de la route</h1>
-      <span>v0.1.2</span>
+      <span>v0.1.3</span>
     </div>
 
     <div class="grid md:grid-cols-2 gap-5 md:gap-3 md:mt-10 ">
