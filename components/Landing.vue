@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-2 gap-3 mt-10 ">
       <article @click="gotoCategory(category)"  v-for="(category) in categories" :key="category.id" class="rounded hover:shadow-lg cursor-pointer md:rounded-lg overflow-hidden border relative h-32">
-        <img :src="category.image" alt="" class="absolute w-full h-full">
+        <img :src="category.imageUrl" alt="" class="absolute w-full h-full">
 
         <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20"></div>
         <div class="absolute bottom-0 text-md  bg-gradient-to-b from-transparent to-black text-white p-2 w-full">
@@ -36,22 +36,24 @@ export default {
   },
   methods: {
     async fetchCategories(){
+
+      this.categories = this.$store.state.categories.list;
       // load categories from firebase
-      this.categories = [
-        {
-          id: 'signalisation',
-          name: 'Signalisation',
-          image: '/signalisation.jpeg',
-        },
-        {
-          id: 'degagement',
-          name: 'Dégagement',
-          image: '/degagement.jpg',
-        },
-      ]
+      // this.categories = [
+      //   {
+      //     id: 'signalisation',
+      //     name: 'Signalisation',
+      //     image: '/signalisation.jpeg',
+      //   },
+      //   {
+      //     id: 'degagement',
+      //     name: 'Dégagement',
+      //     image: '/degagement.jpg',
+      //   },
+      // ]
     },
     gotoCategory(category){
-      this.$router.push({name: 'quizzes', params: {category_id: category.id}})
+      this.$router.push('/quizzes/' + category.id)
     }
   }
 }

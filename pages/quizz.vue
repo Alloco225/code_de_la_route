@@ -132,7 +132,7 @@ export default {
     initQuizz() { 
       this.setLoading();
       // load questions
-      this.questions = this.$store.state.quizzes.questions;
+      this.questions = this.$store.state.quizzes.list;
       console.log("initQuizz", this.questions);
       this.currentQuestionIndex = 0
       this.clearLoading()

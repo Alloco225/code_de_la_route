@@ -1,6 +1,6 @@
 
 const state = {
-  questions: [
+  list: [
     {
       question: 'Quel est le nom de ce signe ?',
       image: '/degagement.jpg',
