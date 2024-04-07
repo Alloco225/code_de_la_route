@@ -21,7 +21,7 @@ export default {
   name: "StartCountdown",
   data() {
     return {
-      time: 3,
+      time: 2,
       timer: null,
     };
   },
