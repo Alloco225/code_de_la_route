@@ -138,7 +138,7 @@ export default {
       this.clearLoading()
 
       console.log("this.$refs")
-      this.$refs.QuestionTimer.startTimer();
+      this.$refs.QuestionTimer.startTimer(); 
     },
     loadNextQuestion() {
       console.log("loadNext")
