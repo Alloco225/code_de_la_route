@@ -5,7 +5,11 @@
     <!-- <countdown></countdown> -->
 
     <div class="p-2">
-      <h2 class="text-xl">Question {{currentQuestionIndex+1}}/{{questions?.length ?? '--'}}</h2>
+      <h2 class="text-xl flex justify-center gap-3">Question
+        <span>
+          {{currentQuestionIndex+1}} / {{questions?.length ?? '--'}}
+        </span>
+        </h2>
 
       <question-timer ref="QuestionTimer" :pause="shouldPauseTimer" @time-expired="onTimeExpired"></question-timer>
     </div>
@@ -20,9 +24,9 @@
         class="mx-auto border-4 border-blue-500 rounded-lg animate-spin h-16 w-16"
       ></div>
     </div>
-    <section v-else>
+    <section v-else class="flex flex-col justify-around h-full">
       <div class="p-2 mb-5">
-        <h2 class="p-5">{{ currentQuestion?.question }}</h2>
+        <h2 class="font-medium p-5 mb-5 text-2xl">{{ currentQuestion?.question }}</h2>
 
         <div
           class=" rounded flex items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800 p-2"
@@ -32,7 +36,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 p-2 gap-2">
+      <div class="grid grid-cols-1 p-2 mt-5 gap-2">
         <button
           v-for="(answer, i) in currentQuestion?.answers"
           :key="i"
