@@ -5,9 +5,9 @@
     <!-- <countdown></countdown> -->
 
     <div class="p-2">
-      <h2 class="text-xl">Question {{currentQuestionIndex+1}}/{{questions?.length}}</h2>
+      <h2 class="text-xl">Question {{currentQuestionIndex+1}}/{{questions?.length ?? '--'}}</h2>
 
-      <question-timer :pause="pauseTimer || isLoading || isQuizzOver" @time-expired="onTimeExpired"></question-timer>
+      <question-timer ref="QuestionTimer" :pause="shouldPauseTimer" @time-expired="onTimeExpired"></question-timer>
     </div>
 
     <div
@@ -42,7 +42,7 @@
               'bg-orange-500 text-white': !showCorrectAnswer && selectedAnswer == answer,
               'bg-green-500 text-white': showCorrectAnswer && answer?.isCorrect,
               'bg-red-500 text-white': showCorrectAnswer && answer == selectedAnswer && !answer?.isCorrect,
-              'bg-gray-600': showCorrectAnswer && answer != selectedAnswer,
+              'bg-gray-600': showCorrectAnswer && answer != selectedAnswer && !answer?.isCorrect,
           }"
         >
           <span class="absolute left-3">{{ i + 1 }}</span>
@@ -60,12 +60,13 @@
           isLoading ? 'invisible' : 'visible',
         ]"
       >
-        Continuer
+
+        {{isSubmittingAnswer ? 'Question suivante...' : 'Continuer'}}
       </button>
     </div>
 
 
-    <quizz-ended v-if="isQuizzOver" :questionCount="questions.length" :correctAnswerCount="answersList?.filter(item => item.isCorrect).length"></quizz-ended>
+    <quizz-ended v-if="isQuizzOver" @restart="restartQuizz" :questionCount="questions.length" :correctAnswerCount="answersList?.filter(item => item.isCorrect).length"></quizz-ended>
   </div>
 </template>
 
@@ -82,6 +83,7 @@ export default {
 
       isLoading: true,
       isQuizzOver: false,
+      isSubmittingAnswer: false,
       pauseTimer: false,
       questions: [],
 
@@ -99,6 +101,9 @@ export default {
     },
     isLastQuestion(){
       return this.currentQuestionIndex == this.questions.length -1;
+    },
+    shouldPauseTimer(){
+      return this.pauseTimer || this.isLoading || this.isQuizzOver
     }
   },
   methods: {
@@ -107,8 +112,20 @@ export default {
         this.isLoading = false
       }, 300)
     },
+    clearQuizzData(){
+      this.answersList = [];
+      this.currentQuestionIndex = 0;
+      this.isLoading = false;
+      this.isQuizzOver = false;
+      this.isSubmittingAnswer = false;
+      this.pauseTimer = false;
+      this.questions = [];
+      this.selectedAnswer = null;
+      this.showCorrectAnswer = false;
+    },
 
     endQuizz(){
+      console.log("endQuizz")
       this.isQuizzOver = true;
       // TODO save results on server
     },
@@ -119,14 +136,28 @@ export default {
       console.log("initQuizz", this.questions);
       this.currentQuestionIndex = 0
       this.clearLoading()
+
+      console.log("this.$refs")
+      this.$refs.QuestionTimer.startTimer();
     },
     loadNextQuestion() {
+      console.log("loadNext")
+      this.isSubmittingAnswer = false;
+      this.selectedAnswer = null;
+
+      this.setLoading();
       if(this.isLastQuestion){
         // show end screen;
         this.endQuizz();
+        this.clearLoading();
+
         return;
       }
-      this.currentQuestionIndex++
+      this.currentQuestionIndex++;
+      //
+      this.showCorrectAnswer = false
+      this.clearLoading();
+      this.pauseTimer = false
 
     },
 
@@ -135,13 +166,23 @@ export default {
       // go to next question
       this.loadNextQuestion();
     },
+    restartQuizz(){
+      // 
+      console.log("restart")
+      this.clearQuizzData();
+      this.initQuizz();
+    },
     submitAnswer() {
       if(!this.selectedAnswer) return;
+      if(this.isSubmittingAnswer) return;
       // stop timer
       this.pauseTimer = true
       // show wrong answers
       this.showCorrectAnswer = true
+      this.isSubmittingAnswer = true;
+      this.answersList.push(this.selectedAnswer)
       // move to next question
+      setTimeout(this.loadNextQuestion, 1000);
     },
     setLoading() {
       this.isLoading = true

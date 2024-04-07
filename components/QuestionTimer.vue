@@ -46,8 +46,11 @@ export default {
   },
   methods: {
     startTimer() {
+      console.log("startTimer")
       this.time = this.START_TIME
 
+      clearInterval(this.timer);
+      
       this.timer = setInterval(() => {
         if(this.pause) return;
         this.time -= .1
@@ -55,7 +58,7 @@ export default {
           //
 
           clearInterval(this.timer)
-          
+
           this.$emit('time-expired', this.time);
         }
       }, 100) // 1 second
