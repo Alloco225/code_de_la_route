@@ -132,13 +132,14 @@ export default {
     initQuizz() { 
       this.setLoading();
       // load questions
-      this.questions = this.$store.state.quizzes.list.filter(item => item.category_id == this.$route.params.category_id) ?? []
+      this.quizz = this.$store.state.quizzes.list.filter(item => item.category_id == this.$route.params.category_id)[this.$route.params?.index];
+      this.questions = this.quizz?.questions;
       console.log("initQuizz", this.questions);
       this.currentQuestionIndex = 0
       this.clearLoading()
 
       console.log("this.$refs")
-      this.restartTimer();
+      this.$refs.QuestionTimer.startTimer(); 
     },
     loadNextQuestion() {
       console.log("loadNext")
@@ -150,14 +151,15 @@ export default {
         // show end screen;
         this.endQuizz();
         this.clearLoading();
+
         return;
       }
-      this.showCorrectAnswer = false
       this.currentQuestionIndex++;
       //
+      this.showCorrectAnswer = false
       this.clearLoading();
       this.pauseTimer = false
-      this.restartTimer();
+
     },
 
     onTimeExpired(){
@@ -170,9 +172,6 @@ export default {
       console.log("restart")
       this.clearQuizzData();
       this.initQuizz();
-    },
-    restartTimer(){
-      this.$refs.QuestionTimer.startTimer(); 
     },
     submitAnswer() {
       if(!this.selectedAnswer) return;
