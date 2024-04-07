@@ -1,5 +1,5 @@
 <template lang="pug">
-  landing.h-full.bg-red-500
+  landing.h-full.bg-gray-700
 </template>
 
 <script>
