@@ -25,9 +25,9 @@
         <h2 class="p-5">{{ currentQuestion?.question }}</h2>
 
         <div
-          class=" rounded flex items-center justify-center border bg-gray-200 text-gray-800"
+          class=" rounded flex items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800 p-2"
         >
-          <img :src="currentQuestion?.image" alt="Image de la question">
+          <img :src="currentQuestion?.image" class="w-full object-contain  h-32" alt="Image de la question">
 
         </div>
       </div>
@@ -45,7 +45,7 @@
               'bg-gray-600': showCorrectAnswer && answer != selectedAnswer && !answer?.isCorrect,
           }"
         >
-          <span class="absolute left-3">{{ i + 1 }}</span>
+          <!-- <span class="absolute left-3">{{ i + 1 }}</span> -->
           <span>{{ answer.content }}</span>
         </button>
       </div>
@@ -129,7 +129,7 @@ export default {
       this.isQuizzOver = true;
       // TODO save results on server
     },
-    initQuizz() { 
+    initQuizz() {
       this.setLoading();
       // load questions
       this.questions = this.$store.state.quizzes.list.filter(item => item.category_id == this.$route.params.category_id) ?? []
@@ -166,13 +166,13 @@ export default {
       this.loadNextQuestion();
     },
     restartQuizz(){
-      // 
+      //
       console.log("restart")
       this.clearQuizzData();
       this.initQuizz();
     },
     restartTimer(){
-      this.$refs.QuestionTimer.startTimer(); 
+      this.$refs.QuestionTimer.startTimer();
     },
     submitAnswer() {
       if(!this.selectedAnswer) return;
@@ -192,7 +192,8 @@ export default {
     toggleSelectAnswer(answer) {
       if(this.showCorrectAnswer) return;
       if (this.selectedAnswer == answer) {
-        this.selectedAnswer = null
+        // this.selectedAnswer = null
+        this.submitAnswer();
         return
       }
       this.selectedAnswer = answer

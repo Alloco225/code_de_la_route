@@ -8,9 +8,9 @@
         'bg-blue-500': score < MARK_TOTAL,
         'bg-orange-500': score <= MARK_TOTAL / 2,
         'bg-red-500': score <= MARK_TOTAL / 3,
-      }">{{score}}/{{MARK_TOTAL}}</div>
+      }">{{score.toFixed(0)}}/{{MARK_TOTAL}}</div>
 
-    
+
     <div class="flex flex-col gap-2 mt-10">
       <div class="flex gap-2">
         <button @click="goBackToQuizzList" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-blue-500">
@@ -27,7 +27,7 @@
         <ion-icon name="home-outline"></ion-icon>
         Menu
       </button>
-      
+
     </div>
   </section>
 </template>
@@ -67,7 +67,7 @@ export default {
       this.score = percentage / coefficient;
     },
     goBackToQuizzList(){
-      this.$router.push({name: 'quizzes'})
+      this.$router.back();
     },
     goToMenu(){
       this.$router.push({name: 'index'})

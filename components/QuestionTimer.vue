@@ -14,7 +14,7 @@
         ></div>
       </div>
     </div>
-    <span class="w-5 h-5 flex justify-center items-center font-semibold text-xl">
+    <span @click="forcePause =! forcePause" class="w-5 h-5 flex justify-center items-center font-semibold text-xl">
       {{time.toFixed(0)}}
     </span>
   </div>
@@ -28,9 +28,11 @@ export default {
   },
   data() {
     return {
+      forcePause: false,
       START_TIME: 10, // seconds
       time: 0, // seconds,
       timer: null,
+
     }
   },
   mounted() {
@@ -50,9 +52,9 @@ export default {
       this.time = this.START_TIME
 
       clearInterval(this.timer);
-      
+
       this.timer = setInterval(() => {
-        if(this.pause) return;
+        if(this.pause || this.forcePause) return;
         this.time -= .1
         if (this.time < 0.2) {
           //
