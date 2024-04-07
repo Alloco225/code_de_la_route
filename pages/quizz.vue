@@ -129,7 +129,7 @@ export default {
       this.isQuizzOver = true;
       // TODO save results on server
     },
-    initQuizz() {
+    initQuizz() { 
       this.setLoading();
       // load questions
       this.questions = this.$store.state.quizzes.questions;
