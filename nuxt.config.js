@@ -15,7 +15,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '/main.css' },
 
-      
+
 
     ],
     script: [
@@ -30,7 +30,10 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    // {src: '~/plugins/confetti.js'}
+    '~/plugins/confetti.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

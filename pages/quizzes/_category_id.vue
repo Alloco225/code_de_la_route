@@ -180,6 +180,7 @@ export default {
         this.$store.state.quizzes.list.filter(
           (item) => item.category_id == this.$route.params.category_id
         ) ?? []
+      this.questions = this.questions.slice(0, 3)
       console.log('initQuizz', this.questions)
       this.shuffle(this.questions)
       this.currentQuestionIndex = 0

@@ -3,7 +3,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f901ccb11b227491c3570.png",
+
       image: "/signals/585f901ccb11b227491c3570.png",
       answers: [
         {
@@ -24,7 +24,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f9250cb11b227491c357d.png",
+
       image: "/signals/585f9250cb11b227491c357d.png",
       answers: [
 
@@ -68,7 +68,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8f6dcb11b227491c355c.png",
+
       image: "/signals/585f8f6dcb11b227491c355c.png",
       answers: [
 
@@ -88,7 +88,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8f49cb11b227491c3558.png",
+
       image: "/signals/585f8f49cb11b227491c3558.png",
       answers: [
 
@@ -107,7 +107,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8f74cb11b227491c355d.png",
+
       image: "/signals/585f8f74cb11b227491c355d.png",
       answers: [
         {
@@ -122,7 +122,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8f29cb11b227491c3555.png",
+
       image: "/signals/585f8f29cb11b227491c3555.png",
       answers: [
         {
@@ -144,7 +144,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8f40cb11b227491c3557.png",
+
       image: "/signals/585f8f40cb11b227491c3557.png",
       answers: [
         {
@@ -162,7 +162,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8ef8cb11b227491c3550.png",
+
       image: "/signals/585f8ef8cb11b227491c3550.png",
       answers: [
 
@@ -182,7 +182,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f8fb9cb11b227491c3563.png",
+
       image: "/signals/585f8fb9cb11b227491c3563.png",
       answers: [
         {
@@ -200,7 +200,7 @@ const state = {
     {
       category_id: "signals",
       question: "De quel panneau s'agit-il ?",
-      // image: "https://assets.stickpng.com/thumbs/585f900ecb11b227491c356e.png",
+
       image: "/signals/585f900ecb11b227491c356e.png",
       answers: [
 
@@ -223,7 +223,12 @@ const state = {
 }
 
 
-const getters = {}
+const getters = {
+  list(){
+    return []
+    return state.list.slice(0, 3)
+  }
+}
 const mutations = {}
 
 const actions = {

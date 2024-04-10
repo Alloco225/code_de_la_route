@@ -65,6 +65,9 @@ export default {
       // find percentage value in regard to MARK_TOTAL which is 100/5
       const coefficient = 100 / this.MARK_TOTAL;
       this.score = percentage / coefficient;
+      if(this.score == this.MARK_TOTAL){
+        this.throwConfetti();
+      }
     },
     goBackToQuizzList(){
       this.$router.back();
@@ -75,6 +78,15 @@ export default {
     restart(){
       this.$emit('restart')
     },
+    throwConfetti(){
+      setTimeout(() => {
+        console.log("confetti !!");
+        this.$confetti.start();
+        setTimeout(() => {
+          this.$confetti.stop();
+        }, 2000);
+      }, 500);
+    }
   }
 }
 </script>

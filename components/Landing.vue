@@ -35,7 +35,8 @@ export default {
     this.fetchCategories();
   },
   mounted(){
-
+    console.log("mounted")
+    
   },
   methods: {
     async fetchCategories(){

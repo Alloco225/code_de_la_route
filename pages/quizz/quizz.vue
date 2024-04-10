@@ -129,16 +129,19 @@ export default {
       this.isQuizzOver = true;
       // TODO save results on server
     },
-    initQuizz() { 
+    initQuizz() {
       this.setLoading();
       // load questions
-      this.questions = this.$store.state.quizzes.list;
+      this.questions = this.$store.getters.quizzes.list.slice(0, 2)
+      console.log("questions sliced", this.questions);
       console.log("initQuizz", this.questions);
       this.currentQuestionIndex = 0
       this.clearLoading()
 
-      console.log("this.$refs")
-      this.$refs.QuestionTimer.startTimer(); 
+      // console.log("this.$refs")
+      // if(isQuizzOver){
+      //   this.$refs.QuestionTimer.startTimer();
+      // }
     },
     loadNextQuestion() {
       console.log("loadNext")
@@ -167,7 +170,7 @@ export default {
       this.loadNextQuestion();
     },
     restartQuizz(){
-      // 
+      //
       console.log("restart")
       this.clearQuizzData();
       this.initQuizz();
