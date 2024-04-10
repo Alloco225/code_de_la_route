@@ -1,4 +1,7 @@
 
+import QuizzDataService from "~/services/QuizzDataService"
+import CategoryDataService from "~/services/CategoryDataService"
+
 const state = {
   list: [
     {
@@ -16,9 +19,18 @@ const state = {
 
 
 const getters = {}
-const mutations = {}
+const mutations = {
+  SET_ALL(data){
+    state.list = data;
+  }
+}
 
-const actions = {}
+const actions = {
+  async fetchAll(commit){
+    const list = await CategoryDataService.getAll();
+    commit('SET_ALL', list)
+  }
+}
 
 
 export default {

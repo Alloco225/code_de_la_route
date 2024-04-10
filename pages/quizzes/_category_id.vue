@@ -106,8 +106,8 @@
       @start-quizz="restartTimer"
     ></countdown>
 
-      <!-- v-if="isQuizzOver" -->
     <quizz-ended
+      v-if="isQuizzOver"
       @restart="restartQuizz"
       :questionCount="questions.length"
       :correctAnswerCount="answersList?.filter((item) => item.isCorrect).length"
