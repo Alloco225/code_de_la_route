@@ -1,10 +1,12 @@
 import { initializeApp } from "firebase/app";
 import {
     getFirestore,
-    
     // collection,
     // getDocs
 } from "firebase/firestore/lite";
+
+import dotenv from 'dotenv'
+dotenv.config();
 
 let firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -14,7 +16,11 @@ let firebaseConfig = {
     messagingSenderId: process.env.FIREBASE_MESSAGIN_SENDER_ID,
     appId: process.env.FIREBASE_APP_ID,
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+
 };
+
+
+console.log("firebase", firebaseConfig, process.env.APP_URL)
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

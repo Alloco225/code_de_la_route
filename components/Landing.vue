@@ -55,9 +55,9 @@ export default {
   methods: {
     async fetchCategories(){
 
-      await this.$store.actions.categories.fetchAll();
+      await this.$store.dispatch('categories/fetchAll');
 
-      this.categories = this.$store.state.categories.list;
+      // this.categories = this.$store.state.categories.list;
       // load categories from firebase
       // this.categories = [
       //   {

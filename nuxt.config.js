@@ -1,5 +1,13 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  vite: {
+    define: {
+      // dont forgot about JSON.stringify, because it adds quotes
+      'process.env.APP_URL': JSON.stringify(process.env.APP_URL),
+      // for example
+      // 'process.env.APP_URL': '"https://myawesomesite.com"'
+    }
+  },
   ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head

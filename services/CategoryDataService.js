@@ -15,8 +15,8 @@ import {
 
 class CategoryDataService {
   async getAll() {
-    const collection = collection(db, "categories");
-    const snapshot = await getDocs(collection);
+    const col = collection(db, "categories");
+    const snapshot = await getDocs(col);
     // return snapshot.docs.map((doc) => doc.data());
     const list = snapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };

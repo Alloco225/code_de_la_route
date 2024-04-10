@@ -22,7 +22,7 @@ export default {
       this.$refs.bgm.pause();
     });
     window.addEventListener('focus', ()=>{
-      this.$refs.bgm.play();
+      // this.$refs.bgm.play();
     });
 
   },
@@ -30,7 +30,7 @@ export default {
     console.log("mounted")
     setTimeout(() => {
       // this.bgm.play();
-      this.$refs.bgm.play();
+      // this.$refs.bgm.play();
       // console.log("confetti !!");
       // this.$confetti.start();
     }, 1000);

@@ -16,6 +16,8 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.25.3",
+    "dotenv": "^16.4.5",
+    "firebase": "^10.10.0",
     "fs": "^0.0.1-security",
     "nuxt": "^2.15.8",
     "pug": "^3.0.2",
