@@ -11,6 +11,22 @@
       }">{{score.toFixed(0)}}/{{MARK_TOTAL}}</div>
 
 
+
+    <div class="text-center flex flex-col justify-center items-center gap-2 mt-5">
+      <span class="rounded-full p-2 w-16 h-16 flex justify-center items-center bg-white bg-opacity-40">
+        <ion-icon name="arrow-redo-outline" size="large"></ion-icon>
+      </span>
+      <span>
+        Partager mon score
+      </span>
+      <div class="flex justify-center gap-3 items-center">
+        <span v-for="platform in platforms" :key="platform.name">
+          <ion-icon :name="platform.icon" size="large"></ion-icon>
+        </span>
+      </div>
+    </div>
+
+
     <div class="flex flex-col gap-2 mt-10">
       <div class="flex gap-2">
         <button @click="goBackToQuizzList" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-blue-500">
@@ -29,6 +45,7 @@
       </button>
 
     </div>
+
   </section>
 </template>
 
@@ -51,6 +68,28 @@ export default {
     return {
       MARK_TOTAL: 20,
       score: 0,
+      platforms: [
+        {
+          name: "Whatsapp",
+          icon: 'logo-whatsapp',
+        },
+
+        {
+          name: "Facebook",
+          icon: "logo-facebook",
+          link: "",
+        },
+        {
+          name: "Twitter",
+          icon: "logo-twitter",
+          link: "",
+        },
+        {
+          name: "Linkedin",
+          icon: "logo-linkedin",
+          link: "",
+        },
+      ]
     }
   },
   mounted(){
@@ -77,6 +116,15 @@ export default {
     },
     restart(){
       this.$emit('restart')
+    },
+    shareScore(platform){
+      //
+      const indexer = {
+        "Whatsapp": 'https://api.whatsapp.com/send/?text=https%3A%2F%2Fwww.tiktok.com%2F%40nimay.ndolo%2Fvideo%2F7337019111794347306%3Fis_from_webapp%3D1%26sender_device%3Dpc%26web_id%3D7354054001593927173&type=custom_url&app_absent=0',
+        "Facebook": 'https://www.facebook.com/sharer/sharer.php?display=popup&sdk=joey&u=https%3A%2F%2Fwww.tiktok.com%2F%40nimay.ndolo%2Fvideo%2F7337019111794347306%3Fis_from_webapp%3D1%26sender_device%3Dpc%26web_id%3D7354054001593927173',
+        "Twitter": 'https://twitter.com/intent/tweet?refer_source=https%3A%2F%2Fwww.tiktok.com%2F%40nimay.ndolo%2Fvideo%2F7337019111794347306%3Fis_from_webapp%3D1%26sender_device%3Dpc%26web_id%3D7354054001593927173&text=https%3A%2F%2Fwww.tiktok.com%2F%40nimay.ndolo%2Fvideo%2F7337019111794347306%3Fis_from_webapp%3D1%26sender_device%3Dpc%26web_id%3D7354054001593927173',
+        "Linkedin": 'https://www.linkedin.com/sharing/share-offsite?url=https%3A%2F%2Fwww.tiktok.com%2F%40nimay.ndolo%2Fvideo%2F7337019111794347306%3Fis_from_webapp%3D1%26sender_device%3Dpc%26web_id%3D7354054001593927173',
+      }
     },
     throwConfetti(){
       setTimeout(() => {

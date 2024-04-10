@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="bg-gray-100")
+  div(class="bg-white h-full overflow-y-scroll")
     div(class="container mx-auto p-8")
       h1(class="text-2xl font-bold mb-4") Conditions générales d'utilisation de l'application
       p Date d'entrée en vigueur : 01/03/2024
