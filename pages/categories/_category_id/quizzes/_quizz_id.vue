@@ -1,16 +1,13 @@
 <template>
-  <!-- <quizz></quizz> -->
-  <div>
-    Quizz Details
-  </div>
+  <quizz :quizz_id="$route.params.quizz_id"></quizz>
 </template>
 
 <script>
+import Quizz from "~/components/Quizz.vue";
 export default {
-  name: 'CategoryQuizzDetails',
-}
+  components: { Quizz },
+  name: "CategoryQuizzDetails",
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

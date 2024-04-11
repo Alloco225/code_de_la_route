@@ -119,9 +119,16 @@
 import QuestionTimer from '~/components/QuestionTimer.vue'
 import Countdown from '~/components/StartCountdown.vue'
 import CategoryDataService from '~/services/CategoryDataService'
+import QuizzDataService from '~/services/QuizzDataService'
 export default {
   components: { Countdown, QuestionTimer },
   name: 'Quizz',
+  props: {
+    quizz_id: {
+      type: [String, Number],
+      required: true,
+    }
+  },
   data() {
     return {
       answersList: [],
@@ -134,6 +141,7 @@ export default {
       isSubmittingAnswer: false,
       pauseTimer: true,
       questions: [],
+      quizz: null,
 
       selectedAnswer: null,
       showCorrectAnswer: false,
@@ -179,7 +187,10 @@ export default {
     },
     async fetchQuizz(){
       console.log("fetchQuizz");
-      await this.$store.dispatch('quizzes/fetch', this.category_id);
+      // await this.$store.dispatch('quizzes/fetchOne', this.category_id);
+      this.quizz = await QuizzDataService.getOne(this.quizz_id)
+      console.log("result", this.quizz)
+      this.questions = this.quizz.questions;
     },
     endQuizz() {
       console.log('endQuizz')

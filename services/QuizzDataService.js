@@ -29,6 +29,11 @@ class QuizzDataService {
     return list;
   }
 
+  async getOne(id) {
+    const col = doc(db, "quizzes", id);
+    const snapshot = await getDoc(col);
+    return { id: snapshot.id, ...snapshot.data() };
+  }
   async get(category_id) {
     const col = query(collection(db, "quizzes"), where("category", "==", category_id));
     const snapshot = await getDocs(col);
