@@ -46,9 +46,10 @@ export default
     }
   },
   created(){
-    this.fetchCategories();
-
     this.initApp();
+
+    this.fetchAppData();
+
   },
   mounted(){
     console.log("mounted")
@@ -72,6 +73,12 @@ export default
           version          : process.env.FACEBOOK_AUTH_VERSION,
         });
       };
+    },
+    async fetchAppData(){
+
+      await this.$store.dispatch('categories/fetchAll');
+      await this.$store.dispatch('quizzes/fetchAll');
+      await this.$store.dispatch('questions/fetchAll');
     },
     async fetchCategories(){
       await this.$store.dispatch('categories/fetchAll');
