@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import categories from './categories'
-import quizzes from './quizzes'
+import quizzes from './quizzes8'
+import auth from './auth'
 
 new Vuex.Store({
   state: () => ({
@@ -12,6 +13,7 @@ new Vuex.Store({
     }
   },
   modules: {
+    auth,
     categories,
     quizzes,
 

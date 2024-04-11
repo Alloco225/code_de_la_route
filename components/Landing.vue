@@ -25,10 +25,7 @@
     </div>
 
     <div class="flex justify-center items-center">
-      <button class="flex justify-center gap-2 px-3 py-2 rounded-lg shadow items-center bg-blue-700 hover:bg-blue-800 text-white">
-        <ion-icon name="logo-facebook"></ion-icon>
-        Connexion
-      </button>
+      <facebook-login-button></facebook-login-button>
     </div>
 
     <footer class="text-center text-gray-200 mb-10 md:mb-5">
@@ -38,7 +35,11 @@
 </template>
 
 <script>
-export default {
+import FacebookLoginButton from "./FacebookLoginButton.vue";
+
+export default
+  {
+  components: { FacebookLoginButton },
   name: 'Landing',
   data(){
     return {
@@ -46,6 +47,8 @@ export default {
   },
   created(){
     this.fetchCategories();
+
+    this.initApp();
   },
   mounted(){
     console.log("mounted")
@@ -57,8 +60,21 @@ export default {
     }
   },
   methods: {
+    async initApp(){
+      console.log("initApp");
+
+      // Initialize Facebook SDK
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : process.env.FACEBOOK_APP_ID,
+          autoLogAppEvents : process.env.FACEBOOK_AUTO_LOG_APP_EVENTS,
+          xfbml            : process.env.FACEBOOK_XFBML,
+          version          : process.env.FACEBOOK_AUTH_VERSION,
+        });
+      };
+    },
     async fetchCategories(){
-      await this.$store.dispatch('categories/fetchAll');
+      // await this.$store.dispatch('categories/fetchAll');
     },
     gotoCategory(category){
       this.$router.push('/quizzes/' + category.id)

@@ -8,6 +8,12 @@ export default {
       // 'process.env.APP_URL': '"https://myawesomesite.com"'
     }
   },
+  env: {
+    FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID,
+    FACEBOOK_AUTO_LOG_APP_EVENTS: process.env.FACEBOOK_AUTO_LOG_APP_EVENTS,
+    FACEBOOK_XFBML: process.env.FACEBOOK_XFBML,
+    FACEBOOK_AUTH_VERSION: process.env.FACEBOOK_AUTH_VERSION,
+  },
   ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -29,6 +35,8 @@ export default {
     script: [
       { type:"module", src:"https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"},
       { nomodule: true, src:"https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"},
+      // FACEBOOK SDK
+      { async:true, defer: true, crossorigin:"anonymous", src:"https://connect.facebook.net/en_US/sdk.js" }
     ]
   },
 
