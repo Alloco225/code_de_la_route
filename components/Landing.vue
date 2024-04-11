@@ -84,7 +84,7 @@ export default
       await this.$store.dispatch('categories/fetchAll');
     },
     gotoCategory(category){
-      this.$router.push('/quizzes/' + category.id)
+      this.$router.push('/categories/' + category.id)
     }
   }
 }

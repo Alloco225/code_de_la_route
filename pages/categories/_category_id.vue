@@ -64,7 +64,7 @@ export default {
       this.$router.push({name: 'index'})
     },
     async openQuizz(index){
-      this.$router.push('/quizz/' + this.category?.id + '/'+ index)
+      this.$router.push('/quizzes/'+ index)
     },
   }
 }
