@@ -21,7 +21,7 @@
 
       </div>
       <ul v-else class="p-3 flex gap-3 flex-col h-full bg-gray-700 overflow-y-scroll">
-        <li v-for="(quizz, i) in quizzes" :key="i" @click="openQuizz(i)" class="flex gap-1 p-2 items-center border rounded bg-white">
+        <li v-for="(quizz, i) in quizzes" :key="quizz.id" @click="openQuizz(quizz.id)" class="flex gap-1 p-2 items-center border rounded bg-white">
           <span class="rounded-full w-10 h-10 text-nowrap bg-gray-800 text-white flex justify-center items-center">{{i+1}}</span>
 
           <div class="flex w-full justify-between">
@@ -52,6 +52,8 @@ export default {
   },
   async created(){
 
+    console.log("_category_id.vue", this.$route.params);
+
     this.category_id = this.$route.params?.category_id;
     // this.category = this.$store.state.categories.list.find(item => item.id == this.$route.params?.category_id);
     // this.quizzes = this.$store.state.quizzes.list.filter(item => item.category_id == this.category?.id);
@@ -64,7 +66,7 @@ export default {
       this.$router.push({name: 'index'})
     },
     async openQuizz(index){
-      this.$router.push('/quizzes/'+ index)
+      this.$router.push('/categories/'+ this.category_id + '/quizzes/'+ index)
     },
   }
 }

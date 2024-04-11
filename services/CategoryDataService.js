@@ -24,7 +24,7 @@ class CategoryDataService {
     const ref = doc(db, "categories", category_id);
     const snapshot = await getDoc(ref);
     // return snapshot.docs.map((doc) => doc.data());
-    const document = {id: snapshot.id, ...snapshot.data(), ref}
+    const document = {id: snapshot.id, ...snapshot.data()}
     return document;
     // return snapshot.docs;
   }

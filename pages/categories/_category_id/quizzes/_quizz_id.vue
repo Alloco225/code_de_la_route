@@ -1,13 +1,13 @@
 <template>
   <!-- <quizz></quizz> -->
   <div>
-    Quizz intext
+    Quizz Details
   </div>
 </template>
 
 <script>
 export default {
-  name: 'QuizzDetails',
+  name: 'CategoryQuizzDetails',
 }
 </script>
 
