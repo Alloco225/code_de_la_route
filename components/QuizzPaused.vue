@@ -8,22 +8,20 @@
       </div>
 
 
-    <div class="flex flex-col gap-2 mt-10">
-      <div class="flex gap-2">
-        <button @click="goBackToQuizzList" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-blue-500">
-          <ion-icon name="return-up-back-outline"></ion-icon>
-          Retour
+    <div class="flex flex-col items-center gap-8 mt-10">
+      <div class="flex flex-row-reverse gap-2">
+
+
+        <button @click="resumeGame" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-blue-500">
+          <ion-icon name="play-outline"></ion-icon>
+          Continuer
         </button>
-        <button @click="restart" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-green-500">
-          <ion-icon name="refresh-outline"></ion-icon>
-          Réessayer
+        <button @click="goToMenu" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-red-500">
+          <ion-icon name="trash-bin-outline"></ion-icon>
+          Abandonner
         </button>
       </div>
 
-      <button @click="goToMenu" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-red-500">
-        <ion-icon name="home-outline"></ion-icon>
-        Menu
-      </button>
 
     </div>
 
@@ -93,7 +91,13 @@ export default {
       this.$router.back();
     },
     goToMenu(){
+      // show tu veux abandonner ?
+      //
+      return;
       this.$router.push({name: 'index'})
+    },
+    resumeGame(){
+      this.$emit('resume')
     },
     restart(){
       this.$emit('restart')
