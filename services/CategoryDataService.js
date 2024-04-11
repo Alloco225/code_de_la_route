@@ -1,17 +1,12 @@
 import db from "../firebase";
 
 import {
-  // getFirestore,
   collection,
   getDocs,
+  doc,
+  getDoc,
+  query, where,
 } from "firebase/firestore/lite";
-
-// async function getCities(db) {
-//     const citiesCol = collection(db, "cities");
-//     const snapshot = await getDocs(citiesCol);
-//     const list = snapshot.docs.map((doc) => doc.data());
-//     return list;
-// }
 
 class CategoryDataService {
   async getAll() {
@@ -23,6 +18,20 @@ class CategoryDataService {
     });
     return list;
     // return snapshot.docs;
+  }
+
+  async get(category_id) {
+    const ref = doc(db, "categories", category_id);
+    const snapshot = await getDoc(ref);
+    // return snapshot.docs.map((doc) => doc.data());
+    const document = {id: snapshot.id, ...snapshot.data(), ref}
+    return document;
+    // return snapshot.docs;
+  }
+  async getOne(category_id) {
+    const ref = doc(db, "categories", category_id);
+    const snapshot = await getDoc(ref);
+    return {id: snapshot.id, ...snapshot.data(), ref}
   }
 
   create(post) {

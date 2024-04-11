@@ -27,8 +27,12 @@ export default {
     });
     window.addEventListener('click', ()=>{
       // this.$refs.bgm.play();
-      this.play('click');
     });
+    const clickables = document.querySelectorAll('.clickable');
+    clickables.forEach(el => el.addEventListener('click', event => {
+      // console.log(event.target.getAttribute("data-el"));
+      this.play('click');
+    }));
 
   },
   mounted(){

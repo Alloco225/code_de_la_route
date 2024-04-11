@@ -19,8 +19,11 @@ const mutations = {
 }
 
 const actions = {
-  async fetchAll({state}){
+  async fetchAll({commit, state}){
+    console.log("fetchAllCategories");
+
     const list = await CategoryDataService.getAll();
+    // commit('SET_ALL', list)
     state.list = list
     console.log("state list", state.list);
   }

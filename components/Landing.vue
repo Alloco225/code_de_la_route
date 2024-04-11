@@ -77,8 +77,8 @@ export default
     async fetchAppData(){
 
       await this.$store.dispatch('categories/fetchAll');
-      await this.$store.dispatch('quizzes/fetchAll');
-      await this.$store.dispatch('questions/fetchAll');
+      // await this.$store.dispatch('quizzes/fetchAll');
+      // await this.$store.dispatch('questions/fetchAll');
     },
     async fetchCategories(){
       await this.$store.dispatch('categories/fetchAll');

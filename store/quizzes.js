@@ -1,6 +1,5 @@
 
 import QuizzDataService from "~/services/QuizzDataService"
-import CategoryDataService from "~/services/CategoryDataService"
 
 const state = () => ({
   list: [],
@@ -20,10 +19,17 @@ const mutations = {
 
 const actions = {
   async fetchAll({ state }) {
-    const list = await CategoryDataService.getAll();
+    console.log("fetchAllQuizzes");
+    const list = await QuizzDataService.getAll();
     state.list = list
-    console.log("state list", state.list);
-  }
+    console.log("state quizzes", state.list);
+  },
+  async fetch({ state }, category_id) {
+    console.log("fetchQuizz");
+    const list = await QuizzDataService.get(category_id);
+    state.list = list
+    console.log("category quizz", state.list);
+  },
 }
 
 
