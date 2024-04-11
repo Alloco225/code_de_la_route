@@ -2,21 +2,8 @@
   <div
     class="text-center bg-gray-700 h-full flex flex-col py-3 justify-between text-white"
   >
-    <div
-      v-if="questions.length == 0"
-      class="mx-2 p-5 flex flex-col gap-3 justify-center items-center text-gray-300 rounded bg-opacity-10 bg-white h-full"
-    >
-      <ion-icon name="search-outline" style="font-size: 64px"></ion-icon>
-      <h2 class="text-xl">Wow such empty</h2>
 
-      <button
-        @click="$router.back()"
-        class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-gray-700 shadow"
-      >
-        <ion-icon name="return-up-back-outline"></ion-icon>
-        Retour
-      </button>
-    </div>
+    <quizz-empty v-if="questions.length == 0"></quizz-empty>
     <div v-else class="flex flex-col h-full justify-between">
       <div class="p-2">
         <h2 class="text-xl flex justify-center gap-3">
@@ -29,6 +16,7 @@
         <question-timer
           ref="QuestionTimer"
           :pause="shouldPauseTimer"
+          @pause-game="onGamePaused"
           @time-expired="onTimeExpired"
         ></question-timer>
       </div>
@@ -112,6 +100,12 @@
       :questionCount="questions.length"
       :correctAnswerCount="answersList?.filter((item) => item.isCorrect).length"
     ></quizz-ended>
+
+    <quizz-paused
+      @restart="restartQuizz"
+      :questionCount="questions.length"
+      :correctAnswerCount="answersList?.filter((item) => item.isCorrect).length"
+    ></quizz-paused>
   </div>
 </template>
 
@@ -120,8 +114,12 @@ import QuestionTimer from '~/components/QuestionTimer.vue'
 import Countdown from '~/components/StartCountdown.vue'
 import CategoryDataService from '~/services/CategoryDataService'
 import QuizzDataService from '~/services/QuizzDataService'
+import QuizzEnded from './QuizzEnded.vue'
+import QuizzEmpty from './QuizzEmpty.vue'
+import QuizzPaused from './QuizzPaused.vue'
+
 export default {
-  components: { Countdown, QuestionTimer },
+  components: { Countdown, QuestionTimer, QuizzEmpty, QuizzPaused,QuizzEnded },
   name: 'Quizz',
   props: {
     quizz_id: {
@@ -237,7 +235,11 @@ export default {
       this.pauseTimer = false
       this.restartTimer()
     },
-
+    onGamePaused(){
+      // pause timers and stuff
+      // show pause popup
+      this.$modal.show('game-paused-modal')
+    },
     onTimeExpired() {
       // TODO add popup
       // go to next question
