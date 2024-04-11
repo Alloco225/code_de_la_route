@@ -25,7 +25,7 @@
     </div>
 
     <div class="flex justify-center items-center">
-      <facebook-login-button></facebook-login-button>
+      <!-- <facebook-login-button></facebook-login-button> -->
     </div>
 
     <footer class="text-center text-gray-200 mb-10 md:mb-5">
@@ -74,7 +74,7 @@ export default
       };
     },
     async fetchCategories(){
-      // await this.$store.dispatch('categories/fetchAll');
+      await this.$store.dispatch('categories/fetchAll');
     },
     gotoCategory(category){
       this.$router.push('/quizzes/' + category.id)

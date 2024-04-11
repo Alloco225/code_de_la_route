@@ -4,6 +4,7 @@
 
     <div>
       <audio ref="bgm"  src="/music/bgm.mp3" preload loop></audio>
+      <audio ref="click"  src="/sounds/mouse_click.mp3" preload></audio>
     </div>
   </div>
 </template>
@@ -24,6 +25,10 @@ export default {
     window.addEventListener('focus', ()=>{
       // this.$refs.bgm.play();
     });
+    window.addEventListener('click', ()=>{
+      // this.$refs.bgm.play();
+      this.play('click');
+    });
 
   },
   mounted(){
@@ -36,7 +41,14 @@ export default {
     }, 1000);
   },
   methods: {
-
+    pause(action){
+      console.log("pause", action)
+      this.$refs[action].pause();
+    },
+    play(action){
+      console.log("play", action)
+      this.$refs[action].play();
+    },
   }
 }
 </script>
