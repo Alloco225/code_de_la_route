@@ -22,17 +22,20 @@ const appMixin = {
     clearState(key) {
       this.$store.dispatch('ui/clearState', { key })
     },
-    pause(elementId) {
-      console.log("pause", elementId)
+    pauseAllMedia(){
+      // pause all playing media
+    },
+    pauseMedia(elementId) {
+      console.log("pauseMedia", elementId)
       // this.$refs[action].pause();
       const element = document.getElementById(elementId);
       element?.pause();
     },
-    play(elementId) {
+    playMedia(elementId) {
       const element = document.getElementById(elementId);
       element?.play();
     },
-    reset(elementId) {
+    resetMedia(elementId) {
       const element = document.getElementById(elementId);
       element?.pause();
       element.currentTime = 0;
@@ -42,7 +45,9 @@ const appMixin = {
     setState(key, val = false) {
       this.$store.dispatch('ui/setState', { key, val })
     },
-
+    sleep(timeInMiliseconds){
+      return new Promise((resolve, reject) => setTimeout(resolve, timeInMiliseconds))
+    },
     toggleLoading(key, val = false) {
       this.$store.dispatch('ui/toggleLoading', { key, val })
       // const data = { ...this.isLoading }

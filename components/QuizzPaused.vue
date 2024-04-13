@@ -25,7 +25,7 @@
 
     </div>
 
-    
+
   </section>
 </template>
 
@@ -123,6 +123,7 @@ export default {
     },
     toujourFuirFuirEtRefuir(){
       //
+      this.$emit('quit')
     }
   }
 }

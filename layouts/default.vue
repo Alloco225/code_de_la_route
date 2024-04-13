@@ -21,7 +21,7 @@ export default {
   created(){
 
     window.addEventListener('blur', ()=>{
-      this.$refs.bgm.pause();
+      this.pauseAllMedia();
     });
     window.addEventListener('focus', ()=>{
       // this.$refs.bgm.play();
@@ -46,14 +46,6 @@ export default {
     }, 1000);
   },
   methods: {
-    // pause(action){
-    //   console.log("pause", action)
-    //   this.$refs[action].pause();
-    // },
-    // play(action){
-    //   console.log("play", action)
-    //   this.$refs[action].play();
-    // },
   }
 }
 </script>
