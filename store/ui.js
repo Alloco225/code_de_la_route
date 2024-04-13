@@ -2,7 +2,9 @@ export default {
   namespaced: true,
   state: () => ({
     isLoading: {},
-    uiStates: {},
+    uiStates: {
+      useLocalDB: true,
+    },
   }),
   getters: {
     isLoading: (state) => (key) => {

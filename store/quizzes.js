@@ -1,4 +1,5 @@
 
+import { QUIZZES } from "~/resources/db";
 import QuizzDataService from "~/services/QuizzDataService"
 
 const state = () => ({
@@ -18,11 +19,16 @@ const mutations = {
 }
 
 const actions = {
-  async fetchAll({ state }) {
-    console.log("fetchAllQuizzes");
-    const list = await QuizzDataService.getAll();
+  async fetchAll({ commit, state, rootState }) {
+    let list = [];
+    if (rootState.ui.uiStates.useLocalDB) {
+      list = QUIZZES
+    } else {
+      list = await QuizzDataService.getAll();
+    }
+    // commit('SET_ALL', list)
     state.list = list
-    console.log("state quizzes", state.list);
+    console.log("state list", state.list);
   },
   async fetch({ state }, category_id) {
     console.log("fetchQuizz");

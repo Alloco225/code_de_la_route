@@ -1,7 +1,7 @@
 
 import QuizzDataService from "~/services/QuizzDataService"
 import CategoryDataService from "~/services/CategoryDataService"
-
+import { CATEGORIES } from '~/resources/db.js'
 const state = () => ({
   list: [],
 })
@@ -19,10 +19,14 @@ const mutations = {
 }
 
 const actions = {
-  async fetchAll({commit, state}){
-    console.log("fetchAllCategories");
 
-    const list = await CategoryDataService.getAll();
+  async fetchAll({ commit, state, rootState }){
+    let list = [];
+    if (rootState.ui.uiStates.useLocalDB){
+      list = CATEGORIES
+    }else{
+      list = await CategoryDataService.getAll();
+    }
     // commit('SET_ALL', list)
     state.list = list
     console.log("state list", state.list);

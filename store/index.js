@@ -6,7 +6,8 @@ import ui from './ui'
 
 new Vuex.Store({
   state: () => ({
-    counter: 0
+    counter: 0,
+
   }),
   mutations: {
     increment(state) {

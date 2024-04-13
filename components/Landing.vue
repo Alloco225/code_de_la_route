@@ -87,7 +87,6 @@ export default {
       }
     },
     async fetchAppData() {
-      await this.sleep(2000)
 
       await this.$store.dispatch('categories/fetchAll')
       // await this.$store.dispatch('quizzes/fetchAll');
