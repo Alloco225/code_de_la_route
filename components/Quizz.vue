@@ -21,16 +21,7 @@
         ></question-timer>
       </div>
 
-      <div
-        v-if="isLoading"
-        class="bg-white bg-opacity-20 rounded-lg w-10/12 mx-auto px-3 py-5 pb-10"
-      >
-        <h5 class="font-medium mb-5 text-2xl">Chargement..</h5>
-
-        <div
-          class="mx-auto border-4 border-blue-500 rounded-lg animate-spin h-16 w-16"
-        ></div>
-      </div>
+      <loading-spinner v-if="isLoading"></loading-spinner>
       <section v-else class="flex flex-col justify-around h-full">
         <div class="flex flex-col gap-3 h-full p-2 mb-5">
           <h2 class="font-medium p-5 mb-5 text-2xl">
@@ -117,10 +108,12 @@ import QuizzDataService from '~/services/QuizzDataService'
 import QuizzEnded from './QuizzEnded.vue'
 import QuizzEmpty from './QuizzEmpty.vue'
 import QuizzPaused from './QuizzPaused.vue'
+import LoadingSpinner from './LoadingSpinner.vue'
 
 export default {
   components: { Countdown, QuestionTimer, QuizzEmpty, QuizzPaused,QuizzEnded },
-  name: 'Quizz',
+  name,
+    LoadingSpinner: 'Quizz',
   props: {
     quizz_id: {
       type: [String, Number],

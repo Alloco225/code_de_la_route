@@ -8,7 +8,9 @@
       </h3>
     </nav>
 
-    <section class="h-full flex flex-col justify-between py-10">
+    <loading-spinner v-if="isLoading('categories')" class="py-10 mt-20"></loading-spinner>
+
+    <section v-else class="h-full flex flex-col justify-between py-10">
       <span></span>
       <div v-if="quizzes.length == 0" class="mx-2 p-5 flex flex-col gap-3 justify-center items-center text-gray-300 rounded bg-opacity-10 bg-white h-full">
         <ion-icon name="search-outline" style="font-size:64px"></ion-icon>
@@ -51,7 +53,7 @@ export default {
     }
   },
   async created(){
-
+    this.toggleLoading('categories', true)
     console.log("_category_id.vue", this.$route.params);
 
     this.category_id = this.$route.params?.category_id;
@@ -60,6 +62,7 @@ export default {
     this.category = await CategoryDataService.getOne(this.category_id)
     this.quizzes = await QuizzDataService.getFromCategory(this.category_id)
 
+    this.toggleLoading('categories', false)
   },
   methods: {
     goBack(){

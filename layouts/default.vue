@@ -2,7 +2,7 @@
   <div class="h-full bg-gray-600" style="min-height: 100vh;">
     <nuxt-child class="mx-auto max-w-md"></nuxt-child>
 
-    <div>
+    <div> 
       <audio ref="bgm"  src="/music/bgm.mp3" preload loop></audio>
       <audio ref="click"  src="/sounds/mouse_click.mp3" preload></audio>
     </div>
