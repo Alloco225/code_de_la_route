@@ -2,9 +2,10 @@
   <div class="h-full bg-gray-600" style="min-height: 100vh;">
     <nuxt-child class="mx-auto max-w-md"></nuxt-child>
 
-    <div> 
-      <audio ref="bgm"  src="/music/bgm.mp3" preload loop></audio>
-      <audio ref="click"  src="/sounds/mouse_click.mp3" preload></audio>
+    <div>
+      <audio ref="bgm" id="bgm"  src="/audio/bgm.mp3" preload loop></audio>
+      <audio ref="click" id="click"  src="/audio/mouse_click.mp3" preload></audio>
+      <audio ref="dontgiveup" id="dontgiveup"  src="/audio/tu_veux_abandonner.mp3" preload></audio>
     </div>
   </div>
 </template>
@@ -45,14 +46,14 @@ export default {
     }, 1000);
   },
   methods: {
-    pause(action){
-      console.log("pause", action)
-      this.$refs[action].pause();
-    },
-    play(action){
-      console.log("play", action)
-      this.$refs[action].play();
-    },
+    // pause(action){
+    //   console.log("pause", action)
+    //   this.$refs[action].pause();
+    // },
+    // play(action){
+    //   console.log("play", action)
+    //   this.$refs[action].play();
+    // },
   }
 }
 </script>

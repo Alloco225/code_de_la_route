@@ -1,5 +1,5 @@
 <template>
-  <section id="countdown" class="fixed transition-all duration-300 ease-out top-0 left-0 w-full h-full flex flex-col gap-3 justify-center items-center bg-gray-700 bg-opacity-90">
+  <section id="quizz-ended" class="fixed transition-all duration-300 ease-out top-0 left-0 w-full h-full flex flex-col gap-3 justify-center items-center bg-gray-700 bg-opacity-90">
 
     <h3 class="text-2xl mb-10">Quizz Terminé</h3>
 

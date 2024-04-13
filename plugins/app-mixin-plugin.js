@@ -1,18 +1,7 @@
 import Vue from "vue"
 
-// Make sure to pick a unique name for the flag
-// so it won't conflict with any other mixin.
-
 
 const appMixin = {
-  data(){
-    return {
-      // isLoading: {},
-    }
-  },
-  created(){
-    // console.log("create app mixin");
-  },
   computed:{
 
     isLoading() {
@@ -30,6 +19,30 @@ const appMixin = {
   },
 
   methods: {
+    clearState(key) {
+      this.$store.dispatch('ui/clearState', { key })
+    },
+    pause(elementId) {
+      console.log("pause", elementId)
+      // this.$refs[action].pause();
+      const element = document.getElementById(elementId);
+      element?.pause();
+    },
+    play(elementId) {
+      const element = document.getElementById(elementId);
+      element?.play();
+    },
+    reset(elementId) {
+      const element = document.getElementById(elementId);
+      element?.pause();
+      element.currentTime = 0;
+      // element?.load();
+
+    },
+    setState(key, val = false) {
+      this.$store.dispatch('ui/setState', { key, val })
+    },
+
     toggleLoading(key, val = false) {
       this.$store.dispatch('ui/toggleLoading', { key, val })
       // const data = { ...this.isLoading }

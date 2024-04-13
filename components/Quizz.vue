@@ -2,15 +2,12 @@
   <div
     class="text-center bg-gray-700 h-full flex flex-col py-3 justify-between text-white"
   >
-
     <quizz-empty v-if="questions.length == 0"></quizz-empty>
     <div v-else class="flex flex-col h-full justify-between">
       <div class="p-2">
         <h2 class="text-xl flex justify-center gap-3">
           Question
-          <span>
-            {{ currentQuestionIndex + 1 }} / {{ questions?.length ?? '--' }}
-          </span>
+          <span> {{ currentQuestionIndex + 1 }} / {{ questions?.length ?? "--" }} </span>
         </h2>
 
         <question-timer
@@ -21,7 +18,7 @@
         ></question-timer>
       </div>
 
-      <loading-spinner v-if="isLoading"></loading-spinner>
+      <loading-spinner v-if="isLoading('quizz')"></loading-spinner>
       <section v-else class="flex flex-col justify-around h-full">
         <div class="flex flex-col gap-3 h-full p-2 mb-5">
           <h2 class="font-medium p-5 mb-5 text-2xl">
@@ -46,17 +43,12 @@
             @click="toggleSelectAnswer(answer)"
             class="relative rounded text-gray-800 bg-gray-200 shadow p-3"
             :class="{
-              'bg-orange-500 text-white':
-                !showCorrectAnswer && selectedAnswer == answer,
+              'bg-orange-500 text-white': !showCorrectAnswer && selectedAnswer == answer,
               'bg-green-500 text-white': showCorrectAnswer && answer?.isCorrect,
               'bg-red-500 text-white':
-                showCorrectAnswer &&
-                answer == selectedAnswer &&
-                !answer?.isCorrect,
+                showCorrectAnswer && answer == selectedAnswer && !answer?.isCorrect,
               'bg-gray-600':
-                showCorrectAnswer &&
-                answer != selectedAnswer &&
-                !answer?.isCorrect,
+                showCorrectAnswer && answer != selectedAnswer && !answer?.isCorrect,
             }"
           >
             <!-- <span class="absolute left-3">{{ i + 1 }}</span> -->
@@ -71,10 +63,10 @@
           class="rounded px-3 py-2 mb-10"
           :class="[
             !!selectedAnswer ? 'bg-blue-600' : '',
-            isLoading ? 'invisible' : 'visible',
+            isLoading('quizz') ? 'invisible' : 'visible',
           ]"
         >
-          {{ isSubmittingAnswer ? 'Question suivante...' : 'Continuer' }}
+          {{ isSubmittingAnswer ? "Question suivante..." : "Continuer" }}
         </button>
       </div>
     </div>
@@ -97,28 +89,31 @@
       :questionCount="questions.length"
       :correctAnswerCount="answersList?.filter((item) => item.isCorrect).length"
     ></quizz-paused>
+
+    <tu-veux-abandonner></tu-veux-abandonner>
   </div>
 </template>
 
 <script>
-import QuestionTimer from '~/components/QuestionTimer.vue'
-import Countdown from '~/components/StartCountdown.vue'
-import CategoryDataService from '~/services/CategoryDataService'
-import QuizzDataService from '~/services/QuizzDataService'
-import QuizzEnded from './QuizzEnded.vue'
-import QuizzEmpty from './QuizzEmpty.vue'
-import QuizzPaused from './QuizzPaused.vue'
-import LoadingSpinner from './LoadingSpinner.vue'
+import QuestionTimer from "~/components/QuestionTimer.vue";
+import Countdown from "~/components/StartCountdown.vue";
+import CategoryDataService from "~/services/CategoryDataService";
+import QuizzDataService from "~/services/QuizzDataService";
+import QuizzEnded from "./QuizzEnded.vue";
+import QuizzEmpty from "./QuizzEmpty.vue";
+import QuizzPaused from "./QuizzPaused.vue";
+import LoadingSpinner from "./LoadingSpinner.vue";
+import TuVeuxAbandonner from "./TuVeuxAbandonner.vue";
 
 export default {
-  components: { Countdown, QuestionTimer, QuizzEmpty, QuizzPaused,QuizzEnded },
+  components: { Countdown, QuestionTimer, QuizzEmpty, QuizzPaused, TuVeuxAbandonner },
   name,
-    LoadingSpinner: 'Quizz',
+  LoadingSpinner: "Quizz",
   props: {
     quizz_id: {
       type: [String, Number],
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -127,7 +122,6 @@ export default {
       category_id: null,
       currentQuestionIndex: 0,
 
-      isLoading: true,
       isQuizzOver: false,
       isSubmittingAnswer: false,
       pauseTimer: true,
@@ -136,161 +130,163 @@ export default {
 
       selectedAnswer: null,
       showCorrectAnswer: false,
-    }
+    };
   },
   async created() {
+    this.toggleLoading('quizz', true);
     this.category_id = this.$route.params.category_id;
 
     // this.category = await CategoryDataService.get(this.category_id);
     // console.log("fetched category", this.category);
-    this.fetchQuizz()
+    this.fetchQuizz();
   },
   mounted() {
     // this.initQuizz()
   },
   computed: {
     currentQuestion() {
-      return this.questions[this.currentQuestionIndex] ?? null
+      return this.questions[this.currentQuestionIndex] ?? null;
     },
     isLastQuestion() {
-      return this.currentQuestionIndex == this.questions.length - 1
+      return this.currentQuestionIndex == this.questions.length - 1;
     },
     shouldPauseTimer() {
-      return this.pauseTimer || this.isLoading || this.isQuizzOver
+      return this.pauseTimer || this.isLoading('quizz') || this.isQuizzOver;
     },
   },
   methods: {
     clearLoading() {
       setTimeout(() => {
-        this.isLoading = false
-      }, 300)
+
+        this.toggleLoading('quizz', false);
+      }, 300);
     },
     clearQuizzData() {
-      this.answersList = []
-      this.currentQuestionIndex = 0
-      this.isLoading = false
-      this.isQuizzOver = false
-      this.isSubmittingAnswer = false
-      this.pauseTimer = false
-      this.questions = []
-      this.selectedAnswer = null
-      this.showCorrectAnswer = false
+      this.answersList = [];
+      this.currentQuestionIndex = 0;
+      this.toggleLoading('quizz', false);
+      this.isQuizzOver = false;
+      this.isSubmittingAnswer = false;
+      this.pauseTimer = false;
+      this.questions = [];
+      this.selectedAnswer = null;
+      this.showCorrectAnswer = false;
     },
-    async fetchQuizz(){
+    async fetchQuizz() {
       console.log("fetchQuizz");
       // await this.$store.dispatch('quizzes/fetchOne', this.category_id);
-      this.quizz = await QuizzDataService.getOne(this.quizz_id)
-      console.log("result", this.quizz)
+      this.quizz = await QuizzDataService.getOne(this.quizz_id);
+      console.log("result", this.quizz);
       this.questions = this.quizz.questions;
     },
     endQuizz() {
-      console.log('endQuizz')
-      this.isQuizzOver = true
+      console.log("endQuizz");
+      this.isQuizzOver = true;
       // TODO save results on server
     },
     initQuizz() {
-      this.setLoading()
+      this.setLoading();
       // load questions
       this.questions =
         this.$store.state.quizzes.list.filter(
           (item) => item.category_id == this.$route.params.category_id
-        ) ?? []
-      this.questions = this.questions.slice(0, 3)
-      console.log('initQuizz', this.questions)
-      this.shuffle(this.questions)
-      this.currentQuestionIndex = 0
-      this.clearLoading()
+        ) ?? [];
+      this.questions = this.questions.slice(0, 3);
+      console.log("initQuizz", this.questions);
+      this.shuffle(this.questions);
+      this.currentQuestionIndex = 0;
+      this.clearLoading();
 
-      console.log('this.$refs')
+      console.log("this.$refs");
       // this.restartTimer();
-      this.launchStartCountDown()
+      this.launchStartCountDown();
     },
     launchStartCountDown() {
-      this.$refs.StartCountdown.startTimer()
+      this.$refs.StartCountdown.startTimer();
       // this.restartTimer();
     },
     loadNextQuestion() {
-      console.log('loadNext')
-      this.isSubmittingAnswer = false
-      this.selectedAnswer = null
+      console.log("loadNext");
+      this.isSubmittingAnswer = false;
+      this.selectedAnswer = null;
 
-      this.setLoading()
+      this.setLoading();
       if (this.isLastQuestion) {
         // show end screen;
-        this.endQuizz()
-        this.clearLoading()
-        return
+        this.endQuizz();
+        this.clearLoading();
+        return;
       }
-      this.showCorrectAnswer = false
-      this.currentQuestionIndex++
+      this.showCorrectAnswer = false;
+      this.currentQuestionIndex++;
       //
-      this.clearLoading()
-      this.pauseTimer = false
-      this.restartTimer()
+      this.clearLoading();
+      this.pauseTimer = false;
+      this.restartTimer();
     },
-    onGamePaused(){
+    onGamePaused() {
       // pause timers and stuff
       // show pause popup
-      this.$modal.show('game-paused-modal')
+      this.$modal.show("game-paused-modal");
     },
     onTimeExpired() {
       // TODO add popup
       // go to next question
-      this.loadNextQuestion()
+      this.loadNextQuestion();
     },
     restartQuizz() {
       //
-      console.log('restart')
-      this.clearQuizzData()
-      this.initQuizz()
+      console.log("restart");
+      this.clearQuizzData();
+      this.initQuizz();
     },
     restartTimer() {
-      this.pauseTimer = false
-      this.$refs.QuestionTimer.startTimer()
+      this.pauseTimer = false;
+      this.$refs.QuestionTimer.startTimer();
     },
     shuffle(array) {
-      let currentIndex = array.length
+      let currentIndex = array.length;
 
       // While there remain elements to shuffle...
       while (currentIndex != 0) {
         // Pick a remaining element...
-        let randomIndex = Math.floor(Math.random() * currentIndex)
-        currentIndex--
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
 
         // And swap it with the current element.
-        ;[array[currentIndex], array[randomIndex]] = [
+        [array[currentIndex], array[randomIndex]] = [
           array[randomIndex],
           array[currentIndex],
-        ]
+        ];
       }
     },
 
     submitAnswer() {
-      if (!this.selectedAnswer) return
-      if (this.isSubmittingAnswer) return
+      if (!this.selectedAnswer) return;
+      if (this.isSubmittingAnswer) return;
       // stop timer
-      this.pauseTimer = true
+      this.pauseTimer = true;
       // show wrong answers
-      this.showCorrectAnswer = true
-      this.isSubmittingAnswer = true
-      this.answersList.push(this.selectedAnswer)
+      this.showCorrectAnswer = true;
+      this.isSubmittingAnswer = true;
+      this.answersList.push(this.selectedAnswer);
       // move to next question
-      setTimeout(this.loadNextQuestion, 1000)
+      setTimeout(this.loadNextQuestion, 1000);
     },
     setLoading() {
-      this.isLoading = true
+      this.toggleLoading('quizz', true);
     },
     toggleSelectAnswer(answer) {
-      if (this.showCorrectAnswer) return
+      if (this.showCorrectAnswer) return;
       if (this.selectedAnswer == answer) {
         // this.selectedAnswer = null
-        this.submitAnswer()
-        return
+        this.submitAnswer();
+        return;
       }
-      this.selectedAnswer = answer
+      this.selectedAnswer = answer;
     },
   },
-}
+};
 </script>
 
 <style></style>

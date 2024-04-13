@@ -16,7 +16,7 @@
           <ion-icon name="play-outline"></ion-icon>
           Continuer
         </button>
-        <button @click="goToMenu" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-red-500">
+        <button @click="toujourFuirFuirEtRefuir" class="flex items-center justify-center gap-2 px-3 py-2 rounded bg-red-500">
           <ion-icon name="trash-bin-outline"></ion-icon>
           Abandonner
         </button>
@@ -25,6 +25,7 @@
 
     </div>
 
+    
   </section>
 </template>
 
@@ -119,6 +120,9 @@ export default {
           this.$confetti.stop();
         }, 2000);
       }, 500);
+    },
+    toujourFuirFuirEtRefuir(){
+      //
     }
   }
 }

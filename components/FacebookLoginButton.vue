@@ -13,16 +13,15 @@ export default {
   name: 'FacebookLoginButton',
   data(){
     return {
-      isLoading: false,
     }
   },
   methods: {
     async facebookLogin() {
-      if(this.isLoading) return;
-      this.isLoading = true;
+      if(this.isLoading('facebookLogin')) return;
+      this.toggleLoading('facebookLogin', true);
       console.log("facebookLogin");
       await this.$store.dispatch('auth/loginViaFacebook')
-      this.isLoading = false;
+      this.toggleLoading('facebookLogin', false);
     },
   },
 }
