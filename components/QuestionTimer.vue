@@ -7,13 +7,9 @@
       <div class="h-3 p-0.5 w-full rounded-xl bg-gray-200">
         <div
           v-show="percentage >= 3"
-          class="z-10 h-full rounded-xl bg-blue-500 transition-all duration-300 ease-in-out"
+          class="z-10 h-full rounded-xl  transition-all duration-300 ease-in-out"
           :style="'width:' + percentage + '%;'"
-          :class="{
-            'bg-yellow-500': percentage <= 80,
-            'bg-orange-500' : percentage <= 50,
-            'bg-red-500': percentage <= 30,
-            }"
+          :class="[percentageColor]"
         ></div>
       </div>
     </div>
@@ -48,6 +44,16 @@ export default {
     percentage() {
       return (this.time * 100) / (this.START_TIME ?? 1)
     },
+    percentageColor(){
+      if(this.percentage <= 30)
+        return 'bg-red-500';
+      if(this.percentage <= 50)
+        return 'bg-orange-500';
+      if(this.percentage <= 80)
+        return 'bg-yellow-500'
+
+      return 'bg-blue-500';
+    }
   },
   methods: {
     startTimer() {
@@ -57,6 +63,7 @@ export default {
       clearInterval(this.timer);
 
       this.timer = setInterval(() => {
+        if(this.state('pause')) return;
         if(this.pause || this.forcePause) return;
         this.time -= .1
         if (this.time < 0.2) {

@@ -156,7 +156,9 @@ export default {
 
     // this.category = await CategoryDataService.get(this.category_id);
     // console.log("fetched category", this.category);
-    this.fetchQuizz()
+    await this.fetchQuizz()
+    this.toggleLoading('quizz', false)
+
   },
   mounted() {
     // this.initQuizz()
