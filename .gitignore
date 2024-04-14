@@ -92,3 +92,4 @@ sw.*
 /resources
 firebase.js
 _firebase.js
+/store

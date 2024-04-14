@@ -77,28 +77,43 @@ export default {
     return {
       category_id: null,
       category: null,
-      quizzes: [],
+
     }
   },
   async created() {
     this.toggleLoading('categories', true)
-    console.log('_category_id.vue', this.$route.params)
+    console.log('_category_id', this.$route.params.category_id)
 
     this.category_id = this.$route.params?.category_id
 
-    if (this.$store.state.ui.uiStates.useLoalDB) {
-      this.category = this.$store.state.categories.list.find(
-        (item) => item.id == this.$route.params?.category_id
+    if (this.$store.state.ui.uiStates.useLocalDB) {
+      this.category = this.categories.find(
+        (item) => item.id == this.category_id
       )
-      this.quizzes = this.$store.state.quizzes.list.filter(
-        (item) => item.category_id == this.category?.id
-      )
+      console.log("categories", this.categories)
+      console.log("category", this.category)
+      console.log("quizzes", this.quizzes)
+      // this.quizzes = this.quizzes.
     } else {
       this.category = await CategoryDataService.getOne(this.category_id)
       this.quizzes = await QuizzDataService.getFromCategory(this.category_id)
     }
 
+    // console.log("category ", this.$store.state.categories.list, this.category, "quizzes", this.quizzes.length)
     this.toggleLoading('categories', false)
+  },
+
+  computed: {
+    categories(){
+      return this.$store.getters['categories/list'];
+    },
+    quizzes(){
+      return this.$store.getters['quizzes/list'];
+      // .filter(
+      // return this.$store.getters['quizzes/list'].filter(
+      //   (item) => item.category_id == this.category_id
+      // )
+    },
   },
   methods: {
     goBack() {

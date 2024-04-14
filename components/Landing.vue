@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.categories.list
+      return this.$store.getters['categories/list']
     },
   },
   methods: {
@@ -87,8 +87,12 @@ export default {
       }
     },
     async fetchAppData() {
+      await this.sleep(1000)
 
-      await this.$store.dispatch('categories/fetchAll')
+      const list = await this.$store.dispatch('categories/fetchAll')
+      console.log("list", list)
+
+      this.$store.commit('categories/SET_ALL', list);
       // await this.$store.dispatch('quizzes/fetchAll');
       // await this.$store.dispatch('questions/fetchAll');
       this.toggleLoading('initApp', false)

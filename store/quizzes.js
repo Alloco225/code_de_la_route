@@ -9,7 +9,7 @@ const state = () => ({
 
 const getters = {
   list() {
-    return state.list;
+    return state.list ?? JSON.parse(localStorage.getItem('quizzes'));
   }
 }
 const mutations = {
@@ -28,6 +28,7 @@ const actions = {
     }
     // commit('SET_ALL', list)
     state.list = list
+    localStorage.setItem(JSON.stringify(list))
     console.log("state list", state.list);
   },
   async fetch({ state }, category_id) {

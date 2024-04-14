@@ -50,6 +50,7 @@ export default {
     // {src: '~/plugins/confetti.js'}
     '~/plugins/app-mixin-plugin.js',
     '~/plugins/confetti.js',
+    '~/plugins/persistent.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
