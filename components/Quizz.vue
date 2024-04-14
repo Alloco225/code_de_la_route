@@ -81,15 +81,13 @@
       v-if="isQuizzOver"
       @restart="restartQuizz"
       :questionCount="questions.length"
-      :correctAnswerCount="answersList?.filter((item) => item.isCorrect).length"
+      :correctAnswerCount="answersList?.filter((item) => item?.isCorrect).length"
     ></quizz-ended>
 
     <quizz-paused
       @resume="resumeGame"
       @quit="userWantsToQuit"
       v-if="state('pause')"
-      :questionCount="questions.length"
-      :correctAnswerCount="answersList?.filter((item) => item.isCorrect).length"
     ></quizz-paused>
 
     <tu-veux-abandonner

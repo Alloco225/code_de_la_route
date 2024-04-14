@@ -105,6 +105,7 @@ export default {
           text: "Tu n'as pas le droit d'abandonner",
           startTime: 14.81,
           endTime: 20,
+          flash: true,
         },
       ],
     }
@@ -131,6 +132,15 @@ export default {
     },
     async giveUp() {
       try {
+
+        if(this.isVideoVisible){
+          // just let the bloke giveup nan
+          this.setState('pause', false);
+          this.setState('isUserQuitting', false);
+
+          this.$router.go(-1)
+          return;
+        }
         this.isVideoVisible = true
 
         await this.sleep(500)
@@ -141,18 +151,9 @@ export default {
       }
       //
     },
-    async showText(text, delay) {
-      if (this.isVideoVisible) {
-        await this.sleep(delay)
-        this.titleText = text
-      }
-    },
+
     onVideoEnded() {
       this.videoPlayedCompletely = true
-    },
-    pauseGame() {
-      this.isVidPlaying = false
-      // this.pause('tu_veux_abandonner')
     },
   },
   watch: {

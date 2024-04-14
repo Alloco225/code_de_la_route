@@ -43,24 +43,32 @@
       >
         <li
           v-for="(quizz, i) in quizzes"
-          :key="quizz.id"
+          :key="i"
           @click="openQuizz(quizz.id)"
-          class="flex gap-1 p-2 items-center border rounded bg-white"
+          class="flex gap-3 p-2 items-center border rounded bg-white"
         >
           <span
-            class="rounded-full w-10 h-10 text-nowrap bg-gray-800 text-white flex justify-center items-center"
+            class="rounded-full w-10 h-10 bg-gray-800 text-white flex justify-center items-center"
             >{{ i + 1 }}</span
           >
 
-          <div class="flex w-full justify-between">
+          <div class="flex grow justify-between items-stretch">
             <div>
-              <h4>Level {{ i + 1 }}</h4>
-              <h4></h4>
+              <h4>{{quizz.level}}</h4>
+              <h4 class="mb-2"></h4>
             </div>
 
-            <span class="rounded-full flex justify-center items-center"
-              >50%</span
-            >
+            <div>
+
+              <!-- <span class="rounded-full bg-red-500 w-5 h-5 flex justify-center items-center"
+                >
+                <span>
+
+                10/20
+                </span>
+                </span
+              > -->
+            </div>
           </div>
         </li>
       </ul>
