@@ -1,7 +1,7 @@
 <template>
-    <section class="flex flex-col justify-around h-full">
-        <div class="flex flex-col gap-3 h-full p-2 mb-5">
-          <h2 class="font-medium p-5 mb-5 text-2xl">
+    <section class="flex flex-col justify-around h-full p-3 px-5">
+        <div class="flex flex-col gap-3 h-full mb-3">
+          <h2 class="font-medium p-5 mb-1 text-2xl">
             {{ question?.question }}
           </h2>
 
@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 p-2 mt-5 gap-3">
+        <div class="grid grid-cols-1 mt-5 gap-3">
           <button
             v-for="(answer, i) in question?.answers"
             :key="i"
@@ -45,14 +45,28 @@ export default {
       type: Object,
       required: true,
     },
-    selectedAnswer: {
-      type: Object,
-      required: false,
-      default: () => null,
-    },
     showCorrectAnswer: {
       type: Boolean,
       default: false,
+    },
+  },
+  data(){
+    return {
+      selectedAnswer: null,
+    }
+  },
+  methods: {
+
+    toggleSelectAnswer(answer) {
+      if (this.showCorrectAnswer) return;
+      if (this.selectedAnswer == answer) {
+        this.$emit('submit-answer')
+        console.log("submit answer");
+        return;
+      }
+      this.selectedAnswer = answer;
+        console.log("answer");
+      this.$emit('answer', this.selectedAnswer)
     },
   }
 }

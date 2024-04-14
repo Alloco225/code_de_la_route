@@ -7,12 +7,15 @@
       <div class="p-2">
         <h2 class="text-xl flex justify-center gap-3">
           Question
-          <span> {{ currentQuestionIndex + 1 }} / {{ questions?.length ?? "--" }} </span>
+          <span>
+            {{ currentQuestionIndex + 1 }} / {{ questions?.length ?? '--' }}
+          </span>
         </h2>
 
         <question-timer
           ref="QuestionTimer"
           :pause="shouldPauseTimer"
+          :countDownTime="currentQuestion?.type == 'order' ? 20 : null"
           @pause-game="onGamePaused"
           @time-expired="onTimeExpired"
         ></question-timer>
@@ -20,10 +23,21 @@
 
       <loading-spinner v-if="isLoading('quizz')"></loading-spinner>
 
-
       <template v-else>
-        <!-- <question-image :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-image> -->
-        <question-order @answer="onAnswered" :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-order>
+        <question-image
+          v-if="currentQuestion?.type == 'image'"
+          @answer="onAnswered"
+          @submit-answer="submitAnswer"
+          :question="currentQuestion"
+          :showCorrectAnswer="showCorrectAnswer"
+        ></question-image>
+        <question-order
+          v-if="currentQuestion?.type == 'order'"
+          @answer="onAnswered"
+          @submit-answer="submitAnswer"
+          :question="currentQuestion"
+          :showCorrectAnswer="showCorrectAnswer"
+        ></question-order>
       </template>
 
       <div>
@@ -35,22 +49,24 @@
             isLoading('quizz') ? 'invisible' : 'visible',
           ]"
         >
-          {{ isSubmittingAnswer ? "Question suivante..." : "Continuer" }}
+          {{ isSubmittingAnswer ? 'Question suivante...' : 'Continuer' }}
         </button>
       </div>
     </div>
 
-    <!-- <countdown
+    <countdown
       v-if="questions.length > 0"
       ref="StartCountdown"
       @start-quizz="restartTimer"
-    ></countdown> -->
+    ></countdown>
 
     <quizz-ended
       v-if="isQuizzOver"
       @restart="restartQuizz"
       :questionCount="questions.length"
-      :correctAnswerCount="answersList?.filter((item) => item?.isCorrect).length"
+      :correctAnswerCount="
+        answersList?.filter((item) => item?.isCorrect).length
+      "
     ></quizz-ended>
 
     <quizz-paused
@@ -67,17 +83,17 @@
 </template>
 
 <script>
-import QuestionTimer from "~/components/QuestionTimer.vue";
-import Countdown from "~/components/StartCountdown.vue";
-import CategoryDataService from "~/services/CategoryDataService";
-import QuizzDataService from "~/services/QuizzDataService";
-import QuizzEnded from "./QuizzEnded.vue";
-import QuizzEmpty from "./QuizzEmpty.vue";
-import QuizzPaused from "./QuizzPaused.vue";
-import LoadingSpinner from "./LoadingSpinner.vue";
-import TuVeuxAbandonner from "./TuVeuxAbandonner.vue";
-import QuestionImage from './questions/QuestionImage.vue';
-import QuestionOrder from './questions/QuestionOrder.vue';
+import QuestionTimer from '~/components/QuestionTimer.vue'
+import Countdown from '~/components/StartCountdown.vue'
+import CategoryDataService from '~/services/CategoryDataService'
+import QuizzDataService from '~/services/QuizzDataService'
+import QuizzEnded from './QuizzEnded.vue'
+import QuizzEmpty from './QuizzEmpty.vue'
+import QuizzPaused from './QuizzPaused.vue'
+import LoadingSpinner from './LoadingSpinner.vue'
+import TuVeuxAbandonner from './TuVeuxAbandonner.vue'
+import QuestionImage from './questions/QuestionImage.vue'
+import QuestionOrder from './questions/QuestionOrder.vue'
 
 export default {
   components: {
@@ -90,7 +106,7 @@ export default {
     QuestionImage,
     QuestionOrder,
   },
-  name: "Quizz",
+  name: 'Quizz',
   props: {
     quizz_id: {
       type: [String, Number],
@@ -114,172 +130,147 @@ export default {
 
       selectedAnswer: null,
       showCorrectAnswer: false,
-    };
-  },
-  async created() {
-    this.toggleLoading("quizz", true);
-    this.category_id = this.$route.params.category_id;
-    // this.quizz_id = this.$route.params.quizz_id
-
-    // this.category = await CategoryDataService.get(this.category_id);
-    // console.log("fetched category", this.category);
-    await this.fetchQuizz();
-    this.toggleLoading("quizz", false);
+    }
   },
   mounted() {
-    // this.initQuizz()
+    this.category_id = this.$route.params.category_id
+    this.initQuizz();
   },
   computed: {
     currentQuestion() {
-      return this.questions[this.currentQuestionIndex] ?? null;
+      return this.questions[this.currentQuestionIndex] ?? null
     },
     isLastQuestion() {
-      return this.currentQuestionIndex == this.questions.length - 1;
+      return this.currentQuestionIndex == this.questions.length - 1
     },
     shouldPauseTimer() {
-      return true
-      return this.pauseTimer || this.isLoading("quizz") || this.isQuizzOver;
+      return this.pauseTimer || this.isLoading('quizz') || this.isQuizzOver
     },
   },
   methods: {
     clearLoading() {
       setTimeout(() => {
-        this.toggleLoading("quizz", false);
-      }, 300);
+        this.toggleLoading('quizz', false)
+      }, 300)
     },
     clearQuizzData() {
-      this.answersList = [];
-      this.currentQuestionIndex = 0;
-      this.toggleLoading("quizz", false);
-      this.isQuizzOver = false;
-      this.isSubmittingAnswer = false;
-      this.pauseTimer = false;
-      this.questions = [];
-      this.selectedAnswer = null;
-      this.showCorrectAnswer = false;
+      this.answersList = []
+      this.currentQuestionIndex = 0
+      this.toggleLoading('quizz', false)
+      this.isQuizzOver = false
+      this.isSubmittingAnswer = false
+      this.pauseTimer = false
+      this.questions = []
+      this.selectedAnswer = null
+      this.showCorrectAnswer = false
     },
     dontQuit() {
-      this.setState("isUserQuitting", false);
-      this.setState("pause", false);
+      this.setState('isUserQuitting', false)
+      this.setState('pause', false)
     },
     async fetchQuizz() {
-      console.log("fetchQuizz");
-      if (this.$store.state.ui.uiStates.useLocalDB) {
-        this.quizz = this.$store.state.quizzes.list.find(
-          (item) => item.id == this.quizz_id && item.category_id == this.$route.params?.category_id
-          );
-      } else {
-        // await this.$store.dispatch('quizzes/fetchOne', this.category_id);
-        this.quizz = await QuizzDataService.getOne(this.quizz_id);
-      }
-      console.log("result", this.quizz);
-      this.questions = this.quizz.questions;
+      console.log('fetchQuizz')
+
     },
     endQuizz() {
-      console.log("endQuizz");
-      this.isQuizzOver = true;
+      console.log('endQuizz')
+      this.isQuizzOver = true
       // TODO save results on server
     },
     initQuizz() {
-      this.setLoading();
-      // load questions
-      this.questions =
-        this.$store.state.quizzes.list.filter(
-          (item) => item.category_id == this.$route.params.category_id
-        ) ?? [];
-      this.questions = this.questions.slice(0, 3);
-      console.log("initQuizz", this.questions);
-      this.shuffleArray(this.questions);
-      this.currentQuestionIndex = 0;
-      this.clearLoading();
+      this.setLoading()
+      this.quizz = this.$store.state.quizzes.list.find(
+        (item) =>
+          item.id == this.quizz_id &&
+          item.category_id == this.$route.params?.category_id
+      )
+      this.questions = this.quizz.questions
+      this.shuffleArray(this.questions)
+      this.currentQuestionIndex = 0
+      this.clearLoading()
 
-      console.log("this.$refs");
       // this.restartTimer();
-      this.launchStartCountDown();
+      // this.launchStartCountDown()
     },
     launchStartCountDown() {
-      this.$refs.StartCountdown.startTimer();
-      // this.restartTimer();
+      this.$refs.StartCountdown.startTimer()
     },
     loadNextQuestion() {
-      console.log("loadNext");
-      this.isSubmittingAnswer = false;
-      this.selectedAnswer = null;
+      console.log('loadNext')
+      this.isSubmittingAnswer = false
+      this.selectedAnswer = null
 
-      this.setLoading();
+      this.setLoading()
       if (this.isLastQuestion) {
         // show end screen;
-        this.endQuizz();
-        this.clearLoading();
-        return;
+        this.endQuizz()
+        this.clearLoading()
+        return
       }
-      this.showCorrectAnswer = false;
-      this.currentQuestionIndex++;
+      this.showCorrectAnswer = false
+      this.currentQuestionIndex++
       //
-      this.clearLoading();
-      this.pauseTimer = false;
-      this.restartTimer();
+      this.clearLoading()
+      this.pauseTimer = false
+      this.restartTimer()
     },
-    onAnswered(answer){
-      this.selectedAnswer = answer;
+    onAnswered(answer) {
+      this.selectedAnswer = answer
       //
     },
     onGamePaused() {
-      this.setState("pause", true);
+      this.setState('pause', true)
     },
     onTimeExpired() {
       // TODO add popup
       // save input
-      this.saveAnswer();
+      this.saveAnswer()
     },
     restartQuizz() {
       //
-      console.log("restart");
-      this.clearQuizzData();
-      this.initQuizz();
+      console.log('restart')
+      this.clearQuizzData()
+      this.initQuizz()
     },
     restartTimer() {
-      this.pauseTimer = false;
-      this.$refs.QuestionTimer.startTimer();
+      this.pauseTimer = false
+      this.$refs.QuestionTimer.startTimer()
     },
-    resumeGame() {
-      this.setState("pause", false);
+    async resumeGame() {
+      this.setState('pause', false)
+      // this.pauseTimer = true;
+      // this.launchStartCountDown();
+      // await this.sleep(this.$refs.StartCountdown.TIME *1000)
+      // this.pauseTimer = false;
     },
     saveAnswer() {
-      this.showCorrectAnswer = true;
-      this.isSubmittingAnswer = true;
-      this.answersList.push(this.selectedAnswer);
+      this.showCorrectAnswer = true
+      this.isSubmittingAnswer = true
+      this.answersList.push(this.selectedAnswer)
 
       // move to next question
       // TODO increase time fn(question type)
-      setTimeout(this.loadNextQuestion, 1000);
+      setTimeout(this.loadNextQuestion, 1000)
     },
 
     submitAnswer({ acceptEmpty = false } = {}) {
-      if (!this.selectedAnswer) return;
-      if (this.isSubmittingAnswer) return;
+      if (!this.selectedAnswer) return
+      if (this.isSubmittingAnswer) return
+
+      console.log('submitAnswer')
       // stop timer
-      this.pauseTimer = true;
+      this.pauseTimer = true
       // show wrong answers
-      this.saveAnswer();
+      this.saveAnswer()
     },
     setLoading() {
-      this.toggleLoading("quizz", true);
-    },
-    toggleSelectAnswer(answer) {
-      if (this.showCorrectAnswer) return;
-      if (this.selectedAnswer == answer) {
-        // this.selectedAnswer = null
-        this.submitAnswer();
-        return;
-      }
-      this.selectedAnswer = answer;
+      this.toggleLoading('quizz', true)
     },
     userWantsToQuit() {
-      this.setState("isUserQuitting", true);
+      this.setState('isUserQuitting', true)
     },
   },
-};
+}
 </script>
 
 <style></style>

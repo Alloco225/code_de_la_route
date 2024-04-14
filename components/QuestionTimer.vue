@@ -23,7 +23,8 @@
 export default {
   name: 'QuestionTimer',
   props: {
-    pause: { type: Boolean, default: false,}
+    pause: { type: Boolean, default: false,},
+    countDownTime: {type: Number, default: null}
   },
   data() {
     return {
@@ -42,7 +43,7 @@ export default {
       return this.time > 0
     },
     percentage() {
-      return (this.time * 100) / (this.START_TIME ?? 1)
+      return (this.time * 100) / (this.remainingTime ?? 1)
     },
     percentageColor(){
       if(this.percentage <= 30)
@@ -53,12 +54,15 @@ export default {
         return 'bg-yellow-500'
 
       return 'bg-blue-500';
+    },
+    remainingTime(){
+      return this.countDownTime ?? this.START_TIME;
     }
   },
   methods: {
     startTimer() {
       console.log("startTimer")
-      this.time = this.START_TIME
+      this.time = this.remainingTime
 
       clearInterval(this.timer);
 
