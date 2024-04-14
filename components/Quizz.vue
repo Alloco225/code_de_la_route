@@ -19,43 +19,12 @@
       </div>
 
       <loading-spinner v-if="isLoading('quizz')"></loading-spinner>
-      <section v-else class="flex flex-col justify-around h-full">
-        <div class="flex flex-col gap-3 h-full p-2 mb-5">
-          <h2 class="font-medium p-5 mb-5 text-2xl">
-            {{ currentQuestion?.question }}
-          </h2>
 
-          <div
-            class="rounded flex h-full items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800 p-2"
-          >
-            <img
-              :src="currentQuestion?.image"
-              class="w-full object-contain h-36 md:h-32"
-              alt="Image de la question"
-            />
-          </div>
-        </div>
 
-        <div class="grid grid-cols-1 p-2 mt-5 gap-3">
-          <button
-            v-for="(answer, i) in currentQuestion?.answers"
-            :key="i"
-            @click="toggleSelectAnswer(answer)"
-            class="relative rounded text-gray-800 bg-gray-200 shadow p-3"
-            :class="{
-              'bg-orange-500 text-white': !showCorrectAnswer && selectedAnswer == answer,
-              'bg-green-500 text-white': showCorrectAnswer && answer?.isCorrect,
-              'bg-red-500 text-white':
-                showCorrectAnswer && answer == selectedAnswer && !answer?.isCorrect,
-              'bg-gray-600':
-                showCorrectAnswer && answer != selectedAnswer && !answer?.isCorrect,
-            }"
-          >
-            <!-- <span class="absolute left-3">{{ i + 1 }}</span> -->
-            <span>{{ answer.content }}</span>
-          </button>
-        </div>
-      </section>
+      <template v-else>
+        <!-- <question-image :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-image> -->
+        <question-order :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-order>
+      </template>
 
       <div>
         <button
@@ -71,11 +40,11 @@
       </div>
     </div>
 
-    <countdown
+    <!-- <countdown
       v-if="questions.length > 0"
       ref="StartCountdown"
       @start-quizz="restartTimer"
-    ></countdown>
+    ></countdown> -->
 
     <quizz-ended
       v-if="isQuizzOver"
@@ -107,6 +76,8 @@ import QuizzEmpty from "./QuizzEmpty.vue";
 import QuizzPaused from "./QuizzPaused.vue";
 import LoadingSpinner from "./LoadingSpinner.vue";
 import TuVeuxAbandonner from "./TuVeuxAbandonner.vue";
+import QuestionImage from './questions/QuestionImage.vue';
+import QuestionOrder from './questions/QuestionOrder.vue';
 
 export default {
   components: {
@@ -116,6 +87,8 @@ export default {
     QuizzPaused,
     TuVeuxAbandonner,
     LoadingSpinner,
+    QuestionImage,
+    QuestionOrder,
   },
   name: "Quizz",
   props: {
@@ -164,6 +137,7 @@ export default {
       return this.currentQuestionIndex == this.questions.length - 1;
     },
     shouldPauseTimer() {
+      return true
       return this.pauseTimer || this.isLoading("quizz") || this.isQuizzOver;
     },
   },
@@ -192,8 +166,8 @@ export default {
       console.log("fetchQuizz");
       if (this.$store.state.ui.uiStates.useLocalDB) {
         this.quizz = this.$store.state.quizzes.list.find(
-          (item) => item.id == this.quizz_id
-        );
+          (item) => item.id == this.quizz_id && item.category_id == this.$route.params?.category_id
+          );
       } else {
         // await this.$store.dispatch('quizzes/fetchOne', this.category_id);
         this.quizz = await QuizzDataService.getOne(this.quizz_id);
@@ -215,7 +189,7 @@ export default {
         ) ?? [];
       this.questions = this.questions.slice(0, 3);
       console.log("initQuizz", this.questions);
-      this.shuffle(this.questions);
+      this.shuffleArray(this.questions);
       this.currentQuestionIndex = 0;
       this.clearLoading();
 
@@ -274,22 +248,6 @@ export default {
 
       // move to next question
       setTimeout(this.loadNextQuestion, 1000);
-    },
-    shuffle(array) {
-      let currentIndex = array.length;
-
-      // While there remain elements to shuffle...
-      while (currentIndex != 0) {
-        // Pick a remaining element...
-        let randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex],
-          array[currentIndex],
-        ];
-      }
     },
 
     submitAnswer({ acceptEmpty = false } = {}) {
