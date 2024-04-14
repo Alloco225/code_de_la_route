@@ -1,29 +1,27 @@
 <template>
     <section class="flex flex-col justify-around h-full p-4">
         <div class="flex flex-col gap-3 h-full mb-5">
-          <h2 class="font-medium p-5 mb-5 text-2xl">
+          <h2 class="font-medium p-5 mb-3 text-2xl">
             {{ question?.question }}
           </h2>
 
           <div
-            class="rounded flex h-full items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800 p-2"
+            class="rounded flex h-full items-center justify-center bg-gray-200 bg-opacity-10 text-gray-800"
           >
             <img
               :src="question?.image"
-              class="w-full object-contain h-36 md:h-32"
+              class="object-contain h-auto w-full rounded"
               alt="Image de la question"
             />
           </div>
 
           <!--  -->
-          <div class=" text-gray-800 rounded grid gap-2 grid-cols-4">
-            <!-- <span class="border-dashed border-2 m-1 p-1 rounded grow">
-              Déposer ici
-            </span> -->
-            <span v-for="i in orderElementCount" @click="toggleOrderElement(selectedOrder[i-1])" :key="i" class=" rounded text-gray-800 bg-gray-200 shadow p-3"
+          <div class=" text-gray-800 rounded flex gap-2" :class="gridColsCount">
+
+            <span v-for="i in orderElementCount" @click="toggleOrderElement(selectedOrder[i-1])" :key="i" class="grow rounded text-gray-800 bg-gray-200 shadow p-2"
               :class="{
-                'bg-green-500 text-white': showCorrectAnswer &&  selectedOrder.join(', ') == question?.correctOrder,
-                'bg-red-500 text-white': showCorrectAnswer &&  selectedOrder.join(', ') != question?.correctOrder,
+                'bg-green-500 text-white': showCorrectAnswer &&  selectedOrder.join(SEPARATOR) == question?.correctOrder,
+                'bg-red-500 text-white': showCorrectAnswer &&  selectedOrder.join(SEPARATOR) != question?.correctOrder,
                 'bg-gray-200 text-gray-800': selectedOrder[i-1],
                 'bg-gray-600 p-5': !selectedOrder[i-1],
               }"
@@ -31,8 +29,8 @@
               {{selectedOrder[i-1]}}
             </span>
           </div>
-          <div v-if="showCorrectAnswer && selectedOrder.join(', ') != question?.correctOrder" class="bg-gray-200 bg-opacity-10 text-gray-800 rounded grid gap-2 grid-cols-4">
-            <span v-for="(elem, i) in selectedOrder" :key="i" class=" rounded shadow p-3 bg-green-500 text-white"
+          <div v-if="showCorrectAnswer && selectedOrder.join(SEPARATOR) != question?.correctOrder" class="bg-gray-200 bg-opacity-10 text-gray-800 rounded flex gap-2" :class="gridColsCount">
+            <span v-for="(elem, i) in question?.correctOrder.split(SEPARATOR)" :key="i" class="grow rounded shadow p-2 bg-green-500 text-white"
             >
               {{elem}}
             </span>
@@ -76,14 +74,21 @@ export default {
   data(){
     return {
       answers: [],
-      orderElementCount: 1,
+      gridColsCount: null,
+      orderElementCount: null,
       selectedOrder: [],
+      SEPARATOR: ', ',
     }
   },
   created(){
-    this.answers = this.question.correctOrder.split(', ');
+    this.answers = this.question.correctOrder.split(this.SEPARATOR);
     this.orderElementCount = this.answers.length
     this.shuffleArray(this.answers)
+
+    this.$nextTick(()=> this.gridColsCount = 'grid-cols-'+ this.orderElementCount)
+  },
+  computed: {
+
   },
   methods: {
     toggleOrderElement(element){
@@ -101,6 +106,18 @@ export default {
         this.answers.splice(index, 1, null)
 
         this.selectedOrder.push(element)
+      }
+
+      const content = this.selectedOrder.join(this.SEPARATOR);
+      let answer = {
+        content,
+      }
+
+      if(this.selectedOrder.length == this.orderElementCount){
+        answer.isCorrect = content === this.question?.correctOrder
+        this.$emit('answer', answer)
+      }else {
+        this.$emit('answer', answer)
       }
     }
   }

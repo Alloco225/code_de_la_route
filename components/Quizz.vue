@@ -23,7 +23,7 @@
 
       <template v-else>
         <!-- <question-image :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-image> -->
-        <question-order :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-order>
+        <question-order @answer="onAnswered" :question="currentQuestion" :selectedAnswer="selectedAnswer" :showCorrectAnswer="showCorrectAnswer"></question-order>
       </template>
 
       <div>
@@ -220,6 +220,10 @@ export default {
       this.pauseTimer = false;
       this.restartTimer();
     },
+    onAnswered(answer){
+      this.selectedAnswer = answer;
+      //
+    },
     onGamePaused() {
       this.setState("pause", true);
     },
@@ -247,6 +251,7 @@ export default {
       this.answersList.push(this.selectedAnswer);
 
       // move to next question
+      // TODO increase time fn(question type)
       setTimeout(this.loadNextQuestion, 1000);
     },
 
