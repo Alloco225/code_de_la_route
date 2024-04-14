@@ -54,6 +54,7 @@
       </div>
     </div>
 
+    <transition>
       <div v-show="!showCorrectAnswer" class="grid grid-cols-2 py-2 mt-5 gap-3">
         <button
           v-for="i in orderElementCount"
@@ -65,6 +66,7 @@
           <span>{{ answers[i - 1] ?? ' ' }}</span>
         </button>
       </div>
+    </transition>
   </section>
 </template>
 

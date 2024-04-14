@@ -88,14 +88,14 @@ export default {
       titleText: 'Quitter ?',
       flash: false,
       subtitles: [
-        { text: 'Tu veux abandonner ?', startTime: 0.8, endTime: 2.7 },
+        { text: 'Tu veux abandonner ?', startTime: 0.7, endTime: 2.7 },
         {
           text: 'Est-ce que tu veux abandonner ?????',
           startTime: 2.7,
-          endTime: 6.11,
+          endTime: 6.6,
           flash: true,
         },
-        { text: 'iYaaAAARGHHH !!!!', startTime: 6.11, endTime: 9.10 },
+        { text: 'iYaaAAARGHHH !!!!', startTime: 6.6, endTime: 9.10 },
         { text: 'Tu es pathétique !!', startTime: 9.10, endTime: 10.11 },
         { text: 'Fuir et fir !!', startTime: 10.11, endTime: 11.21 },
         { text: 'Fir encore !!', startTime: 11.21, endTime: 12.41 },
@@ -126,7 +126,7 @@ export default {
           (subtitle) =>
             currentTime >= subtitle.startTime && currentTime <= subtitle.endTime
         )
-        this.flash = !!currentSubtitle.flash
+        this.flash = !!currentSubtitle?.flash
         this.titleText = currentSubtitle ? currentSubtitle.text : ''
       })
     },

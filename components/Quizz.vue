@@ -15,7 +15,7 @@
         <question-timer
           ref="QuestionTimer"
           :pause="shouldPauseTimer"
-          :countDownTime="currentQuestion?.type == 'order' ? 20 : null"
+          :countDownTime="currentQuestion?.type == 'order' ? 5 : null"
           @pause-game="onGamePaused"
           @time-expired="onTimeExpired"
         ></question-timer>
@@ -185,7 +185,8 @@ export default {
           item.category_id == this.$route.params?.category_id
       )
       this.questions = this.quizz.questions
-      this.shuffleArray(this.questions)
+
+      // this.shuffleArray(this.questions)
       this.currentQuestionIndex = 0
       this.clearLoading()
 
@@ -248,9 +249,9 @@ export default {
       this.isSubmittingAnswer = true
       this.answersList.push(this.selectedAnswer)
 
-      // move to next question
-      // TODO increase time fn(question type)
-      setTimeout(this.loadNextQuestion, 1000)
+      // move to next question after cooldown
+      const cooldown = this.currentQuestion?.type == 'order' ? 3000 : 1000
+      setTimeout(this.loadNextQuestion, cooldown)
     },
 
     submitAnswer({ acceptEmpty = false } = {}) {
