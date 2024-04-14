@@ -88,15 +88,15 @@ export default {
       titleText: 'Quitter ?',
       flash: false,
       subtitles: [
-        { text: 'Tu veux abandonner ?', startTime: 0.8, endTime: 3.0 },
+        { text: 'Tu veux abandonner ?', startTime: 0.8, endTime: 2.7 },
         {
           text: 'Est-ce que tu veux abandonner ?????',
-          startTime: 3.0,
+          startTime: 2.7,
           endTime: 6.11,
           flash: true,
         },
-        { text: 'iYaaAAARGHHH !!!!', startTime: 6.11, endTime: 9.11 },
-        { text: 'Tu es pathétique !!', startTime: 9.11, endTime: 10.11 },
+        { text: 'iYaaAAARGHHH !!!!', startTime: 6.11, endTime: 9.10 },
+        { text: 'Tu es pathétique !!', startTime: 9.10, endTime: 10.11 },
         { text: 'Fuir et fir !!', startTime: 10.11, endTime: 11.21 },
         { text: 'Fir encore !!', startTime: 11.21, endTime: 12.41 },
         { text: 'Toujours fir !!', startTime: 12.41, endTime: 13.61 },
@@ -256,7 +256,7 @@ export default {
 }
 
 .flash {
-  animation: blink 1s step-end -0.5s 1;
+  animation: blink 1s step-end -0.4s 1;
 }
 
 .blink {
