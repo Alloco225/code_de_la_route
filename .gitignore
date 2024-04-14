@@ -93,3 +93,5 @@ sw.*
 firebase.js
 _firebase.js
 /store
+store/
+/store/

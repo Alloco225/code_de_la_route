@@ -57,24 +57,27 @@ export default {
   components: { FacebookLoginButton },
   name: 'Landing',
   data() {
-    return {}
+    return {
+
+    }
   },
-  created() {
+  async created() {
     this.toggleLoading('initApp', true)
-    this.initApp()
-    this.fetchAppData()
+    await this.initApp()
+    this.toggleLoading('initApp', false)
   },
   mounted() {
     console.log('mounted')
   },
   computed: {
     categories() {
+      return this.$store.state.categories.list
       return this.$store.getters['categories/list']
     },
   },
   methods: {
     async initApp() {
-      console.log('initApp')
+      console.log('initApp', )
 
       // Initialize Facebook SDK
       window.fbAsyncInit = function () {
@@ -86,20 +89,7 @@ export default {
         })
       }
     },
-    async fetchAppData() {
-      await this.sleep(1000)
 
-      const list = await this.$store.dispatch('categories/fetchAll')
-      console.log("list", list)
-
-      this.$store.commit('categories/SET_ALL', list);
-      // await this.$store.dispatch('quizzes/fetchAll');
-      // await this.$store.dispatch('questions/fetchAll');
-      this.toggleLoading('initApp', false)
-    },
-    async fetchCategories() {
-      await this.$store.dispatch('categories/fetchAll')
-    },
     gotoCategory(category) {
       this.$router.push('/categories/' + category.id)
     },
