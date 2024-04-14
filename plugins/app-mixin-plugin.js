@@ -30,16 +30,19 @@ const appMixin = {
       // this.$refs[action].pause();
       const element = document.getElementById(elementId);
       element?.pause();
+      return element;
     },
     playMedia(elementId) {
       const element = document.getElementById(elementId);
       element?.play();
+      return element;
     },
     resetMedia(elementId) {
       const element = document.getElementById(elementId);
       element?.pause();
       element.currentTime = 0;
       // element?.load();
+      return element;
 
     },
     setState(key, val = false) {
