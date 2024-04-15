@@ -1,16 +1,20 @@
 <template>
   <div
-    class="transition duration-200 ease-out h-full w-full flex flex-col  px-5 mx-auto md:w-11/12 xl:w-10/12 pt-5"
-    :class="[isLoading('initApp') ?  'justify-center':  'justify-between']"
+    class="landing transition duration-200 ease-out h-full w-full flex flex-col px-5 mx-auto md:w-11/12 xl:w-10/12 pt-5"
+    :class="[]"
   >
-    <div class="mt-5 md:my-10 text-white text-center px-2 transition duration-200 ease-out">
+    <div
+      class="mt-5 md:my-10 text-white text-center px-2 transition duration-200 ease-out"
+    >
       <img src="/logo.png" alt="" class="h-auto w-full" />
-      <span>v0.8.3</span>
+      <span>v0.8.3-test</span>
     </div>
 
     <transition>
-      <div v-if="!isLoading('categories')" class="flex flex-col gap-3 transition duration-200 ease-out">
-        <!-- <h4 class="text-center text-white text-xl uppercase font-medium">Categories</h4> -->
+      <div
+        v-show="!isLoading('initApp')"
+        class="flex flex-col gap-3 transition duration-200 ease-out"
+      >
 
         <div class="grid md:grid-cols-2 gap-5 md:gap-3 md:mt-10">
           <article
@@ -41,43 +45,43 @@
     </transition>
 
     <div class="flex justify-center items-center">
-      <!-- <facebook-login-button></facebook-login-button> -->
+      <facebook-login-button></facebook-login-button>
     </div>
 
-    <footer class="text-center text-gray-200 mb-10 md:mb-5 transition duration-200 ease-out">
+    <footer
+      class="text-center text-gray-200 mb-10 md:mb-5 transition duration-200 ease-out"
+    >
       <a class="underline text-blue-500" href="https://amane.dev">あ</a>
     </footer>
   </div>
 </template>
 
 <script>
-import FacebookLoginButton from './FacebookLoginButton.vue'
+import FacebookLoginButton from "./FacebookLoginButton.vue";
 
 export default {
   components: { FacebookLoginButton },
-  name: 'Landing',
+  name: "Landing",
   data() {
-    return {
-
-    }
+    return {};
   },
   async created() {
-    this.toggleLoading('initApp', true)
-    await this.initApp()
-    this.toggleLoading('initApp', false)
+    this.toggleLoading("initApp", true);
+    await this.initApp();
+    this.toggleLoading("initApp", false);
   },
   mounted() {
-    console.log('mounted')
+    console.log("mounted");
   },
   computed: {
     categories() {
-      return this.$store.state.categories.list
-      return this.$store.getters['categories/list']
+      return this.$store.state.categories.list;
+      return this.$store.getters["categories/list"];
     },
   },
   methods: {
     async initApp() {
-      console.log('initApp', )
+      console.log("initApp");
 
       // Initialize Facebook SDK
       window.fbAsyncInit = function () {
@@ -86,15 +90,26 @@ export default {
           autoLogAppEvents: process.env.FACEBOOK_AUTO_LOG_APP_EVENTS,
           xfbml: process.env.FACEBOOK_XFBML,
           version: process.env.FACEBOOK_AUTH_VERSION,
-        })
-      }
+        });
+      };
     },
 
     gotoCategory(category) {
-      this.$router.push('/categories/' + category.id)
+      this.$router.push("/categories/" + category.id);
     },
   },
-}
+};
 </script>
 
-<style></style>
+<style>
+  .landing {
+    animation: landing 2s forwards;
+    justify-content: center;
+  }
+
+  @keyframes landing {
+    100%{
+      justify-content: space-between;
+    }
+  }
+</style>

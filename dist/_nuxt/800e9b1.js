@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{352:function(n,e,t){"use strict";t.r(e);var c={name:""},l=t(67),component=Object(l.a)(c,(function(){return(0,this._self._c)("div",[this._v("\n  ReverseVoice\n")])}),[],!1,null,null,null);e.default=component.exports}}]);
