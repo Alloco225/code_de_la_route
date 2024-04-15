@@ -15,7 +15,7 @@
         <question-timer
           ref="QuestionTimer"
           :pause="shouldPauseTimer"
-          :countDownTime="currentQuestion?.type == 'order' ? 5 : null"
+          :countDownTime="getQuestionTimerTime(currentQuestion?.type)"
           @pause-game="onGamePaused"
           @time-expired="onTimeExpired"
         ></question-timer>
@@ -119,11 +119,12 @@ export default {
       category: null,
       category_id: null,
       currentQuestionIndex: 0,
-
+      IMAGE_QUESTION_DURATION: 10,
       isQuizzOver: false,
       isGamePaused: false,
       isSubmittingAnswer: false,
       isUserQuitting: false,
+      ORDER_QUESTION_DURATION: 20,
       pauseTimer: true,
       questions: [],
       quizz: null,
@@ -139,6 +140,12 @@ export default {
   computed: {
     currentQuestion() {
       return this.questions[this.currentQuestionIndex] ?? null
+    },
+    getQuestionTimerTime(){
+      if(this.currentQuestion?.type == 'order'){
+        return this.ORDER_QUESTION_DURATION;
+      }
+      return this.IMAGE_QUESTION_DURATION;
     },
     isLastQuestion() {
       return this.currentQuestionIndex == this.questions.length - 1
@@ -177,6 +184,7 @@ export default {
       this.isQuizzOver = true
       // TODO save results on server
     },
+
     initQuizz() {
       this.setLoading()
       this.quizz = this.$store.state.quizzes.list.find(
