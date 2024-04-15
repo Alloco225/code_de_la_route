@@ -45,7 +45,7 @@
     </transition>
 
     <div class="flex justify-center items-center">
-      <facebook-login-button></facebook-login-button>
+      <!-- <facebook-login-button></facebook-login-button> -->
     </div>
 
     <footer
