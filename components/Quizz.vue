@@ -258,7 +258,7 @@ export default {
       this.answersList.push(this.selectedAnswer)
 
       // move to next question after cooldown
-      const cooldown = this.currentQuestion?.type == 'order' ? 3000 : 1000
+      const cooldown = this.currentQuestion?.type == 'order' ? (this.selectedAnswer?.isCorrect ? 500 : 1500) : 1000
       setTimeout(this.loadNextQuestion, cooldown)
     },
 
