@@ -15,7 +15,7 @@
         <question-timer
           ref="QuestionTimer"
           :pause="shouldPauseTimer"
-          :countDownTime="getQuestionTimerTime(currentQuestion?.type)"
+          :countDownTime="getQuestionTimerTime"
           @pause-game="onGamePaused"
           @time-expired="onTimeExpired"
         ></question-timer>
