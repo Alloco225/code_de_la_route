@@ -194,7 +194,7 @@ export default {
       )
       this.questions = this.quizz.questions
 
-      // this.shuffleArray(this.questions)
+      this.shuffleArray(this.questions)
       this.currentQuestionIndex = 0
       this.clearLoading()
 
