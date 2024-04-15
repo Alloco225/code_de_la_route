@@ -31,6 +31,13 @@
           :question="currentQuestion"
           :showCorrectAnswer="showCorrectAnswer"
         ></question-image>
+        <question-voice
+          v-if="currentQuestion?.type == 'voice'"
+          @answer="onAnswered"
+          @submit-answer="submitAnswer"
+          :question="currentQuestion"
+          :showCorrectAnswer="showCorrectAnswer"
+        ></question-voice>
         <question-order
           v-if="currentQuestion?.type == 'order'"
           @answer="onAnswered"
@@ -94,6 +101,7 @@ import LoadingSpinner from './LoadingSpinner.vue'
 import TuVeuxAbandonner from './TuVeuxAbandonner.vue'
 import QuestionImage from './questions/QuestionImage.vue'
 import QuestionOrder from './questions/QuestionOrder.vue'
+import QuestionVoice from './questions/QuestionVoice.vue'
 
 export default {
   components: {
@@ -105,6 +113,7 @@ export default {
     LoadingSpinner,
     QuestionImage,
     QuestionOrder,
+    QuestionVoice,
   },
   name: 'Quizz',
   props: {
