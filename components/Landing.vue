@@ -5,7 +5,7 @@
   >
     <div class="mt-5 md:my-10 text-white text-center px-2 transition duration-200 ease-out">
       <img src="/logo.png" alt="" class="h-auto w-full" />
-      <span>v0.8.8</span>
+      <span>v0.8.9</span>
     </div>
 
     <transition>
