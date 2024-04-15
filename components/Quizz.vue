@@ -124,7 +124,7 @@ export default {
       isGamePaused: false,
       isSubmittingAnswer: false,
       isUserQuitting: false,
-      ORDER_QUESTION_DURATION: 20,
+      ORDER_QUESTION_DURATION: 15,
       pauseTimer: true,
       questions: [],
       quizz: null,
