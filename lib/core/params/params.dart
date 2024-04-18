@@ -8,3 +8,10 @@ class PokemonParams {
     required this.id,
   });
 }
+
+class QuizzParams {
+  final String id;
+  const QuizzParams({
+    required this.id,
+  });
+}
