@@ -1,3 +1,4 @@
+import 'package:cdlr/widgets/question_timer_widget.dart';
 import 'package:flutter/material.dart';
 
 class QuizzScreen extends StatefulWidget {
@@ -12,34 +13,39 @@ class _QuizzScreenState extends State<QuizzScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             //
             const SizedBox(
               height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  child: const Icon(Icons.arrow_back),
-                ),
-                const Text("Question 1/20"),
-                Container(
-                  child: const Icon(Icons.bookmark),
+                Text(
+                  "Question 1/20",
                 ),
               ],
             ),
             Expanded(
                 child: Container(
-              child: const Column(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("De quel signe s'agit-il ?"),
-                  Placeholder(),
-                  Column(
+                  const QuestionTimerWidget(),
+                  const Text(
+                    "De quel signe s'agit-il ?",
+                  ),
+                  Container(
+                    child: const Placeholder(),
+                  ),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Answers
+
                       Card(
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
@@ -52,7 +58,49 @@ class _QuizzScreenState extends State<QuizzScreen> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      )
+                      ),
+
+                      Card(
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Answer 1",
+                            style: TextStyle(),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+
+                      Card(
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Answer 1",
+                            style: TextStyle(),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+
+                      Card(
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Answer 1",
+                            style: TextStyle(),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],

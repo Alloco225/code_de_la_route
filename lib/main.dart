@@ -1,3 +1,4 @@
+import 'package:cdlr/const/theme.dart';
 import 'package:cdlr/screens/home_screen.dart';
 import 'package:cdlr/screens/quizz_screen.dart';
 import 'package:cdlr/screens/splash_screen.dart';
@@ -14,11 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        // elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(shape:)
-      ),
+      theme: kDarkTheme,
       // home: const SplashScreen(),
       // home: const HomeScreen(),
       home: const QuizzScreen(),
