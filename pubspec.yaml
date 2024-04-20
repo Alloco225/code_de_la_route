@@ -60,8 +60,14 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+    - assets/images/categories/
+    - assets/images/degagement/
+    - assets/images/signalisation/
+    # 
+    - assets/fonts/
+    # - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -75,6 +81,39 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: ProductSans
+      fonts:
+        - asset: assets/fonts/ProductSans-Regular.ttf
+          style: normal
+        - asset: assets/fonts/ProductSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/ProductSans-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/ProductSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/ProductSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ProductSans-Black.ttf
+          weight: 900
+        - asset: assets/fonts/ProductSans-ThinItalic.ttf
+          style: italic
+          weight: 100
+        - asset: assets/fonts/ProductSans-LightItalic.ttf
+          style: italic
+          weight: 300
+        - asset: assets/fonts/ProductSans-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/ProductSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/ProductSans-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/ProductSans-BlackItalic.ttf
+          style: italic
+          weight: 900
+
   # fonts:
   #   - family: Schyler
   #     fonts:

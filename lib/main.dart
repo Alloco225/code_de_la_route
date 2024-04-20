@@ -2,6 +2,7 @@ import 'package:cdlr/const/theme.dart';
 import 'package:cdlr/screens/home_screen.dart';
 import 'package:cdlr/screens/quizz_screen.dart';
 import 'package:cdlr/screens/splash_screen.dart';
+import 'package:cdlr/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,9 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: kDarkTheme,
-      // home: const SplashScreen(),
+      home: const SplashScreen(),
       // home: const HomeScreen(),
-      home: const QuizzScreen(),
+      // home: const QuizzScreen(),
+      routes: Routes.routes,
     );
   }
 }
