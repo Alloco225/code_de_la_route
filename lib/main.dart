@@ -1,4 +1,5 @@
 import 'package:cdlr/screens/home_screen.dart';
+import 'package:cdlr/screens/quizz_screen.dart';
 import 'package:cdlr/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        // elevatedButtonTheme: ElevatedButtonThemeData(style: ButtonStyle(shape:)
       ),
       // home: const SplashScreen(),
-      home: const HomeScreen(),
+      // home: const HomeScreen(),
+      home: const QuizzScreen(),
     );
   }
 }
