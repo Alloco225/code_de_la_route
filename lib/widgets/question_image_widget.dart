@@ -1,5 +1,6 @@
 import 'package:cdlr/helpers/assets.dart';
-import 'package:cdlr/models/question.dart';
+import 'package:cdlr/data/models/question.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class QuestionImageWidget extends StatefulWidget {
@@ -34,7 +35,6 @@ class _QuestionImageWidgetState extends State<QuestionImageWidget> {
             ),
             const SizedBox(height: 30.0),
             Container(
-              height: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 color: Colors.blueGrey[800],

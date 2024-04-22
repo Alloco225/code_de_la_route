@@ -1,4 +1,4 @@
-import 'package:cdlr/models/answer.dart';
+import 'package:cdlr/data/models/answer.dart';
 
 class Question {
   final String prompt;

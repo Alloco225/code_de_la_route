@@ -1,6 +1,6 @@
 import 'package:cdlr/db/db.dart';
 import 'package:cdlr/helpers/menu.dart';
-import 'package:cdlr/models/quizz_category.dart';
+import 'package:cdlr/data/models/quizz_category.dart';
 import 'package:cdlr/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

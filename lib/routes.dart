@@ -19,7 +19,7 @@ class Routes {
     splash: (ctx) => const SplashScreen(),
     home: (ctx) => const HomeScreen(),
     quizzList: (ctx) => const QuizzListScreen(),
-    quizzDetails: (ctx) => const QuizzDetailScreen(),
+    quizzDetails: (ctx) => QuizzDetailScreen(),
     // welcome: (ctx) => SwiperPage(),
     // menu: (ctx) => MenuScreen(),
     // readArticle: (ctx) => ReadArticleScreen(),

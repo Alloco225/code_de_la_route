@@ -1,7 +1,7 @@
-import 'package:cdlr/models/answer.dart';
-import 'package:cdlr/models/question.dart';
-import 'package:cdlr/models/quizz.dart';
-import 'package:cdlr/models/quizz_category.dart';
+import 'package:cdlr/data/models/answer.dart';
+import 'package:cdlr/data/models/question.dart';
+import 'package:cdlr/data/models/quizz.dart';
+import 'package:cdlr/data/models/quizz_category.dart';
 import 'package:flutter/material.dart';
 
 final List<QuizzCategory> CATEGORIES = [

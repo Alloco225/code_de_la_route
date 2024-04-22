@@ -1,4 +1,4 @@
-import 'package:cdlr/models/question.dart';
+import 'package:cdlr/data/models/question.dart';
 import 'package:flutter/material.dart';
 
 class Quizz {
