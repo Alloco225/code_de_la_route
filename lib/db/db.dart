@@ -2,16 +2,17 @@ import 'package:cdlr/models/answer.dart';
 import 'package:cdlr/models/question.dart';
 import 'package:cdlr/models/quizz.dart';
 import 'package:cdlr/models/quizz_category.dart';
+import 'package:flutter/material.dart';
 
 final List<QuizzCategory> CATEGORIES = [
   QuizzCategory(
       name: "Dégagement",
       id: "degagement",
-      image: "/categories/degagement.jpg"),
+      image: "assets/images/categories/degagement.jpg"),
   QuizzCategory(
       name: "Signalisation",
       id: "signalisation",
-      image: "/categories/signalisation.jpeg"),
+      image: "assets/images/categories/signalisation.jpeg"),
 ];
 
 final List<Quizz> DEGAGEMENT_QUIZZES = [
@@ -22,70 +23,70 @@ final List<Quizz> DEGAGEMENT_QUIZZES = [
     questions: [
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_1.png",
         correctOrder: "Bleu, Rouge, Jaune, Vert",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_2.png",
         correctOrder: "Jaune, Bleu, Rouge",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_3.png",
         correctOrder: "Bleu, Jaune, Rouge",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_4.png",
         correctOrder: "Bleu, Rouge, Jaune",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_5.png",
         correctOrder: "Jaune, Rouge, Bleu",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_6.png",
         correctOrder: "Jaune, Rouge, Vert, Bleu",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_7.png",
         correctOrder: "Rouge, Jaune, Bleu",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_8.png",
         correctOrder: "Jaune, Bleu, Rouge",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_9.png",
         correctOrder: "Bleu, Rouge, Jaune",
       ),
       Question(
         categoryId: "degagement",
-        promptText: "Quel est l'ordre de passage ?",
+        prompt: "Quel est l'ordre de passage ?",
         type: "order",
         image: "/degagement/degagement_10.png",
         correctOrder: "Jaune, Rouge, Vert",
@@ -99,10 +100,11 @@ final List<Quizz> SIGNALS_QUIZZES = [
       id: 0,
       categoryId: "signalisation",
       level: "Signalisation Verticale",
+      icon: Icons.directions,
       questions: [
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             type: "image",
             image: "/signalisation/585f901ccb11b227491c3570.png",
             answers: [
@@ -122,7 +124,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f9250cb11b227491c357d.png",
@@ -143,7 +145,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             // image: "https://assets.stickpng.com/thumbs/585f90abcb11b227491c3571.png",
@@ -166,7 +168,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f8f6dcb11b227491c355c.png",
@@ -185,7 +187,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f8f49cb11b227491c3558.png",
@@ -204,7 +206,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f8f74cb11b227491c355d.png",
@@ -219,7 +221,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f8f29cb11b227491c3555.png",
@@ -240,7 +242,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f8f40cb11b227491c3557.png",
@@ -258,7 +260,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f8fb9cb11b227491c3563.png",
@@ -276,7 +278,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
             ]),
         Question(
             categoryId: "signalisation",
-            promptText: "De quel panneau s'agit-il ?",
+            prompt: "De quel panneau s'agit-il ?",
             level: "",
             type: "image",
             image: "/signalisation/585f900ecb11b227491c356e.png",
@@ -300,10 +302,11 @@ final List<Quizz> SIGNALS_QUIZZES = [
     id: 1,
     categoryId: "signalisation",
     level: "Signalisation Gestuelle",
+    icon: Icons.sign_language,
     questions: [
       Question(
           categoryId: "signalisation",
-          promptText: "De quel panneau s'agit-il ?",
+          prompt: "De quel panneau s'agit-il ?",
           type: "voice",
           image: "/signalisation/585f901ccb11b227491c3570.png",
           correctAnswers: [
@@ -312,7 +315,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
           ]),
       Question(
           categoryId: "signalisation",
-          promptText: "De quel panneau s'agit-il ?",
+          prompt: "De quel panneau s'agit-il ?",
           type: "voice",
           image: "/signalisation/585f90abcb11b227491c3571.png",
           correctAnswers: [
@@ -324,6 +327,7 @@ final List<Quizz> SIGNALS_QUIZZES = [
     id: 1,
     categoryId: "signalisation",
     level: "Signalisation Horizontale",
+    icon: Icons.remove_road,
     questions: [],
   ),
 ];

@@ -1,7 +1,9 @@
+import 'package:cdlr/helpers/assets.dart';
+import 'package:cdlr/models/question.dart';
 import 'package:flutter/material.dart';
 
 class QuestionImageWidget extends StatefulWidget {
-  final Map<String, dynamic> question;
+  final Question question;
   final bool showCorrectAnswer;
 
   const QuestionImageWidget(
@@ -16,73 +18,69 @@ class _QuestionImageWidgetState extends State<QuestionImageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.question['question'],
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              widget.question.prompt,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
               ),
-              const SizedBox(height: 10.0),
-              Container(
-                height: 200,
+            ),
+            const SizedBox(height: 30.0),
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.blueGrey[800],
+              ),
+              child: Image.asset(
+                getMediaPath(widget.question.image!),
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 10.0),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: List.generate(
+            widget.question.answers!.length,
+            (index) => GestureDetector(
+              onTap: () {
+                toggleSelectAnswer(widget.question.answers![index]);
+              },
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.blueGrey[800],
+                  color: widget.showCorrectAnswer
+                      ? (widget.question.answers![index].isCorrect == true
+                          ? Colors.green[500]
+                          : (selectedAnswer == widget.question.answers![index]
+                              ? Colors.red[500]
+                              : Colors.grey[600]))
+                      : (selectedAnswer == widget.question.answers![index]
+                          ? Colors.orange[500]
+                          : Colors.grey[400]),
                 ),
-                child: Image.network(
-                  widget.question['image'],
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: 10.0),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: List.generate(
-              widget.question['answers'].length,
-              (index) => GestureDetector(
-                onTap: () {
-                  toggleSelectAnswer(widget.question['answers'][index]);
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 10.0),
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: widget.showCorrectAnswer
-                        ? (widget.question['answers'][index]['isCorrect']
-                            ? Colors.green[500]
-                            : (selectedAnswer ==
-                                    widget.question['answers'][index]
-                                ? Colors.red[500]
-                                : Colors.grey[600]))
-                        : (selectedAnswer == widget.question['answers'][index]
-                            ? Colors.orange[500]
-                            : Colors.grey[200]),
-                  ),
-                  child: Text(
-                    widget.question['answers'][index]['content'],
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
+                child: Text(
+                  widget.question.answers?[index].content ?? '',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.grey.shade800, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

@@ -1,10 +1,14 @@
 import 'package:cdlr/screens/home_screen.dart';
+import 'package:cdlr/screens/quizz_list_screen.dart';
+import 'package:cdlr/screens/quizz_detail_screen.dart';
 import 'package:cdlr/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 class Routes {
   static String splash = "/splash";
   static String home = "/home";
+  static String quizzList = "/quizzList";
+  static String quizzDetails = "/quizzDetails";
   static String welcome = "/welcome";
   static String menu = "/menu";
   static String readArticle = "/readArticle";
@@ -14,6 +18,8 @@ class Routes {
   static Map<String, WidgetBuilder> routes = {
     splash: (ctx) => const SplashScreen(),
     home: (ctx) => const HomeScreen(),
+    quizzList: (ctx) => const QuizzListScreen(),
+    quizzDetails: (ctx) => const QuizzDetailScreen(),
     // welcome: (ctx) => SwiperPage(),
     // menu: (ctx) => MenuScreen(),
     // readArticle: (ctx) => ReadArticleScreen(),

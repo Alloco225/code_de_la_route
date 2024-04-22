@@ -1,6 +1,6 @@
 import 'package:cdlr/const/theme.dart';
 import 'package:cdlr/screens/home_screen.dart';
-import 'package:cdlr/screens/quizz_screen.dart';
+import 'package:cdlr/screens/quizz_detail_screen.dart';
 import 'package:cdlr/screens/splash_screen.dart';
 import 'package:cdlr/routes.dart';
 import 'package:flutter/material.dart';

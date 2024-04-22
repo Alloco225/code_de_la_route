@@ -1,9 +1,7 @@
 import 'package:cdlr/models/answer.dart';
 
 class Question {
-  final dynamic prompt;
-  final dynamic promptType;
-  final String? promptText;
+  final String prompt;
   final String? image;
   final String type;
   String? categoryId;
@@ -13,9 +11,7 @@ class Question {
   List<String>? correctAnswers = [];
 
   Question({
-    this.prompt,
-    this.promptType,
-    this.promptText,
+    required this.prompt,
     this.categoryId,
     this.level,
     this.image,
@@ -24,6 +20,7 @@ class Question {
     this.answers,
     required this.type,
   });
+
 }
 
 class QuestionImage {
