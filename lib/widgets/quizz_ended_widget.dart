@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,7 +30,9 @@ class QuizzEnded extends StatefulWidget {
   _QuizzEndedState createState() => _QuizzEndedState();
 }
 
-class _QuizzEndedState extends State<QuizzEnded> {
+class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
+  late final AnimationController _coffettiPopAC;
+
   final int MARK_TOTAL = 20;
   double score = 0;
 
@@ -37,7 +40,16 @@ class _QuizzEndedState extends State<QuizzEnded> {
   void initState() {
     super.initState();
     calcScore();
+
+    _coffettiPopAC = AnimationController(vsync: this);
+
     // TODO add a gsap animation on the score calculating
+  }
+
+  @override
+  void dispose() {
+    _coffettiPopAC.dispose();
+    super.dispose();
   }
 
   void calcScore() {
@@ -119,147 +131,162 @@ class _QuizzEndedState extends State<QuizzEnded> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.9),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.width * .3),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Text(
-              "Quizz Terminé",
-              style: TextStyle(fontSize: 32, color: Colors.white),
-            ),
-            Stack(
-              alignment: Alignment.center,
+      body: Stack(
+        children: [
+          Lottie.asset(
+            'assets/animations/confetti-pop.anim.json',
+            controller: _coffettiPopAC,
+            onLoaded: (composition) {
+              // Configure the AnimationController with the duration of the
+              // Lottie file and start the animation.
+              _coffettiPopAC
+                ..duration = composition.duration
+                ..forward();
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.width * .3),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Center(
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: score == MARK_TOTAL
-                          ? Colors.green
-                          : score < MARK_TOTAL
-                              ? Colors.blue
-                              : score <= MARK_TOTAL / 2
-                                  ? Colors.orange
-                                  : Colors.red,
-                    ),
-                  ),
-                ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${score.toStringAsFixed(0)}/$MARK_TOTAL',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 64,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(.4),
-                        borderRadius: BorderRadius.circular(100)),
-                    child: const Icon(
-                      Ionicons.arrow_redo_outline,
-                      size: 30,
-                    )),
-                const SizedBox(height: 20),
                 const Text(
-                  "Partager mon score",
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+                  "Quizz Terminé",
+                  style: TextStyle(fontSize: 32, color: Colors.white),
                 ),
-                const SizedBox(height: 20),
-                Padding(
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: score == MARK_TOTAL
+                              ? Colors.green
+                              : score < MARK_TOTAL
+                                  ? Colors.blue
+                                  : score <= MARK_TOTAL / 2
+                                      ? Colors.orange
+                                      : Colors.red,
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${score.toStringAsFixed(0)}/$MARK_TOTAL',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 64,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(.4),
+                            borderRadius: BorderRadius.circular(100)),
+                        child: const Icon(
+                          Ionicons.arrow_redo_outline,
+                          size: 30,
+                        )),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Partager mon score",
+                      style: TextStyle(fontSize: 24, color: Colors.white),
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * .20),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(
+                            Ionicons.logo_whatsapp,
+                            size: 38,
+                          ),
+                          Icon(
+                            Ionicons.logo_facebook,
+                            size: 38,
+                          ),
+                          Icon(
+                            Ionicons.logo_twitter,
+                            size: 38,
+                          ),
+                          Icon(
+                            Ionicons.logo_linkedin,
+                            size: 38,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                  ],
+                ),
+                Container(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * .20),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Icon(
-                        Ionicons.logo_whatsapp,
-                        size: 38,
-                      ),
-                      Icon(
-                        Ionicons.logo_facebook,
-                        size: 38,
-                      ),
-                      Icon(
-                        Ionicons.logo_twitter,
-                        size: 38,
-                      ),
-                      Icon(
-                        Ionicons.logo_linkedin,
-                        size: 38,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * .15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
+                      horizontal: MediaQuery.of(context).size.width * .15),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          text: "Retour",
-                          icon: Ionicons.arrow_back,
-                          color: Colors.white,
-                          backgroundColor: Colors.blue,
-                          onPressed: widget.onReturnToQuizzList,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ButtonWidget(
+                              text: "Retour",
+                              icon: Ionicons.arrow_back,
+                              color: Colors.white,
+                              backgroundColor: Colors.blue,
+                              onPressed: widget.onReturnToQuizzList,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: ButtonWidget(
+                              text: "Réessayer",
+                              icon: Ionicons.refresh_outline,
+                              color: Colors.white,
+                              backgroundColor: Colors.green,
+                              onPressed: widget.onRestartQuizz,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: ButtonWidget(
-                          text: "Réessayer",
-                          icon: Ionicons.refresh_outline,
-                          color: Colors.white,
-                          backgroundColor: Colors.green,
-                          onPressed: widget.onRestartQuizz,
-                        ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ButtonWidget(
+                              text: "Menu",
+                              icon: Ionicons.home_outline,
+                              color: Colors.white,
+                              backgroundColor: Colors.red,
+                              onPressed: widget.onGoHome,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ButtonWidget(
-                          text: "Menu",
-                          icon: Ionicons.home_outline,
-                          color: Colors.white,
-                          backgroundColor: Colors.red,
-                          onPressed: widget.onGoHome,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
