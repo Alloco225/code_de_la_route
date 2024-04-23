@@ -3,6 +3,8 @@ import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/state_providers/game_state_provider.dart';
 import 'package:cdlr/widgets/question_image_widget.dart';
 import 'package:cdlr/widgets/question_timer_widget.dart';
+import 'package:cdlr/widgets/quizz_paused_widget.dart';
+import 'package:cdlr/widgets/tu_veux_abandonner_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,36 +67,71 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
     initPage();
 
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            //
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
+        children: [
+          // GameMainContentWidget(
+          //     currentQuestionIndex: currentQuestionIndex,
+          //     questions: questions,
+          //     gameState: gameState,
+          //     getQuestionWidget: getQuestionWidget),
+          // if (gameState.isPaused)
+          //   QuizzPausedWidget(
+          //       onResume: gameState.onGameResume, onQuit: gameState.onQuit),
+          // if (gameState.isQuitting)
+          TuVeuxAbandonnerWidget(
+            onClose: gameState.clearUserQuitting,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class GameMainContentWidget extends StatelessWidget {
+  const GameMainContentWidget({
+    super.key,
+    required this.currentQuestionIndex,
+    required this.questions,
+    required GameStateProvider gameState,
+    required this.getQuestionWidget,
+  }) : _gameState = gameState;
+
+  final int currentQuestionIndex;
+  final List<Question> questions;
+  final GameStateProvider _gameState;
+  final Widget getQuestionWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          //
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Question ${currentQuestionIndex + 1}/${questions.length}",
+              ),
+            ],
+          ),
+          Expanded(
+            child: Column(
               children: [
-                Text(
-                  "Question ${currentQuestionIndex + 1}/${questions.length}",
+                QuestionTimerWidget(
+                  onTimeExpired: _gameState.onTimeExpired,
+                  onTogglePause: _gameState.onTogglePause,
+                  pause: _gameState.isPaused,
                 ),
+                Expanded(child: getQuestionWidget),
               ],
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  // const QuestionTimerWidget(),
-                  InkWell(
-                    onTap: () => gameState.togglePause(),
-                    child: Text(gameState.isPaused ? "Paused" : "Play"),
-                  ),
-                  Expanded(child: getQuestionWidget),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

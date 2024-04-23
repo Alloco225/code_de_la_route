@@ -1,16 +1,17 @@
+import 'package:cdlr/helpers/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class TuVeuxAbandonner extends StatefulWidget {
+class TuVeuxAbandonnerWidget extends StatefulWidget {
   final Function() onClose;
 
-  const TuVeuxAbandonner({super.key, required this.onClose});
+  const TuVeuxAbandonnerWidget({super.key, required this.onClose});
 
   @override
-  _TuVeuxAbandonnerState createState() => _TuVeuxAbandonnerState();
+  _TuVeuxAbandonnerWidgetState createState() => _TuVeuxAbandonnerWidgetState();
 }
 
-class _TuVeuxAbandonnerState extends State<TuVeuxAbandonner> {
+class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
   bool isVideoVisible = false;
   bool isVidPlaying = false;
   bool videoPlayedCompletely = false;
@@ -43,14 +44,19 @@ class _TuVeuxAbandonnerState extends State<TuVeuxAbandonner> {
   @override
   void initState() {
     super.initState();
-    _videoPlayerController =
-        VideoPlayerController.asset('video/tu_veux_abandonner.mp4')
-          ..addListener(videoListener)
-          ..initialize().then((_) {
-            setState(() {
-              isVideoVisible = true;
-            });
-          });
+    final String videoUrl = getMediaPath('/tu_veux_abandonner.mp4');
+    print("path ==== $videoUrl");
+
+    _videoPlayerController = VideoPlayerController.asset(videoUrl)
+      // VideoPlayerController.networkUrl(Uri.parse(
+      //     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
+      // ..addListener(videoListener)
+      ..initialize().then((_) {
+        print("video initialised");
+        setState(() {
+          isVideoVisible = true;
+        });
+      });
   }
 
   @override
@@ -113,6 +119,20 @@ class _TuVeuxAbandonnerState extends State<TuVeuxAbandonner> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black54,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _videoPlayerController.value.isPlaying
+                ? _videoPlayerController.pause()
+                : _videoPlayerController.play();
+          });
+        },
+        child: Icon(
+          _videoPlayerController.value.isPlaying
+              ? Icons.pause
+              : Icons.play_arrow,
+        ),
+      ),
       body: Center(
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
@@ -127,6 +147,7 @@ class _TuVeuxAbandonnerState extends State<TuVeuxAbandonner> {
                     });
                   },
                   child: VideoPlayer(_videoPlayerController),
+                  // child: const Placeholder(),
                 ),
               ),
               if (!isVidPlaying && !videoPlayedCompletely)

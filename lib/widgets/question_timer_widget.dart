@@ -5,9 +5,16 @@ import 'package:flutter/material.dart';
 class QuestionTimerWidget extends StatefulWidget {
   final bool pause;
   final int? countDownTime;
+  final Function() onTogglePause;
+  final Function() onTimeExpired;
 
-  const QuestionTimerWidget(
-      {super.key, this.pause = false, this.countDownTime});
+  const QuestionTimerWidget({
+    super.key,
+    this.pause = false,
+    this.countDownTime,
+    required this.onTogglePause,
+    required this.onTimeExpired,
+  });
 
   @override
   _QuestionTimerWidgetState createState() => _QuestionTimerWidgetState();
@@ -43,6 +50,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
         time -= 0.1;
       });
       if (time < 0.2) {
+        widget.onTimeExpired();
         timer.cancel();
         // Emit time expired event
         // You can define your custom event handling here
@@ -62,6 +70,8 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
   double get remainingTime =>
       widget.countDownTime?.toDouble() ?? START_TIME.toDouble();
 
+  togglePause() {}
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,10 +80,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () {
-              // Emit pause game event
-              // You can define your custom event handling here
-            },
+            onTap: widget.onTogglePause,
             child: Container(
               width: 30,
               height: 30,
