@@ -3,6 +3,7 @@ import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/state_providers/game_state_provider.dart';
 import 'package:cdlr/widgets/question_image_widget.dart';
 import 'package:cdlr/widgets/question_timer_widget.dart';
+import 'package:cdlr/widgets/quizz_ended_widget.dart';
 import 'package:cdlr/widgets/quizz_paused_widget.dart';
 import 'package:cdlr/widgets/tu_veux_abandonner_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,7 +80,9 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
           if (gameState.isQuitting)
             TuVeuxAbandonnerWidget(
               onClose: gameState.clearUserQuitting,
-            )
+            ),
+          // Game
+          QuizzEnded(correctAnswerCount: 5, questionCount: 5),
         ],
       ),
     );
