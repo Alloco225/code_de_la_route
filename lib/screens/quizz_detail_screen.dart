@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:cdlr/db/db.dart';
 import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/state_providers/game_state_provider.dart';
@@ -28,6 +30,7 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
   late String categoryId;
 
   late int quizzId;
+  late Map? routeParams;
 
   bool showCorrectAnswer = false;
 
@@ -41,10 +44,10 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
   }
 
   initPage() {
-    Map? params = ModalRoute.of(context)?.settings.arguments as Map?;
+    routeParams = ModalRoute.of(context)?.settings.arguments as Map?;
 
-    categoryId = params?['categoryId'];
-    quizzId = params?['quizzId'];
+    categoryId = routeParams?['categoryId'];
+    quizzId = routeParams?['quizzId'];
 
     quizz = QUIZZES
         .firstWhere((el) => el.categoryId == categoryId && el.id == quizzId);
@@ -64,6 +67,15 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
       return Container();
     }
 
+    gotoHome(){
+      Navigator.of(context).pushReplacementNamed(Routes.home);
+    }
+    
+    gotoQuizzList(){
+      Navigator.of(context).pushReplacementNamed(Routes.quizzList, arguments: {categoryId: routeParams?['categoryId']});
+    }
+
+
     // final quizzState = mainRef.watch(quizzStateProvider);
 
     return Scaffold(
@@ -82,7 +94,7 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
               onClose: gameState.clearUserQuitting,
             ),
           // Game
-          QuizzEnded(correctAnswerCount: 5, questionCount: 5),
+          QuizzEnded(correctAnswerCount: 5, questionCount: 5, onGoHome: gotoHome, onRestartQuizz: gameState.onRestartQuizz, onReturnToQuizzList: gotoQuizzList,),
         ],
       ),
     );

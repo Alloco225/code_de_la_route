@@ -12,7 +12,7 @@ class GameStateProvider extends ChangeNotifier {
   bool _isQuitting = false;
   final bool _isCorrectAnswerVisible = false;
   int _score = 0;
-  Quizz? _selectedQuizz = null;
+  Quizz? _selectedQuizz;
 
   int get currentQuestionIndex => _currentQuestionIndex;
   int get score => _score;
@@ -63,9 +63,8 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   void endQuizz() {
-  
     _hasGameEnded = true;
-    
+
     notifyListeners();
   }
 
@@ -77,12 +76,12 @@ class GameStateProvider extends ChangeNotifier {
     }
     _currentQuestionIndex++;
     startTimer();
-      // // Access the TimerProvider instance
-      // TimerProvider timerProvider =
-      //     Provider.of<TimerProvider>(context, listen: false);
+    // // Access the TimerProvider instance
+    // TimerProvider timerProvider =
+    //     Provider.of<TimerProvider>(context, listen: false);
 
-      // // Now call the startTimer method
-      // timerProvider.startTimer();
+    // // Now call the startTimer method
+    // timerProvider.startTimer();
     notifyListeners();
   }
 
@@ -106,6 +105,12 @@ class GameStateProvider extends ChangeNotifier {
   onGameResume() {
     togglePause();
     //
+  }
+
+  onRestartQuizz() {
+    // Restart quizz
+    _currentQuestionIndex = 0;
+    // restart timer and stuff
   }
 
   onQuit() {

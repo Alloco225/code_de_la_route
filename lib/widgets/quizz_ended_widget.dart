@@ -1,17 +1,25 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class QuizzEnded extends StatefulWidget {
   final int correctAnswerCount;
   final int questionCount;
+  final Function() onRestartQuizz;
+  final Function() onGoHome;
+  final Function() onReturnToQuizzList;
 
   const QuizzEnded({
     super.key,
     required this.correctAnswerCount,
+    required this.onRestartQuizz,
+    required this.onReturnToQuizzList,
+    required this.onGoHome,
     required this.questionCount,
   });
 
@@ -70,18 +78,6 @@ class _QuizzEndedState extends State<QuizzEnded> {
     return link;
   }
 
-  void goBackToQuizzList(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  void goToMenu(BuildContext context) {
-    // Navigate to menu screen
-  }
-
-  void restart(BuildContext context) {
-    // Emit restart event
-  }
-
   void shareScore(BuildContext context, String platform) async {
     print("shareScore $platform");
     String stringToShare = "https://code-de-la-route.amane.dev";
@@ -120,57 +116,121 @@ class _QuizzEndedState extends State<QuizzEnded> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.9),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.width * .3),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Text(
               "Quizz Terminé",
-              style: TextStyle(fontSize: 24, color: Colors.white),
+              style: TextStyle(fontSize: 32, color: Colors.white),
             ),
-            const SizedBox(height: 10),
-            Container(
-              width: 120,
-              height: 120,
+            Stack(
               alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: score == MARK_TOTAL
-                    ? Colors.green
-                    : score < MARK_TOTAL
-                        ? Colors.blue
-                        : score <= MARK_TOTAL / 2
-                            ? Colors.orange
-                            : Colors.red,
-              ),
-              child: Text(
-                '${score.toStringAsFixed(0)}/$MARK_TOTAL',
-                style: const TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  onPressed: () => goBackToQuizzList(context),
-                  icon: const Icon(Icons.arrow_back),
-                  color: Colors.white,
+                Center(
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: score == MARK_TOTAL
+                          ? Colors.green
+                          : score < MARK_TOTAL
+                              ? Colors.blue
+                              : score <= MARK_TOTAL / 2
+                                  ? Colors.orange
+                                  : Colors.red,
+                    ),
+                  ),
                 ),
-                const SizedBox(width: 10),
-                IconButton(
-                  onPressed: () => restart(context),
-                  icon: const Icon(Icons.refresh),
-                  color: Colors.white,
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${score.toStringAsFixed(0)}/$MARK_TOTAL',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 64,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
                 ),
-                const SizedBox(width: 10),
-                IconButton(
-                  onPressed: () => goToMenu(context),
-                  icon: const Icon(Icons.home),
-                  color: Colors.white,
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(.4),
+                        borderRadius: BorderRadius.circular(100)),
+                    child: const Icon(
+                      Ionicons.arrow_redo_outline,
+                      size: 30,
+                    )),
+                const SizedBox(height: 20),
+                const Text(
+                  "Partager mon score",
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * .25),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(
+                        Ionicons.logo_whatsapp,
+                        size: 32,
+                      ),
+                      Icon(
+                        Ionicons.logo_facebook,
+                        size: 32,
+                      ),
+                      Icon(
+                        Ionicons.logo_twitter,
+                        size: 32,
+                      ),
+                      Icon(
+                        Ionicons.logo_linkedin,
+                        size: 32,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: widget.onReturnToQuizzList,
+                      icon: const Icon(Icons.arrow_back),
+                      color: Colors.white,
+                    ),
+                    const SizedBox(width: 10),
+                    IconButton(
+                      onPressed: widget.onRestartQuizz,
+                      icon: const Icon(Icons.refresh),
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: widget.onGoHome,
+                  child: const Icon(Icons.home),
+                  // color: Colors.white,
                 ),
               ],
             ),
