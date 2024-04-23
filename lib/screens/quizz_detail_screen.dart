@@ -1,20 +1,16 @@
-import 'dart:js_interop';
 
 import 'package:cdlr/db/db.dart';
-import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/state_providers/game_state_provider.dart';
 import 'package:cdlr/widgets/question_image_widget.dart';
 import 'package:cdlr/widgets/question_timer_widget.dart';
 import 'package:cdlr/widgets/quizz_ended_widget.dart';
 import 'package:cdlr/widgets/quizz_paused_widget.dart';
 import 'package:cdlr/widgets/tu_veux_abandonner_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/data.dart';
-import '../data/models/question.dart';
 import '../routes.dart';
 
 class QuizzDetailScreen extends StatefulWidget {
@@ -38,7 +34,6 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     initPage();
   }
@@ -70,7 +65,7 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
     gotoHome(){
       Navigator.of(context).pushReplacementNamed(Routes.home);
     }
-    
+
     gotoQuizzList(){
       Navigator.of(context).pushReplacementNamed(Routes.quizzList, arguments: {categoryId: routeParams?['categoryId']});
     }

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cdlr/widgets/question_image_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../data/data.dart';
