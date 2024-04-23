@@ -13,7 +13,7 @@ class TuVeuxAbandonnerWidget extends StatefulWidget {
 
 class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
   bool isVideoVisible = false;
-  bool isVidPlaying = false;
+
   bool videoPlayedCompletely = false;
   String titleText = 'Quitter ?';
   bool flash = false;
@@ -50,11 +50,13 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
     _videoPlayerController = VideoPlayerController.asset(videoUrl)
       // VideoPlayerController.networkUrl(Uri.parse(
       //     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
-      // ..addListener(videoListener)
+      ..addListener(videoListener)
       ..initialize().then((_) {
         print("video initialised");
         setState(() {
           isVideoVisible = true;
+
+          _videoPlayerController.play();
         });
       });
   }
@@ -62,6 +64,7 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
   @override
   void dispose() {
     _videoPlayerController.dispose();
+    widget.onClose();
     super.dispose();
   }
 
@@ -94,9 +97,7 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
     try {
       if (isVideoVisible) {
         // Just let the bloke give up nan
-        setState(() {
-          isVidPlaying = false;
-        });
+        setState(() {});
         return;
       }
       setState(() {
@@ -104,16 +105,13 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
       });
       await Future.delayed(const Duration(milliseconds: 500));
       _videoPlayerController.play();
-      setState(() {
-        isVidPlaying = true;
-      });
+      setState(() {});
     } catch (error) {
       print("Can't let you give up");
-      setState(() {
-        isVidPlaying = false;
-      });
     }
   }
+
+  bool get isVidPlaying => _videoPlayerController.value.isPlaying;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +141,9 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      isVidPlaying = !isVidPlaying;
+                      _videoPlayerController.value.isPlaying
+                          ? _videoPlayerController.pause()
+                          : _videoPlayerController.play();
                     });
                   },
                   child: VideoPlayer(_videoPlayerController),
@@ -179,7 +179,10 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
                           ),
                         ],
                       ),
-                      child: Text(titleText),
+                      child: Text(
+                        titleText,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),

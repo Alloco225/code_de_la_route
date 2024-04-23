@@ -4,16 +4,24 @@ import 'package:flutter/material.dart';
 
 class QuestionTimerWidget extends StatefulWidget {
   final bool pause;
+  final double percentage;
+  final double time;
   final int? countDownTime;
   final Function() onTogglePause;
   final Function() onTimeExpired;
+  final Function() onInit;
+  final Function() onDispose;
 
   const QuestionTimerWidget({
     super.key,
     this.pause = false,
     this.countDownTime,
+    required this.percentage,
+    required this.time,
     required this.onTogglePause,
     required this.onTimeExpired,
+    required this.onInit,
+    required this.onDispose,
   });
 
   @override
@@ -21,56 +29,27 @@ class QuestionTimerWidget extends StatefulWidget {
 }
 
 class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
-  late bool forcePause;
-  final int START_TIME = 10; // seconds
-  late double time; // seconds
-  late Timer? timer;
 
   final double _progressBarHeight = 13;
 
   @override
   void initState() {
     super.initState();
-    forcePause = false;
-    startTimer();
+    widget.onInit();
   }
 
   @override
   void dispose() {
-    timer?.cancel();
+    widget.onDispose();
     super.dispose();
   }
 
-  void startTimer() {
-    time = remainingTime;
-    // timer?.cancel();
-    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (widget.pause || forcePause) return;
-      setState(() {
-        time -= 0.1;
-      });
-      if (time < 0.2) {
-        widget.onTimeExpired();
-        timer.cancel();
-        // Emit time expired event
-        // You can define your custom event handling here
-      }
-    });
-  }
-
-  double get percentage => ((time * 100) / (remainingTime ?? 1)) / 100;
-
-  Color get percentageColor {
-    if (percentage <= .3) return Colors.red[500]!;
-    if (percentage <= .5) return Colors.orange[800]!;
-    if (percentage <= .8) return Colors.yellow[800]!;
+    Color get percentageColor {
+    if (widget.percentage <= .3) return Colors.red[500]!;
+    if (widget.percentage <= .5) return Colors.orange[800]!;
+    if (widget.percentage <= .8) return Colors.yellow[800]!;
     return Colors.blue[500]!;
   }
-
-  double get remainingTime =>
-      widget.countDownTime?.toDouble() ?? START_TIME.toDouble();
-
-  togglePause() {}
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +85,9 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.grey[200],
               ),
-              child: percentage > .03
+              child: widget.percentage > .03
                   ? FractionallySizedBox(
-                      widthFactor: percentage,
+                      widthFactor: widget.percentage,
                       alignment: AlignmentDirectional.centerStart,
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
@@ -125,17 +104,13 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
             width: 10,
           ),
           GestureDetector(
-            onTap: () {
-              setState(() {
-                forcePause = !forcePause;
-              });
-            },
+            onTap: widget.onTogglePause,
             child: Container(
               width: 30,
               height: 30,
               alignment: Alignment.center,
               child: Text(
-                time.toStringAsFixed(0),
+                widget.time.toStringAsFixed(0),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

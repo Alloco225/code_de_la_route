@@ -28,59 +28,58 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
 
   late int quizzId;
 
-  int currentQuestionIndex = 0;
-
   bool showCorrectAnswer = false;
 
   List<Question> get questions => quizz.questions;
 
-  Question get currentQuestion => questions[currentQuestionIndex];
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    initPage();
+  }
 
-  Widget get getQuestionWidget {
-    if (currentQuestion.type == "image") {
-      return QuestionImageWidget(
-          question: currentQuestion, showCorrectAnswer: showCorrectAnswer);
-    }
-    return Container();
+  initPage() {
+    Map? params = ModalRoute.of(context)?.settings.arguments as Map?;
+
+    categoryId = params?['categoryId'];
+    quizzId = params?['quizzId'];
+
+    quizz = QUIZZES
+        .firstWhere((el) => el.categoryId == categoryId && el.id == quizzId);
   }
 
   @override
   Widget build(BuildContext context) {
     var gameState = Provider.of<GameStateProvider>(context);
 
-    startQuizz() {
-      currentQuestionIndex = 0;
-    }
+    Question currentQuestion = questions[gameState.currentQuestionIndex];
 
-    initPage() {
-      Map? params = ModalRoute.of(context)?.settings.arguments as Map?;
-
-      categoryId = params?['categoryId'];
-      quizzId = params?['quizzId'];
-
-      quizz = QUIZZES
-          .firstWhere((el) => el.categoryId == categoryId && el.id == quizzId);
+    Widget getQuestionWidget() {
+      if (currentQuestion.type == "image") {
+        return QuestionImageWidget(
+            question: currentQuestion, showCorrectAnswer: showCorrectAnswer);
+      }
+      return Container();
     }
 
     // final quizzState = mainRef.watch(quizzStateProvider);
 
-    initPage();
-
     return Scaffold(
       body: Stack(
         children: [
-          // GameMainContentWidget(
-          //     currentQuestionIndex: currentQuestionIndex,
-          //     questions: questions,
-          //     gameState: gameState,
-          //     getQuestionWidget: getQuestionWidget),
-          // if (gameState.isPaused)
-          //   QuizzPausedWidget(
-          //       onResume: gameState.onGameResume, onQuit: gameState.onQuit),
-          // if (gameState.isQuitting)
-          TuVeuxAbandonnerWidget(
-            onClose: gameState.clearUserQuitting,
-          )
+          GameMainContentWidget(
+              currentQuestionIndex: gameState.currentQuestionIndex,
+              questions: questions,
+              gameState: gameState,
+              getQuestionWidget: getQuestionWidget()),
+          if (gameState.isPaused)
+            QuizzPausedWidget(
+                onResume: gameState.onGameResume, onQuit: gameState.onQuit),
+          if (gameState.isQuitting)
+            TuVeuxAbandonnerWidget(
+              onClose: gameState.clearUserQuitting,
+            )
         ],
       ),
     );
@@ -123,6 +122,10 @@ class GameMainContentWidget extends StatelessWidget {
             child: Column(
               children: [
                 QuestionTimerWidget(
+                  time: _gameState.time,
+                  percentage: _gameState.percentage,
+                  onInit: _gameState.startTimer,
+                  onDispose: _gameState.stopTimer,
                   onTimeExpired: _gameState.onTimeExpired,
                   onTogglePause: _gameState.onTogglePause,
                   pause: _gameState.isPaused,
