@@ -19,7 +19,7 @@ class GameStateProvider extends ChangeNotifier {
   Quizz? _selectedQuizz;
   dynamic _selectedAnswer;
 
-  final List<Map> _userResponses = [];
+  List<Map> _userResponses = [];
 
   int get currentQuestionIndex => _currentQuestionIndex;
   int get score => _score;
@@ -81,6 +81,7 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   void stopTimer() {
+    log("<< stopTimer");
     _timer?.cancel();
     _n();
   }
@@ -97,6 +98,7 @@ class GameStateProvider extends ChangeNotifier {
     _isPaused = false;
     _currentQuestionIndex = 0;
     _pause = false;
+    _userResponses = [];
 
     _n();
     startTimer();

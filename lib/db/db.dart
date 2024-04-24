@@ -5,10 +5,10 @@ import 'package:cdlr/data/models/quizz_category.dart';
 import 'package:flutter/material.dart';
 
 final List<QuizzCategory> CATEGORIES = [
-  QuizzCategory(
-      name: "Dégagement",
-      id: "degagement",
-      image: "assets/images/categories/degagement.jpg"),
+  // QuizzCategory(
+  //     name: "Dégagement",
+  //     id: "degagement",
+  //     image: "assets/images/categories/degagement.jpg"),
   QuizzCategory(
       name: "Signalisation",
       id: "signalisation",
