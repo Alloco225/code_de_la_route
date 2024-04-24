@@ -1,4 +1,4 @@
-import 'package:cdlr/helpers/assets.dart';
+import 'package:code_de_la_route/helpers/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 

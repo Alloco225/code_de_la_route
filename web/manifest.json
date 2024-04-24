@@ -1,6 +1,6 @@
 {
-    "name": "cdlr",
-    "short_name": "cdlr",
+    "name": "code_de_la_route",
+    "short_name": "code_de_la_route",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,12 +1,9 @@
-import 'package:cdlr/db/db.dart';
-import 'package:cdlr/helpers/assets.dart';
-import 'package:cdlr/helpers/menu.dart';
-import 'package:cdlr/data/models/quizz_category.dart';
-import 'package:cdlr/routes.dart';
-import 'package:cdlr/widgets/audio_mixer_widget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:code_de_la_route/db/db.dart';
+import 'package:code_de_la_route/helpers/assets.dart';
+import 'package:code_de_la_route/data/models/quizz_category.dart';
+import 'package:code_de_la_route/routes.dart';
+import 'package:code_de_la_route/widgets/audio_mixer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,21 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    AudioMixer.of(context)?.playBgm(getAudioPath('bgm.mp3'));
+    // AudioMixer.of(context)?.playBgm(getAudioPath('bgm.mp3'));
   }
 
   @override
   Widget build(BuildContext context) {
-    var selectedTab = MenuTabs.home;
-
-    void handleIndexChanged(int i) {
-      setState(() {
-        selectedTab = MenuTabs.values[i];
-      });
-    }
-
     void gotoQuizzList(QuizzCategory category) {
       Navigator.of(context).pushNamed(Routes.quizzList, arguments: {
         "categoryId": category.id,

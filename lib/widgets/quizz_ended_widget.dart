@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cdlr/widgets/button_widget.dart';
+import 'package:code_de_la_route/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

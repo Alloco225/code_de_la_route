@@ -1,4 +1,4 @@
-import 'package:cdlr/data/models/answer.dart';
+import 'package:code_de_la_route/data/models/answer.dart';
 
 class Question {
   final String prompt;
@@ -20,7 +20,6 @@ class Question {
     this.answers,
     required this.type,
   });
-
 }
 
 class QuestionImage {

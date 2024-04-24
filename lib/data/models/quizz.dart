@@ -1,4 +1,4 @@
-import 'package:cdlr/data/models/question.dart';
+import 'package:code_de_la_route/data/models/question.dart';
 import 'package:flutter/material.dart';
 
 class Quizz {

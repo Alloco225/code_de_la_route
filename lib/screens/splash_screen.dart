@@ -1,4 +1,4 @@
-import 'package:cdlr/routes.dart';
+import 'package:code_de_la_route/routes.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -55,9 +55,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-
-
-    
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

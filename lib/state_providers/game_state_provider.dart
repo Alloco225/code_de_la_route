@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cdlr/helpers/utils.dart';
+import 'package:code_de_la_route/helpers/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +59,8 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   void startTimer() async {
+    if (selectedQuizz == null) return;
+    if (selectedQuizz!.questions.isEmpty) return;
     log(">> startTimer");
     await Future.delayed(const Duration(milliseconds: 500));
 

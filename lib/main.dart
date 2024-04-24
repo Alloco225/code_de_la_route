@@ -1,8 +1,8 @@
-import 'package:cdlr/const/theme.dart';
-import 'package:cdlr/screens/splash_screen.dart';
-import 'package:cdlr/routes.dart';
-import 'package:cdlr/state_providers/game_state_provider.dart';
-import 'package:cdlr/widgets/audio_mixer_widget.dart';
+import 'package:code_de_la_route/const/theme.dart';
+import 'package:code_de_la_route/screens/splash_screen.dart';
+import 'package:code_de_la_route/routes.dart';
+import 'package:code_de_la_route/state_providers/game_state_provider.dart';
+// import 'package:code_de_la_route/widgets/audio_mixer_widget.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,12 +14,12 @@ void main() {
   runApp(
     // const ProviderScope(child: MyApp()),
     ChangeNotifierProvider(
-        create: (context) => GameStateProvider(),
-        child: const MyApp(),
-        // child: AudioMixer(
-        //   child: const MyApp(),
-        // )
-        ),
+      create: (context) => GameStateProvider(),
+      child: const MyApp(),
+      // child: AudioMixer(
+      //   child: const MyApp(),
+      // )
+    ),
   );
 }
 

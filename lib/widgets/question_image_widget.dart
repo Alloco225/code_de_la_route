@@ -1,7 +1,7 @@
-import 'package:cdlr/data/data.dart';
-import 'package:cdlr/helpers/assets.dart';
-import 'package:cdlr/data/models/question.dart';
-import 'package:cdlr/widgets/button_widget.dart';
+import 'package:code_de_la_route/data/data.dart';
+import 'package:code_de_la_route/helpers/assets.dart';
+import 'package:code_de_la_route/data/models/question.dart';
+import 'package:code_de_la_route/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class QuestionImageWidget extends StatelessWidget {

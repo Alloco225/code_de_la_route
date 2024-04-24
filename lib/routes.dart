@@ -1,7 +1,7 @@
-import 'package:cdlr/screens/home_screen.dart';
-import 'package:cdlr/screens/quizz_list_screen.dart';
-import 'package:cdlr/screens/quizz_detail_screen.dart';
-import 'package:cdlr/screens/splash_screen.dart';
+import 'package:code_de_la_route/screens/home_screen.dart';
+import 'package:code_de_la_route/screens/quizz_list_screen.dart';
+import 'package:code_de_la_route/screens/quizz_detail_screen.dart';
+import 'package:code_de_la_route/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 class Routes {
