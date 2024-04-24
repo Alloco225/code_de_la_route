@@ -8,7 +8,7 @@
 PRODUCT_NAME = code_de_la_route
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = dev.amane.code_de_la_route
+PRODUCT_BUNDLE_IDENTIFIER = dev.amane.codedelaroute
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2024 dev.amane. All rights reserved.
