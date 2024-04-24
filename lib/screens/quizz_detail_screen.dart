@@ -95,8 +95,8 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
           // Game
           if (gameState.hasGameEnded)
             QuizzEnded(
-              correctAnswerCount: 20,
-              questionCount: 20,
+              correctAnswerCount: gameState.correctAnswers.length,
+              questionCount: quizz.questions.length,
               onGoHome: gotoHome,
               onRestartQuizz: gameState.onRestartQuizz,
               onReturnToQuizzList: gotoQuizzList,

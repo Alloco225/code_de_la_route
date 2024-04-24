@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../data/data.dart';
 
-const cooldownTimeBetweenAnswers = 1000; // in miliseconds
+const cooldownTimeBetweenAnswers = 2000; // in miliseconds
 
 class GameStateProvider extends ChangeNotifier {
   int _currentQuestionIndex = 0;
@@ -19,7 +19,7 @@ class GameStateProvider extends ChangeNotifier {
   Quizz? _selectedQuizz;
   dynamic _selectedAnswer;
 
-  final List<Map> _responses = [];
+  final List<Map> _userResponses = [];
 
   int get currentQuestionIndex => _currentQuestionIndex;
   int get score => _score;
@@ -30,7 +30,10 @@ class GameStateProvider extends ChangeNotifier {
   bool get isProcessingAnswer => _isProcessingAnswer;
 
   dynamic get selectedAnswer => _selectedAnswer;
-  List<Map> get responses => _responses;
+  List<Map> get userResponses => _userResponses;
+  List<Map> get answers => _userResponses;
+  List<Map> get correctAnswers =>
+      answers.where((element) => element['isCorrect'] == true).toList();
 
   Timer? _timer;
   final int _seconds = 0;
@@ -137,7 +140,7 @@ class GameStateProvider extends ChangeNotifier {
     log(">> submitAnswer ${selectedAnswer.runtimeType}");
     setProcessing();
 
-    if(selectedAnswer != null){
+    if (selectedAnswer != null) {
       // Check if answer is correct
       bool isCorrect = false;
       String? content;
@@ -155,7 +158,7 @@ class GameStateProvider extends ChangeNotifier {
         'isCorrect': isCorrect,
         'content': content,
       };
-      _responses.add(answer);
+      _userResponses.add(answer);
       log("<< submitAnswer $answer");
     }
 
@@ -198,8 +201,6 @@ class GameStateProvider extends ChangeNotifier {
     log("!! onTimeExpired");
 
     submitAnswer();
-    // DIsplay modal
-    nextQuestion();
   }
 
   onTogglePause() {

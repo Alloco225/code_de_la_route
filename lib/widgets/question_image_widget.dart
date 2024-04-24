@@ -1,3 +1,4 @@
+import 'package:cdlr/data/data.dart';
 import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/data/models/question.dart';
 import 'package:cdlr/widgets/button_widget.dart';
@@ -19,32 +20,29 @@ class QuestionImageWidget extends StatelessWidget {
 
   Color getButtonColor(index) {
     if (isCorrectAnswerVisible) {
-      if (question.answers![index].isCorrect != true &&
-          selectedAnswer != question.answers![index]) {
-        return Colors.black;
-      }
+      if (answers![index].isCorrect == true) return Colors.white;
     }
-    if (selectedAnswer != question.answers![index]) {
-      return Colors.black;
-    }
-    return Colors.white;
+    if (selectedAnswer == answers![index]) return Colors.white;
+    return Colors.black;
   }
 
   Color getButtonBgColor(index) {
     if (isCorrectAnswerVisible) {
-      if (question.answers![index].isCorrect == true) {
+      if (answers![index].isCorrect == true) {
         return Colors.green[500]!;
       }
-      if (selectedAnswer == question.answers![index]) {
+      if (selectedAnswer == answers![index]) {
         return Colors.red[500]!;
       }
       return Colors.grey[700]!;
     }
-    if (selectedAnswer == question.answers![index]) {
+    if (selectedAnswer == answers![index]) {
       return Colors.orange[500]!;
     }
     return Colors.white;
   }
+
+  List<Answer>? get answers => question.answers;
 
   @override
   Widget build(BuildContext context) {
@@ -80,17 +78,16 @@ class QuestionImageWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: List.generate(
-              question.answers!.length,
+              answers!.length,
               (index) => Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ButtonWidget(
-                          text: question.answers?[index].content ?? '',
+                          text: answers?[index].content ?? '',
                           textAlign: TextAlign.center,
                           color: getButtonColor(index),
                           backgroundColor: getButtonBgColor(index),
-                          onPressed: () =>
-                              onSelectAnswer(question.answers![index])),
+                          onPressed: () => onSelectAnswer(answers![index])),
                       const SizedBox(
                         height: 5,
                       ),
