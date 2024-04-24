@@ -1,21 +1,40 @@
 import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/data/models/question.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class QuestionImageWidget extends StatefulWidget {
+class QuestionImageWidget extends StatelessWidget {
   final Question question;
   final bool showCorrectAnswer;
+  final dynamic selectedAnswer;
+  final Function(dynamic answer) onSelectAnswer;
 
-  const QuestionImageWidget(
-      {super.key, required this.question, this.showCorrectAnswer = false});
+  const QuestionImageWidget({
+    super.key,
+    required this.question,
+    required this.showCorrectAnswer,
+    required this.onSelectAnswer,
+    required this.selectedAnswer,
+  });
 
-  @override
-  _QuestionImageWidgetState createState() => _QuestionImageWidgetState();
-}
-
-class _QuestionImageWidgetState extends State<QuestionImageWidget> {
-  dynamic selectedAnswer;
+  Color getButtonColor(index) {
+    if (showCorrectAnswer) {
+      if (question.answers![index].isCorrect == true) {
+        return Colors.green[500]!;
+      } else {
+        if (selectedAnswer == question.answers![index]) {
+          return Colors.red[500]!;
+        } else {
+          return Colors.grey[600]!;
+        }
+      }
+    } else {
+      if (selectedAnswer == question.answers![index]) {
+        return Colors.orange[500]!;
+      } else {
+        return Colors.grey[400]!;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class _QuestionImageWidgetState extends State<QuestionImageWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              widget.question.prompt,
+              question.prompt,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
@@ -40,7 +59,7 @@ class _QuestionImageWidgetState extends State<QuestionImageWidget> {
                 color: Colors.blueGrey[800],
               ),
               child: Image.asset(
-                getMediaPath(widget.question.image!),
+                getMediaPath(question.image!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -50,28 +69,18 @@ class _QuestionImageWidgetState extends State<QuestionImageWidget> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: List.generate(
-            widget.question.answers!.length,
+            question.answers!.length,
             (index) => GestureDetector(
-              onTap: () {
-                toggleSelectAnswer(widget.question.answers![index]);
-              },
+              onTap: () => onSelectAnswer(question.answers![index]),
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10.0),
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: widget.showCorrectAnswer
-                      ? (widget.question.answers![index].isCorrect == true
-                          ? Colors.green[500]
-                          : (selectedAnswer == widget.question.answers![index]
-                              ? Colors.red[500]
-                              : Colors.grey[600]))
-                      : (selectedAnswer == widget.question.answers![index]
-                          ? Colors.orange[500]
-                          : Colors.grey[400]),
+                  color: getButtonColor(index),
                 ),
                 child: Text(
-                  widget.question.answers?[index].content ?? '',
+                  question.answers?[index].content ?? '',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.grey.shade800, fontWeight: FontWeight.w600),
@@ -82,21 +91,5 @@ class _QuestionImageWidgetState extends State<QuestionImageWidget> {
         ),
       ],
     );
-  }
-
-  void toggleSelectAnswer(dynamic answer) {
-    if (widget.showCorrectAnswer) return;
-    setState(() {
-      selectedAnswer = answer;
-    });
-    if (selectedAnswer == answer) {
-      // Emit submit answer event
-      // You can define your custom event handling here
-      print('Submit answer');
-    } else {
-      // Emit answer event
-      // You can define your custom event handling here
-      print('Answer');
-    }
   }
 }

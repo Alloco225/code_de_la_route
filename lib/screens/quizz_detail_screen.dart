@@ -26,6 +26,7 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
 
   late int quizzId;
   late Map? routeParams;
+  late GameStateProvider gameState;
 
   bool showCorrectAnswer = false;
 
@@ -45,18 +46,24 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
 
     quizz = QUIZZES
         .firstWhere((el) => el.categoryId == categoryId && el.id == quizzId);
+
+    gameState = Provider.of<GameStateProvider>(context);
+
+    gameState.selectQuizz(quizz);
   }
 
   @override
   Widget build(BuildContext context) {
-    var gameState = Provider.of<GameStateProvider>(context);
-
     Question currentQuestion = questions[gameState.currentQuestionIndex];
 
     Widget getQuestionWidget() {
       if (currentQuestion.type == "image") {
         return QuestionImageWidget(
-            question: currentQuestion, showCorrectAnswer: showCorrectAnswer);
+          question: currentQuestion,
+          showCorrectAnswer: showCorrectAnswer,
+          onSelectAnswer: gameState.doubleTapAnswerToSubmit,
+          selectedAnswer: gameState.selectedAnswer,
+        );
       }
       return Container();
     }
@@ -88,13 +95,14 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
               onClose: gameState.clearUserQuitting,
             ),
           // Game
-          QuizzEnded(
-            correctAnswerCount: 5,
-            questionCount: 20,
-            onGoHome: gotoHome,
-            onRestartQuizz: gameState.onRestartQuizz,
-            onReturnToQuizzList: gotoQuizzList,
-          ),
+          if (gameState.hasGameEnded)
+            QuizzEnded(
+              correctAnswerCount: 20,
+              questionCount: 20,
+              onGoHome: gotoHome,
+              onRestartQuizz: gameState.onRestartQuizz,
+              onReturnToQuizzList: gotoQuizzList,
+            ),
         ],
       ),
     );

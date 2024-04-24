@@ -15,9 +15,11 @@ void main() {
     // const ProviderScope(child: MyApp()),
     ChangeNotifierProvider(
         create: (context) => GameStateProvider(),
-        child: AudioMixer(
-          child: const MyApp(),
-        )),
+        child: const MyApp(),
+        // child: AudioMixer(
+        //   child: const MyApp(),
+        // )
+        ),
   );
 }
 

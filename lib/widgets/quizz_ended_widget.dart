@@ -31,8 +31,9 @@ class QuizzEnded extends StatefulWidget {
 }
 
 class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
-  late final AnimationController _coffettiPopAC;
-  late final dynamic _confettiComposition;
+  late final AnimationController _coffettiPopAC =
+      AnimationController(vsync: this);
+  dynamic _confettiComposition;
 
   final int MARK_TOTAL = 20;
   double score = 0;
@@ -41,9 +42,6 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     calcScore();
-
-    _coffettiPopAC = AnimationController(vsync: this);
-
     // TODO add a gsap animation on the score calculating
   }
 
@@ -67,11 +65,11 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
     }
   }
 
-    throwConfetti(){
-      _coffettiPopAC
-        ..duration = _confettiComposition.duration
-        ..forward();
-    }
+  throwConfetti() {
+    _coffettiPopAC
+      ..duration = _confettiComposition?.duration ?? const Duration(seconds: 3)
+      ..forward();
+  }
 
   String getShareLink(String platform) {
     if (platform.isEmpty) return '';
@@ -125,11 +123,8 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
   }
 
   void onCoffettiCompositionLoaded(composition) {
-        _confettiComposition = composition;
-    
+    _confettiComposition = composition;
   }
-
-
 
   @override
   Widget build(BuildContext context) {

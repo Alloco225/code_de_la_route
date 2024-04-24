@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../data/data.dart';
@@ -9,9 +10,13 @@ class GameStateProvider extends ChangeNotifier {
   bool _isPaused = false;
   bool _hasGameEnded = false;
   bool _isQuitting = false;
-  final bool _isCorrectAnswerVisible = false;
+  bool _isCorrectAnswerVisible = false;
+  bool _isProcessingAnswer = false;
   int _score = 0;
   Quizz? _selectedQuizz;
+  dynamic _selectedAnswer;
+
+  final List<Map> _responses = [];
 
   int get currentQuestionIndex => _currentQuestionIndex;
   int get score => _score;
@@ -19,6 +24,10 @@ class GameStateProvider extends ChangeNotifier {
   bool get hasGameEnded => _hasGameEnded;
   bool get isQuitting => _isQuitting;
   bool get isCorrectAnswerVisible => _isCorrectAnswerVisible;
+  bool get isProcessingAnswer => _isProcessingAnswer;
+
+  dynamic get selectedAnswer => _selectedAnswer;
+  List<Map> get responses => _responses;
 
   Timer? _timer;
   final int _seconds = 0;
@@ -37,7 +46,10 @@ class GameStateProvider extends ChangeNotifier {
 
   double get remainingTime => START_TIME.toDouble();
 
-  void startTimer() {
+  void startTimer() async {
+    debugPrint(">> startTimer");
+    await Future.delayed(const Duration(milliseconds: 500));
+
     _time = START_TIME * 1.0;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
@@ -62,18 +74,79 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   void endQuizz() {
+    debugPrint(">> endQuizz");
+
     _hasGameEnded = true;
 
     notifyListeners();
   }
 
+  setProcessing() {
+    debugPrint(">> processing");
+    _isProcessingAnswer = true;
+    notifyListeners();
+  }
+
+  clearProcessing() {
+    debugPrint("<< processing");
+
+    _isProcessingAnswer = false;
+    notifyListeners();
+  }
+
+  showCorrectAnswer() {
+    _isCorrectAnswerVisible = true;
+    notifyListeners();
+  }
+
+  hideCorrectAnswer() {
+    _isCorrectAnswerVisible = false;
+    notifyListeners();
+  }
+
+  submitAnswer() async {
+    debugPrint(">> submitAnswer ${selectedAnswer.runtimeType}");
+    setProcessing();
+    // Check if answer is correct
+    bool isCorrect = false;
+    String? content;
+    switch (selectedAnswer.runtimeType) {
+      case Answer:
+        content = (selectedAnswer as Answer).content;
+
+        if ((selectedAnswer as Answer).isCorrect == true) {
+          isCorrect = true;
+        }
+        break;
+      default:
+    }
+    Map answer = {
+      'isCorrect': isCorrect,
+      'content': content,
+    };
+
+    showCorrectAnswer();
+
+    _responses.add(answer);
+    debugPrint("<< submitAnswer $answer");
+
+    await Future.delayed(const Duration(milliseconds: 300));
+    clearProcessing();
+    nextQuestion();
+  }
+
   // void nextQuestion(BuildContext context) {
-  void nextQuestion() {
+  void nextQuestion() async {
+    debugPrint(">> nextQuestion");
+    hideCorrectAnswer();
+    clearAnswer();
     if (currentQuestionIndex >= selectedQuizz!.questions.length - 1) {
       endQuizz();
       return;
     }
     _currentQuestionIndex++;
+    notifyListeners();
+
     startTimer();
     // // Access the TimerProvider instance
     // TimerProvider timerProvider =
@@ -81,7 +154,6 @@ class GameStateProvider extends ChangeNotifier {
 
     // // Now call the startTimer method
     // timerProvider.startTimer();
-    notifyListeners();
   }
 
   void togglePause() {
@@ -90,6 +162,7 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   onTimeExpired() {
+    debugPrint("!! onTimeExpired");
     // DIsplay modal
     nextQuestion();
   }
@@ -114,6 +187,34 @@ class GameStateProvider extends ChangeNotifier {
 
   onQuit() {
     setUserQuitting();
+  }
+
+  doubleTapAnswerToSubmit(dynamic answer) {
+    debugPrint(">> doubleTapAnswerToSubmit $answer");
+    if (_selectedAnswer == null) {
+      selectAnswer(answer);
+      return;
+    }
+    submitAnswer();
+  }
+
+  toggleSelectAnswer(dynamic answer) {
+    _selectedAnswer = _selectedAnswer == answer ? null : answer;
+    notifyListeners();
+  }
+
+  selectAnswer(dynamic answer) {
+    if (isProcessingAnswer) return;
+    debugPrint(">> selectAnswer $answer");
+
+    _selectedAnswer = answer;
+    notifyListeners();
+  }
+
+  clearAnswer() {
+    debugPrint(">> clearAnswer");
+    _selectedAnswer = null;
+    notifyListeners();
   }
 
   setUserQuitting() {
