@@ -28,8 +28,6 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
   late Map? routeParams;
   late GameStateProvider gameState;
 
-  bool showCorrectAnswer = false;
-
   List<Question> get questions => quizz.questions;
 
   @override
@@ -60,7 +58,7 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
       if (currentQuestion.type == "image") {
         return QuestionImageWidget(
           question: currentQuestion,
-          showCorrectAnswer: showCorrectAnswer,
+          isCorrectAnswerVisible: gameState.isCorrectAnswerVisible,
           onSelectAnswer: gameState.doubleTapAnswerToSubmit,
           selectedAnswer: gameState.selectedAnswer,
         );

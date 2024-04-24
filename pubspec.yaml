@@ -46,6 +46,7 @@ dependencies:
   ionicons: ^0.2.2
   lottie: ^3.1.0
   audioplayers: ^6.0.0
+  glassmorphism: ^3.0.0
 
 dev_dependencies:
   flutter_test:

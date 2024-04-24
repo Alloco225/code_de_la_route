@@ -1,23 +1,24 @@
 import 'package:cdlr/helpers/assets.dart';
 import 'package:cdlr/data/models/question.dart';
+import 'package:cdlr/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class QuestionImageWidget extends StatelessWidget {
   final Question question;
-  final bool showCorrectAnswer;
+  final bool isCorrectAnswerVisible;
   final dynamic selectedAnswer;
   final Function(dynamic answer) onSelectAnswer;
 
   const QuestionImageWidget({
     super.key,
     required this.question,
-    required this.showCorrectAnswer,
+    required this.isCorrectAnswerVisible,
     required this.onSelectAnswer,
     required this.selectedAnswer,
   });
 
   Color getButtonColor(index) {
-    if (showCorrectAnswer) {
+    if (isCorrectAnswerVisible) {
       if (question.answers![index].isCorrect == true) {
         return Colors.green[500]!;
       } else {
@@ -48,6 +49,7 @@ class QuestionImageWidget extends StatelessWidget {
             Text(
               question.prompt,
               style: const TextStyle(
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
               ),
@@ -69,25 +71,41 @@ class QuestionImageWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: List.generate(
-            question.answers!.length,
-            (index) => GestureDetector(
-              onTap: () => onSelectAnswer(question.answers![index]),
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 10.0),
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: getButtonColor(index),
-                ),
-                child: Text(
-                  question.answers?[index].content ?? '',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.grey.shade800, fontWeight: FontWeight.w600),
-                ),
+              question.answers!.length,
+              (index) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ButtonWidget(
+                          text: question.answers?[index].content ?? '',
+                          textAlign: TextAlign.center,
+                          color: Colors.white,
+                          backgroundColor: getButtonColor(index),
+                          onPressed: () =>
+                              onSelectAnswer(question.answers![index])),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  )
+
+              //  GestureDetector(
+              //   onTap: ,
+              //   child: Container(
+              //     margin: const EdgeInsets.only(bottom: 10.0),
+              //     padding: const EdgeInsets.all(8.0),
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(10.0),
+              //       color: ,
+              //     ),
+              //     child: Text(
+
+              //       textAlign: TextAlign.center,
+              //       style: TextStyle(
+              //           color: Colors.grey.shade800, fontWeight: FontWeight.w600),
+              //     ),
+              //   ),
+              // ),
               ),
-            ),
-          ),
         ),
       ],
     );

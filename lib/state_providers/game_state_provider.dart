@@ -82,24 +82,27 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   setProcessing() {
-    debugPrint(">> processing");
+    debugPrint(">>oo processing");
     _isProcessingAnswer = true;
     notifyListeners();
   }
 
   clearProcessing() {
-    debugPrint("<< processing");
+    debugPrint("<<oo processing");
 
     _isProcessingAnswer = false;
     notifyListeners();
   }
 
   showCorrectAnswer() {
+    debugPrint(">>oo correctAnswer");
+
     _isCorrectAnswerVisible = true;
     notifyListeners();
   }
 
   hideCorrectAnswer() {
+    debugPrint("<<oo correctAnswer");
     _isCorrectAnswerVisible = false;
     notifyListeners();
   }
@@ -137,6 +140,7 @@ class GameStateProvider extends ChangeNotifier {
 
   // void nextQuestion(BuildContext context) {
   void nextQuestion() async {
+    // return;
     debugPrint(">> nextQuestion");
     hideCorrectAnswer();
     clearAnswer();
