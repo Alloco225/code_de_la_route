@@ -126,6 +126,22 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
     _confettiComposition = composition;
   }
 
+  get markBgColor {
+    if (score <= MARK_TOTAL / 3) {
+      return Colors.orange;
+    }
+    if (score <= MARK_TOTAL / 2) {
+      return Colors.red;
+    }
+    if (score < MARK_TOTAL) {
+      return Colors.blue;
+    }
+    if (score == MARK_TOTAL) {
+      return Colors.green;
+    }
+    return Colors.red.shade700;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,13 +173,7 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: score == MARK_TOTAL
-                              ? Colors.green
-                              : score < MARK_TOTAL
-                                  ? Colors.blue
-                                  : score <= MARK_TOTAL / 2
-                                      ? Colors.orange
-                                      : Colors.red,
+                          color: markBgColor,
                         ),
                       ),
                     ),

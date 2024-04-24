@@ -29,11 +29,14 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
   late GameStateProvider gameState;
 
   List<Question> get questions => quizz.questions;
+  bool isLoading = true;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    initPage();
+    if (mounted) {
+      initPage();
+    }
   }
 
   initPage() {
@@ -45,13 +48,19 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
     quizz = QUIZZES
         .firstWhere((el) => el.categoryId == categoryId && el.id == quizzId);
 
-    gameState = Provider.of<GameStateProvider>(context);
-
-    gameState.selectQuizz(quizz);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    gameState = Provider.of<GameStateProvider>(context);
+
+    if (gameState.selectedQuizz == null) {
+      gameState.selectQuizz(quizz);
+    }
+
     Question currentQuestion = questions[gameState.currentQuestionIndex];
 
     Widget getQuestionWidget() {
@@ -71,8 +80,11 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
     }
 
     gotoQuizzList() {
-      Navigator.of(context).pushReplacementNamed(Routes.quizzList,
-          arguments: {categoryId: routeParams?['categoryId']});
+      gameState.clearQuizz();
+      Navigator.of(context).pop();
+
+      // Navigator.of(context).pushReplacementNamed(Routes.quizzList,
+      //     arguments: {categoryId: routeParams?['categoryId']});
     }
 
     // final quizzState = mainRef.watch(quizzStateProvider);
@@ -80,11 +92,14 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          GameMainContentWidget(
-              currentQuestionIndex: gameState.currentQuestionIndex,
-              questions: questions,
-              gameState: gameState,
-              getQuestionWidget: getQuestionWidget()),
+          if (isLoading)
+            const Center(child: CircularProgressIndicator())
+          else
+            GameMainContentWidget(
+                currentQuestionIndex: gameState.currentQuestionIndex,
+                questions: questions,
+                gameState: gameState,
+                getQuestionWidget: getQuestionWidget()),
           if (gameState.isPaused)
             QuizzPausedWidget(
                 onResume: gameState.onGameResume, onQuit: gameState.onQuit),

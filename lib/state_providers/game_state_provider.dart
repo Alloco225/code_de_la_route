@@ -102,6 +102,17 @@ class GameStateProvider extends ChangeNotifier {
     startTimer();
   }
 
+  clearQuizz() {
+    _hasGameEnded = false;
+    _isPaused = false;
+    _currentQuestionIndex = 0;
+    _pause = false;
+    _selectedAnswer = null;
+    _isCorrectAnswerVisible = false;
+    _isProcessingAnswer = false;
+    _selectedQuizz = null;
+  }
+
   void endQuizz() {
     log(">> endQuizz");
 
@@ -176,9 +187,11 @@ class GameStateProvider extends ChangeNotifier {
     log(">> nextQuestion");
     hideCorrectAnswer();
     clearAnswer();
-    if (currentQuestionIndex >= selectedQuizz!.questions.length - 1) {
-      endQuizz();
-      return;
+    if (selectedQuizz != null) {
+      if (currentQuestionIndex >= selectedQuizz!.questions.length - 1) {
+        endQuizz();
+        return;
+      }
     }
     _currentQuestionIndex++;
     _n();
