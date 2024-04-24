@@ -7,6 +7,7 @@ class QuestionTimerWidget extends StatefulWidget {
   final double time;
   final int? countDownTime;
   final Function() onTogglePause;
+  final Function()? devPauseTimer;
   final Function() onTimeExpired;
   final Function() onInit;
   final Function() onDispose;
@@ -18,6 +19,7 @@ class QuestionTimerWidget extends StatefulWidget {
     required this.percentage,
     required this.time,
     required this.onTogglePause,
+    this.devPauseTimer,
     required this.onTimeExpired,
     required this.onInit,
     required this.onDispose,
@@ -103,7 +105,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
             width: 10,
           ),
           GestureDetector(
-            onTap: widget.onTogglePause,
+            onTap: widget.devPauseTimer,
             child: Container(
               width: 30,
               height: 30,

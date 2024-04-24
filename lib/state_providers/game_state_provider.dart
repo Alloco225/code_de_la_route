@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:cdlr/helpers/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../data/data.dart';
+
+const cooldownTimeBetweenAnswers = 1000; // in miliseconds
 
 class GameStateProvider extends ChangeNotifier {
   int _currentQuestionIndex = 0;
@@ -34,6 +37,8 @@ class GameStateProvider extends ChangeNotifier {
   double _time = 0;
   final int START_TIME = 10; // seconds
 
+  bool _pause = false;
+
   int get seconds => _seconds;
   double get time => _time;
   Quizz? get selectedQuizz => _selectedQuizz;
@@ -46,94 +51,118 @@ class GameStateProvider extends ChangeNotifier {
 
   double get remainingTime => START_TIME.toDouble();
 
+  _n() {
+    notifyListeners();
+  }
+
   void startTimer() async {
-    debugPrint(">> startTimer");
+    log(">> startTimer");
     await Future.delayed(const Duration(milliseconds: 500));
 
     _time = START_TIME * 1.0;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (isPaused || hasGameEnded) return;
+      if (isPaused || hasGameEnded || _pause) return;
       _time -= 0.1;
       if (time < 0.2) {
         onTimeExpired();
         timer.cancel();
       }
-      notifyListeners();
+      _n();
     });
+  }
+
+  togglePauseTimer() {
+    _pause = !_pause;
+    _n();
   }
 
   void stopTimer() {
     _timer?.cancel();
-    notifyListeners();
+    _n();
   }
 
   void incrementScore() {
     _score++;
-    notifyListeners();
+    _n();
+  }
+
+  startQuizz() {
+    log(">> startQuizz");
+
+    _hasGameEnded = false;
+    _isPaused = false;
+    _currentQuestionIndex = 0;
+    _pause = false;
+
+    _n();
+    startTimer();
   }
 
   void endQuizz() {
-    debugPrint(">> endQuizz");
+    log(">> endQuizz");
 
     _hasGameEnded = true;
 
-    notifyListeners();
+    _n();
   }
 
   setProcessing() {
-    debugPrint(">>oo processing");
+    log(">>oo processing");
     _isProcessingAnswer = true;
-    notifyListeners();
+    _n();
   }
 
   clearProcessing() {
-    debugPrint("<<oo processing");
+    log("<<oo processing");
 
     _isProcessingAnswer = false;
-    notifyListeners();
+    _n();
   }
 
   showCorrectAnswer() {
-    debugPrint(">>oo correctAnswer");
+    log(">>oo correctAnswer");
 
     _isCorrectAnswerVisible = true;
-    notifyListeners();
+    _n();
   }
 
   hideCorrectAnswer() {
-    debugPrint("<<oo correctAnswer");
+    log("<<oo correctAnswer");
     _isCorrectAnswerVisible = false;
-    notifyListeners();
+    _n();
   }
 
   submitAnswer() async {
-    debugPrint(">> submitAnswer ${selectedAnswer.runtimeType}");
+    log(">> submitAnswer ${selectedAnswer.runtimeType}");
     setProcessing();
-    // Check if answer is correct
-    bool isCorrect = false;
-    String? content;
-    switch (selectedAnswer.runtimeType) {
-      case Answer:
-        content = (selectedAnswer as Answer).content;
 
-        if ((selectedAnswer as Answer).isCorrect == true) {
-          isCorrect = true;
-        }
-        break;
-      default:
+    if(selectedAnswer != null){
+      // Check if answer is correct
+      bool isCorrect = false;
+      String? content;
+      switch (selectedAnswer.runtimeType) {
+        case Answer:
+          content = (selectedAnswer as Answer).content;
+
+          if ((selectedAnswer as Answer).isCorrect == true) {
+            isCorrect = true;
+          }
+          break;
+        default:
+      }
+      Map answer = {
+        'isCorrect': isCorrect,
+        'content': content,
+      };
+      _responses.add(answer);
+      log("<< submitAnswer $answer");
     }
-    Map answer = {
-      'isCorrect': isCorrect,
-      'content': content,
-    };
 
     showCorrectAnswer();
 
-    _responses.add(answer);
-    debugPrint("<< submitAnswer $answer");
-
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(
+        const Duration(milliseconds: cooldownTimeBetweenAnswers));
     clearProcessing();
     nextQuestion();
   }
@@ -141,7 +170,7 @@ class GameStateProvider extends ChangeNotifier {
   // void nextQuestion(BuildContext context) {
   void nextQuestion() async {
     // return;
-    debugPrint(">> nextQuestion");
+    log(">> nextQuestion");
     hideCorrectAnswer();
     clearAnswer();
     if (currentQuestionIndex >= selectedQuizz!.questions.length - 1) {
@@ -149,7 +178,7 @@ class GameStateProvider extends ChangeNotifier {
       return;
     }
     _currentQuestionIndex++;
-    notifyListeners();
+    _n();
 
     startTimer();
     // // Access the TimerProvider instance
@@ -162,11 +191,13 @@ class GameStateProvider extends ChangeNotifier {
 
   void togglePause() {
     _isPaused = !_isPaused;
-    notifyListeners();
+    _n();
   }
 
-  onTimeExpired() {
-    debugPrint("!! onTimeExpired");
+  onTimeExpired() async {
+    log("!! onTimeExpired");
+
+    submitAnswer();
     // DIsplay modal
     nextQuestion();
   }
@@ -185,51 +216,57 @@ class GameStateProvider extends ChangeNotifier {
 
   onRestartQuizz() {
     // Restart quizz
-    _currentQuestionIndex = 0;
+    // showInitialLoader
+    startQuizz();
+    //
     // restart timer and stuff
   }
 
   onQuit() {
+    log("!! onQuit");
     setUserQuitting();
   }
 
   doubleTapAnswerToSubmit(dynamic answer) {
-    debugPrint(">> doubleTapAnswerToSubmit $answer");
-    if (_selectedAnswer == null) {
-      selectAnswer(answer);
-      return;
+    log(">> doubleTapAnswerToSubmit $answer");
+    if (_selectedAnswer == answer) {
+      submitAnswer();
     }
-    submitAnswer();
+    selectAnswer(answer);
   }
 
   toggleSelectAnswer(dynamic answer) {
     _selectedAnswer = _selectedAnswer == answer ? null : answer;
-    notifyListeners();
+    _n();
   }
 
   selectAnswer(dynamic answer) {
     if (isProcessingAnswer) return;
-    debugPrint(">> selectAnswer $answer");
+    log(">> selectAnswer $answer");
 
     _selectedAnswer = answer;
-    notifyListeners();
+    _n();
   }
 
   clearAnswer() {
-    debugPrint(">> clearAnswer");
+    log(">> clearAnswer");
     _selectedAnswer = null;
-    notifyListeners();
+    _n();
   }
 
   setUserQuitting() {
+    log(">> setUserQuitting");
+
     _isQuitting = true;
-    notifyListeners();
+    _n();
   }
 
   clearUserQuitting() {
+    log("<< setUserQuitting");
+
     _isQuitting = false;
 
     togglePause();
-    notifyListeners();
+    _n();
   }
 }

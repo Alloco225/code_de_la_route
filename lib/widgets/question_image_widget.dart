@@ -19,22 +19,31 @@ class QuestionImageWidget extends StatelessWidget {
 
   Color getButtonColor(index) {
     if (isCorrectAnswerVisible) {
-      if (question.answers![index].isCorrect == true) {
-        return Colors.green[500]!;
-      } else {
-        if (selectedAnswer == question.answers![index]) {
-          return Colors.red[500]!;
-        } else {
-          return Colors.grey[600]!;
-        }
-      }
-    } else {
-      if (selectedAnswer == question.answers![index]) {
-        return Colors.orange[500]!;
-      } else {
-        return Colors.grey[400]!;
+      if (question.answers![index].isCorrect != true &&
+          selectedAnswer != question.answers![index]) {
+        return Colors.black;
       }
     }
+    if (selectedAnswer != question.answers![index]) {
+      return Colors.black;
+    }
+    return Colors.white;
+  }
+
+  Color getButtonBgColor(index) {
+    if (isCorrectAnswerVisible) {
+      if (question.answers![index].isCorrect == true) {
+        return Colors.green[500]!;
+      }
+      if (selectedAnswer == question.answers![index]) {
+        return Colors.red[500]!;
+      }
+      return Colors.grey[700]!;
+    }
+    if (selectedAnswer == question.answers![index]) {
+      return Colors.orange[500]!;
+    }
+    return Colors.white;
   }
 
   @override
@@ -78,34 +87,15 @@ class QuestionImageWidget extends StatelessWidget {
                       ButtonWidget(
                           text: question.answers?[index].content ?? '',
                           textAlign: TextAlign.center,
-                          color: Colors.white,
-                          backgroundColor: getButtonColor(index),
+                          color: getButtonColor(index),
+                          backgroundColor: getButtonBgColor(index),
                           onPressed: () =>
                               onSelectAnswer(question.answers![index])),
                       const SizedBox(
                         height: 5,
                       ),
                     ],
-                  )
-
-              //  GestureDetector(
-              //   onTap: ,
-              //   child: Container(
-              //     margin: const EdgeInsets.only(bottom: 10.0),
-              //     padding: const EdgeInsets.all(8.0),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(10.0),
-              //       color: ,
-              //     ),
-              //     child: Text(
-
-              //       textAlign: TextAlign.center,
-              //       style: TextStyle(
-              //           color: Colors.grey.shade800, fontWeight: FontWeight.w600),
-              //     ),
-              //   ),
-              // ),
-              ),
+                  )),
         ),
       ],
     );

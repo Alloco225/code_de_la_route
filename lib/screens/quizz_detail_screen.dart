@@ -149,6 +149,7 @@ class GameMainContentWidget extends StatelessWidget {
                   onDispose: _gameState.stopTimer,
                   onTimeExpired: _gameState.onTimeExpired,
                   onTogglePause: _gameState.onTogglePause,
+                  devPauseTimer: _gameState.togglePauseTimer,
                   pause: _gameState.isPaused,
                 ),
                 Expanded(child: getQuestionWidget),
