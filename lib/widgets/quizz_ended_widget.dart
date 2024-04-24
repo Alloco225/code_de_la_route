@@ -32,6 +32,7 @@ class QuizzEnded extends StatefulWidget {
 
 class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
   late final AnimationController _coffettiPopAC;
+  late final dynamic _confettiComposition;
 
   final int MARK_TOTAL = 20;
   double score = 0;
@@ -65,6 +66,12 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
       throwConfetti();
     }
   }
+
+    throwConfetti(){
+      _coffettiPopAC
+        ..duration = _confettiComposition.duration
+        ..forward();
+    }
 
   String getShareLink(String platform) {
     if (platform.isEmpty) return '';
@@ -117,15 +124,12 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
     }
   }
 
-  void throwConfetti() {
-    Future.delayed(const Duration(milliseconds: 500), () {
-      print("confetti !!");
-      // Start confetti animation
-      Future.delayed(const Duration(seconds: 2), () {
-        // Stop confetti animation after 2 seconds
-      });
-    });
+  void onCoffettiCompositionLoaded(composition) {
+        _confettiComposition = composition;
+    
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -136,13 +140,7 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
           Lottie.asset(
             'assets/animations/confetti-pop.anim.json',
             controller: _coffettiPopAC,
-            onLoaded: (composition) {
-              // Configure the AnimationController with the duration of the
-              // Lottie file and start the animation.
-              _coffettiPopAC
-                ..duration = composition.duration
-                ..forward();
-            },
+            onLoaded: onCoffettiCompositionLoaded,
           ),
           Padding(
             padding: EdgeInsets.symmetric(

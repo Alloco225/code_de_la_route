@@ -1,7 +1,6 @@
 // assetMixer('image')
 
 String getMediaPath(String fileName) {
-
   // let parts = name.split('/');
   const categoryIndexer = {
     "images": ['png', 'jpg', 'jpeg'],
@@ -20,4 +19,9 @@ String getMediaPath(String fileName) {
   fileName = fileName[0] == '/' ? fileName : '/$fileName';
 
   return 'assets/$category$fileName';
+}
+
+String getAudioPath(String path) {
+  return 'audio/$path';
+  return 'assets/audio/$path';
 }

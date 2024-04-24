@@ -2,18 +2,22 @@ import 'package:cdlr/const/theme.dart';
 import 'package:cdlr/screens/splash_screen.dart';
 import 'package:cdlr/routes.dart';
 import 'package:cdlr/state_providers/game_state_provider.dart';
+import 'package:cdlr/widgets/audio_mixer_widget.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     // const ProviderScope(child: MyApp()),
     ChangeNotifierProvider(
-      create: (context) => GameStateProvider(),
-      child: const MyApp(),
-    ),
+        create: (context) => GameStateProvider(),
+        child: AudioMixer(
+          child: const MyApp(),
+        )),
   );
 }
 

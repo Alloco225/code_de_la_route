@@ -1,4 +1,3 @@
-
 import 'package:cdlr/db/db.dart';
 import 'package:cdlr/state_providers/game_state_provider.dart';
 import 'package:cdlr/widgets/question_image_widget.dart';
@@ -62,14 +61,14 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
       return Container();
     }
 
-    gotoHome(){
+    gotoHome() {
       Navigator.of(context).pushReplacementNamed(Routes.home);
     }
 
-    gotoQuizzList(){
-      Navigator.of(context).pushReplacementNamed(Routes.quizzList, arguments: {categoryId: routeParams?['categoryId']});
+    gotoQuizzList() {
+      Navigator.of(context).pushReplacementNamed(Routes.quizzList,
+          arguments: {categoryId: routeParams?['categoryId']});
     }
-
 
     // final quizzState = mainRef.watch(quizzStateProvider);
 
@@ -89,7 +88,13 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
               onClose: gameState.clearUserQuitting,
             ),
           // Game
-          QuizzEnded(correctAnswerCount: 5, questionCount: 5, onGoHome: gotoHome, onRestartQuizz: gameState.onRestartQuizz, onReturnToQuizzList: gotoQuizzList,),
+          QuizzEnded(
+            correctAnswerCount: 5,
+            questionCount: 20,
+            onGoHome: gotoHome,
+            onRestartQuizz: gameState.onRestartQuizz,
+            onReturnToQuizzList: gotoQuizzList,
+          ),
         ],
       ),
     );

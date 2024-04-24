@@ -45,6 +45,7 @@ dependencies:
   share_plus: ^9.0.0
   ionicons: ^0.2.2
   lottie: ^3.1.0
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:
