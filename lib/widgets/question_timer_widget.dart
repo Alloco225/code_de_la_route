@@ -112,6 +112,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
               alignment: Alignment.center,
               child: Text(
                 widget.time.toStringAsFixed(0),
+                semanticsLabel: widget.time.toStringAsFixed(0),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

@@ -50,6 +50,7 @@ class _QuestionOrderWidgetState extends State<QuestionOrderWidget> {
             children: [
               Text(
                 widget.question['question'],
+                semanticsLabel: widget.question['question'],
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -87,6 +88,7 @@ class _QuestionOrderWidgetState extends State<QuestionOrderWidget> {
                       ),
                       child: Text(
                         answers[index] ?? '',
+                        semanticsLabel: answers[index] ?? '',
                         style: const TextStyle(
                           color: Colors.white,
                         ),
@@ -112,6 +114,9 @@ class _QuestionOrderWidgetState extends State<QuestionOrderWidget> {
                       ),
                       child: Text(
                         widget.question['correctOrder']
+                                .split(SEPARATOR)[index] ??
+                            '',
+                       semanticsLabel: widget.question['correctOrder']
                                 .split(SEPARATOR)[index] ??
                             '',
                         style: const TextStyle(
@@ -141,6 +146,7 @@ class _QuestionOrderWidgetState extends State<QuestionOrderWidget> {
                     ),
                     child: Text(
                       answers[index] ?? '',
+                      semanticsLabel: answers[index] ?? '',
                       style: const TextStyle(
                         color: Colors.white,
                       ),

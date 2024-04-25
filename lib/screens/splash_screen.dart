@@ -76,7 +76,10 @@ class _SplashScreenState extends State<SplashScreen>
           // Version text with opacity animation
           FadeTransition(
             opacity: _opacityAnimation,
-            child: const Text("v1.0.0"),
+            child: const Text(
+              "v1.0.0", 
+              semanticsLabel: "v1.0.0", 
+              ),
           ),
         ],
       ),

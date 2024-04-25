@@ -55,6 +55,7 @@ class QuestionImageWidget extends StatelessWidget {
           children: [
             Text(
               question.prompt,
+              semanticsLabel: question.prompt,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

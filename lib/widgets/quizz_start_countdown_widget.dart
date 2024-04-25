@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 class QuizzStartCountdownWidget extends StatefulWidget {
   final Function() onStartQuizz;
 
-  QuizzStartCountdownWidget({required this.onStartQuizz});
+  const QuizzStartCountdownWidget({super.key, required this.onStartQuizz});
 
   @override
-  _QuizzStartCountdownWidgetState createState() => _QuizzStartCountdownWidgetState();
+  _QuizzStartCountdownWidgetState createState() =>
+      _QuizzStartCountdownWidgetState();
 }
 
 class _QuizzStartCountdownWidgetState extends State<QuizzStartCountdownWidget> {
@@ -26,7 +27,7 @@ class _QuizzStartCountdownWidgetState extends State<QuizzStartCountdownWidget> {
       backgroundColor: Colors.transparent,
       body: Center(
         child: AnimatedOpacity(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           opacity: time > 0 ? 1.0 : 0.0,
           child: Container(
             width: 160,
@@ -38,7 +39,8 @@ class _QuizzStartCountdownWidgetState extends State<QuizzStartCountdownWidget> {
             child: Center(
               child: Text(
                 '$time',
-                style: TextStyle(
+                semanticsLabel: '$time',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 64,
                   fontWeight: FontWeight.bold,
@@ -52,7 +54,7 @@ class _QuizzStartCountdownWidgetState extends State<QuizzStartCountdownWidget> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {
         time--;
         if (time <= 0) {

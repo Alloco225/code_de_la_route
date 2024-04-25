@@ -161,6 +161,7 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
               children: [
                 const Text(
                   "Quizz Terminé",
+                  semanticsLabel: "Quizz Terminé",
                   style: TextStyle(fontSize: 32, color: Colors.white),
                 ),
                 Stack(
@@ -182,6 +183,7 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
                         alignment: Alignment.center,
                         child: Text(
                           '${score.toStringAsFixed(0)}/$MARK_TOTAL',
+                          semanticsLabel: "Note totale ${score.toStringAsFixed(0)}/$MARK_TOTAL'",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 64,
@@ -206,6 +208,7 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
                     const SizedBox(height: 20),
                     const Text(
                       "Partager mon score",
+                      semanticsLabel: "Partager mon score",
                       style: TextStyle(fontSize: 24, color: Colors.white),
                     ),
                     const SizedBox(height: 20),

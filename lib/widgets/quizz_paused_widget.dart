@@ -29,6 +29,7 @@ class QuizzPausedWidget extends StatelessWidget {
               children: [
                 const Text(
                   'PAUSE',
+                  semanticsLabel: 'PAUSE',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

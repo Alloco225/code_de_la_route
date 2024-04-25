@@ -181,6 +181,7 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
                       ),
                       child: Text(
                         titleText,
+                        semanticsLabel: titleText,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -193,7 +194,10 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
                     padding: const EdgeInsets.only(bottom: 100),
                     child: ElevatedButton(
                       onPressed: close,
-                      child: const Text('😅 D\'accord chef'),
+                      child: const Text(
+                        '😅 D\'accord chef',
+                        semanticsLabel: '😅 D\'accord chef',
+                      ),
                     ),
                   ),
                 ),

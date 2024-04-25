@@ -1,8 +1,6 @@
 import 'package:code_de_la_route/db/db.dart';
-import 'package:code_de_la_route/helpers/assets.dart';
 import 'package:code_de_la_route/data/models/quizz_category.dart';
 import 'package:code_de_la_route/routes.dart';
-import 'package:code_de_la_route/widgets/audio_mixer_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -254,7 +252,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       .toList(),
                 ),
               )),
-              TextButton(onPressed: () {}, child: const Text("あ")),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "あ",
+                    semanticsLabel: "あ",
+                  )),
             ],
           ),
         ),

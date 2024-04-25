@@ -38,6 +38,8 @@ class ButtonWidget extends StatelessWidget {
           Flexible(
             child: Text(
               text,
+              semanticsLabel: text,
+
               textAlign: textAlign,
               softWrap: true,
               style: const TextStyle(fontSize: 16),

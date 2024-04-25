@@ -54,41 +54,38 @@ class _QuizzListScreenState extends State<QuizzListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedCategory?.name ?? ''),
+        title: Text(selectedCategory?.name ?? '', semanticsLabel: selectedCategory?.name ?? '',),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            // Appbar
-            Container(
-              child: const Row(
-                children: [],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: quizzes.length,
-                itemBuilder: (ctx, i) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () => gotoQuizz(quizzes[i].id),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: const BorderSide(color: Colors.white)),
-                    tileColor: Colors.grey.withOpacity(.2),
-                    leading:
-                        quizzes[i].icon != null ? Icon(quizzes[i].icon) : null,
-                    title: Text(
-                      quizzes[i].level ?? 'Quizz $i',
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w600),
-                    ),
+      body: Column(
+        children: [
+          // Appbar
+          const Row(
+            children: [],
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: quizzes.length,
+              itemBuilder: (ctx, i) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  onTap: () => gotoQuizz(quizzes[i].id),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: const BorderSide(color: Colors.white)),
+                  tileColor: Colors.grey.withOpacity(.2),
+                  leading:
+                      quizzes[i].icon != null ? Icon(quizzes[i].icon) : null,
+                  title: Text(
+                    quizzes[i].level ?? 'Quizz $i',
+                    semanticsLabel: quizzes[i].level ?? 'Quizz $i',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

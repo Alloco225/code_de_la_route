@@ -151,6 +151,7 @@ class GameMainContentWidget extends StatelessWidget {
             children: [
               Text(
                 "Question ${currentQuestionIndex + 1}/${questions.length}",
+                semanticsLabel: "Question ${currentQuestionIndex + 1}/${questions.length}",
               ),
             ],
           ),

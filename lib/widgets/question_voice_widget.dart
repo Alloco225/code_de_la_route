@@ -72,6 +72,7 @@ class _QuestionVoiceWidgetState extends State<QuestionVoiceWidget> {
             children: [
               Text(
                 widget.question['question'],
+                semanticsLabel: widget.question['question'],
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -101,6 +102,7 @@ class _QuestionVoiceWidgetState extends State<QuestionVoiceWidget> {
                       ),
                       child: Text(
                         answer!,
+                        semanticsLabel: answer!,
                         style: const TextStyle(
                           color: Colors.white,
                         ),
