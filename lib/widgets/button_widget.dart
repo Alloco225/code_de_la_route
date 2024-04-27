@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ButtonWidget extends StatelessWidget {
   final String text;
   final IconData? icon;
-  final Color color;
-  final Color backgroundColor;
+  final Color? color;
+  final Color? backgroundColor;
   final VoidCallback onPressed;
   final TextAlign? textAlign;
 
@@ -13,8 +13,8 @@ class ButtonWidget extends StatelessWidget {
     required this.text,
     this.icon,
     this.textAlign = TextAlign.start,
-    required this.color,
-    required this.backgroundColor,
+    this.color,
+    this.backgroundColor,
     required this.onPressed,
   });
 

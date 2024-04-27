@@ -1,6 +1,7 @@
 import 'package:code_de_la_route/db/db.dart';
 import 'package:code_de_la_route/state_providers/game_state_provider.dart';
 import 'package:code_de_la_route/widgets/question_image_widget.dart';
+import 'package:code_de_la_route/widgets/question_order_widget.dart';
 import 'package:code_de_la_route/widgets/question_timer_widget.dart';
 import 'package:code_de_la_route/widgets/quizz_ended_widget.dart';
 import 'package:code_de_la_route/widgets/quizz_paused_widget.dart';
@@ -66,6 +67,14 @@ class _QuizzDetailScreenState extends State<QuizzDetailScreen> {
     Widget getQuestionWidget() {
       if (currentQuestion.type == "image") {
         return QuestionImageWidget(
+          question: currentQuestion,
+          isCorrectAnswerVisible: gameState.isCorrectAnswerVisible,
+          onSelectAnswer: gameState.doubleTapAnswerToSubmit,
+          selectedAnswer: gameState.selectedAnswer,
+        );
+      }
+      if (currentQuestion.type == "order") {
+        return QuestionOrderWidget(
           question: currentQuestion,
           isCorrectAnswerVisible: gameState.isCorrectAnswerVisible,
           onSelectAnswer: gameState.doubleTapAnswerToSubmit,

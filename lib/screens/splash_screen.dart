@@ -1,5 +1,6 @@
 import 'package:code_de_la_route/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key}); // Fixed super keyword
@@ -15,6 +16,8 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
   late Animation<Offset> _translateAnimation;
+
+  final String version = "v1.0.0";
 
   @override
   void initState() {
@@ -76,10 +79,10 @@ class _SplashScreenState extends State<SplashScreen>
           // Version text with opacity animation
           FadeTransition(
             opacity: _opacityAnimation,
-            child: const Text(
-              "v1.0.0", 
-              semanticsLabel: "v1.0.0", 
-              ),
+            child: Text(
+              version,
+              semanticsLabel: version,
+            ),
           ),
         ],
       ),

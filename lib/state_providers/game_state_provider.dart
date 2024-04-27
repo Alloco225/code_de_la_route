@@ -59,6 +59,7 @@ class GameStateProvider extends ChangeNotifier {
   }
 
   void startTimer() async {
+    return;
     if (selectedQuizz == null) return;
     if (selectedQuizz!.questions.isEmpty) return;
     log(">> startTimer");

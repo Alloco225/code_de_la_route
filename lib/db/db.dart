@@ -5,10 +5,10 @@ import 'package:code_de_la_route/data/models/quizz_category.dart';
 import 'package:flutter/material.dart';
 
 final List<QuizzCategory> CATEGORIES = [
-  // QuizzCategory(
-  //     name: "Dégagement",
-  //     id: "degagement",
-  //     image: "assets/images/categories/degagement.jpg"),
+  QuizzCategory(
+      name: "Dégagement",
+      id: "degagement",
+      image: "assets/images/categories/degagement.jpg"),
   QuizzCategory(
       name: "Signalisation",
       id: "signalisation",
@@ -298,38 +298,38 @@ final List<Quizz> SIGNALS_QUIZZES = [
               ),
             ])
       ]),
-  // Quizz(
-  //   id: 1,
-  //   categoryId: "signalisation",
-  //   level: "Signalisation Gestuelle",
-  //   icon: Icons.sign_language,
-  //   questions: [
-  //     Question(
-  //         categoryId: "signalisation",
-  //         prompt: "De quel panneau s'agit-il ?",
-  //         type: "voice",
-  //         image: "/signalisation/585f901ccb11b227491c3570.png",
-  //         correctAnswers: [
-  //           "Panneau STOP sur un poteau",
-  //           "Panneau STOP",
-  //         ]),
-  //     Question(
-  //         categoryId: "signalisation",
-  //         prompt: "De quel panneau s'agit-il ?",
-  //         type: "voice",
-  //         image: "/signalisation/585f90abcb11b227491c3571.png",
-  //         correctAnswers: [
-  //           "Panneau Céder le passage",
-  //         ]),
-  //   ],
-  // ),
-  // Quizz(
-  //   id: 1,
-  //   categoryId: "signalisation",
-  //   level: "Signalisation Horizontale",
-  //   icon: Icons.remove_road,
-  //   questions: [],
-  // ),
+  Quizz(
+    id: 1,
+    categoryId: "signalisation",
+    level: "Signalisation Gestuelle",
+    icon: Icons.sign_language,
+    questions: [
+      Question(
+          categoryId: "signalisation",
+          prompt: "De quel panneau s'agit-il ?",
+          type: "voice",
+          image: "/signalisation/585f901ccb11b227491c3570.png",
+          correctAnswers: [
+            "Panneau STOP sur un poteau",
+            "Panneau STOP",
+          ]),
+      Question(
+          categoryId: "signalisation",
+          prompt: "De quel panneau s'agit-il ?",
+          type: "voice",
+          image: "/signalisation/585f90abcb11b227491c3571.png",
+          correctAnswers: [
+            "Panneau Céder le passage",
+          ]),
+    ],
+  ),
+  Quizz(
+    id: 1,
+    categoryId: "signalisation",
+    level: "Signalisation Horizontale",
+    icon: Icons.remove_road,
+    questions: [],
+  ),
 ];
 
 final QUIZZES = [...SIGNALS_QUIZZES, ...DEGAGEMENT_QUIZZES];
