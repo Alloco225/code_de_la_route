@@ -14,7 +14,7 @@ class TuVeuxAbandonnerWidget extends StatefulWidget {
 class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
   bool isVideoVisible = false;
 
-  bool videoPlayedCompletely = false;
+  bool hasVideoPlayedCompletely = false;
   String titleText = 'Quitter ?';
   bool flash = false;
   final List<Map> subtitles = [
@@ -25,8 +25,8 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
       'endTime': 6.6,
       'flash': true,
     },
-    {'text': 'iYaaAAARGHHH !!!!', 'startTime': 6.6, 'endTime': 9.10},
-    {'text': 'Tu es pathétique !!', 'startTime': 9.10, 'endTime': 10.11},
+    {'text': 'iYaaAAARGHHH !!!!', 'startTime': 6.5, 'endTime': 9.0},
+    {'text': 'Tu es pathétique !!', 'startTime': 9.0, 'endTime': 10.11},
     {'text': 'Fuir et fir !!', 'startTime': 10.11, 'endTime': 11.21},
     {'text': 'Fir encore !!', 'startTime': 11.21, 'endTime': 12.41},
     {'text': 'Toujours fir !!', 'startTime': 12.41, 'endTime': 13.61},
@@ -71,12 +71,24 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
   void videoListener() {
     final currentTime =
         _videoPlayerController.value.position.inSeconds.toDouble();
-
+    hasVideoPlayedCompletely = false;
     final Map currentSubtitle = subtitles.firstWhere(
         (subtitle) =>
             currentTime >= subtitle['startTime'] &&
             currentTime <= subtitle['endTime'],
         orElse: () => {});
+
+    // Implement your calls inside these conditions' bodies :
+    if (_videoPlayerController.value.position ==
+        const Duration(seconds: 0, minutes: 0, hours: 0)) {
+      // isVidPlaying = true;
+    }
+
+    if (_videoPlayerController.value.position ==
+        _videoPlayerController.value.duration) {
+      hasVideoPlayedCompletely = true;
+    }
+
     setState(() {
       flash = currentSubtitle['flash'] ?? false;
       titleText = currentSubtitle['text'] ?? '';
@@ -91,6 +103,14 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
     _videoPlayerController.pause();
     _videoPlayerController.seekTo(Duration.zero);
     widget.onClose();
+  }
+
+  togglePauseVideo() {
+    setState(() {
+      _videoPlayerController.value.isPlaying
+          ? _videoPlayerController.pause()
+          : _videoPlayerController.play();
+    });
   }
 
   Future<void> giveUp() async {
@@ -117,20 +137,6 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black54,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _videoPlayerController.value.isPlaying
-                ? _videoPlayerController.pause()
-                : _videoPlayerController.play();
-          });
-        },
-        child: Icon(
-          _videoPlayerController.value.isPlaying
-              ? Icons.pause
-              : Icons.play_arrow,
-        ),
-      ),
       body: Center(
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
@@ -150,7 +156,7 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
                   // child: const Placeholder(),
                 ),
               ),
-              if (!isVidPlaying && !videoPlayedCompletely)
+              if (isVidPlaying && !hasVideoPlayedCompletely)
                 Align(
                   alignment: Alignment.topCenter,
                   child: Padding(
@@ -187,7 +193,7 @@ class _TuVeuxAbandonnerWidgetState extends State<TuVeuxAbandonnerWidget> {
                     ),
                   ),
                 ),
-              if (videoPlayedCompletely)
+              if (hasVideoPlayedCompletely)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(

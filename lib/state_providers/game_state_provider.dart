@@ -69,6 +69,7 @@ class GameStateProvider extends ChangeNotifier {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       if (isPaused || hasGameEnded || _pause) return;
+      if (_isProcessingAnswer) return;
       _time -= 0.1;
       if (time < 0.2) {
         onTimeExpired();
@@ -186,9 +187,9 @@ class GameStateProvider extends ChangeNotifier {
     nextQuestion();
   }
 
-  // void nextQuestion(BuildContext context) {
   void nextQuestion() async {
     // return;
+    if (_isProcessingAnswer) return;
     log(">> nextQuestion");
     hideCorrectAnswer();
     clearAnswer();

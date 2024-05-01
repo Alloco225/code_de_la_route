@@ -252,12 +252,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       .toList(),
                 ),
               )),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "あ",
-                    semanticsLabel: "あ",
-                  )),
+              const Text(
+                "あ",
+                semanticsLabel: "あ",
+              ),
             ],
           ),
         ),

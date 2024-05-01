@@ -29,11 +29,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Code de la Route',
       theme: kDarkTheme,
       home: const SplashScreen(),
-      // home: const HomeScreen(),
-      // home: const QuizzScreen(),
       routes: Routes.routes,
     );
   }

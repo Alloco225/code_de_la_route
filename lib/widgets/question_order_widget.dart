@@ -134,35 +134,39 @@ class _QuestionOrderWidgetState extends State<QuestionOrderWidget> {
           ],
         ),
         SizedBox(
-          height: 80,
+          height: 50,
           child: Row(children: [
             for (var index = 0; index < answers.length; index++)
               Expanded(
                 child: Row(
                   children: [
                     Expanded(
-                      // child: Container(
-                      //   color: Colors.blueGrey.shade700,
-                      // ),
-                      child: DragTarget<ButtonWidget>(
-                        onWillAcceptWithDetails: (data) {
-                          print("onWillAcceptWithDetails $data");
-                          return true;
-                        },
-                        onAcceptWithDetails: (data) {
-                          print("onAcceptWithDetails $data");
-                        },
-                        onLeave: (data) {
-                          print("onLeave");
-                        },
-                        builder: (BuildContext context,
-                            List<ButtonWidget?> candidateData,
-                            List<dynamic> rejectedData) {
-                          return Container(
+                      child: Container(
+                        decoration: BoxDecoration(
                             color: Colors.blueGrey.shade700,
-                          );
-                        },
+                            borderRadius: BorderRadius.circular(8)),
                       ),
+                      // child: DragTarget<ButtonWidget>(
+                      //   onWillAcceptWithDetails: (data) {
+                      //     print("onWillAcceptWithDetails $data");
+                      //     return true;
+                      //   },
+                      //   onAcceptWithDetails: (data) {
+                      //     print("onAcceptWithDetails $data");
+                      //   },
+                      //   onLeave: (data) {
+                      //     print("onLeave");
+                      //   },
+                      //   builder: (BuildContext context,
+                      //       List<ButtonWidget?> candidateData,
+                      //       List<dynamic> rejectedData) {
+                      //     return candidateData.isNotEmpty
+                      //         ? Container(child: candidateData[0])
+                      //         : Container(
+                      //             color: Colors.red.shade700,
+                      //           );
+                      //   },
+                      // ),
                     ),
                     if (index < answers.length - 1)
                       const SizedBox(
@@ -187,7 +191,7 @@ class _QuestionOrderWidgetState extends State<QuestionOrderWidget> {
                           text: answers[index] ?? '',
                         ),
                         child: ButtonWidget(
-                          onPressed: () {},
+                          onPressed: (){},
                           text: answers[index] ?? '',
                         ),
                       ),
