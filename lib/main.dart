@@ -2,19 +2,30 @@ import 'package:code_de_la_route/const/theme.dart';
 import 'package:code_de_la_route/screens/splash_screen.dart';
 import 'package:code_de_la_route/routes.dart';
 import 'package:code_de_la_route/state_providers/game_state_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 // import 'package:code_de_la_route/widgets/audio_mixer_widget.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
+  // Ideal time to initialize
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   runApp(
     // const ProviderScope(child: MyApp()),
-    ChangeNotifierProvider(
-      create: (context) => GameStateProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => GameStateProvider()),
+        ChangeNotifierProvider(create: (_) => AuthStateProvider()),
+        // ChangeNotifierProvider(create: (_) => Clock())
+      ],
       child: const MyApp(),
       // child: AudioMixer(
       //   child: const MyApp(),

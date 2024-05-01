@@ -44,3 +44,8 @@ app.*.map.json
 /assets
 /lib/db
 /lib/models
+
+
+google-services.json
+GoogleService-Info.plist
+/lib/db/db.dart
