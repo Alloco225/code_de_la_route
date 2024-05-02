@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import '../controllers/quizz_detail_controller.dart';
 
 class QuizzDetailView extends GetView<QuizzDetailController> {
-  const QuizzDetailView({Key? key}) : super(key: key);
+  const QuizzDetailView({super.key});
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

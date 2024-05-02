@@ -7,16 +7,16 @@ import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'button_widget.dart';
+import '../../../views/widgets/button_widget.dart';
 
-class QuizzEnded extends StatefulWidget {
+class QuizzEndedView extends StatefulWidget {
   final int correctAnswerCount;
   final int questionCount;
   final Function() onRestartQuizz;
   final Function() onGoHome;
   final Function() onReturnToQuizzList;
 
-  const QuizzEnded({
+  const QuizzEndedView({
     super.key,
     required this.correctAnswerCount,
     required this.onRestartQuizz,
@@ -26,10 +26,10 @@ class QuizzEnded extends StatefulWidget {
   });
 
   @override
-  _QuizzEndedState createState() => _QuizzEndedState();
+  _QuizzEndedViewState createState() => _QuizzEndedViewState();
 }
 
-class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
+class _QuizzEndedViewState extends State<QuizzEndedView> with TickerProviderStateMixin {
   late final AnimationController _coffettiPopAC =
       AnimationController(vsync: this);
   dynamic _confettiComposition;
@@ -182,7 +182,8 @@ class _QuizzEndedState extends State<QuizzEnded> with TickerProviderStateMixin {
                         alignment: Alignment.center,
                         child: Text(
                           '${score.toStringAsFixed(0)}/$MARK_TOTAL',
-                          semanticsLabel: "Note totale ${score.toStringAsFixed(0)}/$MARK_TOTAL'",
+                          semanticsLabel:
+                              "Note totale ${score.toStringAsFixed(0)}/$MARK_TOTAL'",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 64,

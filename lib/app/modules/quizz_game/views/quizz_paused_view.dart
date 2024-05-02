@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-import 'button_widget.dart';
+import '../../../views/widgets/button_widget.dart';
 
-class QuizzPausedWidget extends StatelessWidget {
+class QuizzPausedView extends StatelessWidget {
   final Function() onResume;
   final Function() onQuit;
 
-  const QuizzPausedWidget(
+  const QuizzPausedView(
       {super.key, required this.onResume, required this.onQuit});
 
   @override
