@@ -1,14 +1,15 @@
 class QuizzCategory {
-  String? name;
-  String? id;
+  late String name;
+  late String id;
   String? image;
 
-  QuizzCategory({this.name, this.id, this.image});
+  QuizzCategory({required this.name, required this.id, this.image});
 
   QuizzCategory.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     id = json['id'];
     image = json['image'];
+    QuizzCategory(id: id, image: image, name: name);
   }
 
   Map<String, dynamic> toJson() {

@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/quizz/bindings/quizz_binding.dart';
 import '../modules/quizz/views/quizz_view.dart';
+import '../modules/quizz_categories/bindings/quizz_categories_binding.dart';
+import '../modules/quizz_categories/views/quizz_categories_view.dart';
 import '../modules/quizz_detail/bindings/quizz_detail_binding.dart';
 import '../modules/quizz_detail/views/quizz_detail_view.dart';
 import '../modules/quizz_list/bindings/quizz_list_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.QUIZZ_DETAIL,
       page: () => const QuizzDetailView(),
       binding: QuizzDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUIZZ_CATEGORIES,
+      page: () => const QuizzCategoriesView(),
+      binding: QuizzCategoriesBinding(),
     ),
   ];
 }

@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
                   MenuButtonWidget(
                     text: "QUIZZ",
                     onPressed: () {
-                      Get.toNamed(Routes.QUIZZ_LIST);
+                      Get.toNamed(Routes.QUIZZ_CATEGORIES);
                     },
                   ),
                   const SizedBox(

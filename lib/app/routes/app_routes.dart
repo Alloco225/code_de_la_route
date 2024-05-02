@@ -9,6 +9,7 @@ abstract class Routes {
   static const QUIZZ = _Paths.QUIZZ;
   static const QUIZZ_LIST = _Paths.QUIZZ_LIST;
   static const QUIZZ_DETAIL = _Paths.QUIZZ_DETAIL;
+  static const QUIZZ_CATEGORIES = _Paths.QUIZZ_CATEGORIES;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const QUIZZ = '/quizz';
   static const QUIZZ_LIST = '/quizz-list';
   static const QUIZZ_DETAIL = '/quizz-detail';
+  static const QUIZZ_CATEGORIES = '/quizz-categories';
 }

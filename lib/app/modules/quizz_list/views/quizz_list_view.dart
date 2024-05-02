@@ -1,3 +1,4 @@
+import 'package:code_de_la_route/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,6 +7,10 @@ import '../controllers/quizz_list_controller.dart';
 
 class QuizzListView extends GetView<QuizzListController> {
   const QuizzListView({super.key});
+
+  gotoQuizz(id) {
+    Get.toNamed(Routes.QUIZZ_DETAIL, arguments: {'quizzId': id});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +32,7 @@ class QuizzListView extends GetView<QuizzListController> {
                 itemBuilder: (ctx, i) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
-                    // onTap: () => gotoQuizz(controller.quizzes[i].id
-                    // ),
+                    onTap: () => gotoQuizz(controller.quizzes[i].id),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                         side: const BorderSide(color: Colors.white)),
