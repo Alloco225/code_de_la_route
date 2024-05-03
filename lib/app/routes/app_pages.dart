@@ -45,9 +45,10 @@ class AppPages {
         name: _Paths.HOME,
         page: () => HomeView(),
         binding: HomeBinding(),
-        middlewares: const [
-          // PremiumGuard(),
-        ]),
+        // middlewares: const [
+        //   // PremiumGuard(),
+        // ]
+        ),
     GetPage(
       name: _Paths.WELCOME,
       page: () => const WelcomeView(),
@@ -99,11 +100,8 @@ class AppPages {
         binding: ProfileBinding(),
         middlewares: [
           // My middlewares here
-          PremiumGuard(),
           AuthGuard(),
-          // MyMiddleware1(priority: 3),
-          // MyMiddleware2(priority: 1),
-          // MyMiddleware3(priority: 2),
+          PremiumGuard(),
         ]),
     GetPage(
       name: _Paths.LEADERBOARD,
