@@ -58,69 +58,75 @@ class HomeView extends GetView<HomeController> {
           title: const Text('HomeView'),
           centerTitle: true,
         ),
-        body: Column(
+        body: Stack(
           children: [
-            const Spacer(),
-            Expanded(
-                child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * .2),
-              child: Column(
-                children: [
-                  ...menuElements.map(
-                    (element) => Column(children: [
-                      MenuButtonWidget(
-                        text: element['text'],
-                        onPressed: element['action'],
+            Column(
+              children: [
+                const Spacer(),
+                Expanded(
+                    child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * .2),
+                  child: Column(
+                    children: [
+                      ...menuElements.map(
+                        (element) => Column(children: [
+                          MenuButtonWidget(
+                            text: element['text'],
+                            onPressed: element['action'],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ]),
                       ),
+                      Obx(() {
+                        return SwitchListTile(
+                          title: const Text('isPremium value'),
+                          value: _authService.isPremium.value,
+                          onChanged: _authService.setIsPremium,
+                        );
+                      }),
                       const SizedBox(
                         height: 10,
                       ),
-                    ]),
-                  ),
-                  Obx(() {
-                    return SwitchListTile(
-                      title: const Text('isPremium value'),
-                      value: _authService.isPremium.value,
-                      onChanged: _authService.setIsPremium,
-                    );
-                  }),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          // authStateProvider.authenticate();
-                          // Navigator.of(context).pushNamed(Routes.auth);
-                        },
-                        icon: const Icon(Ionicons.person_outline),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Ionicons.settings_outline),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          // showBottomSheet(context: context, builder: (ctx)=>{
-
-                          // })
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => const InfoModal());
-                        },
-                        icon: const Icon(Ionicons.information),
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              // authStateProvider.authenticate();
+                              // Navigator.of(context).pushNamed(Routes.auth);
+                            },
+                            icon: const Icon(Ionicons.person_outline),
+                          ),
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Ionicons.settings_outline),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // showBottomSheet(context: context, builder: (ctx)=>{
+            
+                              // })
+                              showDialog(
+                                  context: context,
+                                  builder: (ctx) => const InfoModal());
+                            },
+                            icon: const Icon(Ionicons.information),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
-            )),
+                  ),
+                )),
+              ],
+            ),
+
+        
           ],
         ));
   }
