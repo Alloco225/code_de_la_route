@@ -33,6 +33,7 @@ class RegisterController extends GetxController {
 
   void signUp(context) async {
     _isSigningUp.value = true;
+
     try {
       User? user = await _auth.signUpWithEmailAndPassword(email, password);
 

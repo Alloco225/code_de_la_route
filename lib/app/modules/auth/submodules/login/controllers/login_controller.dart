@@ -21,9 +21,9 @@ class LoginController extends GetxController {
   get emailController => _emailController.value;
   get passwordController => _passwordController.value;
 
-  String get username => usernameController.value.text;
-  String get email => emailController.value.text;
-  String get password => passwordController.value.text;
+  String get username => usernameController.text;
+  String get email => emailController.text;
+  String get password => passwordController.text;
 
   final count = 0.obs;
   final _isSigning = false.obs;
