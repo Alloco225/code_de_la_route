@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,25 +18,10 @@ class RegisterController extends GetxController {
   String get email => emailController.value.text;
   String get password => passwordController.value.text;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   final count = 0.obs;
   final _isSigningUp = false.obs;
 
   bool get isSigningUp => _isSigningUp.value;
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {
@@ -49,6 +36,7 @@ class RegisterController extends GetxController {
 
   void signUp() async {
     _isSigningUp.value = true;
+    log("signUp $email $password");
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:code_de_la_route/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,20 +39,34 @@ class LoginController extends GetxController {
 
   void signIn() async {
     _isSigning.value = true;
+    log("signIn $email $password");
+    try {
+      User? user = await _auth.signInWithEmailAndPassword(email, password);
 
-    String email = emailController.text;
-    String password = passwordController.text;
+      _isSigning.value = false;
 
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
+      if (user != null) {
+        showSnackbarSuccess("User is successfully signed in",
+            context: Get.context!);
+        Get.toNamed(Routes.WELCOME);
+      } else {
+        showSnackbarError("some error occured", context: Get.context!);
+      }
+    } on FirebaseAuthException catch (e) {
+      log("FirebaseAuthException ${e.code} $e");
 
-    _isSigning.value = false;
-
-    if (user != null) {
-      showSnackbarSuccess("User is successfully signed in",
-          context: Get.context!);
-      Get.toNamed(Routes.WELCOME);
-    } else {
-      showSnackbarError("some error occured", context: Get.context!);
+      if (e.code == 'invalid-email ') {
+        // TODO link with translations table
+        showSnackbarError('invalid-email ', context: Get.context!);
+      }
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        showSnackbarError('Invalid email or password.', context: Get.context!);
+      } else {
+        log('An error occurred: ${e.code}');
+        showSnackbarError('An error occurred.', context: Get.context!);
+      }
+    } catch (e) {
+      showSnackbarError("some error occured $e", context: Get.context!);
     }
   }
 
@@ -72,6 +88,19 @@ class LoginController extends GetxController {
 
         await _firebaseAuth.signInWithCredential(credential);
         Get.toNamed(Routes.WELCOME);
+      }
+    } on FirebaseAuthException catch (e) {
+      log("FirebaseAuthException ${e.code} $e");
+
+      if (e.code == 'invalid-email ') {
+        // TODO link with translations table
+        showSnackbarError('invalid-email ', context: Get.context!);
+      }
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        showSnackbarError('Invalid email or password.', context: Get.context!);
+      } else {
+        log('An error occurred: ${e.code}');
+        showSnackbarError('An error occurred.', context: Get.context!);
       }
     } catch (e) {
       showSnackbarError("some error occured $e", context: Get.context!);
