@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/course_list_controller.dart';
 
 class CourseListView extends GetView<CourseListController> {
-  const CourseListView({Key? key}) : super(key: key);
+  const CourseListView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,11 +13,14 @@ class CourseListView extends GetView<CourseListController> {
         title: const Text('CourseListView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'CourseListView is working',
-          style: TextStyle(fontSize: 20),
+      body: ListView.separated(
+        itemCount: 10,
+        itemBuilder: (ctx, i) => ListTile(
+          onTap: () => controller.gotoCourseDetail(i),
+          title: const Text("Cours n°1"),
+          leading: const Icon(Icons.directions),
         ),
+        separatorBuilder: (ctx, i) => const Divider(),
       ),
     );
   }

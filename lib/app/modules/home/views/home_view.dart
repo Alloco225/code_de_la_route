@@ -8,7 +8,35 @@ import '../../../views/widgets/menu_button_widget.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
+
+  List menuElements = [
+    {
+      "text": "COURS",
+      "action": () {
+        Get.toNamed(Routes.COURSE_LIST);
+      },
+    },
+    {
+      "text": "QUIZZ",
+      "action": () {
+        Get.toNamed(Routes.QUIZZ_CATEGORIES);
+      },
+    },
+    {
+      "text": "PROFILE",
+      "action": () {
+        Get.toNamed(Routes.PROFILE);
+      },
+    },
+    {
+      "text": "LEADERBOARD",
+      "action": () {
+        Get.toNamed(Routes.LEADERBOARD);
+      },
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,22 +53,16 @@ class HomeView extends GetView<HomeController> {
                   horizontal: MediaQuery.of(context).size.width * .2),
               child: Column(
                 children: [
-                  MenuButtonWidget(
-                    text: "QUIZZ",
-                    onPressed: () {
-                      Get.toNamed(Routes.QUIZZ_CATEGORIES);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MenuButtonWidget(
-                    text: "COURS",
-                    onPressed: () {},
-                  ),
-                  MenuButtonWidget(
-                    text: "ABD DMk smdl qsd",
-                    onPressed: () {},
+                  ...menuElements.map(
+                    (element) => Column(children: [
+                      MenuButtonWidget(
+                        text: element['text'],
+                        onPressed: element['action'],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ]),
                   ),
                   const SizedBox(
                     height: 10,
