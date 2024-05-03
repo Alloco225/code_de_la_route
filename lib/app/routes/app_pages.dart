@@ -1,5 +1,7 @@
+import 'package:codedelaroute/app/middlewares/auth_guard.dart';
 import 'package:get/get.dart';
 
+import '../middlewares/premium_guard.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/course_detail/bindings/course_detail_binding.dart';
@@ -43,7 +45,9 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
-    ),
+      middlewares: [
+          PremiumGuard(),
+        ]),
     GetPage(
       name: _Paths.WELCOME,
       page: () => const WelcomeView(),
@@ -90,10 +94,17 @@ class AppPages {
       binding: CourseDetailBinding(),
     ),
     GetPage(
-      name: _Paths.PROFILE,
-      page: () => const ProfileView(),
-      binding: ProfileBinding(),
-    ),
+        name: _Paths.PROFILE,
+        page: () => const ProfileView(),
+        binding: ProfileBinding(),
+        middlewares: [
+          // My middlewares here
+          PremiumGuard(),
+          AuthGuard(),
+          // MyMiddleware1(priority: 3),
+          // MyMiddleware2(priority: 1),
+          // MyMiddleware3(priority: 2),
+        ]),
     GetPage(
       name: _Paths.LEADERBOARD,
       page: () => const LeaderboardView(),

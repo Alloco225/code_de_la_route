@@ -7,10 +7,14 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../views/widgets/menu_button_widget.dart';
+import '../../auth/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
+
+  final _authService = Get.find<AuthService>();
+
 
   final List menuElements = [
     {
@@ -74,6 +78,13 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ]),
                   ),
+                  Obx(() {
+                    return SwitchListTile(
+                      title: const Text('isPremium value'),
+                      value: _authService.isPremium.value,
+                      onChanged: _authService.setIsPremium,
+                    );
+                  }),
                   const SizedBox(
                     height: 10,
                   ),
