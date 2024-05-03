@@ -1,4 +1,5 @@
 import 'package:code_de_la_route/app/data/db/db.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/quizz_model.dart';
@@ -20,18 +21,23 @@ class QuizzListController extends GetxController {
 
     var categoryId = params?['categoryId'];
 
-      // selectedCategory = CATEGORIES.firstWhere((el) => el.id == categoryId);
-      quizzes.value = QUIZZES.where((el) => el.categoryId == categoryId).toList();
+    // selectedCategory = CATEGORIES.firstWhere((el) => el.id == categoryId);
+    quizzes.value = QUIZZES.where((el) => el.categoryId == categoryId).toList();
+    if (kDebugMode) {
+      print("QuizzList onInit");
+    }
   }
 
   @override
   void onReady() {
     super.onReady();
+    print("QuizzList onReady");
   }
 
   @override
   void onClose() {
     super.onClose();
+    print("QuizzList onClose");
   }
 
   void increment() => count.value++;

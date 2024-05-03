@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 
@@ -7,25 +8,32 @@ import '../../../data/db/db.dart';
 import '../../../data/models/answer_model.dart';
 import '../../../data/models/question_model.dart';
 import '../../../data/models/quizz_model.dart';
-import '../../../helpers/utils.dart';
 
 class QuizzGameController extends GetxController {
-  final _categoryId = "".obs;
-  final _quizzId = "".obs;
+  final _categoryId = (null as String?).obs;
+  final _quizzId = (null as int?).obs;
+
+  get categoryId => _categoryId.value;
+  get quizzId => _quizzId.value;
 
   @override
   void onInit() {
     super.onInit();
+    print("QuizzGame onInit");
 
     var routeParams = Get.arguments as Map?;
+
+    print("QuizzGame params $routeParams");
 
     _categoryId.value = routeParams?['categoryId'];
     _quizzId.value = routeParams?['quizzId'];
 
-    _selectedQuizz.value = QUIZZES.firstWhere(
-        (el) => el.categoryId == _categoryId.value && el.id == _quizzId.value);
+    _selectedQuizz.value = QUIZZES.firstWhereOrNull(
+        (el) => el.categoryId == categoryId && el.id == quizzId);
 
     _isLoading.value = false;
+
+    print("QuizzGame onInit");
   }
 
   var _currentQuestionIndex = 0.obs;
@@ -37,15 +45,20 @@ class QuizzGameController extends GetxController {
   final _isProcessingAnswer = false.obs;
 
   var _score = 0.obs;
-  final Rx<Quizz?> _selectedQuizz = null.obs;
-  dynamic _selectedAnswer;
+  final _selectedQuizz = (null as Quizz?).obs;
+  final _selectedAnswer = (null as Answer?).obs;
 
   final _userResponses = <Map>[].obs;
 
   bool get isLoading => _isLoading.value;
   List<Question> get questions => selectedQuizz?.questions ?? [];
 
-  Question get currentQuestion => questions[currentQuestionIndex];
+  bool get quizzNotFound => quizz == null;
+  bool get questionNotFound => currentQuestion == null;
+  bool get noQuestions => questions.isEmpty;
+
+  Question? get currentQuestion =>
+      questions.isEmpty ? null : questions[currentQuestionIndex];
 
   int get currentQuestionIndex => _currentQuestionIndex.value;
   int get score => _score.value;
@@ -63,14 +76,12 @@ class QuizzGameController extends GetxController {
       answers.where((element) => element['isCorrect'] == true).toList();
 
   Timer? _timer;
-  final int _seconds = 0;
-  double _time = 0;
+  final _time = 0.0.obs;
   final int START_TIME = 10; // seconds
 
   final _pause = false.obs;
 
-  int get seconds => _seconds;
-  double get time => _time;
+  double get time => _time.value;
   Quizz? get selectedQuizz => _selectedQuizz.value;
   Quizz? get quizz => selectedQuizz;
 
@@ -89,12 +100,12 @@ class QuizzGameController extends GetxController {
     log(">> startTimer");
     await Future.delayed(const Duration(milliseconds: 500));
 
-    _time = START_TIME * 1.0;
+    _time.value = START_TIME * 1.0;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       if (isPaused || hasGameEnded || pause) return;
       if (isProcessingAnswer) return;
-      _time -= 0.1;
+      _time.value -= 0.1;
       if (time < 0.2) {
         onTimeExpired();
         timer.cancel();
@@ -260,26 +271,26 @@ class QuizzGameController extends GetxController {
 
   doubleTapAnswerToSubmit(dynamic answer) {
     log(">> doubleTapAnswerToSubmit $answer");
-    if (_selectedAnswer == answer) {
+    if (selectedAnswer == answer) {
       submitAnswer();
     }
     selectAnswer(answer);
   }
 
   toggleSelectAnswer(dynamic answer) {
-    _selectedAnswer = _selectedAnswer == answer ? null : answer;
+    _selectedAnswer.value = selectedAnswer == answer ? null : answer;
   }
 
   selectAnswer(dynamic answer) {
     if (isProcessingAnswer) return;
     log(">> selectAnswer $answer");
 
-    _selectedAnswer = answer;
+    _selectedAnswer.value = answer;
   }
 
   clearAnswer() {
     log(">> clearAnswer");
-    _selectedAnswer = null;
+    _selectedAnswer.value = null;
   }
 
   setUserQuitting() {

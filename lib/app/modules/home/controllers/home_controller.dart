@@ -7,16 +7,19 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print("Home onInit");
   }
 
   @override
   void onReady() {
     super.onReady();
+    print("Home onReady");
   }
 
   @override
   void onClose() {
     super.onClose();
+    print("Home onClose");
   }
 
   void increment() => count.value++;

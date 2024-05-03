@@ -12,7 +12,7 @@ import '../../quizz_game/views/tu_veux_abandonner_view.dart';
 import '../controllers/quizz_game_controller.dart';
 
 class QuizzGameView extends GetView<QuizzGameController> {
-  const QuizzGameView({Key? key}) : super(key: key);
+  const QuizzGameView({super.key});
 
   gotoHome() {
     Get.toNamed(Routes.WELCOME);
@@ -27,17 +27,21 @@ class QuizzGameView extends GetView<QuizzGameController> {
   }
 
   Widget getQuestionWidget() {
-    if (controller.currentQuestion.type == "image") {
+    if (controller.currentQuestion == null) {
+      return Container();
+    }
+
+    if (controller.currentQuestion!.type == "image") {
       return QuestionImageWidget(
-        question: controller.currentQuestion,
+        question: controller.currentQuestion!,
         isCorrectAnswerVisible: controller.isCorrectAnswerVisible,
         onSelectAnswer: controller.doubleTapAnswerToSubmit,
         selectedAnswer: controller.selectedAnswer,
       );
     }
-    if (controller.currentQuestion.type == "order") {
+    if (controller.currentQuestion!.type == "order") {
       return QuestionOrderWidget(
-        question: controller.currentQuestion,
+        question: controller.currentQuestion!,
         isCorrectAnswerVisible: controller.isCorrectAnswerVisible,
         onSelectAnswer: controller.doubleTapAnswerToSubmit,
         selectedAnswer: controller.selectedAnswer,
@@ -48,45 +52,65 @@ class QuizzGameView extends GetView<QuizzGameController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('QuizzGameView'),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-          if (controller.isLoading)
-            const Center(child: CircularProgressIndicator())
-          else
-            QuizzGameMainContentView(
-                currentQuestionIndex: controller.currentQuestionIndex,
-                questions: controller.questions,
-                time: controller.time,
-                percentage: controller.percentage,
-                startTimer: controller.startTimer,
-                stopTimer: controller.stopTimer,
-                onTimeExpired: controller.onTimeExpired,
-                onTogglePause: controller.onTogglePause,
-                togglePauseTimer: controller.togglePauseTimer,
-                isPaused: controller.isPaused,
-                getQuestionWidget: getQuestionWidget()),
-          if (controller.isPaused)
-            QuizzPausedView(
-                onResume: controller.onGameResume, onQuit: controller.onQuit),
-          if (controller.isQuitting)
-            TuVeuxAbandonnerView(
-              onClose: controller.clearUserQuitting,
-            ),
-          // Game
-          if (controller.hasGameEnded)
-            QuizzEndedView(
-              correctAnswerCount: controller.correctAnswers.length,
-              questionCount: controller.questions.length,
-              onGoHome: gotoHome,
-              onRestartQuizz: controller.onRestartQuizz,
-              onReturnToQuizzList: gotoQuizzList,
-            ),
-        ],
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) {
+        // TODO add tu veux abandonner
+        print("Oh Ho! Il veut abandonner");
+        // Navigator.pop(context, false);
+        // return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.back(result: Get.arguments),
+            icon: const BackButtonIcon(),
+          ),
+          title: const Text('QuizzGameView'),
+          centerTitle: true,
+        ),
+        body: Obx(
+          () => Stack(
+            children: [
+              if (controller.isLoading)
+                const Center(child: CircularProgressIndicator())
+              else if (controller.quizzNotFound)
+                Container(
+                  child: const Text("No"),
+                )
+              else
+                QuizzGameMainContentView(
+                    currentQuestionIndex: controller.currentQuestionIndex,
+                    questions: controller.questions,
+                    time: controller.time,
+                    percentage: controller.percentage,
+                    startTimer: controller.startTimer,
+                    stopTimer: controller.stopTimer,
+                    onTimeExpired: controller.onTimeExpired,
+                    onTogglePause: controller.onTogglePause,
+                    togglePauseTimer: controller.togglePauseTimer,
+                    isPaused: controller.isPaused,
+                    getQuestionWidget: getQuestionWidget()),
+              if (controller.isPaused)
+                QuizzPausedView(
+                    onResume: controller.onGameResume,
+                    onQuit: controller.onQuit),
+              if (controller.isQuitting)
+                TuVeuxAbandonnerView(
+                  onClose: controller.clearUserQuitting,
+                ),
+              // Game
+              if (controller.hasGameEnded)
+                QuizzEndedView(
+                  correctAnswerCount: controller.correctAnswers.length,
+                  questionCount: controller.questions.length,
+                  onGoHome: gotoHome,
+                  onRestartQuizz: controller.onRestartQuizz,
+                  onReturnToQuizzList: gotoQuizzList,
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

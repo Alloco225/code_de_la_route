@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:code_de_la_route/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +10,11 @@ import '../controllers/quizz_list_controller.dart';
 class QuizzListView extends GetView<QuizzListController> {
   const QuizzListView({super.key});
 
-  gotoQuizz(id) {
-    Get.toNamed(Routes.QUIZZ_DETAIL, arguments: {'quizzId': id});
+  gotoQuizz({categoryId, quizzId}) {
+    log("gotoQuizz $quizzId");
+    debugPrint("gotoQuizz $quizzId");
+    Get.toNamed(Routes.QUIZZ_DETAIL,
+        arguments: {'categoryId': categoryId, 'quizzId': quizzId});
   }
 
   @override
@@ -32,7 +37,9 @@ class QuizzListView extends GetView<QuizzListController> {
                 itemBuilder: (ctx, i) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
-                    onTap: () => gotoQuizz(controller.quizzes[i].id),
+                    onTap: () => gotoQuizz(
+                        quizzId: controller.quizzes[i].id,
+                        categoryId: controller.quizzes[i].categoryId),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                         side: const BorderSide(color: Colors.white)),

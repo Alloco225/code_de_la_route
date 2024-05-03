@@ -1,15 +1,21 @@
+import 'dart:developer';
+
+import 'package:code_de_la_route/app/helpers/utils.dart';
 import 'package:code_de_la_route/app/routes/app_pages.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../../data/db/db.dart';
 import '../../../data/models/quizz_model.dart';
 
 class QuizzDetailController extends GetxController {
-  Rx<Quizz?> quizz = null.obs;
+  final _quizz = (null as Quizz?).obs;
 
-  var categoryId = "".obs;
+  Quizz? get quizz => _quizz.value;
 
-  var quizzId = 0.obs;
+  String? categoryId;
+
+  int? quizzId;
   Map? routeParams;
 
   // List<Question> get questions => quizz.questions;
@@ -18,29 +24,32 @@ class QuizzDetailController extends GetxController {
   void onInit() {
     super.onInit();
 
-    var routeParams = Get.arguments as Map?;
+    routeParams = Get.arguments as Map?;
 
-    categoryId.value = routeParams?['categoryId'];
-    quizzId.value = routeParams?['quizzId'];
+    categoryId = routeParams?['categoryId'];
+    quizzId = routeParams?['quizzId'];
 
-    quizz.value = QUIZZES.firstWhere(
-        (el) => el.categoryId == categoryId.value && el.id == quizzId.value);
+    _quizz.value = QUIZZES.firstWhereOrNull(
+        (el) => el.categoryId == categoryId && el.id == quizzId);
 
     isLoading = false;
+    print("DetailController onInit");
+    log("DetailController onInit");
 
-    Get.toNamed(
-      Routes.QUIZZ_GAME, arguments: routeParams
-    );
+    if (kDebugMode) {
+      print("DetailController DetailController onInit");
+    }
   }
 
   @override
   void onReady() {
     super.onReady();
-  }
+    print("DetailController DetailController onReady onReady");
 
-  @override
-  void onClose() {
-    super.onClose();
+    print("DetailController onReady");
+
+    log("DetailController onReady $routeParams");
+    Get.toNamed(Routes.QUIZZ_GAME, arguments: routeParams);
   }
 
   // *** GAME STATE CONTROLLER
