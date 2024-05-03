@@ -11,6 +11,10 @@ abstract class Routes {
   static const QUIZZ_DETAIL = _Paths.QUIZZ_DETAIL;
   static const QUIZZ_CATEGORIES = _Paths.QUIZZ_CATEGORIES;
   static const QUIZZ_GAME = _Paths.QUIZZ_GAME;
+  static const COURSE_LIST = _Paths.COURSE_LIST;
+  static const COURSE_DETAIL = _Paths.COURSE_DETAIL;
+  static const PROFILE = _Paths.PROFILE;
+  static const LEADERBOARD = _Paths.LEADERBOARD;
 }
 
 abstract class _Paths {
@@ -23,4 +27,8 @@ abstract class _Paths {
   static const QUIZZ_DETAIL = '/quizz-detail';
   static const QUIZZ_CATEGORIES = '/quizz-categories';
   static const QUIZZ_GAME = '/quizz-game';
+  static const COURSE_LIST = '/course-list';
+  static const COURSE_DETAIL = '/course-detail';
+  static const PROFILE = '/profile';
+  static const LEADERBOARD = '/leaderboard';
 }
