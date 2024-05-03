@@ -1,3 +1,4 @@
+import 'package:code_de_la_route/app/modules/home/views/info_modal.dart';
 import 'package:code_de_la_route/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -83,6 +84,16 @@ class HomeView extends GetView<HomeController> {
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(Ionicons.settings_outline),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // showBottomSheet(context: context, builder: (ctx)=>{
+
+                          // })
+                          showDialog(
+                              context: context, builder: (ctx) => InfoModal());
+                        },
+                        icon: const Icon(Ionicons.information),
                       ),
                     ],
                   )
