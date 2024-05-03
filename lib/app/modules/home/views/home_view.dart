@@ -1,5 +1,6 @@
 import 'package:code_de_la_route/app/modules/home/views/info_modal.dart';
 import 'package:code_de_la_route/app/routes/app_pages.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
-  List menuElements = [
+  final List menuElements = [
     {
       "text": "COURS",
       "action": () {
@@ -40,6 +41,14 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('HomeView'),
@@ -91,7 +100,8 @@ class HomeView extends GetView<HomeController> {
 
                           // })
                           showDialog(
-                              context: context, builder: (ctx) => InfoModal());
+                              context: context,
+                              builder: (ctx) => const InfoModal());
                         },
                         icon: const Icon(Ionicons.information),
                       ),

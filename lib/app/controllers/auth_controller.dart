@@ -1,23 +1,17 @@
+import 'package:code_de_la_route/app/data/services/firebase_auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   //TODO: Implement AuthController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final firebaseAuthService = FirebaseAuthService();
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  bool get isAuth => _authUser.value != null;
+  final _authUser = (null as User?).obs;
+  User? get authUser => _authUser.value;
 
-  @override
-  void onClose() {
-    super.onClose();
+  setUser(User? user) {
+    _authUser.value = user;
   }
-
-  void increment() => count.value++;
 }

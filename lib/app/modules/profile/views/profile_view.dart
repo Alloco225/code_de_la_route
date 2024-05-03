@@ -1,24 +1,18 @@
+import 'package:code_de_la_route/app/controllers/auth_controller.dart';
+import 'package:code_de_la_route/app/modules/profile/views/user_profile_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/profile_controller.dart';
+import 'auth_view.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ProfileView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'ProfileView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+    return  Obx(
+        () => controller.isAuth ? const UserProfileView() : const AuthView(),
     );
   }
 }
