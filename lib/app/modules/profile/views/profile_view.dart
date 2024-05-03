@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../auth/views/auth_view.dart';
 import '../controllers/profile_controller.dart';
-import 'auth_view.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});

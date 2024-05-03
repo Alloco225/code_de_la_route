@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/const/app_settings.dart';
+import 'app/modules/auth/services/auth_service.dart';
 import 'app/modules/home/bindings/home_binding.dart';
 import 'app/routes/app_pages.dart';
 
@@ -16,6 +17,8 @@ void main() async {
   await Firebase.initializeApp();
 
   log("Loaded App");
+
+  await Get.putAsync(() => AuthService().init());
 
   runApp(
     GetMaterialApp(
