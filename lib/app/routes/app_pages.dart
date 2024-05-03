@@ -42,11 +42,11 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-      middlewares: [
-          PremiumGuard(),
+        name: _Paths.HOME,
+        page: () => HomeView(),
+        binding: HomeBinding(),
+        middlewares: const [
+          // PremiumGuard(),
         ]),
     GetPage(
       name: _Paths.WELCOME,
