@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:code_de_la_route/app/modules/auth/controllers/auth_controller.dart';
 import 'package:code_de_la_route/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ import '../../../../../helpers/utils.dart';
 import '../../../../../views/ui/snackbar.dart';
 
 class RegisterController extends GetxController {
+  final authController = AuthController();
   final FirebaseAuthService _auth = FirebaseAuthService();
   // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -50,6 +52,7 @@ class RegisterController extends GetxController {
       if (user != null) {
         showSnackbarSuccess("User is successfully created", context: context);
         // Navigator.pushNamed(context, "/home");
+        authController.setUser(user);
         Get.toNamed(Routes.WELCOME);
       } else {
         showSnackbarError("Some error happend", context: context);

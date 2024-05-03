@@ -9,8 +9,10 @@ import '../../../../../data/services/firebase_auth_service.dart';
 import '../../../../../helpers/utils.dart';
 import '../../../../../routes/app_pages.dart';
 import '../../../../../views/ui/snackbar.dart';
+import '../../../controllers/auth_controller.dart';
 
 class LoginController extends GetxController {
+  final authController = AuthController();
   final FirebaseAuthService _auth = FirebaseAuthService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -58,6 +60,8 @@ class LoginController extends GetxController {
 
       if (user != null) {
         showSnackbarSuccess("User is successfully signed in", context: context);
+        authController.setUser(user);
+
         Get.toNamed(Routes.WELCOME);
       } else {
         showSnackbarError("some error occured", context: context);
