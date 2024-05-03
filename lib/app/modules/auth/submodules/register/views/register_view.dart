@@ -30,7 +30,7 @@ class RegisterView extends GetView<RegisterController> {
                   height: 30,
                 ),
                 FormContainerWidget(
-                  controller: controller.usernameController.value,
+                  controller: controller.usernameController,
                   hintText: "Username",
                   isPasswordField: false,
                 ),
@@ -38,7 +38,7 @@ class RegisterView extends GetView<RegisterController> {
                   height: 10,
                 ),
                 FormContainerWidget(
-                  controller: controller.emailController.value,
+                  controller: controller.emailController,
                   hintText: "Email",
                   isPasswordField: false,
                 ),
@@ -46,7 +46,7 @@ class RegisterView extends GetView<RegisterController> {
                   height: 10,
                 ),
                 FormContainerWidget(
-                  controller: controller.passwordController.value,
+                  controller: controller.passwordController,
                   hintText: "Password",
                   isPasswordField: true,
                 ),
@@ -55,7 +55,7 @@ class RegisterView extends GetView<RegisterController> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    controller.signUp();
+                    controller.signUp(context);
                   },
                   child: Container(
                     width: double.infinity,

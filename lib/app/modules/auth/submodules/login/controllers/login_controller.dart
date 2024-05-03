@@ -13,9 +13,13 @@ class LoginController extends GetxController {
   final FirebaseAuthService _auth = FirebaseAuthService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  final usernameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _usernameController = TextEditingController().obs;
+  final _emailController = TextEditingController().obs;
+  final _passwordController = TextEditingController().obs;
+
+  get usernameController => _usernameController.value;
+  get emailController => _emailController.value;
+  get passwordController => _passwordController.value;
 
   String get username => usernameController.value.text;
   String get email => emailController.value.text;
@@ -37,7 +41,7 @@ class LoginController extends GetxController {
 
   void increment() => count.value++;
 
-  void signIn() async {
+  void signIn(context) async {
     _isSigning.value = true;
     log("signIn $email $password");
     try {
@@ -46,31 +50,32 @@ class LoginController extends GetxController {
       _isSigning.value = false;
 
       if (user != null) {
-        showSnackbarSuccess("User is successfully signed in",
-            context: Get.context!);
+        showSnackbarSuccess("User is successfully signed in", context: context);
         Get.toNamed(Routes.WELCOME);
       } else {
-        showSnackbarError("some error occured", context: Get.context!);
+        showSnackbarError("some error occured", context: context);
       }
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException ${e.code} $e");
 
       if (e.code == 'invalid-email ') {
         // TODO link with translations table
-        showSnackbarError('invalid-email ', context: Get.context!);
+        showSnackbarError('invalid-email ', context: context);
       }
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        showSnackbarError('Invalid email or password.', context: Get.context!);
+        showSnackbarError('Invalid email or password.', context: context);
       } else {
         log('An error occurred: ${e.code}');
-        showSnackbarError('An error occurred.', context: Get.context!);
+        showSnackbarError('An error occurred.', context: context);
       }
     } catch (e) {
-      showSnackbarError("some error occured $e", context: Get.context!);
+      showSnackbarError("some error occured $e", context: context);
+    } finally {
+      _isSigning.value = false;
     }
   }
 
-  signInWithGoogle() async {
+  signInWithGoogle(context) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
     try {
@@ -94,16 +99,16 @@ class LoginController extends GetxController {
 
       if (e.code == 'invalid-email ') {
         // TODO link with translations table
-        showSnackbarError('invalid-email ', context: Get.context!);
+        showSnackbarError('invalid-email ', context: context);
       }
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        showSnackbarError('Invalid email or password.', context: Get.context!);
+        showSnackbarError('Invalid email or password.', context: context);
       } else {
         log('An error occurred: ${e.code}');
-        showSnackbarError('An error occurred.', context: Get.context!);
+        showSnackbarError('An error occurred.', context: context);
       }
     } catch (e) {
-      showSnackbarError("some error occured $e", context: Get.context!);
+      showSnackbarError("some error occured $e", context: context);
     }
   }
 }
