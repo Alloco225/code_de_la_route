@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/services/firebase_auth_service.dart';
+import '../../../../../helpers/utils.dart';
 import '../../../../../views/ui/snackbar.dart';
 
 class RegisterController extends GetxController {
@@ -32,6 +33,14 @@ class RegisterController extends GetxController {
   void increment() => count.value++;
 
   void signUp(context) async {
+    if (validateEmail(email) &&
+        validateUsername(username) &&
+        validatePassword(password)) {
+    } else {
+      showSnackbarError("Invalid input for registration.", context: context);
+      return;
+    }
+
     _isSigningUp.value = true;
 
     try {

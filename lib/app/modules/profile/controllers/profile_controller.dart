@@ -1,5 +1,6 @@
-import 'package:code_de_la_route/app/controllers/auth_controller.dart';
 import 'package:get/get.dart';
+
+import '../../auth/controllers/auth_controller.dart';
 
 class ProfileController extends GetxController {
   //TODO: Implement ProfileController

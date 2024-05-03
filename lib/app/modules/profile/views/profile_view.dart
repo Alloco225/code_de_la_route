@@ -1,4 +1,3 @@
-import 'package:code_de_la_route/app/controllers/auth_controller.dart';
 import 'package:code_de_la_route/app/modules/profile/views/user_profile_view.dart';
 import 'package:flutter/material.dart';
 

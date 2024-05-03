@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'app/const/app_settings.dart';
 import 'app/modules/home/bindings/home_binding.dart';
 import 'app/routes/app_pages.dart';
 
@@ -20,9 +21,12 @@ void main() async {
     GetMaterialApp(
       initialBinding: HomeBinding(),
       title: "Code de la Route",
+      // theme: AppSettings.theme,
       theme: kDarkTheme,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      locale: AppSettings.locale,
+      fallbackLocale: AppSettings.fallbackLocale,
     ),
   );
 }

@@ -1,8 +1,9 @@
-import 'package:code_de_la_route/app/controllers/auth_controller.dart';
-import 'package:code_de_la_route/app/modules/auth/submodules/login/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+
+import '../../auth/controllers/auth_controller.dart';
+import '../../auth/submodules/login/views/login_view.dart';
 
 class AuthView extends GetView<AuthController> {
   const AuthView({super.key});

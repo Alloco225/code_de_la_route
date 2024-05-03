@@ -1,8 +1,8 @@
-import 'package:code_de_la_route/app/controllers/auth_controller.dart';
-import 'package:code_de_la_route/app/modules/auth/submodules/login/controllers/login_controller.dart';
-import 'package:code_de_la_route/app/modules/auth/submodules/register/controllers/register_controller.dart';
+import '/app/modules/auth/submodules/login/controllers/login_controller.dart';
+import '/app/modules/auth/submodules/register/controllers/register_controller.dart';
 import 'package:get/get.dart';
 
+import '../../auth/controllers/auth_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeBinding extends Bindings {
@@ -11,11 +11,11 @@ class HomeBinding extends Bindings {
     Get.put<AuthController>(
       AuthController(),
     );
-    Get.lazyPut<LoginController>(
-      () => LoginController(),
+    Get.put<LoginController>(
+      LoginController(),
     );
-    Get.lazyPut<RegisterController>(
-      () => RegisterController(),
+    Get.put<RegisterController>(
+      RegisterController(),
     );
     Get.lazyPut<HomeController>(
       () => HomeController(),

@@ -1,12 +1,13 @@
 import 'dart:developer';
 
-import 'package:code_de_la_route/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../data/services/firebase_auth_service.dart';
+import '../../../../../helpers/utils.dart';
+import '../../../../../routes/app_pages.dart';
 import '../../../../../views/ui/snackbar.dart';
 
 class LoginController extends GetxController {
@@ -42,6 +43,12 @@ class LoginController extends GetxController {
   void increment() => count.value++;
 
   void signIn(context) async {
+    if (validateEmail(email) && validatePassword(password)) {
+    } else {
+      showSnackbarError("Invalid input for login.", context: context);
+      return;
+    }
+
     _isSigning.value = true;
     log("signIn $email $password");
     try {
