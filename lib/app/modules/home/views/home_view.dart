@@ -1,5 +1,5 @@
-import 'package:code_de_la_route/app/modules/home/views/info_modal.dart';
-import 'package:code_de_la_route/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/modules/home/views/info_modal.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

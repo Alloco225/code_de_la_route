@@ -119,6 +119,8 @@ class LoginController extends GetxController {
         showSnackbarError('An error occurred.', context: context);
       }
     } catch (e) {
+      log("xx signInWithGoogle $e");
+
       showSnackbarError("some error occured $e", context: context);
     }
   }

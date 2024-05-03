@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:code_de_la_route/app/modules/auth/controllers/auth_controller.dart';
-import 'package:code_de_la_route/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';

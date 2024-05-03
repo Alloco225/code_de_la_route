@@ -1,4 +1,4 @@
-import 'package:code_de_la_route/app/modules/quizz_game/views/quizz_game_main_content_view.dart';
+import 'package:codedelaroute/app/modules/quizz_game/views/quizz_game_main_content_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

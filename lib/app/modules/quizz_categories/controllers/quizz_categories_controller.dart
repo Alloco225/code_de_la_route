@@ -1,5 +1,5 @@
-import 'package:code_de_la_route/app/data/db/db.dart';
-import 'package:code_de_la_route/app/data/models/quizz_category_model.dart';
+import 'package:codedelaroute/app/data/db/db.dart';
+import 'package:codedelaroute/app/data/models/quizz_category_model.dart';
 import 'package:get/get.dart';
 
 class QuizzCategoriesController extends GetxController {

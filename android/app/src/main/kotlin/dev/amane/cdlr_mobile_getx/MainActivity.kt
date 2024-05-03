@@ -1,4 +1,4 @@
-package dev.amane.code_de_la_route
+package dev.amane.codedelaroute
 
 import io.flutter.embedding.android.FlutterActivity
 

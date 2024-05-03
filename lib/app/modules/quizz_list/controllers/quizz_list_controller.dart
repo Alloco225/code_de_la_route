@@ -1,4 +1,4 @@
-import 'package:code_de_la_route/app/data/db/db.dart';
+import 'package:codedelaroute/app/data/db/db.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 

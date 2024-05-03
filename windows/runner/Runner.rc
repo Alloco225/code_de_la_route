@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "dev.amane" "\0"
-            VALUE "FileDescription", "code_de_la_route" "\0"
+            VALUE "FileDescription", "codedelaroute" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "code_de_la_route" "\0"
+            VALUE "InternalName", "codedelaroute" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 dev.amane. All rights reserved." "\0"
-            VALUE "OriginalFilename", "code_de_la_route.exe" "\0"
-            VALUE "ProductName", "code_de_la_route" "\0"
+            VALUE "OriginalFilename", "codedelaroute.exe" "\0"
+            VALUE "ProductName", "codedelaroute" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

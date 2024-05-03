@@ -9,6 +9,6 @@ class AuthView extends GetView<AuthController> {
   const AuthView({super.key});
   @override
   Widget build(BuildContext context) {
-    return const LoginView();
+    return LoginView();
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:code_de_la_route/app/const/theme.dart';
+import 'package:codedelaroute/app/const/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

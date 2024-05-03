@@ -6,6 +6,10 @@ import '../../views/ui/snackbar.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Disable persistence on web platforms. Must be called on initialization:
+  // final auth = FirebaseAuth.instanceFor(app: Firebase.app(), persistence: Persistence.NONE);
+  // // To change it after initialization, use `setPersistence()`:
+  // await auth.setPersistence(Persistence.LOCAL);
 
   Future<User?> signUpWithEmailAndPassword(
       String email, String password) async {

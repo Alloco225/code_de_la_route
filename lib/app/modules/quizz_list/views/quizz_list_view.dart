@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:code_de_la_route/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

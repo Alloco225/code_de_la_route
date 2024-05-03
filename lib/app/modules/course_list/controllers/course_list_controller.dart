@@ -1,4 +1,4 @@
-import 'package:code_de_la_route/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class CourseListController extends GetxController {
@@ -18,7 +18,6 @@ class CourseListController extends GetxController {
   // void onClose() {
   //   super.onClose();
   // }
-
 
   gotoCourseDetail(courseId) {
     Get.toNamed(Routes.COURSE_DETAIL);
