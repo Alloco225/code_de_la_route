@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
@@ -26,16 +24,16 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            SizedBox(
-              height: 50,
-              child: PageView(
-                children: [
-                  Container(
-                    child: const Text("Signalisation"),
-                  )
-                ],
-              ),
-            ),
+            // SizedBox(
+            //   height: 50,
+            //   child: PageView(
+            //     children: [
+            //       Container(
+            //         child: const Text("Signalisation"),
+            //       )
+            //     ],
+            //   ),
+            // ),
             Expanded(
                 child: ListView(
               children: [
@@ -53,7 +51,7 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
                     ],
                   ),
                 ),
-                for (var i = 0; i < 10; i++) buildQuizzContainer(),
+                for (var i = 0; i < 2; i++) buildQuizzContainer(),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: Row(
@@ -81,6 +79,7 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
     return SizedBox(
         height: 100,
         child: Container(
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.white)),
@@ -90,7 +89,10 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
                 borderRadius:
                     const BorderRadius.horizontal(left: Radius.circular(8)),
                 child: Container(
-                  color: Colors.white,
+                  // color: Colors.white,
+                  padding: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                      border: Border(right: BorderSide(color: Colors.white))),
                   child: Image.asset(
                       'assets/images/signalisation/585f8f29cb11b227491c3555.png'),
                 ),

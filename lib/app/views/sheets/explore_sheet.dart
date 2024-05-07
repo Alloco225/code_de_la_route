@@ -8,6 +8,8 @@ import '../widgets/make_dismissable.dart';
 enum AuthMode { Login, Register }
 
 class ExploreSheet extends StatefulWidget {
+  const ExploreSheet({super.key});
+
   @override
   _ExploreSheetState createState() => _ExploreSheetState();
 }
@@ -50,7 +52,7 @@ class _ExploreSheetState extends State<ExploreSheet> {
 
   _setUpCategories() async {
     // await Navigator.of(context).push(
-        // MaterialPageRoute(builder: (ctx) => EventCategoriesSelectionPage()));
+    // MaterialPageRoute(builder: (ctx) => EventCategoriesSelectionPage()));
   }
 
   @override
@@ -61,7 +63,7 @@ class _ExploreSheetState extends State<ExploreSheet> {
         initialChildSize: 1,
         minChildSize: .3,
         builder: (_, controller) => Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15), topRight: Radius.circular(15)),
@@ -70,15 +72,15 @@ class _ExploreSheetState extends State<ExploreSheet> {
             children: [
               // AGrappler(),
               Container(),
-              // 
+              //
               // date filter
               Container(),
-              // 
+              //
               // events list
               Expanded(
-                child: ListView(children: [
-                  
-                ],),
+                child: ListView(
+                  children: const [],
+                ),
               ),
             ],
           ),
