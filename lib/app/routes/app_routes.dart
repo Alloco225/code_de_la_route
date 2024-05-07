@@ -20,6 +20,7 @@ abstract class Routes {
   static const AUTH = _Paths.AUTH;
   static const PANNEAUX = _Paths.PANNEAUX;
   static const PANNEAUX_CATEGORIES = _Paths.PANNEAUX_CATEGORIES;
+  static const QUIZZ_LEVELS = _Paths.QUIZZ_LEVELS;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const AUTH = '/auth';
   static const PANNEAUX = '/panneaux';
   static const PANNEAUX_CATEGORIES = '/panneaux-categories';
+  static const QUIZZ_LEVELS = '/quizz-levels';
 }

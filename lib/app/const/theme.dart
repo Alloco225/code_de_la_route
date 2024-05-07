@@ -40,8 +40,9 @@ final ThemeData kDarkTheme = ThemeData.light().copyWith(
   // bottomSheetTheme:
   //     const BottomSheetThemeData().copyWith(backgroundColor: Colors.white),
   primaryColor: const Color(0xFFF18D01),
+
   // Colors.blueGrey[900], // Primary color, a dark shade of blue-gray
-  // scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
+  scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
   // scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
   appBarTheme: AppBarTheme(
     color: Colors.blueGrey[900], // Brightness of app bar
@@ -52,14 +53,16 @@ final ThemeData kDarkTheme = ThemeData.light().copyWith(
   // buttonColor: Colors.greenAccent, // Button color, green
   textTheme: const TextTheme(
     // Text theme
-
+    titleMedium: TextStyle(fontFamily: 'ProductSans', color: Colors.white),
     titleLarge: TextStyle(
         fontFamily: 'ProductSans', color: Colors.white), // Headline text color
     bodyLarge: TextStyle(
-        fontFamily: 'ProductSans', color: Colors.white), // Body text color
+        fontFamily: 'ProductSans',
+        color: Colors.white,
+        fontWeight: FontWeight.w700), // Body text color
     bodyMedium: TextStyle(
         fontFamily: 'ProductSans',
-        color: Colors.white70), // Secondary body text color
+        color: Colors.white), // Secondary body text color
   ),
   iconTheme: const IconThemeData(color: Colors.white), // Icon color
   // elevatedButtonTheme: const ElevatedButtonThemeData(

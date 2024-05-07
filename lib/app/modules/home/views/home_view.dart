@@ -16,27 +16,32 @@ class HomeView extends GetView<HomeController> {
   final List menuElements = [
     {
       "text": "PANNEAUX",
-      "action": () {
-        Get.toNamed(Routes.PANNEAUX_CATEGORIES);
-      },
+      "icon": Icons.directions_outlined,
+      "route": Routes.PANNEAUX_CATEGORIES,
     },
     {
       "text": "QUIZZ",
-      "action": () {
-        Get.toNamed(Routes.QUIZZ_CATEGORIES);
-      },
+      "icon": Ionicons.help_outline,
+      "route":
+          //Routes.QUIZZ_CATEGORIES
+          Routes.QUIZZ_LEVELS,
     },
+    // {
+    //   "text": "PROFILE",
+    //   "route":
+    //    Routes.PROFILE
+    //   ,
+    // },
+    // {
+    //   "text": "LEADERBOARD",
+    //   "route":
+    //    Routes.LEADERBOARD
+    //   ,
+    // },
     {
-      "text": "PROFILE",
-      "action": () {
-        Get.toNamed(Routes.PROFILE);
-      },
-    },
-    {
-      "text": "LEADERBOARD",
-      "action": () {
-        Get.toNamed(Routes.LEADERBOARD);
-      },
+      "text": "SETTINGS",
+      "icon": Ionicons.settings_outline,
+      "route": Routes.LEADERBOARD,
     },
   ];
 
@@ -74,96 +79,45 @@ class HomeView extends GetView<HomeController> {
                         horizontal: MediaQuery.of(context).size.width * .2),
                     child: Column(
                       children: [
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: const EdgeInsets.all(10),
-                          child: const Column(
+                        ...menuElements.map(
+                          (element) => Column(
                             children: [
-                              Icon(
-                                Icons.directions,
-                                size: 32,
-                              ),
-                              Text(
-                                "Panneaux",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 25,
-                                  color: Colors.white,
+                              InkWell(
+                                onTap: () => Get.toNamed(element['route']),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 15),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        element['icon'],
+                                        size: 32,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        element['text'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 25,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 30,
                               ),
                             ],
                           ),
                         ),
-
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: const EdgeInsets.all(10),
-                          child: const Column(
-                            children: [
-                              Icon(
-                                Ionicons.help_outline,
-                                size: 32,
-                              ),
-                              Text(
-                                "Quizz",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: const EdgeInsets.all(10),
-                          child: const Column(
-                            children: [
-                              Icon(
-                                Ionicons.settings_outline,
-                                size: 32,
-                              ),
-                              Text(
-                                "Réglages",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        // ...menuElements.map(
-                        //   (element) => Column(children: [
-                        //     MenuButtonWidget(
-                        //       text: element['text'],
-                        //       onPressed: element['action'],
-                        //     ),
-                        //     const SizedBox(
-                        //       height: 10,
-                        //     ),
-                        //   ]),
-                        // ),
                       ],
                     ),
                   )),
