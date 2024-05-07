@@ -1,8 +1,12 @@
-import 'package:codedelaroute/app/middlewares/auth_guard.dart';
 import 'package:get/get.dart';
 
+import '../middlewares/auth_guard.dart';
 import '../middlewares/premium_guard.dart';
 import '../modules/auth/bindings/auth_binding.dart';
+import '../modules/auth/submodules/login/bindings/login_binding.dart';
+import '../modules/auth/submodules/login/views/login_view.dart';
+import '../modules/auth/submodules/register/bindings/register_binding.dart';
+import '../modules/auth/submodules/register/views/register_view.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/course_detail/bindings/course_detail_binding.dart';
 import '../modules/course_detail/views/course_detail_view.dart';
@@ -12,8 +16,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/leaderboard/bindings/leaderboard_binding.dart';
 import '../modules/leaderboard/views/leaderboard_view.dart';
-import '../modules/auth/submodules/login/bindings/login_binding.dart';
-import '../modules/auth/submodules/login/views/login_view.dart';
+import '../modules/panneaux/bindings/panneaux_binding.dart';
+import '../modules/panneaux/views/panneaux_view.dart';
+import '../modules/panneaux_categories/bindings/panneaux_categories_binding.dart';
+import '../modules/panneaux_categories/views/panneaux_categories_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/quizz/bindings/quizz_binding.dart';
@@ -26,8 +32,6 @@ import '../modules/quizz_game/bindings/quizz_game_binding.dart';
 import '../modules/quizz_game/views/quizz_game_view.dart';
 import '../modules/quizz_list/bindings/quizz_list_binding.dart';
 import '../modules/quizz_list/views/quizz_list_view.dart';
-import '../modules/auth/submodules/register/bindings/register_binding.dart';
-import '../modules/auth/submodules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/welcome/bindings/welcome_binding.dart';
@@ -42,13 +46,13 @@ class AppPages {
 
   static final routes = [
     GetPage(
-        name: _Paths.HOME,
-        page: () => HomeView(),
-        binding: HomeBinding(),
-        // middlewares: const [
-        //   // PremiumGuard(),
-        // ]
-        ),
+      name: _Paths.HOME,
+      page: () => HomeView(),
+      binding: HomeBinding(),
+      // middlewares: const [
+      //   // PremiumGuard(),
+      // ]
+    ),
     GetPage(
       name: _Paths.WELCOME,
       page: () => const WelcomeView(),
@@ -122,6 +126,16 @@ class AppPages {
       name: _Paths.AUTH,
       page: () => const AuthView(),
       binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.PANNEAUX,
+      page: () => const PanneauxView(),
+      binding: PanneauxBinding(),
+    ),
+    GetPage(
+      name: _Paths.PANNEAUX_CATEGORIES,
+      page: () => const PanneauxCategoriesView(),
+      binding: PanneauxCategoriesBinding(),
     ),
   ];
 }

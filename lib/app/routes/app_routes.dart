@@ -18,6 +18,8 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const AUTH = _Paths.AUTH;
+  static const PANNEAUX = _Paths.PANNEAUX;
+  static const PANNEAUX_CATEGORIES = _Paths.PANNEAUX_CATEGORIES;
 }
 
 abstract class _Paths {
@@ -37,4 +39,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const AUTH = '/auth';
+  static const PANNEAUX = '/panneaux';
+  static const PANNEAUX_CATEGORIES = '/panneaux-categories';
 }

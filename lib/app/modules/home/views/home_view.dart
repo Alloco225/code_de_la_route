@@ -1,4 +1,3 @@
-import 'package:codedelaroute/app/modules/home/views/info_modal.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../views/widgets/menu_button_widget.dart';
 import '../../auth/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
@@ -15,12 +13,11 @@ class HomeView extends GetView<HomeController> {
 
   final _authService = Get.find<AuthService>();
 
-
   final List menuElements = [
     {
-      "text": "COURS",
+      "text": "PANNEAUX",
       "action": () {
-        Get.toNamed(Routes.COURSE_LIST);
+        Get.toNamed(Routes.PANNEAUX_CATEGORIES);
       },
     },
     {
@@ -54,79 +51,144 @@ class HomeView extends GetView<HomeController> {
     });
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('HomeView'),
-          centerTitle: true,
-        ),
+        backgroundColor: Colors.blueGrey.shade700,
         body: Stack(
           children: [
-            Column(
-              children: [
-                const Spacer(),
-                Expanded(
-                    child: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * .2),
-                  child: Column(
-                    children: [
-                      ...menuElements.map(
-                        (element) => Column(children: [
-                          MenuButtonWidget(
-                            text: element['text'],
-                            onPressed: element['action'],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                        ]),
-                      ),
-                      Obx(() {
-                        return SwitchListTile(
-                          title: const Text('isPremium value'),
-                          value: _authService.isPremium.value,
-                          onChanged: _authService.setIsPremium,
-                        );
-                      }),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              // authStateProvider.authenticate();
-                              // Navigator.of(context).pushNamed(Routes.auth);
-                            },
-                            icon: const Icon(Ionicons.person_outline),
-                          ),
-                          const SizedBox(
-                            width: 30,
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Ionicons.settings_outline),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              // showBottomSheet(context: context, builder: (ctx)=>{
-            
-                              // })
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => const InfoModal());
-                            },
-                            icon: const Icon(Ionicons.information),
-                          ),
-                        ],
-                      )
-                    ],
+            Positioned.fill(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const SizedBox(
+                    height: 50,
                   ),
-                )),
-              ],
-            ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Image.asset('assets/images/logo.png'),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Expanded(
+                      child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * .2),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.all(10),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Icons.directions,
+                                size: 32,
+                              ),
+                              Text(
+                                "Panneaux",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
 
-        
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.all(10),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Ionicons.help_outline,
+                                size: 32,
+                              ),
+                              Text(
+                                "Quizz",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.all(10),
+                          child: const Column(
+                            children: [
+                              Icon(
+                                Ionicons.settings_outline,
+                                size: 32,
+                              ),
+                              Text(
+                                "Réglages",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        // ...menuElements.map(
+                        //   (element) => Column(children: [
+                        //     MenuButtonWidget(
+                        //       text: element['text'],
+                        //       onPressed: element['action'],
+                        //     ),
+                        //     const SizedBox(
+                        //       height: 10,
+                        //     ),
+                        //   ]),
+                        // ),
+                      ],
+                    ),
+                  )),
+                  const Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "v2.0.3",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              fontSize: 22),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 30,
+              child: Container(),
+            ),
           ],
         ));
   }

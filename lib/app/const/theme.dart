@@ -8,6 +8,12 @@ import 'package:flutter/services.dart';
 // #152B3F
 import 'package:flutter/material.dart';
 
+const darkBlueColor = Color(0xFF1E3D59);
+const orangeColor = Color(0xFFF18D01);
+const greenColor = Color(0xFF35A12C);
+const ghostWhite = Color(0xFFF8F8FF);
+const colorWhite = ghostWhite;
+
 var appShadow = [
   BoxShadow(
       color: Colors.grey[300]!, offset: const Offset(0, -2), blurRadius: 15),
@@ -27,15 +33,16 @@ appTextStyle(
 final ButtonStyle kFlatButtonStyle = TextButton.styleFrom(
   // minimumSize: Size(_width, _height),
   backgroundColor: Colors.grey,
-  padding: EdgeInsets.all(0),
+  padding: const EdgeInsets.all(0),
 );
 
-final ThemeData kDarkTheme = ThemeData.dark().copyWith(
-  bottomSheetTheme:
-      const BottomSheetThemeData().copyWith(backgroundColor: Colors.white),
+final ThemeData kDarkTheme = ThemeData.light().copyWith(
+  // bottomSheetTheme:
+  //     const BottomSheetThemeData().copyWith(backgroundColor: Colors.white),
   primaryColor: const Color(0xFFF18D01),
   // Colors.blueGrey[900], // Primary color, a dark shade of blue-gray
-  scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
+  // scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
+  // scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
   appBarTheme: AppBarTheme(
     color: Colors.blueGrey[900], // Brightness of app bar
     iconTheme: const IconThemeData(color: Colors.white),
