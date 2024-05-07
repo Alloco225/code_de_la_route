@@ -141,7 +141,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.QUIZZ_LEVELS,
-      page: () => const QuizzLevelsView(),
+      page: () => QuizzLevelsView(),
       binding: QuizzLevelsBinding(),
     ),
   ];
