@@ -34,6 +34,8 @@ import '../modules/quizz_levels/bindings/quizz_levels_binding.dart';
 import '../modules/quizz_levels/views/quizz_levels_view.dart';
 import '../modules/quizz_list/bindings/quizz_list_binding.dart';
 import '../modules/quizz_list/views/quizz_list_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/welcome/bindings/welcome_binding.dart';
@@ -143,6 +145,11 @@ class AppPages {
       name: _Paths.QUIZZ_LEVELS,
       page: () => QuizzLevelsView(),
       binding: QuizzLevelsBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
     ),
   ];
 }

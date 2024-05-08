@@ -21,6 +21,7 @@ abstract class Routes {
   static const PANNEAUX = _Paths.PANNEAUX;
   static const PANNEAUX_CATEGORIES = _Paths.PANNEAUX_CATEGORIES;
   static const QUIZZ_LEVELS = _Paths.QUIZZ_LEVELS;
+  static const SETTINGS = _Paths.SETTINGS;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const PANNEAUX = '/panneaux';
   static const PANNEAUX_CATEGORIES = '/panneaux-categories';
   static const QUIZZ_LEVELS = '/quizz-levels';
+  static const SETTINGS = '/settings';
 }

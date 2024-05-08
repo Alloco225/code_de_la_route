@@ -1,23 +1,39 @@
+import 'package:codedelaroute/app/data/models/sign_category_model.dart';
 import 'package:get/get.dart';
 
 class PanneauxCategoriesController extends GetxController {
-  //TODO: Implement PanneauxCategoriesController
+  final _categories = [
+    SignCategory(
+      id: "OBLIGATION",
+      name: "OBLIGATION",
+      image: "assets/images/signalisation/585f9250cb11b227491c357d.png",
+    ),
+    SignCategory(
+      id: "DANGER",
+      name: "DANGER",
+      image: "assets/images/signalisation/585f900ecb11b227491c356e.png",
+    ),
+    SignCategory(
+      id: "INTERDICTION",
+      name: "INTERDICTION",
+      image: "assets/images/signalisation/585f900ecb11b227491c356e.png",
+    ),
+    SignCategory(
+      id: "INDICATION",
+      name: "INDICATION",
+      image: "assets/images/signalisation/585f900ecb11b227491c356e.png",
+    ),
+    SignCategory(
+      id: "PARKING",
+      name: "PARKING",
+      image: "assets/images/signalisation/585f900ecb11b227491c356e.png",
+    ),
+    SignCategory(
+      id: "TEMPORAIRE",
+      name: "TEMPORAIRE",
+      image: "assets/images/signalisation/585f900ecb11b227491c356e.png",
+    ),
+  ].obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  List<SignCategory> get categories => _categories.value;
 }

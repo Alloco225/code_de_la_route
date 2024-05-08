@@ -41,7 +41,7 @@ class HomeView extends GetView<HomeController> {
     {
       "text": "SETTINGS",
       "icon": Ionicons.settings_outline,
-      "route": Routes.LEADERBOARD,
+      "route": Routes.SETTINGS,
     },
   ];
 
