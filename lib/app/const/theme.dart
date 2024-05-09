@@ -42,10 +42,13 @@ final ThemeData kDarkTheme = ThemeData.light().copyWith(
   primaryColor: const Color(0xFFF18D01),
 
   // Colors.blueGrey[900], // Primary color, a dark shade of blue-gray
-  scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
+  // scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
+  scaffoldBackgroundColor:
+      Colors.blueGrey.shade700, // Scaffold background color
   // scaffoldBackgroundColor: Colors.blueGrey[800], // Scaffold background color
   appBarTheme: AppBarTheme(
-    color: Colors.blueGrey[900], // Brightness of app bar
+    // color: Colors.blueGrey[900], // Brightness of app bar
+    color: Colors.blueGrey.shade700, // Brightness of app bar
     iconTheme: const IconThemeData(color: Colors.white),
     systemOverlayStyle: SystemUiOverlayStyle.dark, // Icon color in app bar
   ),

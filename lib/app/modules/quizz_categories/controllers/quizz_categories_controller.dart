@@ -1,6 +1,7 @@
-import 'package:codedelaroute/app/data/db/db.dart';
 import 'package:codedelaroute/app/data/models/quizz_category_model.dart';
 import 'package:get/get.dart';
+
+import '../../../data/db/db_data.dart';
 
 class QuizzCategoriesController extends GetxController {
   //TODO: Implement QuizzCategoriesController

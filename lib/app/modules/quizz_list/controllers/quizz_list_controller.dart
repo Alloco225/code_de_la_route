@@ -1,7 +1,7 @@
-import 'package:codedelaroute/app/data/db/db.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+import '../../../data/db/db_data.dart';
 import '../../../data/models/quizz_model.dart';
 
 class QuizzListController extends GetxController {

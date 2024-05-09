@@ -19,9 +19,7 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey.shade700,
         appBar: AppBar(
-          backgroundColor: Colors.blueGrey.shade700,
           title: const Text(
             'Les Panneaux de Signalisation',
             style: TextStyle(fontWeight: FontWeight.w400, color: Colors.white),

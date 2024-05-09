@@ -28,8 +28,8 @@ class PanneauxController extends GetxController {
     _categoryId.value = routeParams?['categoryId'];
     _categoryName.value = routeParams?['categoryName'];
 
-    // _selectedQuizz.value = QUIZZES.firstWhereOrNull(
-    //     (el) => el.categoryId == categoryId && el.id == quizzId);
+    _signs.value = QUIZZES.firstWhereOrNull(
+        (el) => el.categoryId == categoryId && el.id == quizzId);
 
     _isLoading.value = false;
 
