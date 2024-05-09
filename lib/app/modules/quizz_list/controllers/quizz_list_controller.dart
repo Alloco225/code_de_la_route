@@ -20,9 +20,9 @@ class QuizzListController extends GetxController {
   get quizzes => _quizzes.value;
   bool get isLoading => _isLoading.value;
 
-  final _groupedQuizzes = <String, List>{}.obs;
+  final _groupedQuizzes = <String, List<Quizz>>{}.obs;
 
-  Map<String, List> get groupedQuizzes => _groupedQuizzes.value;
+  Map<String, List<Quizz>> get groupedQuizzes => _groupedQuizzes.value;
 
   @override
   void onReady() async {
@@ -38,15 +38,17 @@ class QuizzListController extends GetxController {
       _quizzes.value = _quizzList.value;
     } catch (e) {}
 
-    var quizzesJson = await QuizzesProvider().loadAllQuizzesJson();
+    // var quizzesJson = await QuizzesProvider().loadAllQuizzesJson();
+    // _groupedQuizzes.value =
+    //     groupBy(quizzesJson, (element) => element['categoryId']);
     _groupedQuizzes.value =
-        groupBy(quizzesJson, (element) => element['categoryId']);
+        groupBy(_quizzes.value, (element) => element.categoryId!);
 
     _isLoading.value = false;
     // selectedCategory = CATEGORIES.firstWhere((el) => el.id == categoryId);
     // quizzes.value = QUIZZES.where((el) => el.categoryId == categoryId).toList();
     print("QuizzList onInit ");
-    log("QuizzList onInit ${quizzesJson.length}");
+    // log("QuizzList onInit ${quizzesJson.length}");
     print("QuizzList onReady");
   }
 

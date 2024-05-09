@@ -6,14 +6,22 @@ class Quizz {
   int? id;
   String? categoryId;
   String? level;
+  String? name;
   IconData? icon;
   List<Question> questions = [];
 
-  Quizz({this.id, this.categoryId, this.level, required this.questions, this.icon});
+  Quizz(
+      {this.id,
+      this.categoryId,
+      this.name,
+      this.level,
+      required this.questions,
+      this.icon});
 
   Quizz.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    categoryId = json['category_id'];
+    name = json['name'];
+    categoryId = json['category_id'] ?? json['categoryId'];
     level = json['level'];
     questions = <Question>[];
     if (json['questions'] != null) {
@@ -26,6 +34,7 @@ class Quizz {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
+    data['name'] = name;
     data['category_id'] = categoryId;
     data['level'] = level;
     data['questions'] = questions.map((v) => v.toJson()).toList();

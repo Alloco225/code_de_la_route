@@ -41,7 +41,7 @@ class QuizzListView extends GetView<QuizzListController> {
                           var entry =
                               controller.groupedQuizzes.entries.toList()[i];
                           String key = entry.key;
-                          List values = entry.value;
+                          List<Quizz> values = entry.value;
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -61,11 +61,12 @@ class QuizzListView extends GetView<QuizzListController> {
                                   ],
                                 ),
                               ),
-                              Column(
-                                children: values.map((value) {
-                                  return buildQuizzContainer();
-                                }).toList(),
-                              ),
+                              Column(children: [
+                                for (var i = 0; i < values.length; i++)
+                                  buildQuizzContainer(
+                                    title: values[i].name ?? 'Quizz ${i + 1}',
+                                  )
+                              ]),
                             ],
                           );
                         }),
@@ -76,9 +77,13 @@ class QuizzListView extends GetView<QuizzListController> {
     );
   }
 
-  SizedBox buildQuizzContainer() {
-    return SizedBox(
-        height: 100,
+  buildQuizzContainer({
+    required String title,
+    String score = '-',
+    double completionPercentage = .3,
+  }) {
+    return ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 110, maxHeight: 120),
         child: Container(
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
@@ -92,10 +97,13 @@ class QuizzListView extends GetView<QuizzListController> {
                     const BorderRadius.horizontal(left: Radius.circular(8)),
                 child: Container(
                   padding: const EdgeInsets.all(5),
+                  height: double.infinity,
                   decoration: const BoxDecoration(
                       border: Border(right: BorderSide(color: Colors.white))),
                   child: Image.asset(
-                      'assets/images/signalisation/585f8f29cb11b227491c3555.png'),
+                    'assets/images/signalisation/585f8f29cb11b227491c3555.png',
+                    width: 100,
+                  ),
                 ),
               ),
               Expanded(
@@ -105,34 +113,49 @@ class QuizzListView extends GetView<QuizzListController> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Quizz 1",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w600),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w400),
                       ),
-                      const Text(
-                        "Note moyenne: 15/20",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w400),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: FractionallySizedBox(
-                            widthFactor: .5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.orange,
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Note moyenne:",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w400),
                               ),
-                              height: 4,
+                              Text(
+                                "$score/20",
+                                style: const TextStyle(
+                                    fontSize: 24, fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.all(2),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: FractionallySizedBox(
+                                widthFactor: completionPercentage,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.orange,
+                                  ),
+                                  height: 8,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       )
                     ],
                   ),
