@@ -51,15 +51,16 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
                                     color: Colors.white,
                                   )),
                               padding: const EdgeInsets.all(10),
-                              child: const Column(
+                              child: Column(
                                 children: [
-                                  // Expanded(
-                                  //   // child: Image.asset(element.image!),
-                                  // ),
-                                  SizedBox(
+                                  Expanded(
+                                    child: Image.asset(
+                                        "assets/images/categories/lights.png"),
+                                  ),
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  Text("TOUS",
+                                  const Text("TOUS",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
@@ -93,7 +94,7 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
               const SizedBox(
                 height: 10,
               ),
-              Text(element.name ?? '',
+              Text(element.name ?? "",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontWeight: FontWeight.w600,

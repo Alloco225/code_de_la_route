@@ -18,8 +18,10 @@ class SignProvider extends GetConnect {
 
     List<List<Sign>> results = await Future.wait([
       loadSignByCategory('signs_danger'),
+      loadSignByCategory('signs_direction'),
       loadSignByCategory('signs_obligation'),
-      loadSignByCategory('signs_obligation'),
+      loadSignByCategory('signs_indication'),
+      loadSignByCategory('signs_interdiction'),
     ]);
 
     for (var element in results) {

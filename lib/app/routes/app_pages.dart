@@ -22,8 +22,6 @@ import '../modules/panneaux_categories/bindings/panneaux_categories_binding.dart
 import '../modules/panneaux_categories/views/panneaux_categories_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
-import '../modules/quizz/bindings/quizz_binding.dart';
-import '../modules/quizz/views/quizz_view.dart';
 import '../modules/quizz_categories/bindings/quizz_categories_binding.dart';
 import '../modules/quizz_categories/views/quizz_categories_view.dart';
 import '../modules/quizz_detail/bindings/quizz_detail_binding.dart';
@@ -66,11 +64,6 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
-    ),
-    GetPage(
-      name: _Paths.QUIZZ,
-      page: () => const QuizzView(),
-      binding: QuizzBinding(),
     ),
     GetPage(
       name: _Paths.QUIZZ_LIST,

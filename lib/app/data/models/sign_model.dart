@@ -1,4 +1,5 @@
 class Sign {
+  String? id;
   String? image;
   String? name;
   String? categoryId;
@@ -8,6 +9,7 @@ class Sign {
 
   Sign(
       {this.image,
+      this.id,
       this.name,
       this.categoryId,
       this.categoryName,
@@ -15,6 +17,7 @@ class Sign {
       this.description});
 
   Sign.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     image = json['image'];
     name = json['name'];
     categoryId = json['category_id'];
@@ -25,6 +28,7 @@ class Sign {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['id'] = id;
     data['image'] = image;
     data['name'] = name;
     data['category_id'] = categoryId;

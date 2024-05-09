@@ -1,7 +1,7 @@
-import 'package:codedelaroute/app/modules/quizz/sign_model.dart';
 import 'package:get/get.dart';
 
 import '../../../data/db/db_data.dart';
+import '../../../data/models/sign_model.dart';
 import '../../../data/providers/sign_provider.dart';
 
 class PanneauxController extends GetxController {
