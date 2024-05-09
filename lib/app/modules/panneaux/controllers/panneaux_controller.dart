@@ -1,6 +1,8 @@
 import 'package:codedelaroute/app/modules/quizz/sign_model.dart';
 import 'package:get/get.dart';
 
+import '../../../data/db/db_data.dart';
+
 class PanneauxController extends GetxController {
   //TODO: Implement PanneauxController
   final _categoryId = (null as String?).obs;
@@ -28,8 +30,7 @@ class PanneauxController extends GetxController {
     _categoryId.value = routeParams?['categoryId'];
     _categoryName.value = routeParams?['categoryName'];
 
-    _signs.value = QUIZZES.firstWhereOrNull(
-        (el) => el.categoryId == categoryId && el.id == quizzId);
+    _signs.value = SIGNS.where((el) => el.categoryId == categoryId).toList();
 
     _isLoading.value = false;
 
