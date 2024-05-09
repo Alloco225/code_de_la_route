@@ -19,10 +19,10 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
   String titleText = 'Quitter ?';
   bool flash = false;
   final List<Map> subtitles = [
-    {'text': 'Tu veux abandonner ?', 'startTime': 0.5, 'endTime': 2.7},
+    {'text': 'Tu veux abandonner ?', 'startTime': 0.1, 'endTime': 2.5},
     {
       'text': 'Est-ce que tu veux abandonner ?????',
-      'startTime': 2.7,
+      'startTime': 2.5,
       'endTime': 6.6,
       'flash': true,
     },
@@ -58,7 +58,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
           isVideoVisible = true;
 
           _videoPlayerController.play();
-          hasVideoPlayedCompletely = true;
+          // hasVideoPlayedCompletely = true;
         });
       });
   }
@@ -160,7 +160,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
               ),
               if (isVidPlaying && !hasVideoPlayedCompletely)
                 Align(
-                  alignment: Alignment.topCenter,
+                  alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 100),
                     child: AnimatedDefaultTextStyle(
