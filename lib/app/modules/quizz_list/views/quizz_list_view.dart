@@ -64,8 +64,11 @@ class QuizzListView extends GetView<QuizzListController> {
                               Column(children: [
                                 for (var i = 0; i < values.length; i++)
                                   buildQuizzContainer(
-                                    title: values[i].name ?? 'Quizz ${i + 1}',
-                                  )
+                                      title: values[i].name ?? 'Quizz ${i + 1}',
+                                      onTap: () => gotoQuizz(
+                                            quizzId: values[i].id,
+                                            categoryId: values[i].categoryId,
+                                          ))
                               ]),
                             ],
                           );
@@ -81,87 +84,93 @@ class QuizzListView extends GetView<QuizzListController> {
     required String title,
     String score = '-',
     double completionPercentage = .3,
+    required VoidCallback onTap,
   }) {
     return ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 110, maxHeight: 120),
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-              color: Colors.blueGrey.shade800,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.white)),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius:
-                    const BorderRadius.horizontal(left: Radius.circular(8)),
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  height: double.infinity,
-                  decoration: const BoxDecoration(
-                      border: Border(right: BorderSide(color: Colors.white))),
-                  child: Image.asset(
-                    'assets/images/signalisation/585f8f29cb11b227491c3555.png',
-                    width: 100,
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+                color: Colors.blueGrey.shade800,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.white)),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius:
+                      const BorderRadius.horizontal(left: Radius.circular(8)),
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                        border: Border(right: BorderSide(color: Colors.white))),
+                    child: Image.asset(
+                      'assets/images/signalisation/585f8f29cb11b227491c3555.png',
+                      width: 100,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w400),
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Note moyenne:",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                "$score/20",
-                                style: const TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.w400),
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Note moyenne:",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "$score/20",
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
                             ),
-                            padding: const EdgeInsets.all(2),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: FractionallySizedBox(
-                                widthFactor: completionPercentage,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: Colors.orange,
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.all(2),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: FractionallySizedBox(
+                                  widthFactor: completionPercentage,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.orange,
+                                    ),
+                                    height: 8,
                                   ),
-                                  height: 8,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }
