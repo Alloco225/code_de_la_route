@@ -41,38 +41,66 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
                             childAspectRatio: 1,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10),
-                    children: controller.categories
-                        .map(
-                          (element) => InkWell(
-                            onTap: () => gotoSignsList(element),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                    )),
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Image.asset(element.image!),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(element.name ?? '',
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white,
-                                            fontSize: 23)),
-                                  ],
-                                )),
-                          ),
-                        )
-                        .toList(),
-                  ),
+                    children: [
+                        InkWell(
+                          onTap: () => Get.toNamed(Routes.PANNEAUX),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                  )),
+                              padding: const EdgeInsets.all(10),
+                              child: const Column(
+                                children: [
+                                  // Expanded(
+                                  //   // child: Image.asset(element.image!),
+                                  // ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text("TOUS",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                          fontSize: 23)),
+                                ],
+                              )),
+                        ),
+                        ...controller.categories
+                            .map((element) => _buildCategoryGridItem(element)),
+                      ]),
           ),
         ));
+  }
+
+  _buildCategoryGridItem(SignCategory element) {
+    return InkWell(
+      onTap: () => gotoSignsList(element),
+      child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: Colors.white,
+              )),
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Expanded(
+                child: Image.asset(element.image!),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(element.name ?? '',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 23)),
+            ],
+          )),
+    );
   }
 }

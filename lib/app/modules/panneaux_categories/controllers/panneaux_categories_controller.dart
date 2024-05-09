@@ -1,6 +1,5 @@
 import 'package:codedelaroute/app/data/db/db_data.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
-import 'package:codedelaroute/app/modules/quizz/providers/sign_provider.dart';
 import 'package:get/get.dart';
 
 import '../../../data/providers/sign_category_provider.dart';

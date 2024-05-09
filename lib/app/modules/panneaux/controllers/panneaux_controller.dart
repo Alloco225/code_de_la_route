@@ -2,6 +2,7 @@ import 'package:codedelaroute/app/modules/quizz/sign_model.dart';
 import 'package:get/get.dart';
 
 import '../../../data/db/db_data.dart';
+import '../../../data/providers/sign_provider.dart';
 
 class PanneauxController extends GetxController {
   //TODO: Implement PanneauxController
@@ -10,18 +11,24 @@ class PanneauxController extends GetxController {
   final _quizzId = (null as int?).obs;
   final _isLoading = false.obs;
 
+  final _signProvider = SignProvider();
+
   get categoryId => _categoryId.value;
   get categoryName => _categoryName.value;
   get quizzId => _quizzId.value;
 
+  final _signsList = <Sign>[].obs;
   final _signs = <Sign>[].obs;
 
   List<Sign> get signs => _signs.value;
+  bool get isLoading => _isLoading.value;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     print("Panneaux onInit");
+
+    _isLoading.value = true;
 
     var routeParams = Get.arguments as Map?;
 
@@ -30,7 +37,14 @@ class PanneauxController extends GetxController {
     _categoryId.value = routeParams?['categoryId'];
     _categoryName.value = routeParams?['categoryName'];
 
-    _signs.value = SIGNS.where((el) => el.categoryId == categoryId).toList();
+    _signsList.value = (await _signProvider.loadAllSigns()).cast<Sign>();
+
+    _signs.value = _signsList.value;
+
+    if (_categoryId.value != null) {
+      _signs.value =
+          _signsList.where((el) => el.categoryId == categoryId).toList();
+    }
 
     _isLoading.value = false;
 
