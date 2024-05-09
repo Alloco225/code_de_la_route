@@ -50,6 +50,7 @@ class PanneauxView extends GetView<PanneauxController> {
                                   onTap: () => showSignDetails(element),
                                   child: Container(
                                       decoration: BoxDecoration(
+                                          color: Colors.blueGrey.shade800,
                                           borderRadius:
                                               BorderRadius.circular(8),
                                           border: Border.all(

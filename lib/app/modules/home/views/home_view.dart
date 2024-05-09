@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/const/theme.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -84,10 +85,12 @@ class HomeView extends GetView<HomeController> {
                             children: [
                               InkWell(
                                 onTap: () => Get.toNamed(element['route']),
+                                splashColor: Colors.blueGrey.shade100,
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                       border: Border.all(color: Colors.white),
+                                      color: Colors.blueGrey.shade800,
                                       borderRadius: BorderRadius.circular(8)),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 15),

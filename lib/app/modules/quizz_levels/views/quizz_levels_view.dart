@@ -67,6 +67,7 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
         child: Container(
           margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
+              color: Colors.blueGrey.shade800,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.white)),
           child: Row(

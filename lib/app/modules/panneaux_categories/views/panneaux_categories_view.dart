@@ -50,6 +50,7 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
                             onTap: () => Get.toNamed(Routes.PANNEAUX),
                             child: Container(
                                 decoration: BoxDecoration(
+                                    color: Colors.blueGrey.shade800,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                       color: Colors.white,
@@ -89,6 +90,7 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
       onTap: () => gotoSignsList(element),
       child: Container(
           decoration: BoxDecoration(
+              color: Colors.blueGrey.shade800,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: Colors.white,
