@@ -113,7 +113,7 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Colors.blue,
+                                color: Colors.orange,
                               ),
                               height: 4,
                             ),

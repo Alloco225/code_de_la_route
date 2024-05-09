@@ -16,23 +16,41 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const TitleWidget(title: "Settings"),
             Expanded(
-              child: GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1,
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 15),
-                  children: [
+              child: Column(
+                children: [
+                  const Spacer(),
+                  buildSettingTile(
+                    title: "Theme",
+                    icon: Ionicons.sunny_outline,
+                    value: "Sombre",
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(children: [
                     buildSettingTile(
-                        "Musique", Ionicons.musical_note_outline, "OUI"),
-                    buildSettingTile("Langue", Ionicons.globe_outline, "FR"),
+                        title: "Musique",
+                        icon: Ionicons.musical_note_outline,
+                        value: "OUI",
+                        flex: 1),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    buildSettingTile(
+                        title: "Langue",
+                        icon: Ionicons.globe_outline,
+                        value: "FR",
+                        flex: 1),
                   ]),
+                  const Spacer(),
+                ],
+              ),
             ),
             const BackNavButton(),
           ],
@@ -41,25 +59,44 @@ class SettingsView extends GetView<SettingsController> {
     );
   }
 
-  buildSettingTile(String title, IconData icon, String value) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(icon),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 20),
-          ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 20),
-          ),
-        ],
+  buildSettingTile(
+      {required String title,
+      required IconData icon,
+      required String value,
+      flex = 0}) {
+    return Expanded(
+      flex: flex,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        decoration: BoxDecoration(
+            color: Colors.blueGrey.shade800,
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              icon,
+              size: 35,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 20),
+                ),
+                Text(
+                  value,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
