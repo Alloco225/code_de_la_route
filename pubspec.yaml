@@ -49,6 +49,7 @@ flutter:
     - assets/images/degagement/
     - assets/images/signalisation/
     # 
+    - assets/data/
     - assets/fonts/
     # 
     - assets/video/
