@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../views/widgets/back_nav_button.dart';
+import '../../../views/widgets/title_widget.dart';
 import '../controllers/quizz_levels_controller.dart';
 
 class QuizzLevelsView extends GetView<QuizzLevelsController> {
@@ -12,28 +14,11 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey.shade800,
-        // title: const Text(
-        //   'QuizzLevelsView',
-        //   style: TextStyle(color: Colors.white),
-        // ),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            // SizedBox(
-            //   height: 50,
-            //   child: PageView(
-            //     children: [
-            //       Container(
-            //         child: const Text("Signalisation"),
-            //       )
-            //     ],
-            //   ),
-            // ),
+            const TitleWidget(title: "Quizz"),
             Expanded(
                 child: ListView(
               children: [
@@ -69,6 +54,7 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
                 buildQuizzContainer()
               ],
             )),
+            const BackNavButton(),
           ],
         ),
       ),

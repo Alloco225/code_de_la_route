@@ -1,4 +1,5 @@
 import 'package:codedelaroute/app/views/widgets/button_widget.dart';
+import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../../views/widgets/back_nav_button.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -18,39 +20,21 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(), // 07 08 18 20 20
+            const TitleWidget(title: "Settings"),
             Expanded(
-              flex: 3,
-              child: Column(
-                children: [
-                  const Text(
-                    "Settings",
-                    style: TextStyle(fontSize: 40),
-                  ),
-                  Expanded(
-                    child: GridView(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 1,
-                                mainAxisSpacing: 15,
-                                crossAxisSpacing: 15),
-                        children: [
-                          buildSettingTile(
-                              "Musique", Ionicons.musical_note_outline, "OUI"),
-                          buildSettingTile(
-                              "Langue", Ionicons.globe_outline, "FR"),
-                        ]),
-                  ),
-                  ButtonWidget(
-                      text: "Retour",
-                      onPressed: () {
-                        Get.back();
-                      })
-                ],
-              ),
+              child: GridView(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 15),
+                  children: [
+                    buildSettingTile(
+                        "Musique", Ionicons.musical_note_outline, "OUI"),
+                    buildSettingTile("Langue", Ionicons.globe_outline, "FR"),
+                  ]),
             ),
-            const Spacer(),
+            const BackNavButton(),
           ],
         ),
       ),
