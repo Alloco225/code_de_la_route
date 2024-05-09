@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class QuestionTimerWidget extends StatefulWidget {
   final bool pause;
@@ -54,8 +55,16 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 3.0),
+      padding: const EdgeInsets.only(bottom: 10),
+      decoration: const BoxDecoration(
+          // border: Border(
+          //     bottom: BorderSide(
+          //         // color: Colors.white,
+          //         ))
+          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: widget.onTogglePause,
@@ -67,14 +76,12 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
                 // color: Colors.grey[200],
               ),
               child: const Icon(
-                Icons.pause,
-                size: 20,
+                Ionicons.pause_outline,
+                size: 30,
               ),
             ),
           ),
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: 10),
           Expanded(
             child: Container(
               // width: MediaQuery.of(context).size.width * 0.6,
@@ -99,22 +106,15 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
                   : null,
             ),
           ),
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: 10),
           GestureDetector(
             onTap: widget.devPauseTimer,
-            child: Container(
-              width: 30,
-              height: 30,
-              alignment: Alignment.center,
-              child: Text(
-                widget.time.toStringAsFixed(0),
-                semanticsLabel: widget.time.toStringAsFixed(0),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+            child: Text(
+              widget.time.toStringAsFixed(0),
+              semanticsLabel: widget.time.toStringAsFixed(0),
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
               ),
             ),
           ),

@@ -88,10 +88,10 @@ class QuizzGameView extends GetView<QuizzGameController> {
                 QuizzPausedView(
                     onResume: controller.onGameResume,
                     onQuit: controller.onQuit),
-              // if (controller.isQuitting)
-              TuVeuxAbandonnerView(
-                onClose: controller.clearUserQuitting,
-              ),
+              if (controller.isQuitting)
+                TuVeuxAbandonnerView(
+                  onClose: controller.clearUserQuitting,
+                ),
               // Game
               if (controller.hasGameEnded)
                 QuizzEndedView(

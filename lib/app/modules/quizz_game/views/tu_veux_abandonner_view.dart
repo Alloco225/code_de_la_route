@@ -19,7 +19,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
   String titleText = 'Quitter ?';
   bool flash = false;
   final List<Map> subtitles = [
-    {'text': 'Tu veux abandonner ?', 'startTime': 0.1, 'endTime': 2.5},
+    {'text': 'Tu veux abandonner ?', 'startTime': 0.1, 'endTime': 2.2},
     {
       'text': 'Est-ce que tu veux abandonner ?????',
       'startTime': 2.5,
@@ -39,6 +39,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
       'flash': true,
     },
   ];
+  // TODO add flash blink animation
 
   late VideoPlayerController _videoPlayerController;
 
@@ -72,13 +73,15 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
 
   void videoListener() {
     final currentTime =
-        _videoPlayerController.value.position.inSeconds.toDouble();
+        _videoPlayerController.value.position.inMilliseconds.toDouble() / 1000;
     hasVideoPlayedCompletely = false;
+    print("currentTime : $currentTime");
     final Map currentSubtitle = subtitles.firstWhere(
         (subtitle) =>
             currentTime >= subtitle['startTime'] &&
-            currentTime <= subtitle['endTime'],
+            currentTime < subtitle['endTime'],
         orElse: () => {});
+    print("currentSubtitle : $currentSubtitle");
 
     // Implement your calls inside these conditions' bodies :
     if (_videoPlayerController.value.position ==
@@ -97,11 +100,11 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
     });
   }
 
-  Future<void> close() async {
+  Future<void> closePage() async {
     setState(() {
       isVideoVisible = false;
     });
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 300));
     _videoPlayerController.pause();
     _videoPlayerController.seekTo(Duration.zero);
     widget.onClose();
@@ -113,6 +116,14 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
           ? _videoPlayerController.pause()
           : _videoPlayerController.play();
     });
+  }
+
+  onScreenTap() {
+    if (hasVideoPlayedCompletely) {
+      closePage();
+      return;
+    }
+    togglePauseVideo();
   }
 
   Future<void> giveUp() async {
@@ -147,13 +158,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
             children: [
               Positioned.fill(
                 child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _videoPlayerController.value.isPlaying
-                          ? _videoPlayerController.pause()
-                          : _videoPlayerController.play();
-                    });
-                  },
+                  onTap: onScreenTap,
                   child: VideoPlayer(_videoPlayerController),
                   // child: const Placeholder(),
                 ),
@@ -163,43 +168,60 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
                   alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 100),
-                    child: AnimatedDefaultTextStyle(
-                      duration: const Duration(milliseconds: 500),
-                      style: TextStyle(
-                        fontSize: 64,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                    // child: AnimatedDefaultTextStyle(
+                    //   duration: const Duration(milliseconds: 500),
+                    //   style: TextStyle(
+                    //     fontSize: 64,
+                    //     fontWeight: FontWeight.bold,
+                    //     color: Colors.white,
+                    //     shadows: [
+                    //       Shadow(
+                    //         blurRadius: 5.0,
+                    //         color: Colors.red.withOpacity(flash ? 0.75 : 0),
+                    //         offset: const Offset(0, 0),
+                    //       ),
+                    //       Shadow(
+                    //         blurRadius: 5.0,
+                    //         color: Colors.green.withOpacity(flash ? 0.75 : 0),
+                    //         offset: const Offset(0, 0),
+                    //       ),
+                    //       Shadow(
+                    //         blurRadius: 5.0,
+                    //         color: Colors.blue.withOpacity(flash ? 0.75 : 0),
+                    //         offset: const Offset(0, 0),
+                    //       ),
+                    //     ],
+                    //   ),
+                    child: Text(
+                      flash ? titleText.toUpperCase() : titleText,
+                      semanticsLabel: titleText,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
                         shadows: [
                           Shadow(
                             blurRadius: 5.0,
-                            color: Colors.red.withOpacity(flash ? 0.75 : 0),
-                            offset: const Offset(0, 0),
+                            color: Colors.black,
+                            offset: Offset(1, 1),
                           ),
                           Shadow(
                             blurRadius: 5.0,
-                            color: Colors.green.withOpacity(flash ? 0.75 : 0),
-                            offset: const Offset(0, 0),
-                          ),
-                          Shadow(
-                            blurRadius: 5.0,
-                            color: Colors.blue.withOpacity(flash ? 0.75 : 0),
-                            offset: const Offset(0, 0),
+                            color: Colors.black,
+                            offset: Offset(-1, -1),
                           ),
                         ],
-                      ),
-                      child: Text(
-                        flash ? titleText.toUpperCase() : titleText,
-                        semanticsLabel: titleText,
-                        textAlign: TextAlign.center,
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
+                    // ),
                   ),
                 ),
               if (hasVideoPlayedCompletely)
                 Align(
                     alignment: Alignment.bottomCenter,
                     child: InkWell(
-                      onTap: close,
+                      onTap: closePage,
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(bottom: 100),

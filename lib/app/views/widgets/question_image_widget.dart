@@ -60,13 +60,13 @@ class QuestionImageWidget extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 26,
               ),
             ),
             const SizedBox(height: 30.0),
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(8),
                 color: Colors.blueGrey[800],
               ),
               child: Image.asset(
@@ -85,11 +85,12 @@ class QuestionImageWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ButtonWidget(
-                          text: answers?[index].content ?? '',
-                          textAlign: TextAlign.center,
-                          color: getButtonColor(index),
-                          backgroundColor: getButtonBgColor(index),
-                          onPressed: () => onSelectAnswer(answers![index])),
+                        text: answers?[index].content ?? '',
+                        textAlign: TextAlign.center,
+                        color: getButtonColor(index),
+                        backgroundColor: getButtonBgColor(index),
+                        onPressed: () => onSelectAnswer(answers![index]),
+                      ),
                       const SizedBox(
                         height: 5,
                       ),

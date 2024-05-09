@@ -27,7 +27,7 @@ class ButtonWidget extends StatelessWidget {
         backgroundColor: backgroundColor,
         foregroundColor: color,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       child: Row(
@@ -39,7 +39,6 @@ class ButtonWidget extends StatelessWidget {
             child: Text(
               text,
               semanticsLabel: text,
-
               textAlign: textAlign,
               softWrap: true,
               style: const TextStyle(fontSize: 16),
