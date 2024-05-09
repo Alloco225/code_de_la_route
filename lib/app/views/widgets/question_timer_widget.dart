@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class QuestionTimerWidget extends StatefulWidget {
@@ -30,7 +29,6 @@ class QuestionTimerWidget extends StatefulWidget {
 }
 
 class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
-
   final double _progressBarHeight = 13;
 
   @override
@@ -45,7 +43,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
     super.dispose();
   }
 
-    Color get percentageColor {
+  Color get percentageColor {
     if (widget.percentage <= .3) return Colors.red[500]!;
     if (widget.percentage <= .5) return Colors.orange[800]!;
     if (widget.percentage <= .8) return Colors.yellow[800]!;

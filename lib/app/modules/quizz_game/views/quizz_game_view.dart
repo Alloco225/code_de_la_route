@@ -59,16 +59,9 @@ class QuizzGameView extends GetView<QuizzGameController> {
         print("Oh Ho! Il veut abandonner");
         // Navigator.pop(context, false);
         // return Future.value(false);
+        controller.togglePause();
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Get.back(result: Get.arguments),
-            icon: const BackButtonIcon(),
-          ),
-          title: const Text('QuizzGameView'),
-          centerTitle: true,
-        ),
         body: Obx(
           () => Stack(
             children: [
@@ -95,10 +88,10 @@ class QuizzGameView extends GetView<QuizzGameController> {
                 QuizzPausedView(
                     onResume: controller.onGameResume,
                     onQuit: controller.onQuit),
-              if (controller.isQuitting)
-                TuVeuxAbandonnerView(
-                  onClose: controller.clearUserQuitting,
-                ),
+              // if (controller.isQuitting)
+              TuVeuxAbandonnerView(
+                onClose: controller.clearUserQuitting,
+              ),
               // Game
               if (controller.hasGameEnded)
                 QuizzEndedView(

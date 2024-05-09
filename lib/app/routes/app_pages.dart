@@ -28,8 +28,6 @@ import '../modules/quizz_detail/bindings/quizz_detail_binding.dart';
 import '../modules/quizz_detail/views/quizz_detail_view.dart';
 import '../modules/quizz_game/bindings/quizz_game_binding.dart';
 import '../modules/quizz_game/views/quizz_game_view.dart';
-import '../modules/quizz_levels/bindings/quizz_levels_binding.dart';
-import '../modules/quizz_levels/views/quizz_levels_view.dart';
 import '../modules/quizz_list/bindings/quizz_list_binding.dart';
 import '../modules/quizz_list/views/quizz_list_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
@@ -133,11 +131,6 @@ class AppPages {
       name: _Paths.PANNEAUX_CATEGORIES,
       page: () => PanneauxCategoriesView(),
       binding: PanneauxCategoriesBinding(),
-    ),
-    GetPage(
-      name: _Paths.QUIZZ_LEVELS,
-      page: () => QuizzLevelsView(),
-      binding: QuizzLevelsBinding(),
     ),
     GetPage(
       name: _Paths.SETTINGS,

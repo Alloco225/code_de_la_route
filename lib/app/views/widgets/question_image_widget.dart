@@ -5,7 +5,6 @@ import '../../data/models/question_model.dart';
 import '../../helpers/assets.dart';
 import 'button_widget.dart';
 
-
 class QuestionImageWidget extends StatelessWidget {
   final Question question;
   final bool isCorrectAnswerVisible;
@@ -61,7 +60,7 @@ class QuestionImageWidget extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0,
+                fontSize: 24,
               ),
             ),
             const SizedBox(height: 30.0),

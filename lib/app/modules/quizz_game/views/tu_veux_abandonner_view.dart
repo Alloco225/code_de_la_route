@@ -19,7 +19,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
   String titleText = 'Quitter ?';
   bool flash = false;
   final List<Map> subtitles = [
-    {'text': 'Tu veux abandonner ?', 'startTime': 0.7, 'endTime': 2.7},
+    {'text': 'Tu veux abandonner ?', 'startTime': 0.5, 'endTime': 2.7},
     {
       'text': 'Est-ce que tu veux abandonner ?????',
       'startTime': 2.7,
@@ -58,6 +58,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
           isVideoVisible = true;
 
           _videoPlayerController.play();
+          hasVideoPlayedCompletely = true;
         });
       });
   }
@@ -187,7 +188,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
                         ],
                       ),
                       child: Text(
-                        titleText,
+                        flash ? titleText.toUpperCase() : titleText,
                         semanticsLabel: titleText,
                         textAlign: TextAlign.center,
                       ),
@@ -196,18 +197,24 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
                 ),
               if (hasVideoPlayedCompletely)
                 Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 100),
-                    child: ElevatedButton(
-                      onPressed: close,
-                      child: const Text(
-                        '😅 D\'accord chef',
-                        semanticsLabel: '😅 D\'accord chef',
+                    alignment: Alignment.bottomCenter,
+                    child: InkWell(
+                      onTap: close,
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 100),
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            border: Border.all(color: Colors.white, width: 2),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: const Text(
+                          "😅 D'ACCORD CHEF !",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 20),
+                          semanticsLabel: "😅 D'ACCORD CHEF",
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    ))
             ],
           ),
         ),

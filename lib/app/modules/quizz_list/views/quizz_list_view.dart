@@ -18,7 +18,9 @@ class QuizzListView extends GetView<QuizzListController> {
   gotoQuizz({categoryId, quizzId}) {
     log("gotoQuizz $quizzId");
     debugPrint("gotoQuizz $quizzId");
-    Get.toNamed(Routes.QUIZZ_DETAIL,
+    Get.toNamed(
+        // Routes.QUIZZ_DETAIL,
+        Routes.QUIZZ_GAME,
         arguments: {'categoryId': categoryId, 'quizzId': quizzId});
   }
 

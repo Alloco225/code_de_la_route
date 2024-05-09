@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../data/models/question_model.dart';
 import '../../../views/widgets/question_timer_widget.dart';
@@ -38,19 +39,8 @@ class QuizzGameMainContentView extends StatelessWidget {
       child: Column(
         children: [
           //
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Question ${currentQuestionIndex + 1}/${questions.length}",
-                semanticsLabel:
-                    "Question ${currentQuestionIndex + 1}/${questions.length}",
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ],
+          TitleWidget(
+            title: "Question ${currentQuestionIndex + 1}/${questions.length}",
           ),
           Expanded(
             child: Column(
