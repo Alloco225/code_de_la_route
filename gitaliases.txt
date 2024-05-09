@@ -1,0 +1,59 @@
+git config --global alias.a add .
+
+git config --global alias.aliases config --get-regexp alias
+
+git config --global alias.bi bisect
+
+git config --global alias.ci commit -m
+
+git config --global alias.co checkout
+
+git config --global alias.colast checkout -
+
+git config --global alias.db branch -D
+
+git config --global alias.laf fsck --lost-found
+
+git config --global alias.last log -1 HEAD
+
+git config --global alias.nb checkout -b
+
+git config --global alias.pror remote prune origin
+
+git config --global alias.pr pull --rebase
+
+git config --global alias.pf push --force-with-lease
+
+git config --global alias.psu push --set-upstream
+
+git config --global alias.ra rebase --abort
+
+git config --global alias.rc rebase --continue
+
+git config --global alias.remotes remote -v
+
+git config --global alias.renb branch -m
+
+git config --global alias.rhh reset --hard HEAD
+
+git config --global alias.rh reset --hard
+
+git config --global alias.s status -s
+
+git config --global alias.stashes stash list
+
+git config --global alias.unstash stash pop
+
+git config --global alias.vc clean -dfx
+
+git config --global alias.refactor commit -m '👷Refactor'
+
+git config --global alias.formatting commit -m 💅Formatting
+
+git config --global alias.comments commit -m '📒Comments'
+
+git config --global alias.tests commit -m '✅Tests'
+
+git config --global alias.prum pull --rebase upstream master
+
+git config --global alias.mend commit --amend

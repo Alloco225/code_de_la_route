@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/quizz_model.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -59,7 +58,13 @@ class QuizzListView extends GetView<QuizzListController> {
                                           fontWeight: FontWeight.w400,
                                           fontSize: 25),
                                     ),
-                                    Text("0/${values.length}"),
+                                    Text(
+                                      "0/${values.length}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 23,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -67,6 +72,8 @@ class QuizzListView extends GetView<QuizzListController> {
                                 for (var i = 0; i < values.length; i++)
                                   buildQuizzContainer(
                                       title: values[i].name ?? 'Quizz ${i + 1}',
+                                      completionPercentage: 0,
+                                      score: null,
                                       onTap: () => gotoQuizz(
                                             quizzId: values[i].id,
                                             categoryId: values[i].categoryId,
@@ -84,7 +91,7 @@ class QuizzListView extends GetView<QuizzListController> {
 
   buildQuizzContainer({
     required String title,
-    String score = '-',
+    String? score,
     double completionPercentage = .3,
     required VoidCallback onTap,
   }) {
@@ -127,24 +134,38 @@ class QuizzListView extends GetView<QuizzListController> {
                               fontSize: 22, fontWeight: FontWeight.w400),
                         ),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Note moyenne:",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "$score/20",
-                                  style: const TextStyle(
+                            if (score != null)
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Note moyenne:",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    "${score ?? ''}/20",
+                                    style: const TextStyle(
                                       fontSize: 24,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (score == null) ...[
+                              const Text(
+                                "Pas encore noté",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w400),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              )
+                            ],
                             Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
