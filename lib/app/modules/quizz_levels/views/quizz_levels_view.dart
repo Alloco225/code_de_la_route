@@ -94,12 +94,12 @@ class QuizzLevelsView extends GetView<QuizzLevelsController> {
                       const Text(
                         "Quizz 1",
                         style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w800),
+                            fontSize: 24, fontWeight: FontWeight.w600),
                       ),
                       const Text(
                         "Note moyenne: 15/20",
                         style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w800),
+                            fontSize: 24, fontWeight: FontWeight.w400),
                       ),
                       Container(
                         decoration: BoxDecoration(

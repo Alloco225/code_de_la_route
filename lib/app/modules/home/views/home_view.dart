@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
       "icon": Ionicons.help_outline,
       "route":
           //Routes.QUIZZ_CATEGORIES
-          Routes.QUIZZ_LEVELS,
+          Routes.QUIZZ_LIST,
     },
     // {
     //   "text": "PROFILE",

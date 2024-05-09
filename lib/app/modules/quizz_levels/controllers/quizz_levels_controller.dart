@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class QuizzLevelsController extends GetxController {
   //TODO: Implement QuizzLevelsController
 
-  final count = 0.obs;
+  final _levels = [].obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +19,4 @@ class QuizzLevelsController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
