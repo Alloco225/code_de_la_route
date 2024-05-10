@@ -14,7 +14,10 @@ class LoginModalView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .5,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * .5,
+        maxHeight: MediaQuery.of(context).size.height * .6,
+      ),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.blueGrey.shade700,
@@ -27,11 +30,12 @@ class LoginModalView extends GetView<LoginController> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Se connecter",
-                        style: TextStyle(
+                      Text(
+                        "login".tr.toUpperCase(),
+                        style: const TextStyle(
                             fontSize: 27, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
@@ -39,7 +43,7 @@ class LoginModalView extends GetView<LoginController> {
                       ),
                       FormContainerWidget(
                         controller: controller.emailController,
-                        hintText: "Email",
+                        hintText: "email".tr,
                         isPasswordField: false,
                       ),
                       const SizedBox(
@@ -47,7 +51,7 @@ class LoginModalView extends GetView<LoginController> {
                       ),
                       FormContainerWidget(
                         controller: controller.passwordController,
-                        hintText: "Password",
+                        hintText: "password".tr,
                         isPasswordField: true,
                       ),
                       const SizedBox(
@@ -74,7 +78,7 @@ class LoginModalView extends GetView<LoginController> {
                                     color: Colors.white,
                                   )
                                 : Text(
-                                    "Se Connecter".toUpperCase(),
+                                    "login".tr.toUpperCase(),
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -83,6 +87,13 @@ class LoginModalView extends GetView<LoginController> {
                                   ),
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "or".tr,
+                        style: const TextStyle(fontSize: 22),
                       ),
                       const SizedBox(
                         height: 10,
@@ -110,7 +121,7 @@ class LoginModalView extends GetView<LoginController> {
                                   width: 5,
                                 ),
                                 Text(
-                                  "Sign in with Google".toUpperCase(),
+                                  "login_with_google".tr.toUpperCase(),
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
@@ -128,7 +139,7 @@ class LoginModalView extends GetView<LoginController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have an account?"),
+                          Text("no_account_question".tr),
                           const SizedBox(
                             width: 5,
                           ),
@@ -143,9 +154,9 @@ class LoginModalView extends GetView<LoginController> {
                               //   (route) => false,
                               // );
                             },
-                            child: const Text(
-                              "Sign Up",
-                              style: TextStyle(
+                            child: Text(
+                              "register".tr,
+                              style: const TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.bold,
                               ),

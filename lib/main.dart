@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'app/const/app_settings.dart';
+import 'app/i10n/app_translations.dart';
 import 'app/modules/auth/services/auth_service.dart';
 import 'app/modules/home/bindings/home_binding.dart';
 import 'app/routes/app_pages.dart';
@@ -20,16 +20,30 @@ void main() async {
 
   await Get.putAsync(() => AuthService().init());
 
+  var locale = Get.deviceLocale;
+
   runApp(
     GetMaterialApp(
       initialBinding: HomeBinding(),
       title: "Code de la Route",
       // theme: AppSettings.theme,
+      locale: locale,
+      translations: Messages(), // your translations
       theme: kDarkTheme,
+      localizationsDelegates: const [
+        // GlobalMaterialLocalizations.delegate,
+        // GlobalWidgetsLocalizations.delegate,
+      ],
+
+      supportedLocales: const [
+        Locale('en', 'US'), // English
+        Locale('fr', 'FR'), // Spanish
+        // Add more locales as needed
+      ],
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
-      locale: AppSettings.locale,
-      fallbackLocale: AppSettings.fallbackLocale,
+      // locale: AppSettings.locale,
+      // fallbackLocale: AppSettings.fallbackLocale,
     ),
   );
 }

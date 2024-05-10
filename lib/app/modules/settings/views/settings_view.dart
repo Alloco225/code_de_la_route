@@ -24,15 +24,15 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TitleWidget(title: "Settings"),
+            TitleWidget(title: "settings".tr),
             Expanded(
               child: Column(
                 children: [
                   const Spacer(),
                   buildSettingTile(
-                      title: "Profile",
+                      title: "profile".tr,
                       icon: Ionicons.person,
-                      value: "Déconnecté",
+                      value: "logged_out".tr,
                       onTap: () {
                         print("heyy");
                         showMaterialModalBottomSheet(
@@ -47,24 +47,24 @@ class SettingsView extends GetView<SettingsController> {
                     height: 15,
                   ),
                   buildSettingTile(
-                    title: "Theme",
+                    title: "theme".tr,
                     icon: Ionicons.sunny_outline,
-                    value: "Sombre",
+                    value: "dark".tr,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   Row(children: [
                     buildSettingTile(
-                        title: "Musique",
+                        title: "music".tr,
                         icon: Ionicons.musical_note_outline,
-                        value: "OUI",
+                        value: "on".tr,
                         flex: 1),
                     const SizedBox(
                       width: 15,
                     ),
                     buildSettingTile(
-                        title: "Langue",
+                        title: "language".tr,
                         icon: Ionicons.globe_outline,
                         value: "FR",
                         flex: 1),
@@ -146,9 +146,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
           color: Colors.white, borderRadius: BorderRadius.circular(8)),
       child: Column(
         children: [
-          const Text(
-            "Connexion",
-            style: TextStyle(
+          Text(
+            "login".tr,
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 30,
               fontWeight: FontWeight.w400,

@@ -1,4 +1,3 @@
-import 'package:codedelaroute/app/const/theme.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +15,12 @@ class HomeView extends GetView<HomeController> {
 
   final List menuElements = [
     {
-      "text": "PANNEAUX",
+      "text": "signs",
       "icon": Icons.directions_outlined,
       "route": Routes.PANNEAUX_CATEGORIES,
     },
     {
-      "text": "QUIZZ",
+      "text": "quizz",
       "icon": Ionicons.help_outline,
       "route":
           //Routes.QUIZZ_CATEGORIES
@@ -40,7 +39,7 @@ class HomeView extends GetView<HomeController> {
     //   ,
     // },
     {
-      "text": "SETTINGS",
+      "text": "settings",
       "icon": Ionicons.settings_outline,
       "route": Routes.SETTINGS,
     },
@@ -104,7 +103,9 @@ class HomeView extends GetView<HomeController> {
                                         height: 10,
                                       ),
                                       Text(
-                                        element['text'],
+                                        (element['text'] as String)
+                                            .tr
+                                            .toUpperCase(),
                                         style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 25,

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Column(
         children: [
-          const TitleWidget(
-            title: "Les Panneaux de Signalisation",
+          TitleWidget(
+            title: "title_signs".tr,
           ),
           Obx(
             () => controller.isLoading
@@ -65,9 +66,9 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    const Text("TOUS",
+                                    Text("all".tr.toTitleCase(),
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
                                             fontSize: 23)),
@@ -104,7 +105,7 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
               const SizedBox(
                 height: 10,
               ),
-              Text(element.name ?? "",
+              Text((element.id ?? element.name ?? '').tr.toCapitalized(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontWeight: FontWeight.w600,

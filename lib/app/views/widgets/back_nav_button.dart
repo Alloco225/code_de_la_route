@@ -11,20 +11,20 @@ class BackNavButton extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: InkWell(
         onTap: () => Get.back(),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Ionicons.chevron_back,
               size: 30,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
-              "Retour",
+              "back".tr,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
                 fontSize: 30,
