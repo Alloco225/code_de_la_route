@@ -58,19 +58,24 @@ class SettingsView extends GetView<SettingsController> {
                     const SizedBox(
                       width: 15,
                     ),
-                    buildSettingTile(
-                        title: "language".tr,
-                        icon: Ionicons.globe_outline,
-                        value: (controller.selectedLanguage?.id ?? '')
-                            .toUpperCase(),
-                        flex: 1,
-                        onTap: () => showMaterialModalBottomSheet(
-                              expand: false,
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              // builder: (context) => const ModalInsideModal());
-                              builder: (context) => LanguageSettingsModalView(),
-                            )),
+                    Obx(
+                      () => buildSettingTile(
+                          title: "language".tr,
+                          icon: Ionicons.globe_outline,
+                          value: (controller.selectedLanguage?.id ?? '')
+                              .toUpperCase(),
+                          flex: 1,
+                          onTap: () => showMaterialModalBottomSheet(
+                                expand: false,
+                                enableDrag: false,
+                                isDismissible: true,
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                // builder: (context) => const ModalInsideModal());
+                                builder: (context) =>
+                                    LanguageSettingsModalView(),
+                              )),
+                    ),
                   ]),
                   const Spacer(),
                 ],

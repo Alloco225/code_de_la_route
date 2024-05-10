@@ -105,7 +105,7 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
               const SizedBox(
                 height: 10,
               ),
-              Text((element.id ?? element.name ?? '').tr.toCapitalized(),
+              Text((element.id ?? '').tr.toCapitalized(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontWeight: FontWeight.w600,

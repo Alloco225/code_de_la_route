@@ -45,6 +45,13 @@ class SettingsController extends GetxController {
         Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]));
   }
 
+  saveLanguage() {
+    // if (!_selectedLanguage.value) return;
+    // Language lang = _selectedLanguage.value!;
+    // Get.updateLocale(
+    //     Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]));
+  }
+
   setLocale(locale) {
     _locale.value = locale;
   }
