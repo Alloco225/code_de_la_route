@@ -1,16 +1,12 @@
 import 'package:codedelaroute/app/modules/auth/submodules/login/views/login_modal_view.dart';
-import 'package:codedelaroute/app/modules/auth/views/widgets/auth_sheet.dart';
-import 'package:codedelaroute/app/views/widgets/button_widget.dart';
+import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../../../helpers/utils.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../controllers/settings_controller.dart';
 
@@ -34,7 +30,6 @@ class SettingsView extends GetView<SettingsController> {
                       icon: Ionicons.person,
                       value: "logged_out".tr,
                       onTap: () {
-                        print("heyy");
                         showMaterialModalBottomSheet(
                           expand: false,
                           context: context,
@@ -66,8 +61,16 @@ class SettingsView extends GetView<SettingsController> {
                     buildSettingTile(
                         title: "language".tr,
                         icon: Ionicons.globe_outline,
-                        value: "FR",
-                        flex: 1),
+                        value: (controller.selectedLanguage?.id ?? '')
+                            .toUpperCase(),
+                        flex: 1,
+                        onTap: () => showMaterialModalBottomSheet(
+                              expand: false,
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              // builder: (context) => const ModalInsideModal());
+                              builder: (context) => LanguageSettingsModalView(),
+                            )),
                   ]),
                   const Spacer(),
                 ],
@@ -172,9 +175,9 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: const Text(
-              "Se connecter",
-              style: TextStyle(fontSize: 25),
+            child: Text(
+              "login".tr,
+              style: const TextStyle(fontSize: 25),
               textAlign: TextAlign.center,
             ),
           )

@@ -1,23 +1,55 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/models/language_model.dart';
+import '../../../data/providers/language_provider.dart';
+
 class SettingsController extends GetxController {
-  //TODO: Implement SettingsController
+  final _langProvider = LanguageProvider();
+  final _defaultLocal = const Locale('fr', 'FR');
 
-  final count = 0.obs;
+  final _selectedLanguage = (null as Language?).obs;
+
+  final _locale = const Locale('fr', 'FR').obs;
+  final _fallbackLocale = const Locale('en', 'UK').obs;
+
+  get locale => _locale.value;
+  get fallbackLocale => _fallbackLocale.value;
+
+  final _languages = <Language>[].obs;
+  List<Language> get languages => _languages.value;
+  get selectedLanguage => _selectedLanguage.value;
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    print("Home onInit");
+
+    var selectedLocale = Get.deviceLocale;
+
+    _languages.value = await _langProvider.loadLanguages();
+
+    _selectedLanguage.value =
+        _languages.firstWhere((el) => el.id == selectedLocale!.languageCode);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  loadLanguages() async {}
+
+  isLanguageSelected(Language lang) {
+    return _selectedLanguage.value?.id == lang.id;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  selectLanguage(Language lang) {
+    _selectedLanguage.value = lang;
+    Get.updateLocale(
+        Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]));
   }
 
-  void increment() => count.value++;
+  setLocale(locale) {
+    _locale.value = locale;
+  }
+
+  getDeviceLocale() {
+    _locale.value = Get.deviceLocale ?? _defaultLocal;
+  }
 }
