@@ -1,4 +1,6 @@
 // Function to validate email
+import 'package:flutter/material.dart';
+
 bool validateEmail(String email) {
   // Regular expression for email validation
   RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -43,4 +45,15 @@ void main() {
   } else {
     print("Invalid input for login.");
   }
+}
+
+openModalBottomSheet(context, view) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+    builder: (ctx) => view,
+  );
 }

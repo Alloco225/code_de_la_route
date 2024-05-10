@@ -29,7 +29,8 @@ class QuizzEndedView extends StatefulWidget {
   _QuizzEndedViewState createState() => _QuizzEndedViewState();
 }
 
-class _QuizzEndedViewState extends State<QuizzEndedView> with TickerProviderStateMixin {
+class _QuizzEndedViewState extends State<QuizzEndedView>
+    with TickerProviderStateMixin {
   late final AnimationController _coffettiPopAC =
       AnimationController(vsync: this);
   dynamic _confettiComposition;

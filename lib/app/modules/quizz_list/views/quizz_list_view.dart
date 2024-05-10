@@ -27,7 +27,7 @@ class QuizzListView extends GetView<QuizzListController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Obx(() =>
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const TitleWidget(title: "Quizz"),

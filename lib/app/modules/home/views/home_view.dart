@@ -65,14 +65,14 @@ class HomeView extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const SizedBox(
-                    height: 50,
+                    height: 45,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Image.asset('assets/images/logo.png'),
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 45,
                   ),
                   Expanded(
                       child: Container(
@@ -116,7 +116,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 30,
+                                height: 25,
                               ),
                             ],
                           ),
@@ -125,7 +125,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                   )),
                   const Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: EdgeInsets.all(25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

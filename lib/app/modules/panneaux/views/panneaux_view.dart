@@ -21,7 +21,7 @@ class PanneauxView extends GetView<PanneauxController> {
     return Scaffold(
         // Ressource attribution : https://www.vecteezy.com/members/seetwo
         body: Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       // child: obx,
       child: Column(
         children: [
