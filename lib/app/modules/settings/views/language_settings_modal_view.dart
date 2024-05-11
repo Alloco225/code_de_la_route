@@ -1,16 +1,11 @@
-import 'package:codedelaroute/app/controllers/setting_controller.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/language_model.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
-import 'package:codedelaroute/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/settings_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-
-import '../controllers/settings_controller.dart';
 
 class LanguageSettingsModalView extends GetView<SettingsController> {
   LanguageSettingsModalView({super.key});
@@ -27,6 +22,7 @@ class LanguageSettingsModalView extends GetView<SettingsController> {
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.blueGrey.shade700,
+        // border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Obx(
@@ -50,13 +46,13 @@ class LanguageSettingsModalView extends GetView<SettingsController> {
                       Expanded(
                         child: ListView(
                             shrinkWrap: true,
-                            children: controller.languages
+                            children: controller.lang.languages
                                 .map((language) => _buildLanguageTile(
                                       language: language,
-                                      isSelected: controller
+                                      isSelected: controller.lang
                                           .isLanguageSelected(language),
-                                      onTap: () =>
-                                          controller.selectLanguage(language),
+                                      onTap: () => controller.lang
+                                          .selectLanguage(language),
                                     ))
                                 .toList()),
                       ),

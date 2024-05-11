@@ -51,8 +51,10 @@ class RegisterController extends GetxController {
       _isSigningUp.value = false;
       if (user != null) {
         showSnackbarSuccess("User is successfully created", context: context);
+        String? token = await user.getIdToken();
+
         // Navigator.pushNamed(context, "/home");
-        authController.setUser(user);
+        authController.logUser(user: user, token: token);
         Get.toNamed(Routes.WELCOME);
       } else {
         showSnackbarError("Some error happend", context: context);

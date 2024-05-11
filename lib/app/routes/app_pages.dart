@@ -1,13 +1,10 @@
+import 'package:codedelaroute/app/modules/profile/views/profile.dart';
 import 'package:get/get.dart';
 
 import '../middlewares/auth_guard.dart';
 import '../middlewares/premium_guard.dart';
-import '../modules/auth/bindings/auth_binding.dart';
-import '../modules/auth/submodules/login/bindings/login_binding.dart';
-import '../modules/auth/submodules/login/views/login_view.dart';
 import '../modules/auth/submodules/register/bindings/register_binding.dart';
 import '../modules/auth/submodules/register/views/register_view.dart';
-import '../modules/auth/views/auth_view.dart';
 import '../modules/course_detail/bindings/course_detail_binding.dart';
 import '../modules/course_detail/views/course_detail_view.dart';
 import '../modules/course_list/bindings/course_list_binding.dart';
@@ -21,7 +18,6 @@ import '../modules/panneaux/views/panneaux_view.dart';
 import '../modules/panneaux_categories/bindings/panneaux_categories_binding.dart';
 import '../modules/panneaux_categories/views/panneaux_categories_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
-import '../modules/profile/views/profile_view.dart';
 import '../modules/quizz_categories/bindings/quizz_categories_binding.dart';
 import '../modules/quizz_categories/views/quizz_categories_view.dart';
 import '../modules/quizz_detail/bindings/quizz_detail_binding.dart';
@@ -42,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -60,12 +56,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLASH,
-      page: () => const SplashView(),
+      page: () => SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
       name: _Paths.QUIZZ_LIST,
-      page: () =>  QuizzListView(),
+      page: () => const QuizzListView(),
       binding: QuizzListBinding(),
     ),
     GetPage(
@@ -107,20 +103,21 @@ class AppPages {
       page: () => const LeaderboardView(),
       binding: LeaderboardBinding(),
     ),
-    GetPage(
-      name: _Paths.LOGIN,
-      page: () => LoginView(),
-      binding: LoginBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.LOGIN,
+    //   page: () => showMaterialModalBottomSheet(
+    //                         expand: false,
+    //                         context: context,
+    //                         backgroundColor: Colors.transparent,
+    //                         // builder: (context) => const ModalInsideModal());
+    //                         builder: (context) => LoginModalView(),
+    //                       ),
+    //   binding: LoginBinding(),
+    // ),
     GetPage(
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
-    ),
-    GetPage(
-      name: _Paths.AUTH,
-      page: () => const AuthView(),
-      binding: AuthBinding(),
     ),
     GetPage(
       name: _Paths.PANNEAUX,
@@ -129,7 +126,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PANNEAUX_CATEGORIES,
-      page: () => PanneauxCategoriesView(),
+      page: () => const PanneauxCategoriesView(),
       binding: PanneauxCategoriesBinding(),
     ),
     GetPage(

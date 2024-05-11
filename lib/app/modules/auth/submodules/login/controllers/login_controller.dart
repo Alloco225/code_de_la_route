@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../data/services/firebase_auth_service.dart';
 import '../../../../../helpers/utils.dart';
-import '../../../../../routes/app_pages.dart';
 import '../../../../../views/ui/snackbar.dart';
 import '../../../controllers/auth_controller.dart';
 
@@ -20,13 +19,17 @@ class LoginController extends GetxController {
   final _emailController = TextEditingController().obs;
   final _passwordController = TextEditingController().obs;
 
+  final usernameNode = FocusNode();
+  final emailNode = FocusNode();
+  final passwordNode = FocusNode();
+
   get usernameController => _usernameController.value;
   get emailController => _emailController.value;
   get passwordController => _passwordController.value;
 
-  String get username => usernameController.text;
-  String get email => emailController.text;
-  String get password => passwordController.text;
+  String get username => usernameController.text.toString().trim();
+  String get email => emailController.text.toString().trim();
+  String get password => passwordController.text.toString().trim();
 
   final count = 0.obs;
   final _isSigning = false.obs;
@@ -44,7 +47,7 @@ class LoginController extends GetxController {
 
   void increment() => count.value++;
 
-  void signIn(context) async {
+  Future<void> signIn(context) async {
     if (validateEmail(email) && validatePassword(password)) {
     } else {
       showSnackbarError("Invalid input for login.", context: context);
@@ -53,6 +56,7 @@ class LoginController extends GetxController {
 
     _isSigning.value = true;
     log("signIn $email $password");
+
     try {
       User? user = await _auth.signInWithEmailAndPassword(email, password);
 
@@ -60,9 +64,11 @@ class LoginController extends GetxController {
 
       if (user != null) {
         showSnackbarSuccess("User is successfully signed in", context: context);
-        authController.setUser(user);
-
-        Get.toNamed(Routes.WELCOME);
+        String? token = await user.getIdToken();
+        // user.uid
+        log("user signed in $user $token");
+        authController.logUser(user: user, token: token);
+        // Get.toNamed(Routes.WELCOME);
       } else {
         showSnackbarError("some error occured", context: context);
       }
@@ -102,8 +108,14 @@ class LoginController extends GetxController {
           accessToken: googleSignInAuthentication.accessToken,
         );
 
-        await _firebaseAuth.signInWithCredential(credential);
-        Get.toNamed(Routes.WELCOME);
+        final userCred = await _firebaseAuth.signInWithCredential(credential);
+
+        if (userCred.user != null) {
+          //
+          var token = await userCred.user!.getIdToken();
+          authController.logUser(user: userCred.user, token: token);
+        }
+        // Get.toNamed(Routes.WELCOME);
       }
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException ${e.code} $e");

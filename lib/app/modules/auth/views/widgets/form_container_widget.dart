@@ -4,6 +4,7 @@ class FormContainerWidget extends StatefulWidget {
   final TextEditingController? controller;
   final Key? fieldKey;
   final bool? isPasswordField;
+  final FocusNode? focusNode;
   final String? hintText;
   final String? labelText;
   final String? helperText;
@@ -15,6 +16,7 @@ class FormContainerWidget extends StatefulWidget {
   const FormContainerWidget(
       {super.key,
       this.controller,
+      this.focusNode,
       this.isPasswordField,
       this.fieldKey,
       this.hintText,
@@ -42,6 +44,7 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextFormField(
+        focusNode: widget.focusNode,
         style: const TextStyle(color: Colors.black),
         controller: widget.controller,
         keyboardType: widget.inputType,

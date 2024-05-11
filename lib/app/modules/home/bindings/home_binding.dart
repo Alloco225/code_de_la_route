@@ -1,4 +1,6 @@
-import 'package:codedelaroute/app/controllers/setting_controller.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/audio_settings_controller.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/settings_controller.dart';
 
 import '/app/modules/auth/submodules/login/controllers/login_controller.dart';
 import '/app/modules/auth/submodules/register/controllers/register_controller.dart';
@@ -13,8 +15,14 @@ class HomeBinding extends Bindings {
     Get.put<AuthController>(
       AuthController(),
     );
-    Get.put<SettingController>(
-      SettingController(),
+    Get.put<LanguageSettingsController>(
+      LanguageSettingsController(),
+    );
+    Get.put<AudioSettingsController>(
+      AudioSettingsController(),
+    );
+    Get.put<SettingsController>(
+      SettingsController(),
     );
     Get.put<LoginController>(
       LoginController(),

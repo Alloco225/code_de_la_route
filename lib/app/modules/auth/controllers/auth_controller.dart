@@ -1,21 +1,37 @@
+import 'dart:developer';
+
 import 'package:codedelaroute/app/data/services/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthController extends GetxController {
+import '../mixins/cache_manager.dart';
 
+class AuthController extends GetxController with CacheManager {
   final firebaseAuthService = FirebaseAuthService();
+  final _isAuth = false.obs;
 
-  bool get isAuth => _authUser.value != null;
+  bool get isAuth => _isAuth.value;
   final _authUser = (null as User?).obs;
   User? get authUser => _authUser.value;
 
-  setUser(User? user) {
+  logUser({User? user, String? token}) async {
     _authUser.value = user;
+    log("logUser !!! $user, $token");
+    _isAuth.value = true;
+    //Token is cached
+    await saveToken(token);
   }
 
-  logout() {
+  void logOut() {
     _authUser.value = null;
-    // TODO clear cache n stuff
+    _isAuth.value = false;
+    removeToken();
+  }
+
+  void checkLoginStatus() {
+    final token = getToken();
+    if (token != null) {
+      _isAuth.value = true;
+    }
   }
 }

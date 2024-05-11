@@ -1,4 +1,6 @@
+import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/modules/auth/submodules/login/views/login_modal_view.dart';
+import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +9,14 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import '../../../helpers/utils.dart';
+import '../../../views/ui/snackbar.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,36 +30,62 @@ class SettingsView extends GetView<SettingsController> {
               child: Column(
                 children: [
                   const Spacer(),
-                  buildSettingTile(
-                      title: "profile".tr,
-                      icon: Ionicons.person,
-                      value: "logged_out".tr,
-                      onTap: () {
-                        showMaterialModalBottomSheet(
-                          expand: false,
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          // builder: (context) => const ModalInsideModal());
-                          builder: (context) => LoginModalView(),
-                        );
-                      }),
+                  Obx(
+                    () => buildSettingTile(
+                        title: "profile".tr,
+                        icon: Ionicons.person,
+                        value: (controller.auth.isAuth
+                                ? "logged_in"
+                                : "logged_out")
+                            .tr,
+                        onTap: () async {
+                          if (controller.auth.isAuth) {
+                            showSnackbarSuccess("Already logged in",
+                                context: context);
+                            return;
+                          }
+
+                          bool? loggedIn = await showMaterialModalBottomSheet(
+                            expand: false,
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            // builder: (context) => const ModalInsideModal());
+                            builder: (context) => LoginModalView(),
+                          );
+                          if (loggedIn == true) {
+                            showSnackbarSuccess("User in !", context: context);
+                          }else {
+
+                            showSnackbarError("Could not log in !", context: context);
+                          }
+                        }),
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
-                  buildSettingTile(
-                    title: "theme".tr,
-                    icon: Ionicons.sunny_outline,
-                    value: "dark".tr,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildSettingTile(
+                        title: "theme".tr,
+                        icon: Ionicons.sunny_outline,
+                        value: "dark".tr,
+                        flex: 0,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   Row(children: [
                     buildSettingTile(
-                        title: "music".tr,
-                        icon: Ionicons.musical_note_outline,
-                        value: "on".tr,
-                        flex: 1),
+                      title: "music".tr,
+                      icon: Ionicons.musical_note_outline,
+                      value: null,
+                      flex: 1,
+                      onTap: () => openSettingsModal(AudioSettingsModalView(),
+                          context: context),
+                    ),
                     const SizedBox(
                       width: 15,
                     ),
@@ -62,7 +93,7 @@ class SettingsView extends GetView<SettingsController> {
                       () => buildSettingTile(
                           title: "language".tr,
                           icon: Ionicons.globe_outline,
-                          value: (controller.selectedLanguage?.id ?? '')
+                          value: (controller.lang.selectedLanguage?.id ?? '')
                               .toUpperCase(),
                           flex: 1,
                           onTap: () => showMaterialModalBottomSheet(
@@ -71,7 +102,6 @@ class SettingsView extends GetView<SettingsController> {
                                 isDismissible: true,
                                 context: context,
                                 backgroundColor: Colors.transparent,
-                                // builder: (context) => const ModalInsideModal());
                                 builder: (context) =>
                                     LanguageSettingsModalView(),
                               )),
@@ -88,12 +118,13 @@ class SettingsView extends GetView<SettingsController> {
     );
   }
 
-  buildSettingTile(
-      {required String title,
-      required IconData icon,
-      required String value,
-      VoidCallback? onTap,
-      flex = 0}) {
+  Widget buildSettingTile({
+    required String title,
+    required IconData icon,
+    String? value,
+    VoidCallback? onTap,
+    flex = 0,
+  }) {
     return Expanded(
       flex: flex,
       child: InkWell(
@@ -115,16 +146,20 @@ class SettingsView extends GetView<SettingsController> {
                 height: 15,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: value == null
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     title,
                     style: const TextStyle(fontSize: 20),
                   ),
-                  Text(
-                    value,
-                    style: const TextStyle(fontSize: 20),
-                  ),
+                  if (value != null) const SizedBox(width: 10),
+                  if (value != null)
+                    Text(
+                      value,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                 ],
               ),
             ],

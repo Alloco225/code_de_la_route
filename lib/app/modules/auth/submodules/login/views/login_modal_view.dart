@@ -11,8 +11,13 @@ import '../controllers/login_controller.dart';
 class LoginModalView extends GetView<LoginController> {
   LoginModalView({super.key});
   final authController = AuthController();
+
   @override
   Widget build(BuildContext context) {
+    signIn(context) async {
+      await controller.signIn(context);
+    }
+
     return Container(
       constraints: BoxConstraints(
         minHeight: MediaQuery.of(context).size.height * .5,
@@ -45,6 +50,8 @@ class LoginModalView extends GetView<LoginController> {
                         controller: controller.emailController,
                         hintText: "email".tr,
                         isPasswordField: false,
+                        onFieldSubmitted: (_) =>
+                            controller.passwordNode.requestFocus(),
                       ),
                       const SizedBox(
                         height: 10,
@@ -53,14 +60,13 @@ class LoginModalView extends GetView<LoginController> {
                         controller: controller.passwordController,
                         hintText: "password".tr,
                         isPasswordField: true,
+                        onFieldSubmitted: (_) => signIn(context),
                       ),
                       const SizedBox(
                         height: 30,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          controller.signIn(context);
-                        },
+                        onTap: () => signIn(context),
                         child: Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(8),

@@ -3,14 +3,17 @@ import 'package:get/get.dart';
 class AuthService extends GetxService {
   Future<AuthService> init() async => this;
 
-  final RxBool isAuth = false.obs;
-  final RxBool isPremium = false.obs;
+  final RxBool _isAuth = false.obs;
+  final RxBool _isPremium = false.obs;
+
+  get isAuth => _isAuth.value;
+  get isPremium => _isPremium.value;
 
   void setIsAuth(bool newValue) {
-    isAuth.value = newValue;
+    _isAuth.value = newValue;
   }
 
   void setIsPremium(bool newValue) {
-    isPremium.value = newValue;
+    _isPremium.value = newValue;
   }
 }

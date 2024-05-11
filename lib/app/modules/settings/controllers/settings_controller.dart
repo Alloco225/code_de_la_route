@@ -1,3 +1,7 @@
+import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
+import 'package:codedelaroute/app/modules/auth/services/auth_service.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/audio_settings_controller.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,58 +9,11 @@ import '../../../data/models/language_model.dart';
 import '../../../data/providers/language_provider.dart';
 
 class SettingsController extends GetxController {
-  final _langProvider = LanguageProvider();
-  final _defaultLocal = const Locale('fr', 'FR');
+  final audio = Get.find<AudioSettingsController>();
+  final lang = Get.find<LanguageSettingsController>();
 
-  final _selectedLanguage = (null as Language?).obs;
+  final authService = Get.find<AuthService>();
+  final auth = Get.find<AuthController>();
 
-  final _locale = const Locale('fr', 'FR').obs;
-  final _fallbackLocale = const Locale('en', 'UK').obs;
-
-  get locale => _locale.value;
-  get fallbackLocale => _fallbackLocale.value;
-
-  final _languages = <Language>[].obs;
-  List<Language> get languages => _languages.value;
-  get selectedLanguage => _selectedLanguage.value;
-
-  @override
-  void onInit() async {
-    super.onInit();
-    print("Home onInit");
-
-    var selectedLocale = Get.deviceLocale;
-
-    _languages.value = await _langProvider.loadLanguages();
-
-    _selectedLanguage.value =
-        _languages.firstWhere((el) => el.id == selectedLocale!.languageCode);
-  }
-
-  loadLanguages() async {}
-
-  isLanguageSelected(Language lang) {
-    return _selectedLanguage.value?.id == lang.id;
-  }
-
-  selectLanguage(Language lang) {
-    _selectedLanguage.value = lang;
-    Get.updateLocale(
-        Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]));
-  }
-
-  saveLanguage() {
-    // if (!_selectedLanguage.value) return;
-    // Language lang = _selectedLanguage.value!;
-    // Get.updateLocale(
-    //     Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]));
-  }
-
-  setLocale(locale) {
-    _locale.value = locale;
-  }
-
-  getDeviceLocale() {
-    _locale.value = Get.deviceLocale ?? _defaultLocal;
-  }
+  //
 }

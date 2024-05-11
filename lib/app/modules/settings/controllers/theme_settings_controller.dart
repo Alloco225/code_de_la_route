@@ -4,6 +4,17 @@ import 'package:codedelaroute/app/data/providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SettingController extends GetxController {
+class ThemeSettingsController extends GetxController {
+
+
+  @override
+  void onInit() async {
+    super.onInit();
+    print("Home onInit");
+
+    var selectedLocale = Get.deviceLocale;
   
+
+  }
+
 }

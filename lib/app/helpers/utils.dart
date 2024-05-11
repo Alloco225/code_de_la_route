@@ -1,5 +1,6 @@
 // Function to validate email
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 bool validateEmail(String email) {
   // Regular expression for email validation
@@ -55,5 +56,16 @@ openModalBottomSheet(context, view) {
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
     builder: (ctx) => view,
+  );
+}
+
+openSettingsModal(view, {required context}) {
+  showMaterialModalBottomSheet(
+    expand: false,
+    enableDrag: false,
+    isDismissible: true,
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (context) => view,
   );
 }
