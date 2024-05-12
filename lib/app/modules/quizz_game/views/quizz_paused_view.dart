@@ -8,9 +8,10 @@ import '../../../views/widgets/button_widget.dart';
 class QuizzPausedView extends StatelessWidget {
   final Function() onResume;
   final Function() onQuit;
+  final VoidCallback? onClose;
 
   const QuizzPausedView(
-      {super.key, required this.onResume, required this.onQuit});
+      {super.key, required this.onResume, required this.onQuit, this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,9 @@ class QuizzPausedView extends StatelessWidget {
                         icon: Ionicons.trash_outline,
                         color: Colors.white,
                         backgroundColor: Colors.red,
-                        onPressed: onQuit),
+                        onPressed: onQuit,
+                        onLongPress: onClose,
+                        ),
                   ],
                 ),
               ],

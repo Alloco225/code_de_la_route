@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'question_model.dart';
 
 class Quizz {
-  int? id;
+  String? id;
   String? categoryId;
   String? level;
   String? name;

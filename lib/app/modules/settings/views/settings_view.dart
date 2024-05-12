@@ -2,6 +2,7 @@ import 'package:codedelaroute/app/modules/settings/controllers/language_settings
 import 'package:codedelaroute/app/modules/auth/submodules/login/views/login_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +41,9 @@ class SettingsView extends GetView<SettingsController> {
                             .tr,
                         onTap: () async {
                           if (controller.auth.isAuth) {
-                            showSnackbarSuccess("Already logged in",
-                                context: context);
+                            // showSnackbarSuccess("Already logged in",
+                            //     context: context);
+                            Get.toNamed(Routes.PROFILE);
                             return;
                           }
 
@@ -54,9 +56,9 @@ class SettingsView extends GetView<SettingsController> {
                           );
                           if (loggedIn == true) {
                             showSnackbarSuccess("User in !", context: context);
-                          }else {
-
-                            showSnackbarError("Could not log in !", context: context);
+                          } else {
+                            showSnackbarError("Could not log in !",
+                                context: context);
                           }
                         }),
                   ),

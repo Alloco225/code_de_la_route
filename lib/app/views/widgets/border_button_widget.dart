@@ -6,6 +6,7 @@ class BorderButtonWidget extends StatelessWidget {
   final Color? color;
   final Color? backgroundColor;
   final VoidCallback onPressed;
+  final VoidCallback? onLongPress;
   final TextAlign? textAlign;
 
   const BorderButtonWidget({
@@ -16,12 +17,14 @@ class BorderButtonWidget extends StatelessWidget {
     this.color,
     this.backgroundColor,
     required this.onPressed,
+     this.onLongPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
         onTap: onPressed,
+        onLongPress: onLongPress,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           decoration: BoxDecoration(

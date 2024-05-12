@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/quizz_model.dart';
+import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,6 +13,7 @@ import 'package:get/get.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../controllers/quizz_list_controller.dart';
+import 'quizz_score_widget.dart';
 
 class QuizzListView extends GetView<QuizzListController> {
   const QuizzListView({super.key});
@@ -74,6 +78,7 @@ class QuizzListView extends GetView<QuizzListController> {
                                       title: values[i].name ?? 'Quizz ${i + 1}',
                                       completionPercentage: 0,
                                       score: null,
+                                      quizzId: values[i].id,
                                       onTap: () => gotoQuizz(
                                             quizzId: values[i].id,
                                             categoryId: values[i].categoryId,
@@ -90,6 +95,7 @@ class QuizzListView extends GetView<QuizzListController> {
   }
 
   buildQuizzContainer({
+    required quizzId,
     required String title,
     String? score,
     double completionPercentage = .3,
@@ -133,62 +139,8 @@ class QuizzListView extends GetView<QuizzListController> {
                           style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.w400),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            if (score != null)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    "Note moyenne:",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  Text(
-                                    "${score ?? ''}/20",
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            if (score == null) ...[
-                              const Text(
-                                "Pas encore noté",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w400),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              )
-                            ],
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(2),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: FractionallySizedBox(
-                                  widthFactor: completionPercentage,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.orange,
-                                    ),
-                                    height: 8,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                        QuizScoresWidget(quizzId),
+                      ]
                     ),
                   ),
                 ),
@@ -197,4 +149,31 @@ class QuizzListView extends GetView<QuizzListController> {
           ),
         ));
   }
+
+  // Widget showScore(quizzId) {
+  //   final _authController = Get.find<AuthController>();
+
+  //   if (_authController.isAuth) {
+  //     return FutureBuilder<DocumentSnapshot>(
+  //       future: FirebaseFirestore.instance
+  //           .collection('user_scores')
+  //           .where('quizz_id', isEqualTo: quizzId)
+  //           .where('user_id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+  //           .get(),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.connectionState == ConnectionState.waiting) {
+  //           return Text('Loading...');
+  //         }
+  //         if (snapshot.hasData &&
+  //             snapshot.data!.exists &&
+  //             (snapshot.data! as Map).containsKey('score')) {
+  //           return Text('Your score: ${snapshot.data!['score']}');
+  //         } else {
+  //           return Text('Not attempted');
+  //         }
+  //       },
+  //     );
+  //   }
+  //   return Container();
+  // }
 }

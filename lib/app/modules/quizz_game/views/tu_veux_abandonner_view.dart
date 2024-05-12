@@ -159,6 +159,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
               Positioned.fill(
                 child: GestureDetector(
                   onTap: onScreenTap,
+                  onLongPress: closePage,
                   child: VideoPlayer(_videoPlayerController),
                   // child: const Placeholder(),
                 ),

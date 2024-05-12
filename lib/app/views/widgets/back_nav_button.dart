@@ -13,6 +13,7 @@ class BackNavButton extends StatelessWidget {
         onTap: () => Get.back(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Icon(
               Ionicons.chevron_back,

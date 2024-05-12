@@ -41,17 +41,16 @@ class SplashView extends GetView<SplashController> {
   }
 
   Scaffold waitingView() {
-    return const Scaffold(
+    return Scaffold(
         body: Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
-            child: CircularProgressIndicator(),
+            padding: const EdgeInsets.all(50),
+            child: Image.asset('assets/images/favicon.png'),
           ),
-          Text('Loading...'),
         ],
       ),
     ));

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codedelaroute/app/const/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,14 @@ import 'app/modules/home/bindings/home_binding.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
 
   await GetStorage.init();
 
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   log("Loaded App");
 
   await Get.putAsync(() => AuthService().init());

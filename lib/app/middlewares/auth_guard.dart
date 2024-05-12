@@ -11,8 +11,6 @@ class AuthGuard extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    return authService.isAuth.value
-        ? null
-        : const RouteSettings(name: Routes.LOGIN);
+    return authService.isAuth ? null : const RouteSettings(name: Routes.LOGIN);
   }
 }

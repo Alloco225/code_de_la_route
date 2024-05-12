@@ -1,4 +1,4 @@
-import 'package:codedelaroute/app/modules/profile/views/profile.dart';
+import 'package:codedelaroute/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 
 import '../middlewares/auth_guard.dart';
@@ -90,14 +90,15 @@ class AppPages {
       binding: CourseDetailBinding(),
     ),
     GetPage(
-        name: _Paths.PROFILE,
-        page: () => const ProfileView(),
-        binding: ProfileBinding(),
-        middlewares: [
-          // My middlewares here
-          AuthGuard(),
-          PremiumGuard(),
-        ]),
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+      // middlewares: [
+      //   // My middlewares here
+      //   AuthGuard(),
+      //   PremiumGuard(),
+      // ]
+    ),
     GetPage(
       name: _Paths.LEADERBOARD,
       page: () => const LeaderboardView(),

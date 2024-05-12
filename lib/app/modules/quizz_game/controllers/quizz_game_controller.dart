@@ -11,10 +11,10 @@ import '../../../data/models/quizz_model.dart';
 
 class QuizzGameController extends GetxController {
   final _categoryId = (null as String?).obs;
-  final _quizzId = (null as int?).obs;
+  final _quizzId = (null as String?).obs;
 
   get categoryId => _categoryId.value;
-  get quizzId => _quizzId.value;
+  String? get quizzId => _quizzId.value;
 
   @override
   void onInit() {
@@ -33,7 +33,7 @@ class QuizzGameController extends GetxController {
 
     _isLoading.value = false;
 
-    print("QuizzGame onInit");
+    print("QuizzGame ${_selectedQuizz.value} found: $quizzNotFound");
   }
 
   var _currentQuestionIndex = 0.obs;
@@ -53,7 +53,7 @@ class QuizzGameController extends GetxController {
   bool get isLoading => _isLoading.value;
   List<Question> get questions => selectedQuizz?.questions ?? [];
 
-  bool get quizzNotFound => quizz == null;
+  bool get quizzNotFound => selectedQuizz == null;
   bool get questionNotFound => currentQuestion == null;
   bool get noQuestions => questions.isEmpty;
 
@@ -84,7 +84,6 @@ class QuizzGameController extends GetxController {
 
   double get time => _time.value;
   Quizz? get selectedQuizz => _selectedQuizz.value;
-  Quizz? get quizz => selectedQuizz;
 
   selectQuizz(Quizz? quizz) {
     _selectedQuizz.value = quizz;
