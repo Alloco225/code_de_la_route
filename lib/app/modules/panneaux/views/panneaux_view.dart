@@ -1,3 +1,5 @@
+import 'package:codedelaroute/app/modules/panneaux/views/panneau_details_modal_view.dart';
+import 'package:codedelaroute/app/modules/panneaux/views/panneau_info_slider_view.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,18 +8,26 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/sign_model.dart';
+import '../../../helpers/utils.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../controllers/panneaux_controller.dart';
 
 class PanneauxView extends GetView<PanneauxController> {
   const PanneauxView({super.key});
 
-  showSignDetails(Sign sign) {
-    // Open bottom drawer
-  }
-
   @override
   Widget build(BuildContext context) {
+    showSignDetails(Sign sign) {
+      // Open bottom drawer
+      // openModalBottomSheet(PanneauDetailsModalView(sign: sign), context: context);
+      controller.showSign(sign.id);
+
+      openModalBottomSheet( PanneauInfoSliderModalView(signId: sign.id),
+           
+        context: context,
+      );
+    }
+
     return Scaffold(
         // Ressource attribution : https://www.vecteezy.com/members/seetwo
         body: Padding(

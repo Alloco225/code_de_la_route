@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../data/db/db_data.dart';
@@ -11,6 +14,8 @@ class PanneauxController extends GetxController {
   final _quizzId = (null as int?).obs;
   final _isLoading = false.obs;
 
+  var sliderController = PageController();
+
   final _signProvider = SignProvider();
 
   get categoryId => _categoryId.value;
@@ -19,6 +24,11 @@ class PanneauxController extends GetxController {
 
   final _signsList = <Sign>[].obs;
   final _signs = <Sign>[].obs;
+
+  final _selectedSignIndex = 0.obs;
+
+  get selectedSignIndex => _selectedSignIndex.value;
+  Sign get sign => signs[selectedSignIndex];
 
   List<Sign> get signs => _signs.value;
   bool get isLoading => _isLoading.value;
@@ -49,5 +59,37 @@ class PanneauxController extends GetxController {
     _isLoading.value = false;
 
     print("QuizzGame onInit");
+  }
+
+  showSign(signId) {
+    var index = signs.indexWhere((el) => el.id == signId);
+    log("showSign $signId");
+    if (index != -1) {
+      _selectedSignIndex.value = index;
+      sliderController = PageController(initialPage: index);
+    }
+  }
+
+  _animatePageTo(index) {
+    sliderController.animateToPage(index,
+        duration: const Duration(milliseconds: 200), curve: Curves.easeOut);
+  }
+
+  nextSign() {
+    if (_selectedSignIndex.value < signs.length - 1) {
+      _selectedSignIndex.value++;
+      _animatePageTo(_selectedSignIndex.value);
+    }
+  }
+
+  prevSign() {
+    if (_selectedSignIndex.value > 0) {
+      _selectedSignIndex.value--;
+      _animatePageTo(_selectedSignIndex.value);
+    }
+  }
+
+  updateSignIndex(index) {
+    _selectedSignIndex.value = index;
   }
 }

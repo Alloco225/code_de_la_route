@@ -48,17 +48,27 @@ void main() {
   }
 }
 
-openModalBottomSheet(context, view) {
-  showModalBottomSheet(
+// openModalBottomSheet(context, view) {
+//   showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true,
+//     backgroundColor: Colors.transparent,
+//     shape: const RoundedRectangleBorder(
+//         borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+//     builder: (ctx) => view,
+//   );
+// }
+
+openModalBottomSheet(view, {required context}) {
+  showMaterialModalBottomSheet(
+    expand: false,
+    enableDrag: false,
+    isDismissible: true,
     context: context,
-    isScrollControlled: true,
     backgroundColor: Colors.transparent,
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-    builder: (ctx) => view,
+    builder: (context) => view,
   );
 }
-
 openSettingsModal(view, {required context}) {
   showMaterialModalBottomSheet(
     expand: false,
