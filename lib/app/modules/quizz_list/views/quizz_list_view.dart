@@ -1,11 +1,8 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/quizz_model.dart';
-import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,7 +10,6 @@ import 'package:get/get.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../controllers/quizz_list_controller.dart';
-import 'quizz_score_widget.dart';
 
 class QuizzListView extends GetView<QuizzListController> {
   const QuizzListView({super.key});

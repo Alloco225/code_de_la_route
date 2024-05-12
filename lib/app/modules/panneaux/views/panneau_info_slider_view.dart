@@ -51,10 +51,7 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                               fontSize: 27, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Image.asset(
-                        controller.sign.image!.isNotEmpty
-                            ? controller.sign.image!
-                            : "assets/images/categories/${controller.sign.categoryId}.png",
+                      Image.asset(controller.sign.imageUrl,
                         width: 150,
                         height: 150,
                       ),

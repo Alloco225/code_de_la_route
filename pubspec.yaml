@@ -53,6 +53,11 @@ flutter:
     - assets/images/categories/
     - assets/images/degagement/
     - assets/images/signalisation/
+    - assets/images/signalisation/danger/
+    - assets/images/signalisation/indication/
+    - assets/images/signalisation/obligation/
+    - assets/images/signalisation/interdiction/
+    - assets/images/signalisation/direction/
     # 
     - assets/data/
     - assets/fonts/

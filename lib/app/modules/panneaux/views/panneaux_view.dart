@@ -22,8 +22,8 @@ class PanneauxView extends GetView<PanneauxController> {
       // openModalBottomSheet(PanneauDetailsModalView(sign: sign), context: context);
       controller.showSign(sign.id);
 
-      openModalBottomSheet( PanneauInfoSliderModalView(signId: sign.id),
-           
+      openModalBottomSheet(
+        PanneauInfoSliderModalView(signId: sign.id),
         context: context,
       );
     }
@@ -74,10 +74,9 @@ class PanneauxView extends GetView<PanneauxController> {
                                         children: [
                                           SizedBox(
                                             height: 120,
-                                            child: Image.asset(element
-                                                    .image!.isNotEmpty
-                                                ? element.image!
-                                                : "assets/images/categories/${element.categoryId}.png"),
+                                            child: Image.asset(
+                                              element.imageUrl,
+                                            ),
                                           ),
                                           const SizedBox(
                                             height: 10,
