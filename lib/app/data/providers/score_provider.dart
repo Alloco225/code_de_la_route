@@ -33,7 +33,23 @@ class ScoreProvider extends GetConnect {
     return response.body;
   }
 
+  Future<Score?> saveScore(
+      {required String quizzId, required userId, required score}) async {
+    try {
+      await FirebaseFirestore.instance.collection('scores').add({
+        'quizz_id': quizzId,
+        'user_id': userId,
+        'score_value': score,
+      });
+    } catch (e) {
+      print('Error recording score: $e');
+      rethrow;
+    }
+    return null;
+  }
+
   Future<Response<Score>> postScore(Score score) async =>
       await post('score', score);
+
   Future<Response> deleteScore(int id) async => await delete('score/$id');
 }

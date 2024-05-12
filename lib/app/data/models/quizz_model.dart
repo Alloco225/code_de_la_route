@@ -10,13 +10,14 @@ class Quizz {
   IconData? icon;
   List<Question> questions = [];
 
-  Quizz(
-      {this.id,
-      this.categoryId,
-      this.name,
-      this.level,
-      required this.questions,
-      this.icon});
+  Quizz({
+    this.id,
+    this.categoryId,
+    this.name,
+    this.level,
+    required this.questions,
+    this.icon,
+  });
 
   Quizz.fromJson(Map<String, dynamic> json) {
     id = json['id'];

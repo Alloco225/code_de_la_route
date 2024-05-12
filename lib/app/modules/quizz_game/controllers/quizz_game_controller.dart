@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../const/game_settings.dart';
@@ -10,6 +11,7 @@ import '../../../data/models/question_model.dart';
 import '../../../data/models/quizz_model.dart';
 
 class QuizzGameController extends GetxController {
+  final _quizzListController = Get.find<QuizzListController>();
   final _categoryId = (null as String?).obs;
   final _quizzId = (null as String?).obs;
 
@@ -28,7 +30,9 @@ class QuizzGameController extends GetxController {
     _categoryId.value = routeParams?['categoryId'];
     _quizzId.value = routeParams?['quizzId'];
 
-    _selectedQuizz.value = QUIZZES.firstWhereOrNull(
+    //
+
+    _selectedQuizz.value = _quizzListController.quizzes.firstWhereOrNull(
         (el) => el.categoryId == categoryId && el.id == quizzId);
 
     _isLoading.value = false;

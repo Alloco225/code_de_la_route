@@ -31,51 +31,51 @@ class SettingsView extends GetView<SettingsController> {
               child: Column(
                 children: [
                   const Spacer(),
-                  Obx(
-                    () => buildSettingTile(
-                        title: "profile".tr,
-                        icon: Ionicons.person,
-                        value: (controller.auth.isAuth
-                                ? "logged_in"
-                                : "logged_out")
-                            .tr,
-                        onTap: () async {
-                          if (controller.auth.isAuth) {
-                            // showSnackbarSuccess("Already logged in",
-                            //     context: context);
-                            Get.toNamed(Routes.PROFILE);
-                            return;
-                          }
+                  // Obx(
+                  //   () => buildSettingTile(
+                  //       title: "profile".tr,
+                  //       icon: Ionicons.person,
+                  //       value: (controller.auth.isAuth
+                  //               ? "logged_in"
+                  //               : "logged_out")
+                  //           .tr,
+                  //       onTap: () async {
+                  //         if (controller.auth.isAuth) {
+                  //           // showSnackbarSuccess("Already logged in",
+                  //           //     context: context);
+                  //           Get.toNamed(Routes.PROFILE);
+                  //           return;
+                  //         }
 
-                          bool? loggedIn = await showMaterialModalBottomSheet(
-                            expand: false,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            // builder: (context) => const ModalInsideModal());
-                            builder: (context) => LoginModalView(),
-                          );
-                          if (loggedIn == true) {
-                            showSnackbarSuccess("User in !", context: context);
-                          } else {
-                            showSnackbarError("Could not log in !",
-                                context: context);
-                          }
-                        }),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildSettingTile(
-                        title: "theme".tr,
-                        icon: Ionicons.sunny_outline,
-                        value: "dark".tr,
-                        flex: 0,
-                      ),
-                    ],
-                  ),
+                  //         bool? loggedIn = await showMaterialModalBottomSheet(
+                  //           expand: false,
+                  //           context: context,
+                  //           backgroundColor: Colors.transparent,
+                  //           // builder: (context) => const ModalInsideModal());
+                  //           builder: (context) => LoginModalView(),
+                  //         );
+                  //         if (loggedIn == true) {
+                  //           showSnackbarSuccess("User in !", context: context);
+                  //         } else {
+                  //           showSnackbarError("Could not log in !",
+                  //               context: context);
+                  //         }
+                  //       }),
+                  // ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     buildSettingTile(
+                  //       title: "theme".tr,
+                  //       icon: Ionicons.sunny_outline,
+                  //       value: "dark".tr,
+                  //       flex: 0,
+                  //     ),
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -109,6 +109,10 @@ class SettingsView extends GetView<SettingsController> {
                               )),
                     ),
                   ]),
+
+                  const SizedBox(
+                    height: 15,
+                  ),
                   const Spacer(),
                 ],
               ),

@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:codedelaroute/app/data/providers/score_provider.dart';
+import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
-import 'package:share_plus/share_plus.dart';
+// import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../views/widgets/button_widget.dart';
@@ -35,6 +38,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       AnimationController(vsync: this);
   dynamic _confettiComposition;
 
+  final globalKey = GlobalKey();
+
   final int MARK_TOTAL = 20;
   double score = 0;
 
@@ -51,15 +56,21 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     super.dispose();
   }
 
-  void calcScore() {
+  void calcScore() async {
     final int total = widget.questionCount != 0 ? widget.questionCount : 1;
 
     double percentage = (widget.correctAnswerCount * 100) / total;
     // find percentage value in regard to MARK_TOTAL which is 100/5
     double coefficient = 100 / MARK_TOTAL;
-    setState(() {
-      score = percentage / coefficient;
-    });
+    score = percentage / coefficient;
+
+    // Save score online
+    final _gameController = Get.find<QuizzGameController>();
+
+    final _scoreProvider = ScoreProvider();
+    _scoreProvider.saveScore(
+        quizzId: _gameController.selectedQuizz!.id!, score: score, userId: null);
+    setState(() {});
     if (score == MARK_TOTAL) {
       throwConfetti();
     }
@@ -116,7 +127,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
         await Clipboard.setData(ClipboardData(text: stringText));
         // Show toast: "Copié dans le presse papier"
       } else {
-        await Share.share(stringText);
+        // await Share.share(stringText);
       }
       return;
     }
@@ -207,11 +218,19 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                           size: 30,
                         )),
                     const SizedBox(height: 20),
+                    // InkWell(
+                    //               onTap: () {
+                    //   sharing.shareWidgets();
+                    // },
+                    // child: ShareScreenshotAsImage(
+                    //   globalKey:globalKey,
+                    //   child:
                     const Text(
                       "Partager mon score",
                       semanticsLabel: "Partager mon score",
                       style: TextStyle(fontSize: 24, color: Colors.white),
                     ),
+                    // ),),
                     const SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.symmetric(

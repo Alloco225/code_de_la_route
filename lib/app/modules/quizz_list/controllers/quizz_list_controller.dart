@@ -17,7 +17,7 @@ class QuizzListController extends GetxController {
   final _quizzes = <Quizz>[].obs;
   // final _quizzList = <Quizz>[...QUIZZES].obs;
 
-  get quizzes => _quizzes.value;
+  List<Quizz> get quizzes => _quizzes.value;
   bool get isLoading => _isLoading.value;
 
   final _groupedQuizzes = <String, List<Quizz>>{}.obs;

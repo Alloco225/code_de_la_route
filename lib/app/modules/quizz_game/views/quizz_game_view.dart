@@ -17,7 +17,7 @@ class QuizzGameView extends GetView<QuizzGameController> {
   const QuizzGameView({super.key});
 
   gotoHome() {
-    Get.toNamed(Routes.WELCOME);
+    Get.toNamed(Routes.HOME);
   }
 
   gotoQuizzList() {

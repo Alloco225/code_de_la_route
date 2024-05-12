@@ -19,8 +19,7 @@ class QuizzListView extends GetView<QuizzListController> {
   const QuizzListView({super.key});
 
   gotoQuizz({categoryId, quizzId}) {
-    log("gotoQuizz $quizzId");
-    debugPrint("gotoQuizz $quizzId");
+    log("gotoQuizz $categoryId $quizzId");
     Get.toNamed(
         // Routes.QUIZZ_DETAIL,
         Routes.QUIZZ_GAME,
@@ -131,17 +130,71 @@ class QuizzListView extends GetView<QuizzListController> {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w400),
-                        ),
-                        QuizScoresWidget(quizzId),
-                      ]
-                    ),
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            title,
+                            style: const TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w400),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (score != null)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      "Note moyenne:",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    Text(
+                                      "${score ?? ''}/20",
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              if (score == null) ...[
+                                const Text(
+                                  "Pas encore noté",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                )
+                              ],
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: const EdgeInsets.all(2),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: FractionallySizedBox(
+                                    widthFactor: completionPercentage,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Colors.orange,
+                                      ),
+                                      height: 8,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
                   ),
                 ),
               ],
