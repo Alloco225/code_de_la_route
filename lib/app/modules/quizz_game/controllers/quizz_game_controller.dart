@@ -83,8 +83,7 @@ class QuizzGameController extends GetxController {
   final _time = 0.0.obs;
   final int START_TIME = 10; // seconds
 
-  // final _pause = false.obs;
-  final _pause = true.obs;
+  final _pause = false.obs;
 
   double get time => _time.value;
   Quizz? get selectedQuizz => _selectedQuizz.value;

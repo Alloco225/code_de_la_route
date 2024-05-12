@@ -70,7 +70,8 @@ class QuestionImageWidget extends StatelessWidget {
                 color: Colors.blueGrey[800],
               ),
               child: Image.asset(
-                getMediaPath(question.image!),
+                // getMediaPath(question.image!),
+                question.image!,
                 fit: BoxFit.cover,
               ),
             ),

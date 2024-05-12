@@ -46,12 +46,14 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                         child: Text(
                           // controller.sign.id!.tr.toCapitalized(),
                           controller.sign.name!.tr.toCapitalized(),
+                          // controller.sign.name!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 27, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Image.asset(controller.sign.imageUrl,
+                      Image.asset(
+                        controller.sign.imageUrl,
                         width: 150,
                         height: 150,
                       ),

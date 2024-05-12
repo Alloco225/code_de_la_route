@@ -17,7 +17,8 @@ class PanneauxView extends GetView<PanneauxController> {
 
   @override
   Widget build(BuildContext context) {
-    showSignDetails(Sign sign) {
+
+    showSignDetails(Sign sign, context) {
       // Open bottom drawer
       // openModalBottomSheet(PanneauDetailsModalView(sign: sign), context: context);
       controller.showSign(sign.id);
@@ -37,10 +38,12 @@ class PanneauxView extends GetView<PanneauxController> {
         children: [
           Obx(
             () => TitleWidget(
-              title: (controller.categoryName == null
-                  ? "all_signs".tr
-                  : "all_signs"
-                      .trParams({'category': controller.categoryName ?? ''})),
+              title: "Panneaux ${controller.categoryName}"
+              // controller.categoryName == null
+              //   ? "all_signs".tr
+              //   : "all_signs"
+              //       .trParams({'category': controller.categoryName ?? ''})
+              ,
             ),
           ),
           Obx(() => controller.isLoading
@@ -58,7 +61,7 @@ class PanneauxView extends GetView<PanneauxController> {
                           .map((element) => StaggeredGridTile.fit(
                                 crossAxisCellCount: 1,
                                 child: InkWell(
-                                  onTap: () => showSignDetails(element),
+                                  onTap: () => showSignDetails(element, context),
                                   child: Container(
                                       decoration: BoxDecoration(
                                           color: Colors.blueGrey.shade800,

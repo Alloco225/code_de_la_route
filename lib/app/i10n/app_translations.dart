@@ -134,9 +134,7 @@ class Messages extends Translations {
           // 
           
         },
-        'de_DE': {
-          'hello': 'Hallo Welt',
-        },
+        
         'ja_JP': {
           'hello': 'こんにちは、世界',
           'login': "ログイン",

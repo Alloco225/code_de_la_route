@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/modules/panneaux_categories/controllers/panneaux_categories_controller.dart';
 import 'package:codedelaroute/app/modules/settings/controllers/audio_settings_controller.dart';
 import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/modules/settings/controllers/settings_controller.dart';

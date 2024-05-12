@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:codedelaroute/app/data/json_data_provider.dart';
 import 'package:codedelaroute/app/data/models/language_model.dart';
 import 'package:codedelaroute/app/data/providers/language_provider.dart';
@@ -41,8 +43,9 @@ class LanguageSettingsController extends GetxController {
 
   selectLanguage(Language lang) {
     _selectedLanguage.value = lang;
-    Get.updateLocale(
-        Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]));
+    var locale = Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]);
+    log("selectedLanguage $locale");
+    Get.updateLocale(locale);
   }
 
   saveLanguage() {

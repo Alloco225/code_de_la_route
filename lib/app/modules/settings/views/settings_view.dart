@@ -1,5 +1,6 @@
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
+import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -89,20 +90,23 @@ class SettingsView extends GetView<SettingsController> {
                     ),
                     Obx(
                       () => buildSettingTile(
-                          title: "language".tr,
-                          icon: Ionicons.globe_outline,
-                          value: (controller.lang.selectedLanguage?.id ?? '')
-                              .toUpperCase(),
-                          flex: 1,
-                          onTap: () => showMaterialModalBottomSheet(
-                                expand: false,
-                                enableDrag: false,
-                                isDismissible: true,
-                                context: context,
-                                backgroundColor: Colors.transparent,
-                                builder: (context) =>
-                                    LanguageSettingsModalView(),
-                              )),
+                        title: "language".tr,
+                        icon: Ionicons.globe_outline,
+                        value: (controller.lang.selectedLanguage?.id ?? '')
+                            .toUpperCase(),
+                        flex: 1,
+                        // onTap: () => showMaterialModalBottomSheet(
+                        //       expand: false,
+                        //       enableDrag: false,
+                        //       isDismissible: true,
+                        //       context: context,
+                        //       backgroundColor: Colors.transparent,
+                        //       builder: (context) =>
+                        //           LanguageSettingsModalView(),
+                        //     )),
+                        onTap: () =>
+                            showSnackbarInfo("Bientôt", context: context),
+                      ),
                     ),
                   ]),
 

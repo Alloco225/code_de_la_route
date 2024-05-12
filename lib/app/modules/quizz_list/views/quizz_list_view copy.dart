@@ -57,13 +57,13 @@ class QuizzListView extends GetView<QuizzListController> {
                                           fontWeight: FontWeight.w400,
                                           fontSize: 25),
                                     ),
-                                    // Text(
-                                    //   "0/${values.length}",
-                                    //   style: const TextStyle(
-                                    //     fontWeight: FontWeight.w400,
-                                    //     fontSize: 23,
-                                    //   ),
-                                    // ),
+                                    Text(
+                                      "0/${values.length}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 23,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -72,7 +72,6 @@ class QuizzListView extends GetView<QuizzListController> {
                                   buildQuizzContainer(
                                       title: values[i].name ?? 'Quizz ${i + 1}',
                                       completionPercentage: 0,
-                                      image: values[i].image,
                                       score: null,
                                       quizzId: values[i].id,
                                       onTap: () => gotoQuizz(
@@ -94,7 +93,6 @@ class QuizzListView extends GetView<QuizzListController> {
     required quizzId,
     required String title,
     String? score,
-    String? image,
     double completionPercentage = .3,
     required VoidCallback onTap,
   }) {
@@ -110,19 +108,20 @@ class QuizzListView extends GetView<QuizzListController> {
                 border: Border.all(color: Colors.white)),
             child: Row(
               children: [
-                if (image != null)
-                  ClipRRect(
-                    borderRadius:
-                        const BorderRadius.horizontal(left: Radius.circular(8)),
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                          border:
-                              Border(right: BorderSide(color: Colors.white))),
-                      child: Image.asset(image, width: 100),
+                ClipRRect(
+                  borderRadius:
+                      const BorderRadius.horizontal(left: Radius.circular(8)),
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                        border: Border(right: BorderSide(color: Colors.white))),
+                    child: Image.asset(
+                      'assets/images/signalisation/585f8f29cb11b227491c3555.png',
+                      width: 100,
                     ),
                   ),
+                ),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(10),

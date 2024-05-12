@@ -14,7 +14,6 @@ import 'app/modules/home/bindings/home_binding.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
@@ -26,7 +25,8 @@ void main() async {
 
   await Get.putAsync(() => AuthService().init());
 
-  var locale = Get.deviceLocale;
+  // var locale = Get.deviceLocale;
+  var locale = const Locale('fr', 'FR');
 
   runApp(
     GetMaterialApp(
@@ -41,11 +41,11 @@ void main() async {
         // GlobalWidgetsLocalizations.delegate,
       ],
 
-      supportedLocales: const [
-        Locale('en', 'US'), // English
-        Locale('fr', 'FR'), // Spanish
-        // Add more locales as needed
-      ],
+      // supportedLocales: const [
+      //   Locale('en', 'US'), // English
+      //   Locale('fr', 'FR'), // Spanish
+      //   // Add more locales as needed
+      // ],
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       // locale: AppSettings.locale,

@@ -7,6 +7,7 @@ class Quizz {
   String? categoryId;
   String? level;
   String? name;
+  String? image;
   IconData? icon;
   List<Question> questions = [];
 
@@ -14,6 +15,7 @@ class Quizz {
     this.id,
     this.categoryId,
     this.name,
+    this.image,
     this.level,
     required this.questions,
     this.icon,
