@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, non_constant_identifier_names
+
 import 'dart:async';
 import 'dart:developer';
 
@@ -5,7 +7,6 @@ import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_cont
 import 'package:get/get.dart';
 
 import '../../../const/game_settings.dart';
-import '../../../data/db/db_data.dart';
 import '../../../data/models/answer_model.dart';
 import '../../../data/models/question_model.dart';
 import '../../../data/models/quizz_model.dart';
@@ -21,11 +22,8 @@ class QuizzGameController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print("QuizzGame onInit");
 
     var routeParams = Get.arguments as Map?;
-
-    print("QuizzGame params $routeParams");
 
     _categoryId.value = routeParams?['categoryId'];
     _quizzId.value = routeParams?['quizzId'];
@@ -36,8 +34,6 @@ class QuizzGameController extends GetxController {
         (el) => el.categoryId == categoryId && el.id == quizzId);
 
     _isLoading.value = false;
-
-    print("QuizzGame ${_selectedQuizz.value} found: $quizzNotFound");
   }
 
   var _currentQuestionIndex = 0.obs;
@@ -92,7 +88,8 @@ class QuizzGameController extends GetxController {
     _selectedQuizz.value = quizz;
   }
 
-  double get percentage => ((time * 100) / (remainingTime ?? 1)) / 100;
+  double get percentage =>
+      ((time * 100) / (remainingTime > 0 ? remainingTime : 1)) / 100;
 
   double get remainingTime => START_TIME.toDouble();
 
@@ -190,7 +187,7 @@ class QuizzGameController extends GetxController {
       bool isCorrect = false;
       String? content;
       switch (selectedAnswer.runtimeType) {
-        case Answer:
+        case Answer _:
           content = (selectedAnswer as Answer).content;
 
           if ((selectedAnswer as Answer).isCorrect == true) {

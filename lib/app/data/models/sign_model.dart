@@ -19,7 +19,6 @@ class Sign {
   String get imageUrl {
     if (image == null || image == "" || image == ".jpg") {
       return 'assets/images/favicon.png';
-      return "assets/images/categories/$categoryId.png";
     }
     return "assets/images/signalisation/$categoryId/$image";
   }

@@ -1,4 +1,5 @@
-import 'dart:developer';
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:math';
 
 import 'package:codedelaroute/app/data/models/answer_model.dart';
@@ -37,46 +38,15 @@ class QuizzListController extends GetxController {
     _quizzList.value = await loadQuizzesFromSignCategories();
 
     _quizzes.value = _quizzList.value;
-    try {
-      Map? params = Get.arguments as Map?;
-      var categoryId = params?['categoryId'];
 
-      _quizzes.value = _quizzList.value;
-    } catch (e) {}
-
-    // var quizzesJson = await QuizzesProvider().loadAllQuizzesJson();
-    // _groupedQuizzes.value =
-    //     groupBy(quizzesJson, (element) => element['categoryId']);
     _groupedQuizzes.value =
         groupBy(_quizzes.value, (element) => element.categoryId!);
 
-    await Future.delayed(Duration(seconds: Random().nextInt(1)));
+    await Future.delayed(const Duration(seconds: 1));
     _isLoading.value = false;
-    // selectedCategory = CATEGORIES.firstWhere((el) => el.id == categoryId);
-    // quizzes.value = QUIZZES.where((el) => el.categoryId == categoryId).toList();
-    print("QuizzList onInit ");
-    // log("QuizzList onInit ${quizzesJson.length}");
-    print("QuizzList onReady");
-  }
-
-  updateQuizzScore(id, score) {
-    print("updateQuizzScore $id $score");
-    // var index = quizzes.indexWhere((element) => element.id == id);
-    // if (index != -1) {
-    //   _quizzes.value. [index].score = score;
-    //   storage.write(id, score);
-    // }
-    // for (var quizz in _quizzList.value) {
-    //   if (quizz.id == id) {
-    //     quizz.score = score;
-    //     storage.write(id, score);
-    //     break;
-    //   }
-    // }
   }
 
   loadQuizzesFromSignCategories() async {
-    print("loadQuizzesFromSignCategories");
     final signCategoryProvider = SignCategoryProvider();
     final signProvider = SignProvider();
 
@@ -152,11 +122,5 @@ class QuizzListController extends GetxController {
       }
     }
     return quizzes;
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    print("QuizzList onClose");
   }
 }

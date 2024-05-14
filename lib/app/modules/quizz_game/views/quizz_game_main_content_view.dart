@@ -4,6 +4,19 @@ import '../../../data/models/question_model.dart';
 import '../../../views/widgets/question_timer_widget.dart';
 
 class QuizzGameMainContentView extends StatelessWidget {
+  final int currentQuestionIndex;
+  final List<Question> questions;
+  final Widget getQuestionWidget;
+
+  final double time;
+  final double percentage;
+  final VoidCallback startTimer;
+  final VoidCallback stopTimer;
+  final VoidCallback onTimeExpired;
+  final VoidCallback onTogglePause;
+  final VoidCallback togglePauseTimer;
+  final bool isPaused;
+
   const QuizzGameMainContentView({
     super.key,
     required this.currentQuestionIndex,
@@ -19,18 +32,6 @@ class QuizzGameMainContentView extends StatelessWidget {
     required this.isPaused,
   });
 
-  final int currentQuestionIndex;
-  final List<Question> questions;
-  final Widget getQuestionWidget;
-
-  final time;
-  final percentage;
-  final startTimer;
-  final stopTimer;
-  final onTimeExpired;
-  final onTogglePause;
-  final togglePauseTimer;
-  final isPaused;
 
   @override
   Widget build(BuildContext context) {

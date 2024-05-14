@@ -44,7 +44,7 @@ class _QuizzListViewState extends State<QuizzListView> {
               const TitleWidget(title: "Quizz"),
               Expanded(
                 child: controller.isLoading
-                    ? LoadingWidget()
+                    ? const LoadingWidget()
                     : ListView.builder(
                         itemCount: controller.groupedQuizzes.entries.length,
                         itemBuilder: (ctx, i) {
@@ -165,7 +165,7 @@ class _QuizzListViewState extends State<QuizzListView> {
                                           fontWeight: FontWeight.w400),
                                     ),
                                     Text(
-                                      "${(score ?? 0).toInt()}/20",
+                                      "${(score).toInt()}/20",
                                       style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w400,

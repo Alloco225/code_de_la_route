@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../views/widgets/border_button_widget.dart';
-import '../../../views/widgets/button_widget.dart';
 
 class QuizzPausedView extends StatelessWidget {
   final Function() onResume;

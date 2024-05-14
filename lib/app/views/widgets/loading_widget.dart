@@ -1,13 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoadingWidget extends StatelessWidget {
-  double size;
-  double padding;
-  double strokeWidth;
-  Color? color;
-  LoadingWidget({
+  final double size;
+  final double padding;
+  final double strokeWidth;
+  final Color? color;
+  const LoadingWidget({
     super.key,
     this.size = 150,
     this.padding = 20,

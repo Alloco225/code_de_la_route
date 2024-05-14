@@ -5,14 +5,14 @@ class ASnackBar {
     bool hasAction = (actionText != null && action != null);
     return SnackBar(
       behavior: SnackBarBehavior.floating,
-      content: Text("$message"),
+      content: Text(message),
       action: hasAction
-        ? SnackBarAction(
-            label: actionText,
-            textColor: Colors.orange,
-            onPressed: () => action,
-          )
-        : null,
+          ? SnackBarAction(
+              label: actionText,
+              textColor: Colors.orange,
+              onPressed: () => action,
+            )
+          : null,
     );
   }
 
@@ -20,6 +20,6 @@ class ASnackBar {
       {String? actionText, Function? action}) {
     // scaffold.currentState.hideCurrentSnackBar();
     // scaffold.currentState.showSnackBar(
-        // ASnackBar.snack(message, actionText: actionText, action: action));
+    // ASnackBar.snack(message, actionText: actionText, action: action));
   }
 }

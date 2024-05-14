@@ -131,8 +131,6 @@ class Messages extends Translations {
           "zone_avalanche": "Zone d'avalanche",
           "danger_travaux_routiers": "Danger, travaux routiers",
           "chute_pierres": "Chute de pierres",
-          "devers_dangereux_gauche": "Dévers dangereux à gauche",
-          "devers_dangereux_droite": "Dévers dangereux à droite",
           "traversee_tortues": "Traversée de tortues",
           "traversee_moutons": "Traversée de moutons",
           //

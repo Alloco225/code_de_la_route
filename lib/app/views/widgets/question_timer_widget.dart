@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -45,8 +47,6 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
     widget.onDispose();
     super.dispose();
   }
-
- 
 
   @override
   Widget build(BuildContext context) {

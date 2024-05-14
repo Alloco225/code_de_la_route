@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
@@ -34,13 +36,10 @@ class PanneauxController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    print("Panneaux onInit");
 
     _isLoading.value = true;
 
     var routeParams = Get.arguments as Map?;
-
-    print("Panneaux params $routeParams");
 
     _categoryId.value = routeParams?['categoryId'];
     _categoryName.value = routeParams?['categoryName'];
@@ -55,8 +54,6 @@ class PanneauxController extends GetxController {
     }
 
     _isLoading.value = false;
-
-    print("QuizzGame onInit");
   }
 
   showSign(signId) {

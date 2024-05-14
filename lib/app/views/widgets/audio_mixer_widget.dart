@@ -13,10 +13,7 @@ class AudioMixer extends InheritedWidget {
   }
 
   void playBgm(String bgmPath) async {
-    print("playBgm path$bgmPath");
-
     await bgmPlayer.stop();
-
     await bgmPlayer.play(AssetSource(bgmPath), mode: PlayerMode.lowLatency);
   }
 

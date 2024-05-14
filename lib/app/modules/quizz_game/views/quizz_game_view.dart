@@ -7,7 +7,6 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../views/widgets/question_image_widget.dart';
-import '../../../views/widgets/question_order_widget.dart';
 import '../../quizz_game/views/quizz_ended_view.dart';
 import '../../quizz_game/views/quizz_paused_view.dart';
 import '../../quizz_game/views/tu_veux_abandonner_view.dart';
@@ -41,14 +40,7 @@ class QuizzGameView extends GetView<QuizzGameController> {
         selectedAnswer: controller.selectedAnswer,
       );
     }
-    if (controller.currentQuestion!.type == "order") {
-      return QuestionOrderWidget(
-        question: controller.currentQuestion!,
-        isCorrectAnswerVisible: controller.isCorrectAnswerVisible,
-        onSelectAnswer: controller.doubleTapAnswerToSubmit,
-        selectedAnswer: controller.selectedAnswer,
-      );
-    }
+    if (controller.currentQuestion!.type == "order") {}
     return Container();
   }
 
@@ -57,8 +49,6 @@ class QuizzGameView extends GetView<QuizzGameController> {
     return PopScope(
       canPop: false,
       onPopInvoked: (_) {
-        // TODO add tu veux abandonner
-        print("Oh Ho! Il veut abandonner");
         // Navigator.pop(context, false);
         // return Future.value(false);
         controller.togglePause();

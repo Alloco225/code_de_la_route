@@ -1,12 +1,11 @@
+// ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api
+
 import 'dart:async';
 
-import 'package:codedelaroute/app/data/providers/score_provider.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
-import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ionicons/ionicons.dart';
@@ -42,7 +41,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   late final AnimationController _coffettiPopAC =
       AnimationController(vsync: this);
   dynamic _confettiComposition;
-  final _quizzListController = Get.find<QuizzListController>();
   final _gameController = Get.find<QuizzGameController>();
   final storage = GetStorage();
 
@@ -65,7 +63,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   void initState() {
     super.initState();
     calcScore();
-    // TODO add a gsap animation on the score calculating
   }
 
   @override
@@ -82,21 +79,14 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     double coefficient = 100 / MARK_TOTAL;
     score = percentage / coefficient;
 
-    // Save score online
-
     // save score
     String? quizzId = _gameController.selectedQuizz?.id;
     if (quizzId != null) {
-      _quizzListController.updateQuizzScore(quizzId, score);
+      // _quizzListController.updateQuizzScore(quizzId, score);
       storage.write(quizzId, score);
     }
 
-    final scoreProvider = ScoreProvider();
-    scoreProvider.saveScore(
-      quizzId: _gameController.selectedQuizz!.id!,
-      score: score,
-      userId: null,
-    );
+
     setState(() {});
     if (score == MARK_TOTAL) {
       throwConfetti();
@@ -110,22 +100,20 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   Future<bool> getShareLink(String platformShareLink) async {
-    print("getShareLink $platformShareLink");
 
     String stringText = shareData.values.join('\n');
     String link = url;
 
     link = platformShareLink.replaceAll('REPLACE_WITH_LINK', stringText);
-    print("link $link");
 
     Uri shareUrl = Uri.parse(link);
     if (await canLaunchUrl(shareUrl)) {
       await launchUrl(shareUrl);
+      // ignore: use_build_context_synchronously
       showSnackbarSuccess("Merci d'avoir partagé", context: context);
       return true;
     }
     // showSnackbarError("Lien de partage indisponible", context: context);
-    // print("could not share");
     shareScore();
 
     return false;
@@ -136,6 +124,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     var result = await Share.share(stringText);
     if (result.status == ShareResultStatus.success) {
+      // ignore: use_build_context_synchronously
       showSnackbarSuccess("Merci d'avoir partagé", context: context);
     }
     return;

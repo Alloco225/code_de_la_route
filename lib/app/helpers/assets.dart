@@ -23,5 +23,4 @@ String getMediaPath(String fileName) {
 
 String getAudioPath(String path) {
   return 'audio/$path';
-  return 'assets/audio/$path';
 }

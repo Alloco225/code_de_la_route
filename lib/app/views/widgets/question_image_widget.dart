@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/answer_model.dart';
 import '../../data/models/question_model.dart';
-import '../../helpers/assets.dart';
 import 'button_widget.dart';
 
 class QuestionImageWidget extends StatelessWidget {

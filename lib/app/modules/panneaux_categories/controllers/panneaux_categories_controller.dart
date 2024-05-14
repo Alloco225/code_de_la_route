@@ -1,7 +1,6 @@
-import 'package:codedelaroute/app/data/db/db_data.dart';
+// ignore_for_file: invalid_use_of_protected_member
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
 import 'package:get/get.dart';
-
 import '../../../data/providers/sign_category_provider.dart';
 
 class PanneauxCategoriesController extends GetxController {
@@ -16,7 +15,6 @@ class PanneauxCategoriesController extends GetxController {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     _isLoading.value = true;
     _categories.value = await provider.loadSignCategory();

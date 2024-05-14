@@ -1,18 +1,15 @@
 import 'package:codedelaroute/app/routes/app_pages.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../auth/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
-  final _authService = Get.find<AuthService>();
-
+  // ignore: non_constant_identifier_names
   final VERSION = "2.6.1";
 
   final List menuElements = [
@@ -24,22 +21,8 @@ class HomeView extends GetView<HomeController> {
     {
       "text": "quizz",
       "icon": Ionicons.help_outline,
-      "route":
-          //Routes.QUIZZ_CATEGORIES
-          Routes.QUIZZ_LIST,
+      "route": Routes.QUIZZ_LIST,
     },
-    // {
-    //   "text": "PROFILE",
-    //   "route":
-    //    Routes.PROFILE
-    //   ,
-    // },
-    // {
-    //   "text": "LEADERBOARD",
-    //   "route":
-    //    Routes.LEADERBOARD
-    //   ,
-    // },
     {
       "text": "settings",
       "icon": Ionicons.settings_outline,
@@ -49,14 +32,6 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in!');
-      }
-    });
-
     return Scaffold(
         backgroundColor: Colors.blueGrey.shade700,
         body: Stack(

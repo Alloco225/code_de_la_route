@@ -1,11 +1,5 @@
-import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
-import 'package:codedelaroute/app/data/models/language_model.dart';
-import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
-import 'package:codedelaroute/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -13,9 +7,7 @@ import 'package:ionicons/ionicons.dart';
 import '../controllers/settings_controller.dart';
 
 class AudioSettingsModalView extends GetView<SettingsController> {
-  AudioSettingsModalView({super.key});
-
-  final authController = AuthController();
+  const AudioSettingsModalView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,82 +22,80 @@ class AudioSettingsModalView extends GetView<SettingsController> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Obx(
-          () => authController.isAuth
-              ? const Text("Already Signed In")
-              : Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Text(
-                            "music".tr.toUpperCase(),
-                            style: const TextStyle(
-                                fontSize: 27, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Expanded(
-                          child: Obx(
-                            () => Column(
-                              children: [
-                                _buildSettingTile(
-                                    icon: Ionicons.musical_notes_outline,
-                                    title: "music",
-                                    active: controller.audio.isMusicOn,
-                                    onTap: () => {
-                                          controller.audio.toggleMusic(),
-                                        }),
-                                _buildSettingTile(
-                                    icon: Ionicons.musical_note_outline,
-                                    title: "sound",
-                                    active: controller.audio.isSoundOn,
-                                    onTap: () => {
-                                          controller.audio.toggleSound(),
-                                        }),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.orange.shade400,
-                              border: Border.all(
-                                width: 3,
-                                color: Colors.orange.shade700,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "save".tr.toUpperCase(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
+          () => Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      "music".tr.toUpperCase(),
+                      style: const TextStyle(
+                          fontSize: 27, fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
+                  Expanded(
+                    child: Obx(
+                      () => Column(
+                        children: [
+                          _buildSettingTile(
+                              icon: Ionicons.musical_notes_outline,
+                              title: "music",
+                              active: controller.audio.isMusicOn,
+                              onTap: () => {
+                                    controller.audio.toggleMusic(),
+                                  }),
+                          _buildSettingTile(
+                              icon: Ionicons.musical_note_outline,
+                              title: "sound",
+                              active: controller.audio.isSoundOn,
+                              onTap: () => {
+                                    controller.audio.toggleSound(),
+                                  }),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade400,
+                        border: Border.all(
+                          width: 3,
+                          color: Colors.orange.shade700,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "save".tr.toUpperCase(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ));
   }
 

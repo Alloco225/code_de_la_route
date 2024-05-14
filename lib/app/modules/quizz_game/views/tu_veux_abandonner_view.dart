@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -39,22 +41,18 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
       'flash': true,
     },
   ];
-  // TODO add flash blink animation
-
   late VideoPlayerController _videoPlayerController;
 
   @override
   void initState() {
     super.initState();
     final String videoUrl = getMediaPath('/tu_veux_abandonner.mp4');
-    print("path ==== $videoUrl");
 
     _videoPlayerController = VideoPlayerController.asset(videoUrl)
       // VideoPlayerController.networkUrl(Uri.parse(
       //     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
       ..addListener(videoListener)
       ..initialize().then((_) {
-        print("video initialised");
         setState(() {
           isVideoVisible = true;
 
@@ -75,13 +73,11 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
     final currentTime =
         _videoPlayerController.value.position.inMilliseconds.toDouble() / 1000;
     hasVideoPlayedCompletely = false;
-    print("currentTime : $currentTime");
     final Map currentSubtitle = subtitles.firstWhere(
         (subtitle) =>
             currentTime >= subtitle['startTime'] &&
             currentTime < subtitle['endTime'],
         orElse: () => {});
-    print("currentSubtitle : $currentSubtitle");
 
     // Implement your calls inside these conditions' bodies :
     if (_videoPlayerController.value.position ==
@@ -139,9 +135,8 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
       await Future.delayed(const Duration(milliseconds: 500));
       _videoPlayerController.play();
       setState(() {});
-    } catch (error) {
-      print("Can't let you give up");
-    }
+    // ignore: empty_catches
+    } catch (error) {}
   }
 
   bool get isVidPlaying => _videoPlayerController.value.isPlaying;

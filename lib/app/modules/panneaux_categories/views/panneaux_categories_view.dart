@@ -1,14 +1,7 @@
-import 'dart:ffi';
-
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-
 import '../../../routes/app_pages.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/title_widget.dart';
@@ -56,36 +49,6 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
       ),
     ));
   }
-
-  // _buildAllBUtton() {
-  //   return InkWell(
-  //     onTap: () => Get.toNamed(Routes.PANNEAUX),
-  //     child: Container(
-  //         decoration: BoxDecoration(
-  //             color: Colors.blueGrey.shade800,
-  //             borderRadius: BorderRadius.circular(8),
-  //             border: Border.all(
-  //               color: Colors.white,
-  //             )),
-  //         padding: const EdgeInsets.all(10),
-  //         child: Column(
-  //           children: [
-  //             Expanded(
-  //               child: Image.asset("assets/images/categories/lights.png"),
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             Text("all".tr.toTitleCase(),
-  //                 textAlign: TextAlign.center,
-  //                 style: const TextStyle(
-  //                     fontWeight: FontWeight.w600,
-  //                     color: Colors.white,
-  //                     fontSize: 23)),
-  //           ],
-  //         )),
-  //   );
-  // }
 
   Widget _buildCategoryGridItem(SignCategory element) {
     return InkWell(
