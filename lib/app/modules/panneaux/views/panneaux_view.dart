@@ -35,7 +35,7 @@ class PanneauxView extends GetView<PanneauxController> {
               title:
                   controller.categoryName == null
                       ? "all_signs".tr
-                      : "all_signs".trParams(
+                      : "all_category_signs".trParams(
                           {'category': controller.categoryName ?? ''}),
             ),
           ),

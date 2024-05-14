@@ -91,7 +91,7 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
     }
 
     setState(() {
-      flash = currentSubtitle['flash'] ?? false;
+      flash = currentSubtitle['flash'] == null;
       titleText = currentSubtitle['text'] ?? '';
     });
   }
