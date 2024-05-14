@@ -61,7 +61,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.QUIZZ_LIST,
-      page: () => const QuizzListView(),
+      page: () => QuizzListView(),
       binding: QuizzListBinding(),
     ),
     GetPage(

@@ -1,13 +1,17 @@
 import 'dart:async';
 
 import 'package:codedelaroute/app/data/providers/score_provider.dart';
+import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
+import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
+import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:share_plus/share_plus.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../views/widgets/button_widget.dart';
@@ -15,6 +19,7 @@ import '../../../views/widgets/button_widget.dart';
 class QuizzEndedView extends StatefulWidget {
   final int correctAnswerCount;
   final int questionCount;
+
   final Function() onRestartQuizz;
   final Function() onGoHome;
   final Function() onReturnToQuizzList;
@@ -37,11 +42,15 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   late final AnimationController _coffettiPopAC =
       AnimationController(vsync: this);
   dynamic _confettiComposition;
+  final _quizzListController = Get.find<QuizzListController>();
+  final _gameController = Get.find<QuizzGameController>();
+  final storage = GetStorage();
 
   final globalKey = GlobalKey();
 
   final int MARK_TOTAL = 20;
   double score = 0;
+  double percentage = 0;
 
   @override
   void initState() {
@@ -59,17 +68,26 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   void calcScore() async {
     final int total = widget.questionCount != 0 ? widget.questionCount : 1;
 
-    double percentage = (widget.correctAnswerCount * 100) / total;
+    percentage = (widget.correctAnswerCount * 100) / total;
     // find percentage value in regard to MARK_TOTAL which is 100/5
     double coefficient = 100 / MARK_TOTAL;
     score = percentage / coefficient;
 
     // Save score online
-    final _gameController = Get.find<QuizzGameController>();
 
-    final _scoreProvider = ScoreProvider();
-    _scoreProvider.saveScore(
-        quizzId: _gameController.selectedQuizz!.id!, score: score, userId: null);
+    // save score
+    String? quizzId = _gameController.selectedQuizz?.id;
+    if (quizzId != null) {
+      _quizzListController.updateQuizzScore(quizzId, score);
+      storage.write(quizzId, score);
+    }
+
+    final scoreProvider = ScoreProvider();
+    scoreProvider.saveScore(
+      quizzId: _gameController.selectedQuizz!.id!,
+      score: score,
+      userId: null,
+    );
     setState(() {});
     if (score == MARK_TOTAL) {
       throwConfetti();
@@ -82,9 +100,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       ..forward();
   }
 
-  String getShareLink(String platform) {
-    if (platform.isEmpty) return '';
-
+  Future<bool> getShareLink(String platformShareLink) async {
+    print("getShareLink $platformShareLink");
     String url = "https://code-de-la-route.amane.dev";
 
     String scoreText = '${score.toStringAsFixed(0)}/$MARK_TOTAL';
@@ -96,41 +113,41 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     String stringText = data.values.join('\n');
 
     String link = url;
-    if (platform == "whatsapp") {
-      link = "whatsapp://send?text=$stringText";
-    } else if (platform == "facebook") {
-      link = "https://www.facebook.com/sharer/sharer.php?u=$stringText";
-    } else if (platform == "linkedin") {
-      link = "https://www.linkedin.com/shareArticle?url=$stringText";
-    } else if (platform == "twitter") {
-      link = "https://twitter.com/intent/tweet?url=$stringText";
-    }
 
-    return link;
+    link = platformShareLink.replaceAll('REPLACE_WITH_LINK', stringText);
+    print("link $link");
+
+    Uri shareUrl = Uri.parse(link);
+    if (await canLaunchUrl(shareUrl)) {
+      await launchUrl(shareUrl);
+      showSnackbarSuccess("Merci d'avoir partagé", context: context);
+      return true;
+    }
+    // showSnackbarError("Lien de partage indisponible", context: context);
+    // print("could not share");
+    shareScore();
+
+    return false;
   }
 
-  void shareScore(BuildContext context, String platform) async {
-    print("shareScore $platform");
+  void shareScore() async {
     String stringToShare = "https://code-de-la-route.amane.dev";
     // String link = "";
 
-    if (platform.isEmpty) {
-      String scoreText = '${score.toStringAsFixed(0)}/$MARK_TOTAL';
-      Map<String, String> data = {
-        'title': "Euss, esseu tu peux ?",
-        'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
-        'url': stringToShare,
-      };
-      String stringText = data.values.join('\n');
+    String scoreText = '${score.toStringAsFixed(0)}/$MARK_TOTAL';
+    Map<String, String> data = {
+      'title': "Euss, esseu tu peux ?",
+      'text':
+          "J'ai eu $scoreText au test de Code de la Route. Est-ce que tu maitrise le code de la route ?",
+      'url': stringToShare,
+    };
+    String stringText = data.values.join('\n');
 
-      if (!await canLaunch(stringText)) {
-        await Clipboard.setData(ClipboardData(text: stringText));
-        // Show toast: "Copié dans le presse papier"
-      } else {
-        // await Share.share(stringText);
-      }
-      return;
+    var result = await Share.share(stringText);
+    if (result.status == ShareResultStatus.success) {
+      showSnackbarSuccess("Merci d'avoir partagé", context: context);
     }
+    return;
   }
 
   void onCoffettiCompositionLoaded(composition) {
@@ -138,20 +155,41 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   get markBgColor {
-    if (score <= MARK_TOTAL / 3) {
-      return Colors.orange;
-    }
-    if (score <= MARK_TOTAL / 2) {
-      return Colors.red;
-    }
-    if (score < MARK_TOTAL) {
-      return Colors.blue;
-    }
     if (score == MARK_TOTAL) {
       return Colors.green;
     }
+    if (score > MARK_TOTAL / 2) {
+      return Colors.blue;
+    }
+    if (score > MARK_TOTAL / 3) {
+      return Colors.red;
+    }
+    if (score > MARK_TOTAL / 4) {
+      return Colors.orange;
+    }
     return Colors.red.shade700;
   }
+
+  List<Map> platformIcons = [
+    {
+      "icon": Ionicons.logo_whatsapp,
+      "share_link": "whatsapp://send?text=REPLACE_WITH_LINK",
+    },
+    {
+      "icon": Ionicons.logo_facebook,
+      "share_link":
+          "https://www.facebook.com/sharer/sharer.php?u=REPLACE_WITH_LINK",
+    },
+    {
+      "icon": Ionicons.logo_twitter,
+      "share_link":
+          "https://www.linkedin.com/shareArticle?url=REPLACE_WITH_LINK",
+    },
+    {
+      "icon": Ionicons.logo_linkedin,
+      "share_link": "https://twitter.com/intent/tweet?url=REPLACE_WITH_LINK",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +223,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: markBgColor,
+                          color: percentageColor(percentage),
                         ),
                       ),
                     ),
@@ -208,54 +246,38 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                 ),
                 Column(
                   children: [
-                    Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(.4),
-                            borderRadius: BorderRadius.circular(100)),
-                        child: const Icon(
-                          Ionicons.arrow_redo_outline,
-                          size: 30,
-                        )),
-                    const SizedBox(height: 20),
-                    // InkWell(
-                    //               onTap: () {
-                    //   sharing.shareWidgets();
-                    // },
-                    // child: ShareScreenshotAsImage(
-                    //   globalKey:globalKey,
-                    //   child:
-                    const Text(
-                      "Partager mon score",
-                      semanticsLabel: "Partager mon score",
-                      style: TextStyle(fontSize: 24, color: Colors.white),
+                    InkWell(
+                      onTap: shareScore,
+                      child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(.4),
+                              borderRadius: BorderRadius.circular(100)),
+                          child: const Icon(
+                            Ionicons.arrow_redo_outline,
+                            size: 30,
+                          )),
                     ),
-                    // ),),
+                    const SizedBox(height: 20),
+                    InkWell(
+                      onTap: shareScore,
+                      child: const Text(
+                        "Partager mon score",
+                        semanticsLabel: "Partager mon score",
+                        style: TextStyle(fontSize: 24, color: Colors.white),
+                      ),
+                    ),
                     const SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: MediaQuery.of(context).size.width * .20),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(
-                            Ionicons.logo_whatsapp,
-                            size: 38,
-                          ),
-                          Icon(
-                            Ionicons.logo_facebook,
-                            size: 38,
-                          ),
-                          Icon(
-                            Ionicons.logo_twitter,
-                            size: 38,
-                          ),
-                          Icon(
-                            Ionicons.logo_linkedin,
-                            size: 38,
-                          ),
-                        ],
-                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: platformIcons
+                              .map((e) => _buildPlatformButton(
+                                  icon: e['icon'],
+                                  onTap: () => getShareLink(e['share_link'])))
+                              .toList()),
                     ),
                     const SizedBox(
                       height: 40,
@@ -315,5 +337,17 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
         ],
       ),
     );
+  }
+
+  Widget _buildPlatformButton({
+    VoidCallback? onTap,
+    IconData? icon,
+  }) {
+    return InkWell(
+        onTap: onTap,
+        child: Icon(
+          icon,
+          size: 38,
+        ));
   }
 }

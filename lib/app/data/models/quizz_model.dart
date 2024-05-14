@@ -8,6 +8,7 @@ class Quizz {
   String? level;
   String? name;
   String? image;
+  double? score;
   IconData? icon;
   List<Question> questions = [];
 
@@ -16,6 +17,7 @@ class Quizz {
     this.categoryId,
     this.name,
     this.image,
+    this.score,
     this.level,
     required this.questions,
     this.icon,
@@ -38,6 +40,8 @@ class Quizz {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['image'] = image;
+    data['score'] = score;
     data['category_id'] = categoryId;
     data['level'] = level;
     data['questions'] = questions.map((v) => v.toJson()).toList();

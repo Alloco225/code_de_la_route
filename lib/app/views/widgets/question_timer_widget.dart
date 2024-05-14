@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../helpers/utils.dart';
+
 class QuestionTimerWidget extends StatefulWidget {
   final bool pause;
   final double percentage;
@@ -44,12 +46,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
     super.dispose();
   }
 
-  Color get percentageColor {
-    if (widget.percentage <= .3) return Colors.red[500]!;
-    if (widget.percentage <= .5) return Colors.orange[800]!;
-    if (widget.percentage <= .8) return Colors.yellow[800]!;
-    return Colors.blue[500]!;
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +96,7 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
                         duration: const Duration(milliseconds: 300),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: percentageColor,
+                          color: percentageColor(widget.percentage),
                         ),
                       ),
                     )

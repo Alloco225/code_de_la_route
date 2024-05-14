@@ -48,6 +48,14 @@ void main() {
   }
 }
 
+
+Color percentageColor(percentage) {
+  if (percentage <= .3) return Colors.red[500]!;
+  if (percentage <= .5) return Colors.orange[800]!;
+  if (percentage <= .8) return Colors.yellow[800]!;
+  return Colors.blue[500]!;
+}
+
 // openModalBottomSheet(context, view) {
 //   showModalBottomSheet(
 //     context: context,

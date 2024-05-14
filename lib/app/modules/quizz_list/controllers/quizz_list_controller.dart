@@ -5,6 +5,7 @@ import 'package:codedelaroute/app/data/models/answer_model.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
 import 'package:collection/collection.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../data/models/question_model.dart';
 import '../../../data/models/quizz_model.dart';
@@ -14,6 +15,8 @@ import '../../../data/providers/sign_provider.dart';
 
 class QuizzListController extends GetxController {
   final _isLoading = true.obs;
+
+  final storage = GetStorage();
 
   final _quizzList = <Quizz>[].obs;
   final _quizzes = <Quizz>[].obs;
@@ -47,12 +50,29 @@ class QuizzListController extends GetxController {
     _groupedQuizzes.value =
         groupBy(_quizzes.value, (element) => element.categoryId!);
 
+    await Future.delayed(Duration(seconds: Random().nextInt(1)));
     _isLoading.value = false;
     // selectedCategory = CATEGORIES.firstWhere((el) => el.id == categoryId);
     // quizzes.value = QUIZZES.where((el) => el.categoryId == categoryId).toList();
     print("QuizzList onInit ");
     // log("QuizzList onInit ${quizzesJson.length}");
     print("QuizzList onReady");
+  }
+
+  updateQuizzScore(id, score) {
+    print("updateQuizzScore $id $score");
+    // var index = quizzes.indexWhere((element) => element.id == id);
+    // if (index != -1) {
+    //   _quizzes.value. [index].score = score;
+    //   storage.write(id, score);
+    // }
+    // for (var quizz in _quizzList.value) {
+    //   if (quizz.id == id) {
+    //     quizz.score = score;
+    //     storage.write(id, score);
+    //     break;
+    //   }
+    // }
   }
 
   loadQuizzesFromSignCategories() async {
@@ -84,7 +104,7 @@ class QuizzListController extends GetxController {
           isCorrect: true,
         ));
         // And other false answers
-        int falseAnswerCount = answersPerQuestion-1;
+        int falseAnswerCount = answersPerQuestion - 1;
         if (i >= signs.length - falseAnswerCount) {
           for (var j = i - 1; j >= i - falseAnswerCount; j--) {
             answers.add(Answer(content: signs[j].name));
@@ -96,7 +116,6 @@ class QuizzListController extends GetxController {
         }
         // confuuuse the ennemy
 
-
         if (answers.length == answersPerQuestion) {
           answers.shuffle();
           // Add fake answers
@@ -104,6 +123,7 @@ class QuizzListController extends GetxController {
           if (Random().nextDouble() > .2) {
             quizzImage = sign.imageUrl;
           }
+
           questions.add(Question(
             categoryId: category.id,
             prompt: "De quel panneau s'agit-il ?",
@@ -116,8 +136,11 @@ class QuizzListController extends GetxController {
         }
 
         if (questions.length == questionsPerQuizz || i == signs.length - 1) {
+          String quizzId = "q_${category.id}_${quizzes.length}";
+          double? score = storage.read(quizzId);
           quizzes.add(Quizz(
-            id: "q_${category.id}_$catIndex",
+            id: quizzId,
+            score: score,
             categoryId: category.id,
             name: null,
             image: quizzImage,

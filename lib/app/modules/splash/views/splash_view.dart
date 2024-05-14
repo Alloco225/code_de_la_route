@@ -1,6 +1,7 @@
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/modules/auth/submodules/login/views/login_modal_view.dart';
 import 'package:codedelaroute/app/modules/home/views/home_view.dart';
+import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -43,17 +44,10 @@ class SplashView extends GetView<SplashController> {
   Scaffold waitingView() {
     return Scaffold(
         body: Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(50),
-            child: Image.asset('assets/images/favicon.png'),
-          ),
-        ],
-      ),
-    ));
+            child: LoadingWidget(
+      size: 250,
+      padding: 30,
+    )));
   }
 }
 

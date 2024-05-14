@@ -3,23 +3,35 @@ import 'dart:developer';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/quizz_model.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../../helpers/utils.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../controllers/quizz_list_controller.dart';
 
-class QuizzListView extends GetView<QuizzListController> {
+class QuizzListView extends StatefulWidget {
   const QuizzListView({super.key});
+
+  @override
+  State<QuizzListView> createState() => _QuizzListViewState();
+}
+
+class _QuizzListViewState extends State<QuizzListView> {
+  final controller = Get.find<QuizzListController>();
+  final storage = GetStorage();
 
   gotoQuizz({categoryId, quizzId}) {
     log("gotoQuizz $categoryId $quizzId");
     Get.toNamed(
-        // Routes.QUIZZ_DETAIL,
-        Routes.QUIZZ_GAME,
-        arguments: {'categoryId': categoryId, 'quizzId': quizzId});
+            // Routes.QUIZZ_DETAIL,
+            Routes.QUIZZ_GAME,
+            arguments: {'categoryId': categoryId, 'quizzId': quizzId})
+        ?.then((value) => setState(() {}));
   }
 
   @override
@@ -32,9 +44,7 @@ class QuizzListView extends GetView<QuizzListController> {
               const TitleWidget(title: "Quizz"),
               Expanded(
                 child: controller.isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? LoadingWidget()
                     : ListView.builder(
                         itemCount: controller.groupedQuizzes.entries.length,
                         itemBuilder: (ctx, i) {
@@ -71,9 +81,10 @@ class QuizzListView extends GetView<QuizzListController> {
                                 for (var i = 0; i < values.length; i++)
                                   buildQuizzContainer(
                                       title: values[i].name ?? 'Quizz ${i + 1}',
-                                      completionPercentage: 0,
+                                      // completionPercentage: 0,
                                       image: values[i].image,
-                                      score: null,
+                                      storage: storage,
+                                      // score: values[i].score,
                                       quizzId: values[i].id,
                                       onTap: () => gotoQuizz(
                                             quizzId: values[i].id,
@@ -90,14 +101,18 @@ class QuizzListView extends GetView<QuizzListController> {
     );
   }
 
-  buildQuizzContainer({
+  Widget buildQuizzContainer({
     required quizzId,
     required String title,
-    String? score,
+    required storage,
+    // double? score,
     String? image,
-    double completionPercentage = .3,
+    // double completionPercentage = .3,
     required VoidCallback onTap,
   }) {
+    double? score = storage.read(quizzId);
+    double percentage = (((score ?? 0)) / 20);
+
     return ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 110, maxHeight: 120),
         child: InkWell(
@@ -144,13 +159,13 @@ class QuizzListView extends GetView<QuizzListController> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      "Note moyenne:",
+                                      "Note",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w400),
                                     ),
                                     Text(
-                                      "${score ?? ''}/20",
+                                      "${(score ?? 0).toInt()}/20",
                                       style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w400,
@@ -178,11 +193,11 @@ class QuizzListView extends GetView<QuizzListController> {
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: FractionallySizedBox(
-                                    widthFactor: completionPercentage,
+                                    widthFactor: percentage,
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
-                                        color: Colors.orange,
+                                        color: percentageColor(percentage),
                                       ),
                                       height: 8,
                                     ),
