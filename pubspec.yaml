@@ -62,6 +62,7 @@ flutter:
     - assets/images/signalisation/obligation/
     - assets/images/signalisation/temporaire/
     - assets/images/signalisation/interdiction/
+    - assets/images/signalisation/intersection/
     # 
     - assets/video/
 

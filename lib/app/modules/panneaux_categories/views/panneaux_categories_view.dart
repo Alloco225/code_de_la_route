@@ -46,38 +46,9 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
                                 childAspectRatio: 1,
                                 mainAxisSpacing: 10,
                                 crossAxisSpacing: 10),
-                        children: [
-                          InkWell(
-                            onTap: () => Get.toNamed(Routes.PANNEAUX),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.blueGrey.shade800,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: Colors.white,
-                                    )),
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Image.asset(
-                                          "assets/images/categories/lights.png"),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text("all".tr.toTitleCase(),
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white,
-                                            fontSize: 23)),
-                                  ],
-                                )),
-                          ),
-                          ...controller.categories.map(
-                              (element) => _buildCategoryGridItem(element)),
-                        ]),
+                        children: controller.categories.map(
+                              (element) => _buildCategoryGridItem(element)).toList(),
+                        ),
                   ),
           ),
           const BackNavButton(),
@@ -86,7 +57,37 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
     ));
   }
 
-  _buildCategoryGridItem(SignCategory element) {
+  // _buildAllBUtton() {
+  //   return InkWell(
+  //     onTap: () => Get.toNamed(Routes.PANNEAUX),
+  //     child: Container(
+  //         decoration: BoxDecoration(
+  //             color: Colors.blueGrey.shade800,
+  //             borderRadius: BorderRadius.circular(8),
+  //             border: Border.all(
+  //               color: Colors.white,
+  //             )),
+  //         padding: const EdgeInsets.all(10),
+  //         child: Column(
+  //           children: [
+  //             Expanded(
+  //               child: Image.asset("assets/images/categories/lights.png"),
+  //             ),
+  //             const SizedBox(
+  //               height: 10,
+  //             ),
+  //             Text("all".tr.toTitleCase(),
+  //                 textAlign: TextAlign.center,
+  //                 style: const TextStyle(
+  //                     fontWeight: FontWeight.w600,
+  //                     color: Colors.white,
+  //                     fontSize: 23)),
+  //           ],
+  //         )),
+  //   );
+  // }
+
+  Widget _buildCategoryGridItem(SignCategory element) {
     return InkWell(
       onTap: () => gotoSignsList(element),
       child: Container(
