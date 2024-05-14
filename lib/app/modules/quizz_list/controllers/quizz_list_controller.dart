@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:codedelaroute/app/data/models/answer_model.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
@@ -55,7 +56,7 @@ class QuizzListController extends GetxController {
   }
 
   loadQuizzesFromSignCategories() async {
-    log("loadQuizzesFromSignCategories");
+    print("loadQuizzesFromSignCategories");
     final signCategoryProvider = SignCategoryProvider();
     final signProvider = SignProvider();
 
@@ -66,44 +67,43 @@ class QuizzListController extends GetxController {
     for (var catIndex = 0; catIndex < categories.length; catIndex++) {
       SignCategory category = categories[catIndex];
 
+      String quizzImage = category.image!;
+
       List<Sign> signs =
           await signProvider.loadSignByCategory('signs_${category.id}');
 
-      const maxQuestionsPerQuizz = 10;
+      int questionsPerQuizz = 10;
+      int answersPerQuestion = 4;
+      List<Question> questions = [];
+      List<Answer> answers = [];
+      for (int i = 0; i < signs.length; i += 1) {
+        var sign = signs[i];
 
-      int quizzCount = signs.length ~/ maxQuestionsPerQuizz;
-
-      for (var quizzIdx = 0; quizzIdx < quizzCount; quizzIdx++) {
-        // signs.shuffle();
-        signs.slice(quizzIdx * maxQuestionsPerQuizz,
-            (quizzIdx + 1) * maxQuestionsPerQuizz);
-        //
-        List<Question> questions = [];
-        int maxQuestions = 10;
-        for (var i = 0; i < maxQuestions; i++) {
-          var sign = signs[i];
-
-          List<Answer> answers = [];
-
-          answers.add(Answer(
-            content: sign.name,
-            isCorrect: true,
-          ));
-          // And other false answers
-          const falseAnswerCount = 3;
-          if (i >= signs.length - falseAnswerCount) {
-            for (var j = i - 1; j >= i - falseAnswerCount; j--) {
-              answers.add(Answer(content: signs[j].name));
-            }
-          } else {
-            for (var j = i + 1; j <= i + falseAnswerCount; j++) {
-              answers.add(Answer(content: signs[j].name));
-            }
+        answers.add(Answer(
+          content: sign.name,
+          isCorrect: true,
+        ));
+        // And other false answers
+        int falseAnswerCount = answersPerQuestion-1;
+        if (i >= signs.length - falseAnswerCount) {
+          for (var j = i - 1; j >= i - falseAnswerCount; j--) {
+            answers.add(Answer(content: signs[j].name));
           }
-          // randomize the bih
-          answers.shuffle();
+        } else {
+          for (var j = i + 1; j <= i + falseAnswerCount; j++) {
+            answers.add(Answer(content: signs[j].name));
+          }
+        }
+        // confuuuse the ennemy
 
+
+        if (answers.length == answersPerQuestion) {
+          answers.shuffle();
           // Add fake answers
+
+          if (Random().nextDouble() > .2) {
+            quizzImage = sign.imageUrl;
+          }
           questions.add(Question(
             categoryId: category.id,
             prompt: "De quel panneau s'agit-il ?",
@@ -112,16 +112,20 @@ class QuizzListController extends GetxController {
             image: sign.imageUrl,
             answers: answers,
           ));
+          answers = [];
         }
 
-        //
-        quizzes.add(Quizz(
-          id: "q_${category.id}_$catIndex",
-          categoryId: category.id,
-          name: null,
-          image: category.image,
-          questions: questions,
-        ));
+        if (questions.length == questionsPerQuizz || i == signs.length - 1) {
+          quizzes.add(Quizz(
+            id: "q_${category.id}_$catIndex",
+            categoryId: category.id,
+            name: null,
+            image: quizzImage,
+            questions: questions,
+          ));
+          questions = [];
+          answers = [];
+        }
       }
     }
     return quizzes;

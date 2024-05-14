@@ -29,7 +29,7 @@ class SplashView extends GetView<SplashController> {
           if (snapshot.hasError) {
             return errorView(snapshot);
           } else {
-            return const Scaffold(body: OnBoard());
+            return Scaffold(body: HomeView());
           }
         }
       },
