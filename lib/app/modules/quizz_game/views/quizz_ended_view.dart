@@ -51,6 +51,15 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   final int MARK_TOTAL = 20;
   double score = 0;
   double percentage = 0;
+  String url = "https://code-de-la-route.amane.dev";
+
+  String get scoreText => '${score.toStringAsFixed(0)}/$MARK_TOTAL';
+
+  Map<String, String> get shareData => {
+    'title': "Est-ce que tu maitrises le Code de la Route ?",
+    'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
+    'url': url,
+  };
 
   @override
   void initState() {
@@ -102,16 +111,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
   Future<bool> getShareLink(String platformShareLink) async {
     print("getShareLink $platformShareLink");
-    String url = "https://code-de-la-route.amane.dev";
 
-    String scoreText = '${score.toStringAsFixed(0)}/$MARK_TOTAL';
-    Map<String, String> data = {
-      'title': "Euss, esseu tu peux ?",
-      'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
-      'url': url,
-    };
-    String stringText = data.values.join('\n');
-
+    String stringText = shareData.values.join('\n');
     String link = url;
 
     link = platformShareLink.replaceAll('REPLACE_WITH_LINK', stringText);
@@ -131,17 +132,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   void shareScore() async {
-    String stringToShare = "https://code-de-la-route.amane.dev";
-    // String link = "";
-
-    String scoreText = '${score.toStringAsFixed(0)}/$MARK_TOTAL';
-    Map<String, String> data = {
-      'title': "Euss, esseu tu peux ?",
-      'text':
-          "J'ai eu $scoreText au test de Code de la Route. Est-ce que tu maitrise le code de la route ?",
-      'url': stringToShare,
-    };
-    String stringText = data.values.join('\n');
+    String stringText = shareData.values.join('\n');
 
     var result = await Share.share(stringText);
     if (result.status == ShareResultStatus.success) {

@@ -48,8 +48,10 @@ void main() {
   }
 }
 
-
 Color percentageColor(percentage) {
+  if (percentage > 1) {
+    percentage /= 100;
+  }
   if (percentage <= .3) return Colors.red[500]!;
   if (percentage <= .5) return Colors.orange[800]!;
   if (percentage <= .8) return Colors.yellow[800]!;
@@ -77,6 +79,7 @@ openModalBottomSheet(view, {required context}) {
     builder: (context) => view,
   );
 }
+
 openSettingsModal(view, {required context}) {
   showMaterialModalBottomSheet(
     expand: false,
