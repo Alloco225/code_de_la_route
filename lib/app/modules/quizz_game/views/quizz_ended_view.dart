@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
@@ -54,10 +55,10 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   String get scoreText => '${score.toStringAsFixed(0)}/$MARK_TOTAL';
 
   Map<String, String> get shareData => {
-    'title': "Est-ce que tu maitrises le Code de la Route ?",
-    'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
-    'url': url,
-  };
+        'title': "Est-ce que tu maitrises le Code de la Route ?",
+        'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
+        'url': url,
+      };
 
   @override
   void initState() {
@@ -72,6 +73,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   void calcScore() async {
+    log("calcScore");
     final int total = widget.questionCount != 0 ? widget.questionCount : 1;
 
     percentage = (widget.correctAnswerCount * 100) / total;
@@ -86,6 +88,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       storage.write(quizzId, score);
     }
 
+    log("score $score :: $percentage, totalQuestions $total, correctAnswers ${widget.correctAnswerCount}");
 
     setState(() {});
     if (score == MARK_TOTAL) {
@@ -100,7 +103,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   Future<bool> getShareLink(String platformShareLink) async {
-
     String stringText = shareData.values.join('\n');
     String link = url;
 

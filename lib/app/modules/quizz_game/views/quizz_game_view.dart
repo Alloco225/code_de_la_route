@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:codedelaroute/app/modules/quizz_game/views/quizz_game_main_content_view.dart';
 import 'package:codedelaroute/app/views/widgets/back_nav_button.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,7 @@ class QuizzGameView extends GetView<QuizzGameController> {
     }
 
     if (controller.currentQuestion!.type == "image") {
+      log("currentQuestion answers : ${controller.currentQuestion?.answers}");
       return QuestionImageWidget(
         question: controller.currentQuestion!,
         isCorrectAnswerVisible: controller.isCorrectAnswerVisible,

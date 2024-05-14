@@ -18,4 +18,9 @@ class Answer {
     data['isCorrect'] = isCorrect;
     return data;
   }
+
+  @override
+  String toString() {
+    return "${toJson()}";
+  }
 }

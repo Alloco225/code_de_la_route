@@ -178,7 +178,7 @@ class QuizzGameController extends GetxController {
   }
 
   submitAnswer() async {
-    log(">> submitAnswer ${selectedAnswer.runtimeType}");
+    log(">> submitAnswer $selectedAnswer");
     setProcessing();
     stopTimer();
 
@@ -187,7 +187,8 @@ class QuizzGameController extends GetxController {
       bool isCorrect = false;
       String? content;
       switch (selectedAnswer.runtimeType) {
-        case Answer _:
+        // ignore: type_literal_in_constant_pattern
+        case Answer:
           content = (selectedAnswer as Answer).content;
 
           if ((selectedAnswer as Answer).isCorrect == true) {

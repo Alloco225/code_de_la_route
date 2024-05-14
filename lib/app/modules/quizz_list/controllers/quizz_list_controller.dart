@@ -108,6 +108,8 @@ class QuizzListController extends GetxController {
         if (questions.length == questionsPerQuizz || i == signs.length - 1) {
           String quizzId = "q_${category.id}_${quizzes.length}";
           double? score = storage.read(quizzId);
+
+          questions.shuffle();
           quizzes.add(Quizz(
             id: quizzId,
             score: score,
