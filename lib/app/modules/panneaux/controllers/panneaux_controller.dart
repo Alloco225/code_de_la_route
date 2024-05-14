@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../../data/db/db_data.dart';
 import '../../../data/models/sign_model.dart';
 import '../../../data/providers/sign_provider.dart';
 
 class PanneauxController extends GetxController {
-  //TODO: Implement PanneauxController
   final _categoryId = (null as String?).obs;
   final _categoryName = (null as String?).obs;
   final _quizzId = (null as int?).obs;
@@ -47,7 +45,7 @@ class PanneauxController extends GetxController {
     _categoryId.value = routeParams?['categoryId'];
     _categoryName.value = routeParams?['categoryName'];
 
-    _signsList.value = (await _signProvider.loadAllSigns()).cast<Sign>();
+    _signsList.value = await _signProvider.loadAllSigns();
 
     _signs.value = _signsList.value;
 

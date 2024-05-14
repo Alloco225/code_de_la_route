@@ -33,6 +33,7 @@ class Messages extends Translations {
           'all_category_signs': "@category Signs",
           'obligation': "Obligation",
           'danger': "Danger",
+          'temporaire': "Temporaire",
           'interdiction': "Interdiction",
           'indication': "Indication",
           'direction': "Direction",
@@ -60,11 +61,12 @@ class Messages extends Translations {
           //
           'back': "Retour",
           //
+          'all': "Voir tout",
           'signs': "Panneaux",
           'quizz': "Quizz",
           'slogan': "Conduire en toute sécurité, c'est facile",
           'title_signs': "Panneaux routiers",
-          'all_signs': "Chaque panneau @category",
+          'all_signs': "Tous les panneaux",
           'all_category_signs': "Panneaux @category",
           'obligation': "Obligation",
           'danger': "Danger",
@@ -73,7 +75,7 @@ class Messages extends Translations {
           'direction': "Direction",
           'signaling': "Panneaux routiers",
 
-          // 
+          //
           "virage_dangereux_gauche": "Virage dangereux à gauche",
           "virage_dangereux_droite": "Virage dangereux à droite",
           "virage_epingle_gauche": "Virage en épingle à cheveux à gauche",
@@ -106,7 +108,8 @@ class Messages extends Translations {
           "traversee_cyclistes": "Traversée de cyclistes",
           "pente_raide_gauche": "Pente raide à gauche",
           "pente_raide_droite": "Pente raide à droite",
-          "presence_animaux_domestiques": "Danger, présence d'animaux domestiques",
+          "presence_animaux_domestiques":
+              "Danger, présence d'animaux domestiques",
           "vent_fort": "Vent fort",
           "passage_niveau_sans_barrieres": "Passage à niveau sans barrières",
           "banc_brouillard": "Banc de brouillard",
@@ -119,7 +122,8 @@ class Messages extends Translations {
           "virage_serre_droite": "Virage serré à droite",
           "affaissement_chaussee": "Danger, affaissement de chaussée",
           "traversee_chevaux": "Traversée de chevaux",
-          "glissement_neige_roches": "Glissement de neige ou de roches possible",
+          "glissement_neige_roches":
+              "Glissement de neige ou de roches possible",
           "zone_brouillard": "Zone de brouillard",
           "traversee_pietons": "Traversée de piétons",
           "pente_raide_descente_continue": "Pente raide, descente continue",
@@ -131,10 +135,8 @@ class Messages extends Translations {
           "devers_dangereux_droite": "Dévers dangereux à droite",
           "traversee_tortues": "Traversée de tortues",
           "traversee_moutons": "Traversée de moutons",
-          // 
-          
+          //
         },
-        
         'ja_JP': {
           'hello': 'こんにちは、世界',
           'login': "ログイン",

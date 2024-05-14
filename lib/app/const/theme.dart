@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 // #35A12C
 // #F8F8FF
 // #152B3F
-import 'package:flutter/material.dart';
 
 const darkBlueColor = Color(0xFF1E3D59);
 const orangeColor = Color(0xFFF18D01);

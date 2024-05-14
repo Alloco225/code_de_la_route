@@ -17,7 +17,6 @@ class PanneauxView extends GetView<PanneauxController> {
 
   @override
   Widget build(BuildContext context) {
-
     showSignDetails(Sign sign, context) {
       // Open bottom drawer
       // openModalBottomSheet(PanneauDetailsModalView(sign: sign), context: context);
@@ -38,20 +37,21 @@ class PanneauxView extends GetView<PanneauxController> {
         children: [
           Obx(
             () => TitleWidget(
-              title: "Panneaux ${controller.categoryName}"
-              // controller.categoryName == null
-              //   ? "all_signs".tr
-              //   : "all_signs"
-              //       .trParams({'category': controller.categoryName ?? ''})
-              ,
+              title:
+                  // "Panneaux ${controller.categoryName}"
+                  controller.categoryName == null
+                      ? "all_signs".tr
+                      : "all_signs".trParams(
+                          {'category': controller.categoryName ?? ''}),
             ),
           ),
-          Obx(() => controller.isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Expanded(
-                  child: ListView(children: [
+          Expanded(
+              child: Obx(
+            () => controller.isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView(children: [
                     StaggeredGrid.count(
                       crossAxisCount: 2,
                       mainAxisSpacing: 15,
@@ -61,7 +61,8 @@ class PanneauxView extends GetView<PanneauxController> {
                           .map((element) => StaggeredGridTile.fit(
                                 crossAxisCellCount: 1,
                                 child: InkWell(
-                                  onTap: () => showSignDetails(element, context),
+                                  onTap: () =>
+                                      showSignDetails(element, context),
                                   child: Container(
                                       decoration: BoxDecoration(
                                           color: Colors.blueGrey.shade800,
@@ -98,8 +99,11 @@ class PanneauxView extends GetView<PanneauxController> {
                               ))
                           .toList(),
                     ),
+                    const SizedBox(
+                      height: 50,
+                    )
                   ]),
-                )),
+          )),
           const BackNavButton(),
         ],
       ),

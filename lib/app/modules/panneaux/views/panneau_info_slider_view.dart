@@ -17,8 +17,8 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
         constraints: BoxConstraints(
           minHeight: MediaQuery.of(context).size.height * .5,
           maxHeight: MediaQuery.of(context).size.height * .5 +
-              (controller.sign.description?.length ?? 0) * .65 +
-              (controller.sign.name?.length ?? 0) * .1,
+              (controller.sign.description?.length ?? 0) * .66 +
+              (controller.sign.name?.length ?? 0) * .3,
         ),
         child: PageView.builder(
           controller: controller.sliderController,

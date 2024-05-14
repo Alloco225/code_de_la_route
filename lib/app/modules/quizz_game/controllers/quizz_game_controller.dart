@@ -101,7 +101,7 @@ class QuizzGameController extends GetxController {
     if (selectedQuizz == null) return;
     if (selectedQuizz!.questions.isEmpty) return;
     log(">> startTimer");
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     _time.value = START_TIME * 1.0;
     _timer?.cancel();
@@ -183,6 +183,7 @@ class QuizzGameController extends GetxController {
   submitAnswer() async {
     log(">> submitAnswer ${selectedAnswer.runtimeType}");
     setProcessing();
+    stopTimer();
 
     if (selectedAnswer != null) {
       // Check if answer is correct
@@ -307,6 +308,6 @@ class QuizzGameController extends GetxController {
 
     _isQuitting.value = false;
 
-    togglePause();
+    // togglePause();
   }
 }

@@ -14,15 +14,14 @@ class SignProvider extends GetConnect {
   }
 
   Future<List<Sign>> loadAllSigns() async {
+    final allCategories =
+        await JsonDataProvider().loadJsonData('sign_categories');
+    List pathsToLoad =
+        allCategories.map((category) => 'signs_${category['id']}').toList();
     List<Sign> list = [];
 
-    List<List<Sign>> results = await Future.wait([
-      loadSignByCategory('signs_danger'),
-      loadSignByCategory('signs_direction'),
-      loadSignByCategory('signs_obligation'),
-      loadSignByCategory('signs_indication'),
-      loadSignByCategory('signs_interdiction'),
-    ]);
+    List<List<Sign>> results = await Future.wait(
+        pathsToLoad.map((path) => loadSignByCategory(path)).toList());
 
     for (var element in results) {
       list.addAll(element);
