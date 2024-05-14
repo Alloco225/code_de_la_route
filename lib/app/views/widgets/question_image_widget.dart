@@ -69,10 +69,15 @@ class QuestionImageWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.blueGrey[800],
               ),
-              child: Image.asset(
-                // getMediaPath(question.image!),
-                question.image!,
-                fit: BoxFit.cover,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.width,
+                ),
+                child: Image.asset(
+                  // getMediaPath(question.image!),
+                  question.image!,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 10.0),

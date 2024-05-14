@@ -13,6 +13,8 @@ class HomeView extends GetView<HomeController> {
 
   final _authService = Get.find<AuthService>();
 
+  final VERSION = "2.6.1";
+
   final List menuElements = [
     {
       "text": "signs",
@@ -125,14 +127,14 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   )),
-                  const Padding(
-                    padding: EdgeInsets.all(25),
+                  Padding(
+                    padding: const EdgeInsets.all(25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "v2.0.3",
-                          style: TextStyle(
+                          "v$VERSION",
+                          style: const TextStyle(
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
                               fontSize: 22),

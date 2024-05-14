@@ -104,8 +104,9 @@ class SettingsView extends GetView<SettingsController> {
                         //       builder: (context) =>
                         //           LanguageSettingsModalView(),
                         //     )),
-                        onTap: () =>
-                            showSnackbarInfo("Bientôt", context: context),
+                        onTap: () => showSnackbarInfo(
+                            "La traduction sera disponible dans la prochaine version",
+                            context: context),
                       ),
                     ),
                   ]),
