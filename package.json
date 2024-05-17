@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
+    "@supabase/supabase-js": "^2.43.0",
     "core-js": "^3.25.3",
     "dotenv": "^16.4.5",
     "firebase": "^10.10.0",
@@ -22,9 +23,11 @@
     "nuxt": "^2.15.8",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
+    "supabase": "^1.164.1",
     "vue": "^2.7.10",
     "vue-confetti": "^2.3.0",
     "vue-server-renderer": "^2.7.10",
+    "vue-supabase": "^2.3.0",
     "vue-template-compiler": "^2.7.10",
     "vuex-persistedstate": "^4.1.0"
   },

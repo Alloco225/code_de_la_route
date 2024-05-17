@@ -51,6 +51,7 @@ export default {
     '~/plugins/app-mixin-plugin.js',
     '~/plugins/confetti.js',
     '~/plugins/persistent.js',
+    '~/plugins/supabase.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

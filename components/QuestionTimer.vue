@@ -1,6 +1,6 @@
 <template>
   <div class="flex gap-2 mt-3 items-center">
-    <span @click="$emit('pause-game')" class="w-5 h-5 flex justify-center items-center">
+    <span @click="$emit('game-paused')" class="w-5 h-5 flex justify-center items-center">
       <ion-icon name="pause-outline" size="large"></ion-icon>
     </span>
     <div class="relative w-full">

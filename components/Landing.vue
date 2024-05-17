@@ -74,6 +74,10 @@ export default {
       return this.$store.state.categories.list
       return this.$store.getters['categories/list']
     },
+    menu() {
+      return this.$store.state.app.menu
+      return this.$store.getters['categories/list']
+    },
   },
   methods: {
     async initApp() {

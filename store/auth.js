@@ -10,6 +10,9 @@ export default {
     isAuthenticated(state) {
       return !!state.token
     },
+    isAuth(state) {
+      return !!state.token
+    },
     token(state) {
       return state.token
     },
