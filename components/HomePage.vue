@@ -37,6 +37,66 @@
     </section>
 
     <!-- testimonies -->
+    <section class="py-10">
+      <div class="grid grid-cols-3 gap-3">
+        <article
+          v-for="i in 3"
+          :key="i"
+          class="border rounded-xl px-3 py-5 flex flex-col gap-3"
+        >
+          <div>
+            <div class="float-start relative h-32 w-32 -m-3">
+              <img
+                src="/categories/degagement.jpg"
+                class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover w-20 h-20 border-4 rounded-full"
+                alt=""
+              />
+              <img
+                src="/images/logo_frame.svg"
+                class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-24 h-24"
+                alt=""
+              />
+            </div>
+
+            <div
+              class="flex flex-col"
+            >
+              <h3 class="font-medium text-2xl">User name</h3>
+              <div class=" text-orange-500">
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star"></ion-icon>
+              </div>
+            </div>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi,
+              labore qui. Quia ipsam tenetur fugiat laudantium, quis soluta,
+              rerum autem voluptatibus recusandae libero et possimus optio
+              ducimus reprehenderit quasi rem!
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="rounded-xl p-5 flex justify-between border">
+      <div class="flex flex-col gap-2">
+        <div>
+          <h3 class="font-medium text-xl">Lorem ipsum dolor sit amet.</h3>
+          <h3 class="ont-medium text-xl">Lorem ipsum dolor sit amet.</h3>
+        </div>
+        <div class="flex gap-3 text-white">
+          <button class="rounded bg-black px-2 py-1">Apple Store</button>
+          <button class="rounded bg-black px-2 py-1">Play Store</button>
+        </div>
+      </div>
+      <div class="h-64 w-32 transform rotate-6">
+        <img src="/images/shots/3_panneaux_obligation.jpg" class="w-full h-auto" alt="">
+      </div>
+    </section>
   </div>
 </template>
 
@@ -49,72 +109,30 @@ export default {
       password: null,
     }
   },
-  async created() {
-    console.log('menu')
-    this.toggleLoading('initApp', true)
-    await this.initApp()
-    this.toggleLoading('initApp', false)
-  },
-  mounted() {
-    console.log('mounted')
-  },
-  computed: {
-    isAuth() {
-      // return supabase.auth.user();
-      return this.$store.state.auth.isAuth
-      return this.$store.getters['categories/list']
-    },
-    categories() {
-      return this.$store.state.categories.list
-      return this.$store.getters['categories/list']
-    },
-    categories() {
-      return this.$store.state.categories.list
-      return this.$store.getters['categories/list']
-    },
-    menu() {
-      return this.$store.state.app.menu
-      return this.$store.getters['categories/list']
-    },
-  },
-  methods: {
-    async initApp() {
-      console.log('initApp')
-
-      // Initialize Facebook SDK
-      window.fbAsyncInit = function () {
-        FB.init({
-          appId: process.env.FACEBOOK_APP_ID,
-          autoLogAppEvents: process.env.FACEBOOK_AUTO_LOG_APP_EVENTS,
-          xfbml: process.env.FACEBOOK_XFBML,
-          version: process.env.FACEBOOK_AUTH_VERSION,
-        })
-      }
-    },
-
-    async login() {
-      try {
-        const { user, session, error } = await supabase.auth.signIn({
-          email: this.email,
-          password: this.password,
-        })
-
-        if (error) {
-          console.error(error.message)
-        } else {
-          console.log('Authenticated successfully', user, session)
-          // Redirect or do something else upon successful authentication
-        }
-      } catch (error) {
-        console.error('Error signing in:', error.message)
-      }
-    },
-
-    gotoCategory(category) {
-      this.$router.push('/categories/' + category.id)
-    },
-  },
 }
 </script>
 
-<style></style>
+<style>
+.mask1 {
+  -webkit-mask-image: url('/images/logo frame.png');
+  mask-image: url('/images/logo frame.png');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.hexagon {
+  position: relative;
+  background-color: orange;
+  clip-path: polygon(25% 5%, 75% 5%, 95% 50%, 75% 95%, 25% 95%, 5% 50%);
+}
+
+.hexagon img {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  clip-path: polygon(25% 5%, 75% 5%, 95% 50%, 75% 95%, 25% 95%, 5% 50%);
+  border-radius: 10px; /* Smooth the corners */
+}
+</style>
