@@ -1,4 +1,5 @@
 <template lang="pug">
+
   div(class="bg-white h-full overflow-y-scroll")
     div(class="container mx-auto p-8")
       h1(class="text-2xl font-bold mb-4") Conditions générales d'utilisation de l'application
@@ -32,6 +33,8 @@
       h2(class="text-xl font-bold mt-4 mb-2") Lois applicables
       p Ces Conditions sont régies et interprétées conformément aux lois de la République de Côte d'Ivoire.
       p En utilisant l'application "Code de la Route", vous acceptez d'être lié par ces Conditions. Si vous avez des questions ou des préoccupations concernant ces Conditions, veuillez nous contacter à hello@amane.dev.
+    home-footer 
+
 </template>
 
 <script>

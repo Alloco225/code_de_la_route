@@ -1,13 +1,42 @@
 <template>
-  <div class="flex items-start relative justify-center gap-3 mt-10">
-    <mini-quizz-question
-      v-for="(question, i) in questions"
-      @answered="validateAnswer"
-      :isActive="isActiveQuestion(i)"
-      :question="question"
-      :key="i"
-      :style="'opacity:' + (1 - (i - activeQuestionIndex) * 0.25) + ';'"
-    ></mini-quizz-question>
+  <div class="flex flex-col">
+    <div
+      class="flex flex-col md:flex-row items-start relative justify-center gap-3 mt-10"
+    >
+      <mini-quizz-question
+        v-for="(question, i) in questions"
+        @answered="validateAnswer"
+        :isActive="isActiveQuestion(i) && gamePlaying"
+        :question="question"
+        :key="i"
+        :style="'opacity:' + (1 - (i - activeQuestionIndex) * 0.25) + ';'"
+      ></mini-quizz-question>
+    </div>
+
+    <transition name="slide-down">
+      <div v-show="showResults" class="flex flex-col items-center gap-2 mt-3">
+        <div class="text-center mt-5">
+          <h3 class="text-3xl font-semibold">Votre score</h3>
+          <div
+            id="score-container"
+            class="rounded-full text-6xl mt-3 font-bold text-white flex justify-center items-center w-24 h-24 mx-auto animated-pulse text-black"
+            :class="{
+              'bg-green-500': score == MARK_TOTAL,
+              'bg-blue-500': score < MARK_TOTAL,
+              'bg-orange-500': score <= MARK_TOTAL / 2,
+              'bg-red-500': score <= MARK_TOTAL / 3,
+            }"
+          >
+            {{ score.toFixed(0) }}/{{ MARK_TOTAL }}
+          </div>
+          <h5>Téléchargez l'application pour plus de quizz</h5>
+        </div>
+        <div class="flex justify-center gap-3 text-white">
+          <button class="rounded bg-black px-2 py-1">Apple Store</button>
+          <button class="rounded bg-black px-2 py-1">Play Store</button>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -16,6 +45,11 @@ export default {
   name: 'MiniQuizz',
   data() {
     return {
+
+      MARK_TOTAL: 20,
+      score: 0,
+      gamePlaying: true,
+      showResults: false,
       activeQuestionIndex: 0,
       answers: [],
       questions: [
@@ -24,21 +58,20 @@ export default {
           question: "De quel panneau s'agit-il ?",
           level: '',
           type: 'image',
-          image: '/signalisation/585f90abcb11b227491c3571.png',
+          image: '/signalisation/sens-giratoire-obligatoire.svg.png',
           answers: [
-            {
-              content: 'Panneau Arrêt au poste de douane',
-            },
-            {
-              content:
-                'Panneau Accès interdit aux véhicules pesant sur un essieu plus que le nombre indiqué',
-            },
             {
               content: 'Panneau Céder le passage',
+            },
+            {
+              content: 'Tourner à gauche',
+            },
+            {
+              content: 'Sens giratoire obligatoire',
               isCorrect: true,
             },
             {
-              content: 'Panneau STOP sur un poteau',
+              content: 'Faire demi-tour',
             },
           ],
         },
@@ -48,19 +81,23 @@ export default {
           level: '',
           type: 'image',
 
-          image: '/signalisation/585f8f6dcb11b227491c355c.png',
+          image:
+            '/signalisation/panneau-d-interdictionsens-interdit-a-tout-vehicule-b1.png',
           answers: [
             {
-              content:
-                'Panneau Accès interdit aux véhicules pesant sur un essieu plus que le nombre indiqué',
-              isCorrect: true,
+              content: 'Arrêt et stationnement interdits',
             },
             {
-              content: 'Panneau Arrêt au poste de douane',
+              content: 'Sens Interdit',
+              isCorrect: true,
             },
 
             {
-              content: 'Panneau Arrêt et stationnement interdits',
+              content: 'Interdit de passer',
+            },
+
+            {
+              content: 'Interdit de circuler',
             },
           ],
         },
@@ -70,17 +107,20 @@ export default {
           level: '',
           type: 'image',
 
-          image: '/signalisation/585f8f49cb11b227491c3558.png',
+          image:
+            '/signalisation/panneau-indication-circulation-a-sens-unique-c12.png',
           answers: [
             {
-              content: 'Panneau Arrêt au poste de douane',
+              content: 'Continuer tout droit',
             },
             {
-              content:
-                'Panneau Accès interdit aux véhicules pesant sur un essieu plus que le nombre indiqué',
+              content: 'Circuler sur la voie du milieu',
             },
             {
-              content: 'Panneau Accès interdits aux motos',
+              content: 'Direction autoroute',
+            },
+            {
+              content: 'Circulation sens unique',
               isCorrect: true,
             },
           ],
@@ -91,14 +131,21 @@ export default {
           level: '',
           type: 'image',
 
-          image: '/signalisation/585f8f74cb11b227491c355d.png',
+          image:
+            '/signalisation/panneau-indication-du-caractere-prioritaire-d-une-route-ab6.jpg',
           answers: [
             {
-              content: 'Panneau STOP sur un poteau',
+              content: 'Indique des travaux sur la voie',
             },
             {
-              content: 'Panneau Arrêt au poste de douane',
+              content: 'Indique une route prioritaire',
               isCorrect: true,
+            },
+            {
+              content: 'Indique un pont mobile',
+            },
+            {
+              content: 'Indique un céder le passage',
             },
           ],
         },
@@ -111,15 +158,41 @@ export default {
     },
   },
   methods: {
+    calcScore() {
+      let percentage = (this.answers.filter(r => !!r).length * 100) / (this.questions.length ?? 0);
+      // find percentage value in regard to MARK_TOTAL which is 100/5
+      const coefficient = 100 / this.MARK_TOTAL;
+      this.score = percentage / coefficient;
+      if (this.score == this.MARK_TOTAL) {
+        this.throwConfetti();
+      }
+    },
+    throwConfetti() {
+      setTimeout(() => {
+        console.log("confetti !!");
+        this.$confetti.start();
+        setTimeout(() => {
+          this.$confetti.stop();
+        }, 2000);
+      }, 500);
+    },
     isActiveQuestion(index) {
       return this.activeQuestionIndex == index
     },
     isAnswerCorrect(index) {
       return this.answers[index]
     },
+    endGame() {
+      this.gamePlaying = false
+      this.showResults = true
+      this.calcScore();
+    },
     nextQuestion() {
-      if (this.activeQuestionIndex < this.questions.length - 1)
+      if (this.activeQuestionIndex < this.questions.length - 1) {
         this.activeQuestionIndex++
+        return
+      }
+      this.endGame()
     },
     submitAnswer() {},
     validateAnswer(answer) {
@@ -129,7 +202,7 @@ export default {
 
       setTimeout(() => {
         this.nextQuestion()
-      }, 2000);
+      }, 500)
     },
   },
 }

@@ -1,8 +1,8 @@
 <template>
   <div
-    class="transition duration-200 ease-out h-full w-full flex flex-col px-5 mx-auto md:w-11/12 xl:w-10/12 pt-5 pb-10"
+    class="transition duration-200 ease-out h-full w-full flex flex-col pt-5 pb-10"
   >
-    <nav class="justify-between hidden">
+    <nav class="justify-between hidden px-5 mx-auto md:w-11/12 xl:w-10/12">
       <img src="/favicon.png" alt="" class="w-24 h-24" />
 
       <ul>
@@ -10,10 +10,10 @@
       </ul>
     </nav>
     <section
-      class="h-full flex flex-col gap-10 justify-center mx-auto w-1/2 py-24"
+      class="md:h-full flex flex-col gap-10 justify-center mx-auto md:w-1/2 md:py-24"
     >
       <div class="flex justify-center">
-        <img src="/favicon.png" alt="" />
+        <img src="/favicon.png" class="w-32 md:w-auto" alt="" />
       </div>
       <h1 class="text-4xl font-semibold text-center">
         Maitriser le Code de la Route n'a jamais été aussi facile
@@ -28,16 +28,60 @@
         <button class="rounded bg-black px-2 py-1">Play Store</button>
       </div>
     </section>
-    <section class="py-10">
-      <h2 class="text-2xl font-medium text-center">
-        Des quiz sur chaque sujet pour vous tester
-      </h2>
 
-      <mini-quizz></mini-quizz>
+    <section class="py-10 bg-gray-50">
+      <div
+        class="flex flex-col text-center md:text-left items-center md:grid grid-cols-2 gap-5 px-5 mx-auto md:w-11/12 xl:w-10/12"
+      >
+        <div
+          class="font-medium flex flex-col gap-3 justify-center md:items-start"
+        >
+          <h2 class="text-5xl">Lessons sur les Panneaux</h2>
+          <p>Révisez et apprennnez les panneaux grace à des flash cards</p>
+          <div class="flex justify-center gap-3 text-white">
+            <button class="rounded bg-black px-2 py-1">Apple Store</button>
+            <button class="rounded bg-black px-2 py-1">Play Store</button>
+          </div>
+        </div>
+        <!-- <flip-image-group></flip-image-group> -->
+        <div class="relative flex flex-col md:flex-row gap-2">
+          <img
+            class="md:h-96 md:w-auto w-full h-auto"
+            src="/images/shots/sign_indication_details.jpg"
+            alt=""
+          />
+          <img
+            class="md:h-96 md:w-auto w-full h-auto"
+            src="/images/shots/sign_interdiction_details_2.jpg"
+            alt=""
+          />
+          <img
+            class="md:h-96 md:w-auto w-full h-auto"
+            src="/images/shots/sign_obligation_details.jpg"
+            alt=""
+          />
+        </div>
+      </div>
     </section>
 
+    <section class="py-20  bg-gray-100">
+      <div class="flex flex-col px-5 mx-auto md:w-11/12 xl:w-10/12">
+        <div
+          class="font-medium text-center md:text-left flex flex-col items-center justify-center"
+        >
+          <h2 class="text-5xl">Quizz sur les Panneaux</h2>
+          <p>Révisez et apprennnez les panneaux grace à des quizz</p>
+        </div>
+        <div>
+          <mini-quizz></mini-quizz>
+        </div>
+      </div>
+    </section>
+
+    <home-footer></home-footer>
+
     <!-- testimonies -->
-    <section class="py-10">
+    <!-- <section class="py-10">
       <div class="grid grid-cols-3 gap-3">
         <article
           v-for="i in 3"
@@ -58,11 +102,9 @@
               />
             </div>
 
-            <div
-              class="flex flex-col"
-            >
+            <div class="flex flex-col">
               <h3 class="font-medium text-2xl">User name</h3>
-              <div class=" text-orange-500">
+              <div class="text-orange-500">
                 <ion-icon name="star"></ion-icon>
                 <ion-icon name="star"></ion-icon>
                 <ion-icon name="star"></ion-icon>
@@ -79,24 +121,7 @@
           </div>
         </article>
       </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="rounded-xl p-5 flex justify-between border">
-      <div class="flex flex-col gap-2">
-        <div>
-          <h3 class="font-medium text-xl">Lorem ipsum dolor sit amet.</h3>
-          <h3 class="ont-medium text-xl">Lorem ipsum dolor sit amet.</h3>
-        </div>
-        <div class="flex gap-3 text-white">
-          <button class="rounded bg-black px-2 py-1">Apple Store</button>
-          <button class="rounded bg-black px-2 py-1">Play Store</button>
-        </div>
-      </div>
-      <div class="h-64 w-32 transform rotate-6">
-        <img src="/images/shots/3_panneaux_obligation.jpg" class="w-full h-auto" alt="">
-      </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
