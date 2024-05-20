@@ -10,7 +10,7 @@
       </ul>
     </nav>
     <section
-      class="md:h-full flex flex-col gap-10 justify-center mx-auto md:w-1/2 md:py-24"
+      class="md:h-full flex flex-col gap-10 justify-center mx-auto px-3 md:w-1/2 py-10 md:py-24"
     >
       <div class="flex justify-center">
         <img src="/favicon.png" class="w-32 md:w-auto" alt="" />
@@ -73,7 +73,7 @@
           <p>Révisez et apprennnez les panneaux grace à des quizz</p>
         </div>
         <div>
-          <mini-quizz></mini-quizz>
+          <mini-quizz :start="startMiniQuizz"></mini-quizz>
         </div>
       </div>
     </section>
@@ -132,6 +132,7 @@ export default {
     return {
       email: null,
       password: null,
+      startMiniQuizz: false,
     }
   },
 }

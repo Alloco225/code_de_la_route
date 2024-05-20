@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div id="mini_quizz" class="flex flex-col">
     <div
       class="flex flex-col md:flex-row items-start relative justify-center gap-3 mt-10"
     >
@@ -10,6 +10,7 @@
         :question="question"
         :key="i"
         :style="'opacity:' + (1 - (i - activeQuestionIndex) * 0.25) + ';'"
+        :id="'mini_quizz_question_'+ i"
       ></mini-quizz-question>
     </div>
 
@@ -19,7 +20,7 @@
           <h3 class="text-3xl font-semibold">Votre score</h3>
           <div
             id="score-container"
-            class="rounded-full text-6xl mt-3 font-bold text-white flex justify-center items-center w-24 h-24 mx-auto animated-pulse text-black"
+            class="rounded-full text-6xl mt-3 font-bold flex justify-center items-center w-24 h-24 mx-auto animated-pulse text-black"
             :class="{
               'bg-green-500': score == MARK_TOTAL,
               'bg-blue-500': score < MARK_TOTAL,
@@ -43,6 +44,12 @@
 <script>
 export default {
   name: 'MiniQuizz',
+  props: {
+    startMiniQuizz: {
+      type: Boolean,
+      default: false,
+    }
+  },
   data() {
     return {
 
@@ -152,12 +159,31 @@ export default {
       ],
     }
   },
+  mounted(){
+
+    document.addEventListener('wheel', ()=>{
+      setTimeout(() => {
+        this.gamePlaying = this.checkVisible('#mini_quizz');
+      }, 300);
+    })
+  },
   computed: {
     currentQuestion() {
       return this.questions[this.activeQuestionIndex]
     },
   },
   methods: {
+    checkVisible(elmId, threshold = 0, mode) {
+      threshold = threshold || 0;
+      mode = mode || 'visible';
+      let elm = document.querySelector(elmId)
+      var rect = elm.getBoundingClientRect();
+      var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+      var above = rect.bottom - threshold < 0;
+      var below = rect.top - viewHeight + threshold >= 0;
+
+      return mode === 'above' ? above : (mode === 'below' ? below : !above && !below);
+    },
     calcScore() {
       let percentage = (this.answers.filter(r => !!r).length * 100) / (this.questions.length ?? 0);
       // find percentage value in regard to MARK_TOTAL which is 100/5
@@ -169,7 +195,6 @@ export default {
     },
     throwConfetti() {
       setTimeout(() => {
-        console.log("confetti !!");
         this.$confetti.start();
         setTimeout(() => {
           this.$confetti.stop();
@@ -190,19 +215,22 @@ export default {
     nextQuestion() {
       if (this.activeQuestionIndex < this.questions.length - 1) {
         this.activeQuestionIndex++
+        try {
+          let elId = 'mini_quizz_question_'+ this.activeQuestionIndex;
+          document.getElementById(elId).scrollIntoView();
+        } catch (error) {
+
+        }
         return
       }
       this.endGame()
     },
     submitAnswer() {},
     validateAnswer(answer) {
-      console.log('validateAnswer', answer)
       this.answers[this.activeQuestionIndex] = !!answer?.isCorrect
-      console.log('answers', this.answers)
-
       setTimeout(() => {
         this.nextQuestion()
-      }, 500)
+      }, 1000)
     },
   },
 }
