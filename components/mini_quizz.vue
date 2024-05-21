@@ -11,6 +11,7 @@
         :key="i"
         :style="'opacity:' + (1 - (i - activeQuestionIndex) * 0.25) + ';'"
         :id="'mini_quizz_question_'+ i"
+        class="pt-5 md:pt-0"
       ></mini-quizz-question>
     </div>
 
