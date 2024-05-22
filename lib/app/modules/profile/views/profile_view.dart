@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/const/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -15,38 +16,60 @@ class ProfileView extends GetView<ProfileController> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TitleWidget(title: "settings".tr),
+            TitleWidget(title: "profile".tr),
             Expanded(
               child: Column(
                 children: [
                   const Spacer(),
                   Container(
-                    child: const Column(
-                      children: [
-                        CircleAvatar(),
-                        Text("Username"),
-                        Row(
-                          children: [
-                            Text("Rank : 1"),
-                            Text("Points : 2"),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  const Expanded(
                     child: Column(
                       children: [
-                        ListTile(
-                          title: Text("delete_account"),
+                        const CircleAvatar(
+                          radius: 30,
                         ),
-                        ListTile(
-                          title: Text("logout"),
+                        const Text("Username", style: TextStyle(fontSize: 20)),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.blueGrey.shade800,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: Colors.white,
+                              )),
+                          child: Row(
+                            children: [
+                              Expanded(child: _buildStatItem("Signs", "0/5")),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(child: _buildStatItem("Quizzes", "0/5")),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: _buildStatItem("Moyenne", "20/20"),
+                              ),
+                            ],
+                          ),
                         ),
-                        ListTile(
-                          title: Text("achievements"), // TODO
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.blueGrey.shade800,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: Colors.white,
+                              )),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Rank:"),
+                              Text("Traffic Titan"),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -60,6 +83,21 @@ class ProfileView extends GetView<ProfileController> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStatItem(String title, String value) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 21),
+        ),
+        Text(
+          value,
+          style: const TextStyle(fontSize: 20),
+        ),
+      ],
     );
   }
 }

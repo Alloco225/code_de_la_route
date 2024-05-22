@@ -1,8 +1,6 @@
 import 'package:codedelaroute/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 
-import '../middlewares/auth_guard.dart';
-import '../middlewares/premium_guard.dart';
 import '../modules/auth/submodules/register/bindings/register_binding.dart';
 import '../modules/auth/submodules/register/views/register_view.dart';
 import '../modules/course_detail/bindings/course_detail_binding.dart';

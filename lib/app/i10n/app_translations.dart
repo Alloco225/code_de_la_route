@@ -83,8 +83,6 @@ class Messages extends Translations {
           "route_glissante": "Danger, route glissante",
           "virage_dangereux_double_sens": "Virage dangereux à double sens",
           "passage_pietons_dangereux": "Passage pour piétons dangereux",
-          "devers_dangereux_gauche": "Dévers dangereux à gauche",
-          "devers_dangereux_droite": "Dévers dangereux à droite",
           "traversee_sangliers": "Traversée de sangliers",
           "chaussee_deformee": "Chaussée déformée",
           "bordure_abrupte": "Danger, bordure abrupte",
@@ -108,8 +106,7 @@ class Messages extends Translations {
           "traversee_cyclistes": "Traversée de cyclistes",
           "pente_raide_gauche": "Pente raide à gauche",
           "pente_raide_droite": "Pente raide à droite",
-          "presence_animaux_domestiques":
-              "Danger, présence d'animaux domestiques",
+          "presence_animaux_domestiques": "Danger, présence d'animaux domestiques",
           "vent_fort": "Vent fort",
           "passage_niveau_sans_barrieres": "Passage à niveau sans barrières",
           "banc_brouillard": "Banc de brouillard",

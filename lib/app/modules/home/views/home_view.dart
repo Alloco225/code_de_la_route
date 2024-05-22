@@ -40,10 +40,15 @@ class HomeView extends GetView<HomeController> {
     //    Routes.LEADERBOARD
     //   ,
     // },
+    // {
+    //   "text": "settings",
+    //   "icon": Ionicons.settings_outline,
+    //   "route": Routes.SETTINGS,
+    // },
     {
-      "text": "settings",
-      "icon": Ionicons.settings_outline,
-      "route": Routes.SETTINGS,
+      "text": "profile",
+      "icon": Ionicons.person_outline,
+      "route": Routes.PROFILE,
     },
   ];
 

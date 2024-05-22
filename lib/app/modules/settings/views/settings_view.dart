@@ -1,6 +1,5 @@
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
-import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,10 @@ import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../helpers/utils.dart';
+import '../../../routes/app_pages.dart';
+import '../../../views/ui/snackbar.dart';
 import '../../../views/widgets/back_nav_button.dart';
+import '../../auth/submodules/login/views/login_modal_view.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -28,51 +30,51 @@ class SettingsView extends GetView<SettingsController> {
               child: Column(
                 children: [
                   const Spacer(),
-                  // Obx(
-                  //   () => buildSettingTile(
-                  //       title: "profile".tr,
-                  //       icon: Ionicons.person,
-                  //       value: (controller.auth.isAuth
-                  //               ? "logged_in"
-                  //               : "logged_out")
-                  //           .tr,
-                  //       onTap: () async {
-                  //         if (controller.auth.isAuth) {
-                  //           // showSnackbarSuccess("Already logged in",
-                  //           //     context: context);
-                  //           Get.toNamed(Routes.PROFILE);
-                  //           return;
-                  //         }
+                  Obx(
+                    () => buildSettingTile(
+                        title: "profile".tr,
+                        icon: Ionicons.person,
+                        value: (controller.auth.isAuth
+                                ? "logged_in"
+                                : "logged_out")
+                            .tr,
+                        onTap: () async {
+                          if (controller.auth.isAuth) {
+                            // showSnackbarSuccess("Already logged in",
+                            //     context: context);
+                            Get.toNamed(Routes.PROFILE);
+                            return;
+                          }
 
-                  //         bool? loggedIn = await showMaterialModalBottomSheet(
-                  //           expand: false,
-                  //           context: context,
-                  //           backgroundColor: Colors.transparent,
-                  //           // builder: (context) => const ModalInsideModal());
-                  //           builder: (context) => LoginModalView(),
-                  //         );
-                  //         if (loggedIn == true) {
-                  //           showSnackbarSuccess("User in !", context: context);
-                  //         } else {
-                  //           showSnackbarError("Could not log in !",
-                  //               context: context);
-                  //         }
-                  //       }),
-                  // ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     buildSettingTile(
-                  //       title: "theme".tr,
-                  //       icon: Ionicons.sunny_outline,
-                  //       value: "dark".tr,
-                  //       flex: 0,
-                  //     ),
-                  //   ],
-                  // ),
+                          bool? loggedIn = await showMaterialModalBottomSheet(
+                            expand: false,
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            // builder: (context) => const ModalInsideModal());
+                            builder: (context) => LoginModalView(),
+                          );
+                          if (loggedIn == true) {
+                            showSnackbarSuccess("User in !", context: context);
+                          } else {
+                            showSnackbarError("Could not log in !",
+                                context: context);
+                          }
+                        }),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildSettingTile(
+                        title: "theme".tr,
+                        icon: Ionicons.sunny_outline,
+                        value: "dark".tr,
+                        flex: 0,
+                      ),
+                    ],
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -95,22 +97,20 @@ class SettingsView extends GetView<SettingsController> {
                         value: (controller.lang.selectedLanguage?.id ?? '')
                             .toUpperCase(),
                         flex: 1,
-                        // onTap: () => showMaterialModalBottomSheet(
-                        //       expand: false,
-                        //       enableDrag: false,
-                        //       isDismissible: true,
-                        //       context: context,
-                        //       backgroundColor: Colors.transparent,
-                        //       builder: (context) =>
-                        //           LanguageSettingsModalView(),
-                        //     )),
-                        onTap: () => showSnackbarInfo(
-                            "La traduction sera disponible dans la prochaine version",
-                            context: context),
+                        onTap: () => showMaterialModalBottomSheet(
+                          expand: false,
+                          enableDrag: false,
+                          isDismissible: true,
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => LanguageSettingsModalView(),
+                        ),
+                        // onTap: () => showSnackbarInfo(
+                        //     "La traduction sera disponible dans la prochaine version",
+                        //     context: context),
                       ),
                     ),
                   ]),
-
                   const SizedBox(
                     height: 15,
                   ),

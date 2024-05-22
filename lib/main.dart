@@ -25,8 +25,8 @@ void main() async {
 
   await Get.putAsync(() => AuthService().init());
 
-  // var locale = Get.deviceLocale;
-  var locale = const Locale('fr', 'FR');
+  var locale = Get.deviceLocale;
+  // var locale = const Locale('fr', 'FR');
 
   runApp(
     GetMaterialApp(
