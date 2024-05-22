@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/quizz_model.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/views/widgets/container_widget.dart';
 import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -113,16 +114,13 @@ class _QuizzListViewState extends State<QuizzListView> {
     double? score = storage.read(quizzId);
     double percentage = (((score ?? 0)) / 20);
 
-    return ConstrainedBox(
+    return Container(
+        margin: const EdgeInsets.only(bottom: 10),
         constraints: const BoxConstraints(minHeight: 110, maxHeight: 120),
         child: InkWell(
           onTap: onTap,
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            decoration: BoxDecoration(
-                color: Colors.blueGrey.shade800,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.white)),
+          child: ContainerWidget(
+            padding: EdgeInsets.zero,
             child: Row(
               children: [
                 if (image != null)

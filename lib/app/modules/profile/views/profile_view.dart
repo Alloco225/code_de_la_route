@@ -1,10 +1,9 @@
-import 'package:codedelaroute/app/const/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
 import '../../../views/widgets/back_nav_button.dart';
+import '../../../views/widgets/container_widget.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../controllers/profile_controller.dart';
 
@@ -21,23 +20,20 @@ class ProfileView extends GetView<ProfileController> {
             Expanded(
               child: Column(
                 children: [
-                  const Spacer(),
+                  const SizedBox(height: 50),
                   Container(
                     child: Column(
                       children: [
-                        const CircleAvatar(
-                          radius: 30,
+                        const ContainerWidget(
+                          borderRadius: 100,
+                          child: SizedBox(
+                            width: 100,
+                            height: 100,
+                          ),
                         ),
                         const Text("Username", style: TextStyle(fontSize: 20)),
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.blueGrey.shade800,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
+                        const SizedBox(height: 20),
+                         ContainerWidget(
                           child: Row(
                             children: [
                               Expanded(child: _buildStatItem("Signs", "0/5")),
@@ -55,20 +51,33 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.blueGrey.shade800,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
-                          child: const Row(
+                        const ContainerWidget(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Rank:"),
                               Text("Traffic Titan"),
                             ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          "achievements".tr,
+                          style: const TextStyle(fontSize: 23),
+                        ),
+                        Expanded(
+                          child: GridView.count(
+                            crossAxisCount: 4,
+                            crossAxisSpacing: 5,
+                            children: List.generate(4, (index) {
+                              return const ContainerWidget();
+                            }),
                           ),
                         ),
                       ],

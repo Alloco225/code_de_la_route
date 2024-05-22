@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../../views/widgets/container_widget.dart';
 import '../../auth/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
@@ -92,34 +93,34 @@ class HomeView extends GetView<HomeController> {
                               InkWell(
                                 onTap: () => Get.toNamed(element['route']),
                                 splashColor: Colors.blueGrey.shade100,
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white),
-                                      color: Colors.blueGrey.shade800,
-                                      borderRadius: BorderRadius.circular(8)),
+                                child: ContainerWidget(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 15),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        element['icon'],
-                                        size: 32,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        (element['text'] as String)
-                                            .tr
-                                            .toUpperCase(),
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 25,
-                                          color: Colors.white,
+                                    horizontal: 10,
+                                    vertical: 15,
+                                  ),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          element['icon'],
+                                          size: 32,
                                         ),
-                                      ),
-                                    ],
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          (element['text'] as String)
+                                              .tr
+                                              .toUpperCase(),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 25,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
