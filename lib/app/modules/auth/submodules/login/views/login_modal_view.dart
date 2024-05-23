@@ -25,8 +25,11 @@ class LoginModalView extends GetView<LoginController> {
       ),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.blueGrey.shade700,
+        color: Colors.blueGrey.shade800,
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Colors.white,
+        ),
       ),
       child: Obx(
         () => authController.isAuth

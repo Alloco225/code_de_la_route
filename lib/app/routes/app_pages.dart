@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/modules/auth/submodules/register/views/register_modal_view.dart';
 import 'package:codedelaroute/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 
@@ -59,7 +60,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.QUIZZ_LIST,
-      page: () => QuizzListView(),
+      page: () => const QuizzListView(),
       binding: QuizzListBinding(),
     ),
     GetPage(
@@ -115,7 +116,8 @@ class AppPages {
     // ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => const RegisterView(),
+      // page: () => const RegisterView(),
+      page: () => const RegisterModalView(),
       binding: RegisterBinding(),
     ),
     GetPage(

@@ -1,13 +1,19 @@
+import 'package:codedelaroute/app/modules/profile/views/achievements_view.dart';
+import 'package:codedelaroute/app/views/widgets/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
+import '../../../views/ui/snackbar.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../../../views/widgets/title_widget.dart';
+import '../../auth/submodules/login/views/login_modal_view.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -27,14 +33,15 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(height: 20),
                   Column(
                     children: [
-                      const ContainerWidget(
-                        borderRadius: 100,
-                        child: SizedBox(
-                          width: 100,
-                          height: 100,
+                      const SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: ContainerWidget(
+                          borderRadius: 100,
+                          child: Center(child: Icon(Ionicons.person, size: 50)),
                         ),
                       ),
-                      const Text("Username", style: TextStyle(fontSize: 20)),
+                      const Text("username", style: TextStyle(fontSize: 20)),
                       const SizedBox(height: 10),
                       ContainerWidget(
                         child: Row(
@@ -92,7 +99,7 @@ class ProfileView extends GetView<ProfileController> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  _buildAchievements(),
+                  const AchievementsView(),
                   const SizedBox(height: 10)
                 ],
               ),
@@ -100,115 +107,6 @@ class ProfileView extends GetView<ProfileController> {
             const BackNavButton(padding: 5),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildAchievements() {
-    List achievements = [
-      {
-        "name": "Social Sharer",
-        "image": "assets/badges/badge_red.png",
-        "description": "sharer_description",
-        "unlocked": true,
-        "icon": Ionicons.arrow_redo,
-      },
-      {
-        "name": "Pavement Pupil",
-        "image": "assets/badges/badge_green.png",
-        "description": "beginner_description",
-        "unlocked": false,
-        "icon": Ionicons.ribbon,
-      },
-      {
-        "name": "Asphalt Apprentice",
-        "image": "assets/badges/badge_silver.png",
-        "description": "intermediate_description",
-        "unlocked": false,
-        "icon": Ionicons.medal,
-      },
-      {
-        "name": "Highway Hero",
-        "image": "assets/badges/badge_brown.png",
-        "description": "expert_description",
-        "unlocked": false,
-        "icon": Ionicons.golf,
-      },
-      {
-        "name": "Traffic Titan",
-        "image": "assets/badges/badge_orange.png",
-        "description": "expert_description",
-        "unlocked": false,
-        "icon": Ionicons.diamond,
-      },
-      {
-        "name": "Roadmaster Royalty",
-        "image": "assets/badges/badge_yellow.png",
-        "description": "expert_description",
-        "unlocked": false,
-        "icon": Ionicons.earth,
-      },
-    ];
-
-    return Expanded(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "achievements".tr,
-            style: const TextStyle(fontSize: 23),
-          ),
-          Expanded(
-            child: GridView.count(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-              childAspectRatio: .9,
-              children: List.generate(achievements.length, (index) {
-                return ContainerWidget(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        child: Stack(
-                          children: [
-                            Positioned.fill(
-                              child: Image.asset(
-                                achievements[index]["image"],
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            if (achievements[index]["icon"] != null)
-                              Positioned.fill(
-                                child: Icon(
-                                  achievements[index]["icon"],
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Column(
-                        children: (achievements[index]["name"] as String)
-                            .split(" ")
-                            .map((t) => Text(
-                                  t,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 14),
-                                ))
-                            .toList(),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            ),
-          ),
-        ],
       ),
     );
   }
