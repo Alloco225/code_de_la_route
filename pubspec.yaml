@@ -49,6 +49,8 @@ flutter:
     # 
     - assets/audio/
     # 
+    - assets/badges/
+    # 
     - assets/data/
     # 
     - assets/fonts/

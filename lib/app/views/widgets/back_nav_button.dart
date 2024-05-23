@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
 class BackNavButton extends StatelessWidget {
-  const BackNavButton({super.key});
+  final double? padding;
+  const BackNavButton({super.key, this.padding = 10});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(padding!),
       child: InkWell(
         onTap: () => Get.back(),
         child: Row(
