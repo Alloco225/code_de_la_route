@@ -1,16 +1,12 @@
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:simple_html_css/simple_html_css.dart';
 
 import '../../../helpers/utils.dart';
 import '../../../views/widgets/container_widget.dart';
@@ -63,6 +59,7 @@ class HomeView extends GetView<HomeController> {
 
   final String _privacyURL = "https://amane.dev/privacy";
   final String _cguURL = "https://amane.dev/privacy";
+  final String _authorURL = "https://amane.dev";
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +137,7 @@ class HomeView extends GetView<HomeController> {
                   const WidgetSpan(child: SizedBox(width: 5)),
                   WidgetSpan(
                     child: InkWell(
-                      onTap: () => launchURL("https://amane.dev"),
+                      onTap: () => launchURL(_authorURL),
                       child: const Text(
                         "amane",
                         style: TextStyle(decoration: TextDecoration.underline),

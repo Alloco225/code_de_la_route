@@ -160,6 +160,7 @@ class ProfileView extends GetView<ProfileController> {
           ),
           Expanded(
             child: GridView.count(
+              padding: const EdgeInsets.symmetric(vertical: 5),
               crossAxisCount: 3,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
