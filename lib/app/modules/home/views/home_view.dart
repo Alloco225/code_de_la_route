@@ -1,10 +1,18 @@
 import 'package:codedelaroute/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 
+import '../../../helpers/utils.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../../auth/services/auth_service.dart';
 import '../controllers/home_controller.dart';
@@ -53,6 +61,9 @@ class HomeView extends GetView<HomeController> {
     },
   ];
 
+  final String _privacyURL = "https://amane.dev/privacy";
+  final String _cguURL = "https://amane.dev/privacy";
+
   @override
   Widget build(BuildContext context) {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -62,6 +73,88 @@ class HomeView extends GetView<HomeController> {
         print('User is signed in!');
       }
     });
+
+    void launchURL(String url) async {
+      Uri uri = Uri.parse(url);
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        showSnackbarError("Could not launch $url", context: context);
+        throw 'Could not launch $url';
+      }
+    }
+
+    openCredits() {
+      openModalBottomSheet(
+        Container(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * .2,
+            maxHeight: MediaQuery.of(context).size.height * .4,
+          ),
+          margin: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.shade700,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                height: 100,
+                child: Image.asset('assets/images/favicon.png'),
+              ),
+              const Text(
+                "Code de la Route",
+                style: TextStyle(
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Wrap(children: [
+                InkWell(
+                  onTap: () => launchURL(_cguURL),
+                  child: const Text(
+                    "Conditions d'utilisation",
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                InkWell(
+                  onTap: () => launchURL(_privacyURL),
+                  child: const Text(
+                    "Politique de confidentialité",
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                ),
+              ]),
+              Text("Version $VERSION du 23/05/2024"),
+              RichText(
+                text: TextSpan(children: [
+                  const TextSpan(
+                    text: "Made by",
+                  ),
+                  const WidgetSpan(child: SizedBox(width: 5)),
+                  WidgetSpan(
+                    child: InkWell(
+                      onTap: () => launchURL("https://amane.dev"),
+                      child: const Text(
+                        "amane",
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
+            ],
+          ),
+        ),
+        context: context,
+      );
+    }
 
     return Scaffold(
         backgroundColor: Colors.blueGrey.shade700,
@@ -74,9 +167,12 @@ class HomeView extends GetView<HomeController> {
                   const SizedBox(
                     height: 45,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Image.asset('assets/images/logo.png'),
+                  InkWell(
+                    onTap: openCredits,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
                   ),
                   const SizedBox(
                     height: 45,
@@ -133,19 +229,33 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   )),
-                  Padding(
-                    padding: const EdgeInsets.all(25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "v$VERSION",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
-                              fontSize: 22),
-                        )
-                      ],
+                  InkWell(
+                    onTap: openCredits,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              const Text(
+                                "あ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                    fontSize: 22),
+                              ),
+                              Text(
+                                "v$VERSION",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                    fontSize: 22),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
