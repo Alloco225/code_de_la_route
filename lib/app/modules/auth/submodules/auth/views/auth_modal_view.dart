@@ -29,9 +29,9 @@ class _AuthModalViewState extends State<AuthModalView> {
     authContentModal() {
       switch (_authMode) {
         case AuthMode.login:
-          return LoginModalContentView();
+          return LoginModalContentView(parentContext: context);
         case AuthMode.regiter:
-          return const RegisterModalContentView();
+          return RegisterModalContentView(parentContext: context);
         default:
           return const Text("AUth");
       }

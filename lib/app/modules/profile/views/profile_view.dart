@@ -1,26 +1,32 @@
 import 'package:codedelaroute/app/modules/profile/views/achievements_view.dart';
-import 'package:codedelaroute/app/views/widgets/button_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
-import '../../../views/ui/snackbar.dart';
 import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../../../views/widgets/title_widget.dart';
-import '../../auth/submodules/login/views/login_modal_view.dart';
+import '../../auth/controllers/auth_controller.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({super.key});
+  final authController = Get.find<AuthController>();
+
+  ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String buildUserName() {
+      if (authController.isAuth) {
+        return authController.authUser?.displayName ??
+            authController.authUser?.email ??
+            "user name".tr;
+      }
+      return "username";
+    }
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
@@ -33,15 +39,29 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(height: 20),
                   Column(
                     children: [
-                      const SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: ContainerWidget(
-                          borderRadius: 100,
-                          child: Center(child: Icon(Ionicons.person, size: 50)),
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Ionicons.settings_outline)),
+                          const SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: ContainerWidget(
+                              borderRadius: 100,
+                              child: Center(
+                                  child: Icon(Ionicons.person, size: 50)),
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Ionicons.settings_outline)),
+                        ],
                       ),
-                      const Text("username", style: TextStyle(fontSize: 20)),
+                      Text(buildUserName(),
+                          style: const TextStyle(fontSize: 20)),
                       const SizedBox(height: 10),
                       ContainerWidget(
                         child: Row(
@@ -64,37 +84,7 @@ class ProfileView extends GetView<ProfileController> {
                       const SizedBox(height: 10),
                       ContainerWidget(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("your_rank".tr),
-                                const Text("Traffic Titan"),
-                              ],
-                            ),
-                            Container(
-                              width: 70,
-                              height: 70,
-                              padding: const EdgeInsets.all(10),
-                              child: Container(
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        "assets/badges/badge_green.png",
-                                      ),
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                  child: const Center(
-                                      child: Text(
-                                    "5",
-                                    style: TextStyle(fontSize: 20),
-                                  ))),
-                            ),
-                          ],
-                        ),
+                        child: _rankWidget(),
                       ),
                     ],
                   ),
@@ -108,6 +98,74 @@ class ProfileView extends GetView<ProfileController> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _unAuthRankWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("your_rank".tr),
+            const Text("Connectez-vous pour débloquer"),
+          ],
+        ),
+        Container(
+          width: 70,
+          height: 70,
+          padding: const EdgeInsets.all(10),
+          child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/badges/badge_green.png",
+                  ),
+                  fit: BoxFit.contain,
+                ),
+              ),
+              child: const Center(
+                  child: Text(
+                "5",
+                style: TextStyle(fontSize: 20),
+              ))),
+        ),
+      ],
+    );
+  }
+
+  Widget _rankWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("your_rank".tr),
+            const Text("Traffic Titan"),
+          ],
+        ),
+        Container(
+          width: 70,
+          height: 70,
+          padding: const EdgeInsets.all(10),
+          child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/badges/badge_green.png",
+                  ),
+                  fit: BoxFit.contain,
+                ),
+              ),
+              child: const Center(
+                  child: Text(
+                "5",
+                style: TextStyle(fontSize: 20),
+              ))),
+        ),
+      ],
     );
   }
 

@@ -23,6 +23,10 @@ class RegisterController extends GetxController {
   get emailController => _emailController.value;
   get passwordController => _passwordController.value;
 
+  final usernameNode = FocusNode();
+  final emailNode = FocusNode();
+  final passwordNode = FocusNode();
+
   String get username => usernameController.text;
   String get email => emailController.text;
   String get password => passwordController.text;

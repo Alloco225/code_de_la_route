@@ -7,7 +7,8 @@ import '../../../views/widgets/form_container_widget.dart';
 import '../controllers/register_controller.dart';
 
 class RegisterModalContentView extends GetView<RegisterController> {
-  const RegisterModalContentView({super.key});
+  BuildContext parentContext;
+   RegisterModalContentView({super.key, required this.parentContext, });
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -23,7 +24,10 @@ class RegisterModalContentView extends GetView<RegisterController> {
           ),
           FormContainerWidget(
             controller: controller.usernameController,
+            focusNode: controller.usernameNode,
             hintText: "Username",
+             onFieldSubmitted: (_) =>
+                          controller.emailNode.requestFocus(),
             isPasswordField: false,
           ),
           const SizedBox(
@@ -31,16 +35,21 @@ class RegisterModalContentView extends GetView<RegisterController> {
           ),
           FormContainerWidget(
             controller: controller.emailController,
+            focusNode: controller.emailNode,
             hintText: "Email",
             isPasswordField: false,
+             onFieldSubmitted: (_) => controller.passwordNode.requestFocus()
           ),
           const SizedBox(
             height: 10,
           ),
           FormContainerWidget(
+            focusNode: controller.passwordNode,
             controller: controller.passwordController,
             hintText: "Password",
             isPasswordField: true,
+
+                    onFieldSubmitted: (_) => controller.signUp(context),
           ),
           const SizedBox(
             height: 30,

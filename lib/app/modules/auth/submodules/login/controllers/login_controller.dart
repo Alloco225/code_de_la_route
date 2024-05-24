@@ -47,15 +47,15 @@ class LoginController extends GetxController {
 
   void increment() => count.value++;
 
-  Future<void> signIn(context) async {
+  Future<bool> signIn(context) async {
     if (validateEmail(email) && validatePassword(password)) {
     } else {
       showSnackbarError("Invalid input for login.", context: context);
-      return;
+      return false;
     }
 
     _isSigning.value = true;
-    log("signIn $email $password");
+    log("signIn >> $email $password");
 
     try {
       User? user = await _auth.signInWithEmailAndPassword(email, password);
@@ -67,10 +67,12 @@ class LoginController extends GetxController {
         String? token = await user.getIdToken();
         // user.uid
         log("user signed in $user $token");
-        authController.logUser(user: user, token: token);
+        await authController.logUser(user: user, token: token);
         // Get.toNamed(Routes.WELCOME);
+        return true;
       } else {
         showSnackbarError("some error occured", context: context);
+        return false;
       }
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException ${e.code} $e");
@@ -89,6 +91,7 @@ class LoginController extends GetxController {
       showSnackbarError("some error occured $e", context: context);
     } finally {
       _isSigning.value = false;
+      return false;
     }
   }
 

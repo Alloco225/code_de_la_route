@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +11,23 @@ import '../../../views/widgets/form_container_widget.dart';
 import '../controllers/login_controller.dart';
 
 class LoginModalContentView extends GetView<LoginController> {
-  LoginModalContentView({super.key});
-  final authController = AuthController();
+  BuildContext parentContext;
+
+  LoginModalContentView({
+    super.key,
+    required this.parentContext,
+  });
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
     signIn(context) async {
-      await controller.signIn(context);
+      log(">> signIn");
+      bool loggedIn = await controller.signIn(context);
+      log("<< signIn loggedIn $loggedIn");
+      if (loggedIn) {
+        Navigator.of(parentContext).pop();
+      }
     }
 
     return Obx(
@@ -35,17 +47,18 @@ class LoginModalContentView extends GetView<LoginController> {
                     height: 30,
                   ),
                   FormContainerWidget(
-                    controller: controller.emailController,
-                    hintText: "email".tr,
-                    isPasswordField: false,
-                    onFieldSubmitted: (_) =>
-                        controller.passwordNode.requestFocus(),
-                  ),
+                      controller: controller.emailController,
+                      focusNode: controller.emailNode,
+                      hintText: "email".tr,
+                      isPasswordField: false,
+                      onFieldSubmitted: (_) =>
+                          controller.passwordNode.requestFocus()),
                   const SizedBox(
                     height: 10,
                   ),
                   FormContainerWidget(
                     controller: controller.passwordController,
+                    focusNode: controller.passwordNode,
                     hintText: "password".tr,
                     isPasswordField: true,
                     onFieldSubmitted: (_) => signIn(context),
