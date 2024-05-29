@@ -1,0 +1,14 @@
+assets
+android
+ios
+build
+.idea
+.dart_tool
+linux
+resources
+releases
+windows
+macos
+lib/app/data
+google-services.json
+GoogleService-Info.plist
