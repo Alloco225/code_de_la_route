@@ -1,6 +1,6 @@
 import 'package:codedelaroute/app/modules/profile/views/achievements_view.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -16,89 +16,116 @@ class ProfileView extends GetView<ProfileController> {
 
   ProfileView({super.key});
 
+  String buildUserName() {
+    if (authController.isAuth) {
+      return authController.authUser?.displayName ??
+          authController.authUser?.uid ??
+          authController.authUser?.email ??
+          "user name".tr;
+    }
+    return "username";
+  }
+
   @override
   Widget build(BuildContext context) {
-    String buildUserName() {
-      if (authController.isAuth) {
-        return authController.authUser?.displayName ??
-            authController.authUser?.email ??
-            "user name".tr;
-      }
-      return "username";
-    }
-
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-        child: Column(
-          children: [
-            TitleWidget(title: "profile".tr),
-            Expanded(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+        body: Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+      child: Column(
+        children: [
+          TitleWidget(title: "profile".tr),
+          Expanded(
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Column(
+                  children: [
+                    const SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: ContainerWidget(
+                        borderRadius: 100,
+                        child: Center(child: Icon(Ionicons.person, size: 50)),
+                      ),
+                    ),
+                    Obx(
+                      () => Text(buildUserName(),
+                          style: const TextStyle(fontSize: 20)),
+                    ),
+                    const SizedBox(height: 10),
+                    ContainerWidget(
+                      child: Row(
                         children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Ionicons.settings_outline)),
+                          Expanded(child: _buildStatItem("signs".tr, "0/5")),
                           const SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: ContainerWidget(
-                              borderRadius: 100,
-                              child: Center(
-                                  child: Icon(Ionicons.person, size: 50)),
-                            ),
+                            width: 10,
                           ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Ionicons.settings_outline)),
+                          Expanded(child: _buildStatItem("quizzes".tr, "0/5")),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: _buildStatItem("avg".tr, "20/20"),
+                          ),
                         ],
                       ),
-                      Text(buildUserName(),
-                          style: const TextStyle(fontSize: 20)),
-                      const SizedBox(height: 10),
-                      ContainerWidget(
-                        child: Row(
-                          children: [
-                            Expanded(child: _buildStatItem("signs".tr, "0/5")),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: _buildStatItem("quizzes".tr, "0/5")),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: _buildStatItem("avg".tr, "20/20"),
-                            ),
-                          ],
+                    ),
+                    const SizedBox(height: 10),
+                    ContainerWidget(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: _rankWidget(),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const AchievementsView(),
+                const SizedBox(height: 15),
+                Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () => Get.toNamed(Routes.SETTINGS),
+                        child: ContainerWidget(
+                          child: Row(
+                            children: [
+                              Text("settings".tr),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Icon(Ionicons.settings_outline),
+                            ],
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      ContainerWidget(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: _rankWidget(),
-                      ),
+                      if (authController.isAuth) const SizedBox(width: 15),
+                      if (authController.isAuth)
+                        InkWell(
+                          onTap: () => authController.logOut(),
+                          child: ContainerWidget(
+                            child: Row(
+                              children: [
+                                Text("logout".tr),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Icon(Ionicons.log_out_outline),
+                              ],
+                            ),
+                          ),
+                        ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  const AchievementsView(),
-                  const SizedBox(height: 10)
-                ],
-              ),
+                ),
+                const SizedBox(height: 10),
+              ],
             ),
-            const BackNavButton(padding: 5),
-          ],
-        ),
+          ),
+          const BackNavButton(padding: 5),
+        ],
       ),
-    );
+    ));
   }
 
   Widget _unAuthRankWidget() {

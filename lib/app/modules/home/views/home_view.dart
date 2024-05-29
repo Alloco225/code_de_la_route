@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +18,7 @@ class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
   final _authService = Get.find<AuthService>();
+  final authController = Get.find<AuthController>();
 
   final VERSION = "2.6.1";
 
@@ -64,10 +66,11 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      authController.updateUser(user);
       if (user == null) {
         print('User is currently signed out!');
       } else {
-        print('User is signed in!');
+        print('User is signed in! $user');
       }
     });
 

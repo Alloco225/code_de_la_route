@@ -38,13 +38,13 @@ class RegisterController extends GetxController {
 
   void increment() => count.value++;
 
-  void signUp(context) async {
+  Future<bool> signUp(context) async {
     if (validateEmail(email) &&
         validateUsername(username) &&
         validatePassword(password)) {
     } else {
       showSnackbarError("Invalid input for registration.", context: context);
-      return;
+      return false;
     }
 
     _isSigningUp.value = true;
@@ -54,15 +54,16 @@ class RegisterController extends GetxController {
 
       _isSigningUp.value = false;
       if (user != null) {
+        await user.updateDisplayName(username);
         showSnackbarSuccess("User is successfully created", context: context);
         String? token = await user.getIdToken();
 
         // Navigator.pushNamed(context, "/home");
         authController.logUser(user: user, token: token);
-        Get.toNamed(Routes.WELCOME);
-      } else {
-        showSnackbarError("Some error happend", context: context);
+        return true;
       }
+      showSnackbarError("Some error happend", context: context);
+      return false;
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException ${e.code} $e");
 
@@ -76,8 +77,10 @@ class RegisterController extends GetxController {
         log('An error occurred: ${e.code}');
         showSnackbarError('An error occurred.', context: context);
       }
+      return false;
     } catch (e) {
       showSnackbarError("some error occured $e", context: context);
+      return false;
     } finally {
       _isSigningUp.value = false;
     }

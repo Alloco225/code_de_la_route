@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:codedelaroute/app/data/models/answer_model.dart';
@@ -19,6 +18,7 @@ class QuizzListController extends GetxController {
   final storage = GetStorage();
 
   final _quizzList = <Quizz>[].obs;
+  List<Quizz> get quizzList => _quizzList.value;
   final _quizzes = <Quizz>[].obs;
   // final _quizzList = <Quizz>[...QUIZZES].obs;
 

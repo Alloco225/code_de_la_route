@@ -3,11 +3,16 @@ import 'dart:developer';
 import 'package:codedelaroute/app/data/services/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../quizz_list/controllers/quizz_list_controller.dart';
 import '../mixins/cache_manager.dart';
 
 class AuthController extends GetxController with CacheManager {
   final firebaseAuthService = FirebaseAuthService();
+  final quizzListController = Get.find<QuizzListController>();
+  final storage = GetStorage();
+
   final _isAuth = false.obs;
 
   bool get isAuth => _isAuth.value;
@@ -17,9 +22,35 @@ class AuthController extends GetxController with CacheManager {
   logUser({User? user, String? token}) async {
     _authUser.value = user;
     log("logUser !!! $user, $token");
+    log("userInfo !!! ${user?.displayName}, ${user?.email}, ${user?.photoURL}");
     _isAuth.value = true;
     //Token is cached
     await saveToken(token);
+  }
+
+  updateUser(User? user) {
+    if (user == null) {
+      logOut();
+    } else {
+      _authUser.value = user;
+      _isAuth.value = true;
+    }
+  }
+
+  updateUserScore() async {
+    if (authUser == null) {
+      return;
+    }
+
+    for (var quizz in quizzListController.quizzList) {
+      if (quizz.id != null) {
+        var score = storage.read(quizz.id!);
+
+        //
+        // firebaseAuthService.updateQuizzScore(quizz.id!, score);
+        break;
+      }
+    }
   }
 
   void logOut() {

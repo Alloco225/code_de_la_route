@@ -68,19 +68,20 @@ class _AchievementsViewState extends State<AchievementsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: __buildAchievementsSection());
+    return Expanded(child: Obx(() => __buildAchievementsSection()));
   }
 
   __buildAchievementsStack() {
     return Expanded(
-      child: Stack(
+        child: Obx(
+      () => Stack(
         children: [
           __buildAchievementsSection(),
           if (!authController.isAuth)
             Positioned.fill(child: __buildLoginMessageContainer())
         ],
       ),
-    );
+    ));
   }
 
   Widget __buildLoginMessageContainer() {

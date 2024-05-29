@@ -1,3 +1,4 @@
+import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
@@ -15,7 +16,8 @@ import '../../auth/submodules/login/views/login_modal_view.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
-  const SettingsView({super.key});
+  SettingsView({super.key});
+  final auth = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,54 +32,6 @@ class SettingsView extends GetView<SettingsController> {
               child: Column(
                 children: [
                   const Spacer(),
-                  Obx(
-                    () => buildSettingTile(
-                        title: "profile".tr,
-                        icon: Ionicons.person,
-                        value: (controller.auth.isAuth
-                                ? "logged_in"
-                                : "logged_out")
-                            .tr,
-                        onTap: () async {
-                          if (controller.auth.isAuth) {
-                            // showSnackbarSuccess("Already logged in",
-                            //     context: context);
-                            Get.toNamed(Routes.PROFILE);
-                            return;
-                          }
-
-                          bool? loggedIn = await showMaterialModalBottomSheet(
-                            expand: false,
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            // builder: (context) => const ModalInsideModal());
-                            builder: (context) => LoginModalView(),
-                          );
-                          if (loggedIn == true) {
-                            showSnackbarSuccess("User in !", context: context);
-                          } else {
-                            showSnackbarError("Could not log in !",
-                                context: context);
-                          }
-                        }),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildSettingTile(
-                        title: "theme".tr,
-                        icon: Ionicons.sunny_outline,
-                        value: "dark".tr,
-                        flex: 0,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   Row(children: [
                     buildSettingTile(
                       title: "music".tr,
@@ -111,6 +65,41 @@ class SettingsView extends GetView<SettingsController> {
                       ),
                     ),
                   ]),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildSettingTile(
+                        title: "theme".tr,
+                        icon: Ionicons.sunny_outline,
+                        value: "dark".tr,
+                        flex: 0,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      buildSettingTile(
+                          flex: 1,
+                          title: "delete_data".tr,
+                          icon: Ionicons.trash_outline,
+                          onTap: () async {}),
+                      const SizedBox(width: 15),
+                      buildSettingTile(
+                          flex: 1,
+                          title: "profile".tr,
+                          icon: Ionicons.log_out_outline,
+                          onTap: () async {
+                            auth.logOut();
+                          }),
+                    ],
+                  ),
                   const SizedBox(
                     height: 15,
                   ),

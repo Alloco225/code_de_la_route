@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../data/services/firebase_auth_service.dart';
 import '../../../../../helpers/utils.dart';
+import '../../../../../routes/app_pages.dart';
 import '../../../../../views/ui/snackbar.dart';
 import '../../../controllers/auth_controller.dart';
 
@@ -68,7 +69,8 @@ class LoginController extends GetxController {
         // user.uid
         log("user signed in $user $token");
         await authController.logUser(user: user, token: token);
-        // Get.toNamed(Routes.WELCOME);
+        // Get.toNamed(Routes.PROFILE);
+
         return true;
       } else {
         showSnackbarError("some error occured", context: context);
@@ -76,6 +78,7 @@ class LoginController extends GetxController {
       }
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException ${e.code} $e");
+      
 
       if (e.code == 'invalid-email ') {
         // TODO link with translations table
@@ -118,7 +121,7 @@ class LoginController extends GetxController {
           var token = await userCred.user!.getIdToken();
           authController.logUser(user: userCred.user, token: token);
         }
-        // Get.toNamed(Routes.WELCOME);
+        // Get.toNamed(Routes.PROFILE);
       }
     } on FirebaseAuthException catch (e) {
       log("FirebaseAuthException ${e.code} $e");
