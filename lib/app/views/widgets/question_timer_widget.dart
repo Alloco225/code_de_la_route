@@ -46,8 +46,6 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
     super.dispose();
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -104,14 +102,18 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
             ),
           ),
           const SizedBox(width: 10),
-          GestureDetector(
-            onTap: widget.devPauseTimer,
-            child: Text(
-              widget.time.toStringAsFixed(0),
-              semanticsLabel: widget.time.toStringAsFixed(0),
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 30,
+          SizedBox(
+            width: 30,
+            child: GestureDetector(
+              onTap: widget.devPauseTimer,
+              child: Text(
+                widget.time.toStringAsFixed(0),
+                semanticsLabel: widget.time.toStringAsFixed(0),
+                textAlign: TextAlign.right,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 30,
+                ),
               ),
             ),
           ),
