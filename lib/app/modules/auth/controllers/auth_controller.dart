@@ -59,6 +59,7 @@ class AuthController extends GetxController with CacheManager {
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 Future<void> unlockAchievement(String userId, String achievementId) async {
+  log("Unlocking achievement $achievementId for user $userId");
   DocumentReference userDoc = _firestore.collection('users').doc(userId);
   await userDoc.update({
     'achievements.$achievementId': {

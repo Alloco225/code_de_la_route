@@ -79,7 +79,14 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 const SizedBox(height: 10),
                 // const AchievementsView(),
-                AchievementsScreen(user: authController.authUser),
+
+                Text(
+                  "achievements".tr,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 23),
+                ),
+                Expanded(
+                    child: AchievementsScreen(user: authController.authUser)),
                 const SizedBox(height: 15),
                 Obx(
                   () => Row(
