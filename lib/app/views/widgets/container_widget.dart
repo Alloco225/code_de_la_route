@@ -4,12 +4,14 @@ class ContainerWidget extends StatelessWidget {
   final Color? color;
   final Widget? child;
   final double? borderRadius;
+  final double? width;
   final bool? hasBorder;
   final EdgeInsets? padding;
   const ContainerWidget(
       {super.key,
       this.color,
       this.child,
+      this.width,
       this.borderRadius,
       this.padding,
       this.hasBorder = true});
@@ -17,6 +19,7 @@ class ContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width,
       padding: padding ?? const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: color ?? Colors.blueGrey.shade800,

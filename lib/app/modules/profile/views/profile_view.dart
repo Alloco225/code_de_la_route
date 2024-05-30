@@ -1,4 +1,5 @@
-import 'package:codedelaroute/app/modules/profile/views/achievements_view.dart';
+import 'package:codedelaroute/app/modules/profile/views/achievements_screen.dart';
+import 'package:codedelaroute/app/modules/profile/views/achievements_grid_view.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,6 @@ class ProfileView extends GetView<ProfileController> {
   String buildUserName() {
     if (authController.isAuth) {
       return authController.authUser?.displayName ??
-          authController.authUser?.uid ??
           authController.authUser?.email ??
           "user name".tr;
     }
@@ -78,7 +78,8 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                const AchievementsView(),
+                // const AchievementsView(),
+                AchievementsScreen(user: authController.authUser),
                 const SizedBox(height: 15),
                 Obx(
                   () => Row(

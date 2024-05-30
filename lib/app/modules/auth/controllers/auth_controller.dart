@@ -4,6 +4,8 @@ import 'package:codedelaroute/app/data/services/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 import '../../quizz_list/controllers/quizz_list_controller.dart';
 import '../mixins/cache_manager.dart';
@@ -52,6 +54,41 @@ class AuthController extends GetxController with CacheManager {
       }
     }
   }
+
+
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+Future<void> unlockAchievement(String userId, String achievementId) async {
+  DocumentReference userDoc = _firestore.collection('users').doc(userId);
+  await userDoc.update({
+    'achievements.$achievementId': {
+      'unlocked': true,
+      'dateUnlocked': FieldValue.serverTimestamp(),
+    }
+  });
+}
+
+Future<void> checkAndUnlockAchievements(String userId, Map<String, dynamic> userProgress) async {
+  // Fetch all achievements
+  QuerySnapshot achievementsSnapshot = await _firestore.collection('achievements').get();
+  for (var achievementDoc in achievementsSnapshot.docs) {
+    Map<String, dynamic> achievement = achievementDoc.data() as Map<String, dynamic>;
+    String achievementId = achievementDoc.id;
+    Map<String, dynamic> conditions = achievement['conditions'];
+
+    // Check if the user meets the conditions to unlock this achievement
+    bool conditionsMet = conditions.entries.every((condition) {
+      String key = condition.key;
+      dynamic value = condition.value;
+      return userProgress[key] >= value;
+    });
+
+    if (conditionsMet) {
+      await unlockAchievement(userId, achievementId);
+    }
+  }
+}
+
 
   void logOut() {
     _authUser.value = null;

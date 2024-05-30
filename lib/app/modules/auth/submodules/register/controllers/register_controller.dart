@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -60,6 +62,21 @@ class RegisterController extends GetxController {
 
         // Navigator.pushNamed(context, "/home");
         authController.logUser(user: user, token: token);
+
+
+      // Create user document in Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .set({
+          'email': email,
+          'achievements': {},
+          'level': null,
+          'points': 0,
+          'username': username,
+          'country': '',
+        });
+
         return true;
       }
       showSnackbarError("Some error happend", context: context);

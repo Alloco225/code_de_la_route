@@ -11,14 +11,14 @@ import '../../../views/widgets/container_widget.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../../auth/submodules/login/views/login_modal_view.dart';
 
-class AchievementsView extends StatefulWidget {
-  const AchievementsView({super.key});
+class AchievementsGridView extends StatefulWidget {
+  const AchievementsGridView({super.key});
 
   @override
-  State<AchievementsView> createState() => _AchievementsViewState();
+  State<AchievementsGridView> createState() => _AchievementsGridViewState();
 }
 
-class _AchievementsViewState extends State<AchievementsView> {
+class _AchievementsGridViewState extends State<AchievementsGridView> {
   final authController = Get.find<AuthController>();
 
   List achievements = [
@@ -68,59 +68,7 @@ class _AchievementsViewState extends State<AchievementsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Obx(() => __buildAchievementsSection()));
-  }
-
-  __buildAchievementsStack() {
-    return Expanded(
-        child: Obx(
-      () => Stack(
-        children: [
-          __buildAchievementsSection(),
-          if (!authController.isAuth)
-            Positioned.fill(child: __buildLoginMessageContainer())
-        ],
-      ),
-    ));
-  }
-
-  Widget __buildLoginMessageContainer() {
-    openAuthModal() async {
-      bool? loggedIn = await showMaterialModalBottomSheet(
-        expand: false,
-        context: context,
-        backgroundColor: Colors.transparent,
-        // builder: (context) => const ModalInsideModal());
-        builder: (context) => const AuthModalView(),
-      );
-      if (loggedIn == true) {
-        showSnackbarSuccess("User in !", context: context);
-      } else {
-        showSnackbarError("Could not log in !", context: context);
-      }
-    }
-
-    return ContainerWidget(
-      color: Colors.blueGrey.shade800.withOpacity(.9),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              "authenticate to unlock more achievements",
-              textAlign: TextAlign.center,
-            ),
-          ),
-          InkWell(
-            child: const ContainerWidget(
-              child: Text("authenticate"),
-            ),
-            onTap: () => openAuthModal(),
-          )
-        ],
-      ),
-    );
+    return Expanded(child: Obx(() => _achievementGrid()));
   }
 
   __buildAchievementsSection() {
@@ -133,10 +81,7 @@ class _AchievementsViewState extends State<AchievementsView> {
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 23),
         ),
-        if (!authController.isAuth)
-          Expanded(child: __buildLoginMessageContainer())
-        else
-          _achievementGrid(),
+        _achievementGrid(),
       ],
     );
   }
