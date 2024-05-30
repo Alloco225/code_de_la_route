@@ -71,6 +71,7 @@ class RegisterController extends GetxController {
             .set({
           'email': email,
           'achievements': {},
+          'learned_signs': [],
           'level': null,
           'points': 0,
           'username': username,

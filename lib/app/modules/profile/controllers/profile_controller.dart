@@ -11,7 +11,7 @@ import '../../quizz_list/controllers/quizz_list_controller.dart';
 class ProfileController extends GetxController {
   //TODO: Implement ProfileController
 
-  final authController = AuthController();
+  final authController = Get.find<AuthController>();
   final _signProvider = SignProvider();
   final _quizzListController = Get.find<QuizzListController>();
   final _totalSignCount = 0.obs;
@@ -47,19 +47,16 @@ class ProfileController extends GetxController {
   }
 
   calculateStats() async {
-    log("calculating stats");
-    // _avgScore.value = _quizzListController.quizzList
-    //         .map((e) => e.score)
-    //         .reduce((value, element) => value! + element!)! ~/
-    //     _quizzListController.quizzList.length;
-
     if (authController.userId != null) {
       FirestoreService firestoreService =
           FirestoreService(authController.userId!);
       _avgScore.value = await firestoreService.calculateAverageScore();
 
       _acedQuizzCount.value = await firestoreService.countFullMarksQuizzes();
-      log("Aced Quizz Count: $_acedQuizzCount");
+
+      firestoreService
+          .getLearnedSigns()
+          .then((value) => _learnedSignCount.value = value.length);
     }
   }
 }

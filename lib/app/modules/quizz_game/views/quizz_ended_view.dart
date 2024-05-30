@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:codedelaroute/app/data/models/sign_model.dart';
-import 'package:codedelaroute/app/data/providers/score_provider.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
 import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ionicons/ionicons.dart';
@@ -47,7 +44,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   late final AnimationController _coffettiPopAC =
       AnimationController(vsync: this);
   dynamic _confettiComposition;
-  final _quizzListController = Get.find<QuizzListController>();
   final _authController = Get.find<AuthController>();
   final _gameController = Get.find<QuizzGameController>();
 
@@ -101,8 +97,13 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     _saveScore(score);
 
-    List<String> correctlyAnsweredSigns =
-        widget.correctAnswers.map((e) => e['sign'] as String).toList();
+    log("correct answers ${widget.correctAnswers}");
+    List<String> correctlyAnsweredSigns = widget.correctAnswers
+            .where((el) => el['signId'] != null)
+            .map((e) => e['signId'] as String)
+            .toList();
+
+    log("calculated correctlyAnsweredSigns");
 
     log("correctly guessed signs $correctlyAnsweredSigns");
 
@@ -147,6 +148,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   Future<void> _saveLearnedSigns(List<String> signIds) async {
+    log("saving learned signs $signIds");
     if (_authController.userId == null) {
       await _localStorage.saveLearnedSigns(signIds);
     } else {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreService {
@@ -61,10 +63,7 @@ class FirestoreService {
   }
 
   Future<void> saveAverageScore(double averageScore) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .update({
+    await FirebaseFirestore.instance.collection('users').doc(userId).update({
       'averageScore': averageScore,
     });
   }
@@ -109,31 +108,27 @@ class FirestoreService {
     return totalScore ~/ numberOfQuizzes; // Use integer division for simplicity
   }
 
-
-
-  // 
+  //
   Future<List<String>> getLearnedSigns() async {
-    DocumentSnapshot doc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .get();
+    DocumentSnapshot doc =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
     if (doc.exists) {
-      return (doc['learned_signs'] as List<dynamic>).cast<String>();
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return (data['learned_signs'] ?? []).cast<String>();
     }
     return [];
   }
 
   Future<void> saveLearnedSigns(List<String> signs) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .update({
+    await FirebaseFirestore.instance.collection('users').doc(userId).update({
       'learned_signs': signs,
     });
   }
 
   Future<void> addLearnedSigns(List<String> newSigns) async {
+    log('Adding new signs to learned signs list $newSigns');
     List<String> currentSigns = await getLearnedSigns();
+    log('Current signs $currentSigns');
     List<String> updatedSigns = List.from(currentSigns);
 
     for (String sign in newSigns) {
