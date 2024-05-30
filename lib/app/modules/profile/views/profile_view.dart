@@ -54,20 +54,33 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     const SizedBox(height: 10),
                     ContainerWidget(
-                      child: Row(
-                        children: [
-                          Expanded(child: _buildStatItem("signs".tr, "0/5")),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(child: _buildStatItem("quizzes".tr, "0/5")),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: _buildStatItem("avg".tr, "20/20"),
-                          ),
-                        ],
+                      child: Obx(
+                        () => Row(
+                          children: [
+                            Expanded(
+                                child: _buildStatItem(
+                              "signs".tr,
+                              current: 0,
+                              total: controller.totalSignCount,
+                            )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: _buildStatItem(
+                              "quizzes".tr,
+                              current: 0,
+                              total: controller.totalQuizzCount,
+                            )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: _buildStatItem("avg".tr,
+                                  total: 20, current: 0),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -204,17 +217,18 @@ class ProfileView extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildStatItem(String title, String value) {
+  Widget _buildStatItem(String title, {dynamic current, dynamic total}) {
     return Column(
       children: [
         Text(
           title,
           style: const TextStyle(fontSize: 21),
         ),
-        Text(
-          value,
-          style: const TextStyle(fontSize: 20),
-        ),
+        if (current != null && total != null)
+          Text(
+            "$current/$total",
+            style: const TextStyle(fontSize: 20),
+          ),
       ],
     );
   }
