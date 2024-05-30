@@ -23,7 +23,7 @@ class ProfileView extends GetView<ProfileController> {
           authController.authUser?.email ??
           "user name".tr;
     }
-    return "username";
+    return "guest";
   }
 
   @override
@@ -53,12 +53,13 @@ class ProfileView extends GetView<ProfileController> {
                           style: const TextStyle(fontSize: 20)),
                     ),
                     const SizedBox(height: 10),
-                    const ProfileStatsView(),
+                    if (authController.isAuth) const ProfileStatsView(),
                     const SizedBox(height: 10),
-                    ContainerWidget(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: _rankWidget(),
-                    ),
+                    if (authController.isAuth)
+                      ContainerWidget(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: _rankWidget(),
+                      ),
                   ],
                 ),
                 const SizedBox(height: 10),

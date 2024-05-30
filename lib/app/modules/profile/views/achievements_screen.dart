@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
+import 'package:codedelaroute/app/views/widgets/badge_widget.dart';
 import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,14 +22,6 @@ class AchievementsScreen extends StatelessWidget {
   final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
-    final Map<String, IconData> iconIndex = {
-      "Ionicons.arrow_redo": Ionicons.arrow_redo,
-      "Ionicons.ribbon": Ionicons.ribbon,
-      "Ionicons.medal": Ionicons.medal,
-      "Ionicons.golf": Ionicons.golf,
-      "Ionicons.diamond": Ionicons.diamond,
-      "Ionicons.earth": Ionicons.earth,
-    };
     if (user == null) {
       return _buildAuthCTA(context);
     }
@@ -103,26 +96,9 @@ class AchievementsScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    SizedBox(
-                                      height: 50,
-                                      child: Stack(
-                                        children: [
-                                          Positioned.fill(
-                                            child: Image.asset(
-                                              "assets/badges/badge_${achievementData["badge"]}.png",
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                          if (achievementData["icon"] != null)
-                                            Positioned.fill(
-                                              child: Icon(
-                                                iconIndex[achievementData[
-                                                        "icon"]] ??
-                                                    Ionicons.earth,
-                                              ),
-                                            ),
-                                        ],
-                                      ),
+                                    BadgeWidget(
+                                      iconString: achievementData["icon"],
+                                      id: achievementData["badge"],
                                     ),
                                     Column(
                                       children:

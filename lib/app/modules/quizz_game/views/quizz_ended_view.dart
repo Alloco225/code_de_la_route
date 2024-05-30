@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
@@ -64,6 +65,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
   String? get quizzId => _gameController.selectedQuizz?.id;
 
+  bool newAchievement = false;
+
   Map<String, String> get shareData => {
         'title': "Est-ce que tu maitrises le Code de la Route ?",
         'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
@@ -71,8 +74,9 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       };
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
     calcScore();
     // TODO add a gsap animation on the score calculating
   }
@@ -99,9 +103,9 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     log("correct answers ${widget.correctAnswers}");
     List<String> correctlyAnsweredSigns = widget.correctAnswers
-            .where((el) => el['signId'] != null)
-            .map((e) => e['signId'] as String)
-            .toList();
+        .where((el) => el['signId'] != null)
+        .map((e) => e['signId'] as String)
+        .toList();
 
     log("calculated correctlyAnsweredSigns");
 
@@ -123,6 +127,20 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     //   score: score,
     //   userId: null,
     // );
+
+    // Check for achievements
+
+    // newAchievement = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (math.Random().nextDouble() > .3) {
+        // showSnackbarSuccess("Achievement unlocked", context: context);
+        showSnackbarAchievement("Achievement unlocked", context: context);
+        // Your code HERE
+        // Flutter will wait until the current build is completed before executing this code.
+      }
+    });
+
     setState(() {});
     if (score == MARK_TOTAL) {
       throwConfetti();
@@ -355,7 +373,10 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                               icon: Ionicons.refresh_outline,
                               color: Colors.white,
                               backgroundColor: Colors.green,
-                              onPressed: widget.onRestartQuizz,
+                              // onPressed: widget.onRestartQuizz,
+                              onPressed: () => showSnackbarAchievement(
+                                  "Achievement unlocked",
+                                  context: context),
                             ),
                           ),
                         ],

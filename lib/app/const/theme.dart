@@ -20,6 +20,15 @@ var appShadow = [
       color: Colors.grey[300]!, offset: const Offset(0, 2), blurRadius: 15),
 ];
 
+const kDefaultBoxShadow = [
+  BoxShadow(
+    color: Colors.black26,
+    offset: Offset(0, 8),
+    spreadRadius: 1,
+    blurRadius: 30,
+  ),
+];
+
 appTextStyle(
     {double fs = 18, FontWeight fw = FontWeight.w500, color = Colors.black}) {
   return TextStyle(
