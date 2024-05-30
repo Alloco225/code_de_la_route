@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:codedelaroute/app/data/models/answer_model.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
+import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -11,9 +12,13 @@ import '../../../data/models/quizz_model.dart';
 import '../../../data/models/sign_model.dart';
 import '../../../data/providers/sign_category_provider.dart';
 import '../../../data/providers/sign_provider.dart';
+import '../../../data/services/firestore_service.dart';
+import '../../../helpers/local_storage.dart';
 
 class QuizzListController extends GetxController {
   final _isLoading = true.obs;
+  final authController = Get.find<AuthController>();
+  final LocalStorage _localStorage = LocalStorage();
 
   final storage = GetStorage();
 
@@ -57,6 +62,18 @@ class QuizzListController extends GetxController {
     print("QuizzList onInit ");
     // log("QuizzList onInit ${quizzesJson.length}");
     print("QuizzList onReady");
+  }
+
+  Future<double?> loadScore(String quizzId) async {
+    double? score;
+    String? userId = authController.userId;
+    if (userId == null) {
+      score = await _localStorage.getScore(quizzId);
+    } else {
+      FirestoreService firestoreService = FirestoreService(userId);
+      score = await firestoreService.getScore(quizzId);
+    }
+    return score;
   }
 
   updateQuizzScore(id, score) {
@@ -137,7 +154,7 @@ class QuizzListController extends GetxController {
 
         if (questions.length == questionsPerQuizz || i == signs.length - 1) {
           String quizzId = "q_${category.id}_${quizzes.length}";
-          double? score = storage.read(quizzId);
+          double? score = await loadScore(quizzId);
           quizzes.add(Quizz(
             id: quizzId,
             score: score,

@@ -14,7 +14,10 @@ import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../data/services/firestore_service.dart';
+import '../../../helpers/local_storage.dart';
 import '../../../views/widgets/button_widget.dart';
+import '../../auth/controllers/auth_controller.dart';
 
 class QuizzEndedView extends StatefulWidget {
   final int correctAnswerCount;
@@ -43,7 +46,10 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       AnimationController(vsync: this);
   dynamic _confettiComposition;
   final _quizzListController = Get.find<QuizzListController>();
+  final _authController = Get.find<AuthController>();
   final _gameController = Get.find<QuizzGameController>();
+
+  final LocalStorage _localStorage = LocalStorage();
   final storage = GetStorage();
 
   final globalKey = GlobalKey();
@@ -55,11 +61,14 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
   String get scoreText => '${score.toStringAsFixed(0)}/$MARK_TOTAL';
 
+  String? get quizzId => _gameController.selectedQuizz?.id;
+
+
   Map<String, String> get shareData => {
-    'title': "Est-ce que tu maitrises le Code de la Route ?",
-    'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
-    'url': url,
-  };
+        'title': "Est-ce que tu maitrises le Code de la Route ?",
+        'text': "J'ai eu $scoreText au test de Code de la Route en ligne",
+        'url': url,
+      };
 
   @override
   void initState() {
@@ -84,22 +93,32 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     // Save score online
 
-    // save score
-    String? quizzId = _gameController.selectedQuizz?.id;
-    if (quizzId != null) {
-      _quizzListController.updateQuizzScore(quizzId, score);
-      storage.write(quizzId, score);
-    }
+    _saveScore(score);
 
-    final scoreProvider = ScoreProvider();
-    scoreProvider.saveScore(
-      quizzId: _gameController.selectedQuizz!.id!,
-      score: score,
-      userId: null,
-    );
+    // save score
+    // if (quizzId != null) {
+    //   _quizzListController.updateQuizzScore(quizzId, score);
+    //   storage.write(quizzId!, score);
+    // }
+
+    // final scoreProvider = ScoreProvider();
+    // scoreProvider.saveScore(
+    //   quizzId: _gameController.selectedQuizz!.id!,
+    //   score: score,
+    //   userId: null,
+    // );
     setState(() {});
     if (score == MARK_TOTAL) {
       throwConfetti();
+    }
+  }
+
+  Future<void> _saveScore(double score) async {
+    if (_authController.userId == null) {
+      await _localStorage.saveScore(quizzId!, score);
+    } else {
+      FirestoreService firestoreService = FirestoreService(_authController.userId!);
+      await firestoreService.saveScore(quizzId!, score);
     }
   }
 
