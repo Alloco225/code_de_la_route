@@ -38,6 +38,16 @@ class Messages extends Translations {
           'indication': "Indication",
           'direction': "Direction",
           'signaling': "Road signs",
+          //
+          "quizzes": "Quizzes",
+          "avg": "Score",
+          "achievements": "Achievements",
+          "username": "Username",
+          "authenticate_cta_achivements": "Authenticate to unlock achievements",
+          "authenticate": "Login or Create an account",
+          "your_rank": "Your rank",
+          //
+          "logout": "Logout",
         },
         'fr_FR': {
           'hello': 'Bonjour tout le monde',
@@ -106,7 +116,8 @@ class Messages extends Translations {
           "traversee_cyclistes": "Traversée de cyclistes",
           "pente_raide_gauche": "Pente raide à gauche",
           "pente_raide_droite": "Pente raide à droite",
-          "presence_animaux_domestiques": "Danger, présence d'animaux domestiques",
+          "presence_animaux_domestiques":
+              "Danger, présence d'animaux domestiques",
           "vent_fort": "Vent fort",
           "passage_niveau_sans_barrieres": "Passage à niveau sans barrières",
           "banc_brouillard": "Banc de brouillard",
@@ -132,7 +143,6 @@ class Messages extends Translations {
           "devers_dangereux_droite": "Dévers dangereux à droite",
           "traversee_tortues": "Traversée de tortues",
           "traversee_moutons": "Traversée de moutons",
-          //
         },
         'ja_JP': {
           'hello': 'こんにちは、世界',

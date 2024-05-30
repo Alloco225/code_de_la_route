@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
+import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,7 +38,7 @@ class AchievementsScreen extends StatelessWidget {
             FirebaseFirestore.instance.collection('users').doc(user!.uid).get(),
         builder: (context, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingWidget();
           }
           if (userSnapshot.hasError) {
             return Center(child: Text('Error: ${userSnapshot.error}'));
@@ -56,7 +57,7 @@ class AchievementsScreen extends StatelessWidget {
               builder: (context, achievementsSnapshot) {
                 if (achievementsSnapshot.connectionState ==
                     ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const LoadingWidget();
                 }
                 if (achievementsSnapshot.hasError) {
                   return Center(
@@ -141,6 +142,7 @@ class AchievementsScreen extends StatelessWidget {
                               if (!unlocked)
                                 Positioned.fill(
                                   child: ContainerWidget(
+                                      hasBorder: false,
                                       color: Colors.black.withOpacity(.4),
                                       child: Icon(
                                         Ionicons.lock_closed,

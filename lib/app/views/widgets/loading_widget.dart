@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class LoadingWidget extends StatelessWidget {
-  double size;
-  double padding;
-  double strokeWidth;
-  Color? color;
-  LoadingWidget({
+  final double size;
+  final double padding;
+  final double strokeWidth;
+  final Color? color;
+  const LoadingWidget({
     super.key,
     this.size = 150,
     this.padding = 20,
@@ -26,7 +26,8 @@ class LoadingWidget extends StatelessWidget {
             height: size + padding,
             child: CircularProgressIndicator(
               strokeWidth: strokeWidth,
-              color: color ?? Colors.blueGrey.shade900,
+              // color: color ?? Colors.blueGrey.shade900,
+              color: Colors.orange.shade600,
             ),
           )),
           Center(

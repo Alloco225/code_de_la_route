@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:codedelaroute/app/data/models/sign_model.dart';
 import 'package:codedelaroute/app/data/providers/score_provider.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
@@ -20,7 +22,7 @@ import '../../../views/widgets/button_widget.dart';
 import '../../auth/controllers/auth_controller.dart';
 
 class QuizzEndedView extends StatefulWidget {
-  final int correctAnswerCount;
+  final List<Map> correctAnswers;
   final int questionCount;
 
   final Function() onRestartQuizz;
@@ -29,7 +31,7 @@ class QuizzEndedView extends StatefulWidget {
 
   const QuizzEndedView({
     super.key,
-    required this.correctAnswerCount,
+    required this.correctAnswers,
     required this.onRestartQuizz,
     required this.onReturnToQuizzList,
     required this.onGoHome,
@@ -49,6 +51,9 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   final _authController = Get.find<AuthController>();
   final _gameController = Get.find<QuizzGameController>();
 
+  late FirestoreService firestoreService =
+      FirestoreService(_authController.userId!);
+
   final LocalStorage _localStorage = LocalStorage();
   final storage = GetStorage();
 
@@ -62,7 +67,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   String get scoreText => '${score.toStringAsFixed(0)}/$MARK_TOTAL';
 
   String? get quizzId => _gameController.selectedQuizz?.id;
-
 
   Map<String, String> get shareData => {
         'title': "Est-ce que tu maitrises le Code de la Route ?",
@@ -86,7 +90,9 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   void calcScore() async {
     final int total = widget.questionCount != 0 ? widget.questionCount : 1;
 
-    percentage = (widget.correctAnswerCount * 100) / total;
+    int correctAnswerCount = widget.correctAnswers.length;
+
+    percentage = (correctAnswerCount * 100) / total;
     // find percentage value in regard to MARK_TOTAL which is 100/5
     double coefficient = 100 / MARK_TOTAL;
     score = percentage / coefficient;
@@ -94,6 +100,15 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     // Save score online
 
     _saveScore(score);
+
+    List<String> correctlyAnsweredSigns =
+        widget.correctAnswers.map((e) => e['sign'] as String).toList();
+
+    log("correctly guessed signs $correctlyAnsweredSigns");
+
+    _saveLearnedSigns(correctlyAnsweredSigns);
+
+    _calculateAndSaveAverageScore();
 
     // save score
     // if (quizzId != null) {
@@ -114,11 +129,30 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   Future<void> _saveScore(double score) async {
+    log("saving score $score");
     if (_authController.userId == null) {
       await _localStorage.saveScore(quizzId!, score);
     } else {
-      FirestoreService firestoreService = FirestoreService(_authController.userId!);
+      FirestoreService firestoreService =
+          FirestoreService(_authController.userId!);
       await firestoreService.saveScore(quizzId!, score);
+    }
+  }
+
+  void _calculateAndSaveAverageScore() async {
+    double averageScore = await firestoreService.calculateAverageScore();
+
+    // Save average score online
+    await firestoreService.saveAverageScore(averageScore);
+  }
+
+  Future<void> _saveLearnedSigns(List<String> signIds) async {
+    if (_authController.userId == null) {
+      await _localStorage.saveLearnedSigns(signIds);
+    } else {
+      FirestoreService firestoreService =
+          FirestoreService(_authController.userId!);
+      await firestoreService.addLearnedSigns(signIds);
     }
   }
 

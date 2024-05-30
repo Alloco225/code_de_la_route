@@ -117,6 +117,7 @@ class QuizzListController extends GetxController {
         var sign = signs[i];
 
         answers.add(Answer(
+          signId: sign.id,
           content: sign.name,
           isCorrect: true,
         ));

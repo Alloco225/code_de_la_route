@@ -1,5 +1,4 @@
 import 'package:codedelaroute/app/modules/profile/views/achievements_screen.dart';
-import 'package:codedelaroute/app/modules/profile/views/achievements_grid_view.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +10,7 @@ import '../../../views/widgets/container_widget.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../controllers/profile_controller.dart';
+import 'profile_stats_view.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final authController = Get.find<AuthController>();
@@ -53,36 +53,7 @@ class ProfileView extends GetView<ProfileController> {
                           style: const TextStyle(fontSize: 20)),
                     ),
                     const SizedBox(height: 10),
-                    ContainerWidget(
-                      child: Obx(
-                        () => Row(
-                          children: [
-                            Expanded(
-                                child: _buildStatItem(
-                              "signs".tr,
-                              current: 0,
-                              total: controller.totalSignCount,
-                            )),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                child: _buildStatItem(
-                              "quizzes".tr,
-                              current: 0,
-                              total: controller.totalQuizzCount,
-                            )),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: _buildStatItem("avg".tr,
-                                  total: 20, current: 0),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const ProfileStatsView(),
                     const SizedBox(height: 10),
                     ContainerWidget(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -91,8 +62,6 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                // const AchievementsView(),
-
                 Text(
                   "achievements".tr,
                   textAlign: TextAlign.center,
@@ -149,40 +118,6 @@ class ProfileView extends GetView<ProfileController> {
     ));
   }
 
-  Widget _unAuthRankWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("your_rank".tr),
-            const Text("Connectez-vous pour débloquer"),
-          ],
-        ),
-        Container(
-          width: 70,
-          height: 70,
-          padding: const EdgeInsets.all(10),
-          child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    "assets/badges/badge_green.png",
-                  ),
-                  fit: BoxFit.contain,
-                ),
-              ),
-              child: const Center(
-                  child: Text(
-                "5",
-                style: TextStyle(fontSize: 20),
-              ))),
-        ),
-      ],
-    );
-  }
-
   Widget _rankWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -213,22 +148,6 @@ class ProfileView extends GetView<ProfileController> {
                 style: TextStyle(fontSize: 20),
               ))),
         ),
-      ],
-    );
-  }
-
-  Widget _buildStatItem(String title, {dynamic current, dynamic total}) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 21),
-        ),
-        if (current != null && total != null)
-          Text(
-            "$current/$total",
-            style: const TextStyle(fontSize: 20),
-          ),
       ],
     );
   }

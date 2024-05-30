@@ -120,7 +120,7 @@ class QuizzGameView extends GetView<QuizzGameController> {
               // Game
               if (controller.hasGameEnded)
                 QuizzEndedView(
-                  correctAnswerCount: controller.correctAnswers.length,
+                  correctAnswers: controller.correctAnswers,
                   questionCount: controller.questions.length,
                   onGoHome: gotoHome,
                   onRestartQuizz: controller.onRestartQuizz,

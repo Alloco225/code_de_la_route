@@ -73,7 +73,7 @@ class QuizzGameController extends GetxController {
   bool get isProcessingAnswer => _isProcessingAnswer.value;
   bool get pause => _pause.value;
 
-  dynamic get selectedAnswer => _selectedAnswer.value;
+  Answer? get selectedAnswer => _selectedAnswer.value;
   List<Map> get userResponses => _userResponses.value;
   List<Map> get answers => userResponses;
   List<Map> get correctAnswers =>
@@ -200,6 +200,7 @@ class QuizzGameController extends GetxController {
         default:
       }
       Map answer = {
+        'signId': selectedAnswer?.signId,
         'isCorrect': isCorrect,
         'content': content,
       };
