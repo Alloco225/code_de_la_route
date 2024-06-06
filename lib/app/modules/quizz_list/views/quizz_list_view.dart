@@ -4,6 +4,7 @@ import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/quizz_model.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/views/widgets/app_bar_widget.dart';
 import 'package:codedelaroute/app/views/widgets/container_widget.dart';
 import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +47,13 @@ class _QuizzListViewState extends State<QuizzListView> {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Obx(() =>
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const TitleWidget(title: "Quizz"),
+              TitleWidget(
+                title: "title_signs".tr,
+                paddingBottom: 10,
+              ),
               Expanded(
                 child: controller.isLoading
-                    ? LoadingWidget()
+                    ? const LoadingWidget()
                     : ListView.builder(
                         itemCount: controller.groupedQuizzes.entries.length,
                         itemBuilder: (ctx, i) {
@@ -101,7 +105,6 @@ class _QuizzListViewState extends State<QuizzListView> {
                           );
                         }),
               ),
-              const BackNavButton(),
             ])),
       ),
     );

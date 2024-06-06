@@ -33,87 +33,97 @@ class ProfileView extends GetView<ProfileController> {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
       child: Column(
         children: [
-          TitleWidget(title: "profile".tr),
-          Expanded(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: ContainerWidget(
-                        borderRadius: 100,
-                        child: Center(child: Icon(Ionicons.person, size: 50)),
-                      ),
-                    ),
-                    Obx(
-                      () => Text(buildUserName(),
-                          style: const TextStyle(fontSize: 20)),
-                    ),
-                    const SizedBox(height: 10),
-                    if (authController.isAuth) const ProfileStatsView(),
-                    const SizedBox(height: 10),
-                    if (authController.isAuth)
-                      ContainerWidget(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: _rankWidget(),
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "achievements".tr,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 23),
-                ),
-                Expanded(
-                    child: AchievementsScreen(user: authController.authUser)),
-                const SizedBox(height: 15),
-                Obx(
-                  () => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+          TitleWidget(
+            title: "profile".tr,
+            paddingTop: 30,
+            paddingBottom: 10,
+            gap: 5,
+          ),
+          Obx(
+            () => Expanded(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Column(
                     children: [
-                      InkWell(
-                        onTap: () => Get.toNamed(Routes.SETTINGS),
+                      const SizedBox(
+                        width: 100,
+                        height: 100,
                         child: ContainerWidget(
-                          child: Row(
-                            children: [
-                              Text("settings".tr),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Icon(Ionicons.settings_outline),
-                            ],
-                          ),
+                          borderRadius: 100,
+                          child: Center(child: Icon(Ionicons.person, size: 50)),
                         ),
                       ),
-                      if (authController.isAuth) const SizedBox(width: 15),
+                      Obx(
+                        () => Text(buildUserName(),
+                            style: const TextStyle(fontSize: 20)),
+                      ),
+                      const SizedBox(height: 10),
+                      if (authController.isAuth) const ProfileStatsView(),
+                      const SizedBox(height: 10),
                       if (authController.isAuth)
+                        ContainerWidget(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: _rankWidget(),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "achievements".tr,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 23),
+                  ),
+                  Obx(
+                    () => Expanded(
+                        child:
+                            AchievementsScreen(user: authController.authUser)),
+                  ),
+                  const SizedBox(height: 15),
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
                         InkWell(
-                          onTap: () => authController.logOut(),
+                          onTap: () => Get.toNamed(Routes.SETTINGS),
                           child: ContainerWidget(
                             child: Row(
                               children: [
-                                Text("logout".tr),
+                                Text("settings".tr),
                                 const SizedBox(
                                   width: 5,
                                 ),
-                                const Icon(Ionicons.log_out_outline),
+                                const Icon(Ionicons.settings_outline),
                               ],
                             ),
                           ),
                         ),
-                    ],
+                        if (authController.isAuth) const SizedBox(width: 15),
+                        if (authController.isAuth)
+                          InkWell(
+                            onTap: () => authController.logOut(),
+                            child: ContainerWidget(
+                              child: Row(
+                                children: [
+                                  Text("logout".tr),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Icon(Ionicons.log_out_outline),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-              ],
+                  const SizedBox(height: 10),
+                ],
+              ),
             ),
           ),
-          const BackNavButton(padding: 5),
+          // const BackNavButton(padding: 5),
         ],
       ),
     ));

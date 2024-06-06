@@ -17,39 +17,12 @@ void showSnackbarSuccess(String message, {required BuildContext context}) {
   showSnackbar(context: context, message: message, type: SnackbarType.success);
 }
 
-void showSnackbarAchievement(String message, {required BuildContext context}) {
-  Widget widget = Container(
-    clipBehavior: Clip.hardEdge,
-    height: 80,
-    width: double.infinity,
-    decoration: BoxDecoration(
-      color: Colors.blueGrey.shade800,
-      borderRadius: BorderRadius.circular(8),
-      boxShadow: kDefaultBoxShadow,
-    ),
-    child: Stack(
-      children: [
-        Container(
-          color: Colors.red,
-          child: const Row(
-            children: [
-              BadgeWidget(
-                id: "red",
-                icon: Ionicons.egg,
-              ),
-              Column(
-                children: [
-                  Text("hello!"),
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
-    ),
-  );
-
-  widget = CustomSnackBar.success(
+void showSnackbarAchievement({
+  required BuildContext context,
+  String? id,
+  String? message,
+}) {
+  Widget widget = CustomSnackBar.success(
     message: "Asphalt Apprentice Unlocked",
     backgroundColor: Colors.red.shade300,
     iconRotationAngle: 25,

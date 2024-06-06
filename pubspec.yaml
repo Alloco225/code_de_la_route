@@ -1,5 +1,5 @@
 name: codedelaroute
-version: 2.6.6+8
+version: 2.8.1+8 #google_sign_in
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -37,6 +37,7 @@ dependencies:
   get_storage: ^2.1.1
   cloud_firestore: ^4.17.3
   shared_preferences: ^2.2.3
+  animated_flip_counter: ^0.3.4
 
 dev_dependencies: 
   flutter_lints: 3.0.2

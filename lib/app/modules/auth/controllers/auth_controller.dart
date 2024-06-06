@@ -55,6 +55,7 @@ class AuthController extends GetxController with CacheManager {
     // Fetch all achievements
     QuerySnapshot achievementsSnapshot =
         await _firestore.collection('achievements').get();
+        
     for (var achievementDoc in achievementsSnapshot.docs) {
       Map<String, dynamic> achievement =
           achievementDoc.data() as Map<String, dynamic>;

@@ -178,6 +178,14 @@ class Messages extends Translations {
           'indication': "指示",
           'direction': "方向",
           'signaling': "道路標識",
+          "quizzes": "クイズ",
+          "avg": "スコア",
+          "achievements": "実績",
+          "username": "ユーザー名",
+          "authenticate_cta_achivements": "実績をアンロックするには認証してください",
+          "authenticate": "ログインまたはアカウント作成",
+          "your_rank": "あなたのランク",
+          "logout": "ログアウト"
         },
       };
 }

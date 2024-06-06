@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:math' as math;
 
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
 import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
@@ -135,7 +136,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (math.Random().nextDouble() > .3) {
         // showSnackbarSuccess("Achievement unlocked", context: context);
-        showSnackbarAchievement("Achievement unlocked", context: context);
+        // showSnackbarAchievement("Achievement unlocked", context: context);
         // Your code HERE
         // Flutter will wait until the current build is completed before executing this code.
       }
@@ -183,13 +184,13 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   }
 
   Future<bool> getShareLink(String platformShareLink) async {
-    print("getShareLink $platformShareLink");
+    log("getShareLink $platformShareLink");
 
     String stringText = shareData.values.join('\n');
     String link = url;
 
     link = platformShareLink.replaceAll('REPLACE_WITH_LINK', stringText);
-    print("link $link");
+    log("link $link");
 
     Uri shareUrl = Uri.parse(link);
     if (await canLaunchUrl(shareUrl)) {
@@ -198,7 +199,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       return true;
     }
     // showSnackbarError("Lien de partage indisponible", context: context);
-    // print("could not share");
+    // log("could not share");
     shareScore();
 
     return false;
@@ -210,6 +211,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     var result = await Share.share(stringText);
     if (result.status == ShareResultStatus.success) {
       showSnackbarSuccess("Merci d'avoir partagé", context: context);
+      // check if user has social share badge
+      
     }
     return;
   }
@@ -255,6 +258,17 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     },
   ];
 
+  unlockBadge(BuildContext context) {
+    // showSnackbarAchievement(context: context);
+    showSnackbarAchievement(
+      context: context,
+      id: "red",
+      message: "Asphalt Apprentice Unlocked",
+    );
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -294,16 +308,29 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                     Positioned.fill(
                       child: Align(
                         alignment: Alignment.center,
-                        child: Text(
-                          '${score.toStringAsFixed(0)}/$MARK_TOTAL',
-                          semanticsLabel:
-                              "Note totale ${score.toStringAsFixed(0)}/$MARK_TOTAL'",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 64,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AnimatedFlipCounter(
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.easeOutCubic,
+                                value: score.toPrecision(0),
+                                textStyle: const TextStyle(
+                                    fontSize: 64,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              Text(
+                                '/$MARK_TOTAL',
+                                semanticsLabel:
+                                    "Note totale ${score.toStringAsFixed(0)}/$MARK_TOTAL'",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 64,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ]),
                       ),
                     ),
                   ],
@@ -374,9 +401,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                               color: Colors.white,
                               backgroundColor: Colors.green,
                               // onPressed: widget.onRestartQuizz,
-                              onPressed: () => showSnackbarAchievement(
-                                  "Achievement unlocked",
-                                  context: context),
+                              onPressed: () => unlockBadge(context),
                             ),
                           ),
                         ],

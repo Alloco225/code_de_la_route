@@ -1,5 +1,7 @@
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
+import 'package:codedelaroute/app/views/widgets/app_bar_widget.dart';
+import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -22,6 +24,15 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
   Widget build(BuildContext context) {
     return Scaffold(
         // Ressource attribution : https://www.vecteezy.com/members/seetwo
+        // appBar: PreferredSize(
+        //   preferredSize: const Size.fromHeight(kToolbarHeight * 2),
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(top: 50),
+        //     child: AppBarWidget(
+        //       title: "title_signs".tr,
+        //     ),
+        //   ),
+        // ),
         body: Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Column(
@@ -30,12 +41,10 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
             title: "title_signs".tr,
           ),
           Obx(
-            () => controller.isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: GridView(
+            () => Expanded(
+              child: controller.isLoading
+                  ? const LoadingWidget()
+                  : GridView(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -46,9 +55,9 @@ class PanneauxCategoriesView extends GetView<PanneauxCategoriesController> {
                           .map((element) => _buildCategoryGridItem(element))
                           .toList(),
                     ),
-                  ),
+            ),
           ),
-          const BackNavButton(),
+          // const BackNavButton(),
         ],
       ),
     ));

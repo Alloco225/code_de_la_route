@@ -13,6 +13,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../../views/ui/snackbar.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../../auth/submodules/auth/views/auth_modal_view.dart';
+import '../../auth/submodules/login/controllers/login_controller.dart';
 
 class AchievementsScreen extends StatelessWidget {
   final User? user;
@@ -138,6 +139,8 @@ class AchievementsScreen extends StatelessWidget {
   }
 
   Widget _buildAuthCTA(context) {
+    final authController = Get.find<AuthController>();
+    final loginController = Get.find<LoginController>();
     openAuthModal() async {
       bool? loggedIn = await showMaterialModalBottomSheet(
         expand: false,
@@ -161,17 +164,37 @@ class AchievementsScreen extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            child: const Text(
-              "authenticate to unlock achievements",
+            child: Text(
+              "authenticate_cta_achivements".tr,
               textAlign: TextAlign.center,
             ),
           ),
           InkWell(
-            child: const ContainerWidget(
-              child: Text("authenticate"),
+            onTap: () => loginController.signInWithGoogle(context),
+            child: ContainerWidget(
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Ionicons.logo_google,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "login_with_google".tr.toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            onTap: () => openAuthModal(),
-          )
+          ),
         ],
       ),
     );
