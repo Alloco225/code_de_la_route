@@ -17,13 +17,30 @@ class ProfileView extends GetView<ProfileController> {
 
   ProfileView({super.key});
 
+  buildUserProfileImage() {
+    return SizedBox(
+      width: 100,
+      height: 100,
+      child: ContainerWidget(
+        borderRadius: 100,
+        padding:
+            authController.isAuth == false ? null : const EdgeInsets.all(5),
+        child: authController.isAuth == false
+            ? const Center(child: Icon(Ionicons.person, size: 50))
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.network(authController.authUser?.photoURL ?? '')),
+      ),
+    );
+  }
+
   String buildUserName() {
     if (authController.isAuth) {
       return authController.authUser?.displayName ??
           authController.authUser?.email ??
-          "user name".tr;
+          '';
     }
-    return "guest";
+    return "guest".tr;
   }
 
   @override
@@ -46,14 +63,7 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(height: 20),
                   Column(
                     children: [
-                      const SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: ContainerWidget(
-                          borderRadius: 100,
-                          child: Center(child: Icon(Ionicons.person, size: 50)),
-                        ),
-                      ),
+                      buildUserProfileImage(),
                       Obx(
                         () => Text(buildUserName(),
                             style: const TextStyle(fontSize: 20)),

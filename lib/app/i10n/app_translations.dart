@@ -24,6 +24,7 @@ class Messages extends Translations {
           'off': "Non",
           //
           'back': "Back",
+          'guest': "Guest",
           //
           'signs': "Signs",
           'quizz': "Quizz",
@@ -70,6 +71,7 @@ class Messages extends Translations {
           'off': "Non",
           //
           'back': "Retour",
+          'guest': "Invité",
           //
           'all': "Voir tout",
           'signs': "Panneaux",
@@ -165,6 +167,7 @@ class Messages extends Translations {
           'off': "いいえ",
           //
           'back': "戻る",
+          'guest': "ゲスト",
           //
           'signs': "道路標識",
           'quizz': "クイズ",
@@ -185,7 +188,16 @@ class Messages extends Translations {
           "authenticate_cta_achivements": "実績をアンロックするには認証してください",
           "authenticate": "ログインまたはアカウント作成",
           "your_rank": "あなたのランク",
-          "logout": "ログアウト"
+          "logout": "ログアウト",
+
+          "highway_hero": "ハイウェイヒーロー",
+          "traffic_titan": "トラフィックタイタン",
+          "pavement_pupil": "舗装生徒",
+          "roadmaster_royalty": "ロードマスターロイヤルティ",
+          "social_sharer": "ソーシャルシェアラー",
+          "asphalt_apprentice": "アスファルト見習い",
+
+
         },
       };
 }
