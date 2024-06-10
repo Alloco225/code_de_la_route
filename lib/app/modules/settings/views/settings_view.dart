@@ -38,7 +38,7 @@ class SettingsView extends GetView<SettingsController> {
                     () => buildSettingTile(
                       title: "language".tr,
                       icon: Ionicons.globe_outline,
-                      value: (controller.lang.selectedLanguage?.id ?? '')
+                      value: (controller.lang.selectedLanguage?.emoji ?? '')
                           .toUpperCase(),
                       flex: 1,
                       onTap: () => showMaterialModalBottomSheet(
@@ -125,7 +125,9 @@ class SettingsView extends GetView<SettingsController> {
                         title: "logout".tr,
                         icon: Ionicons.log_out_outline,
                         onTap: () async {
-                          auth.logOut();
+                          await auth.logOut();
+                          
+                          Get.back();
                         }),
                   if (auth.isAuth)
                     const SizedBox(

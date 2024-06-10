@@ -1,5 +1,6 @@
 import 'package:codedelaroute/app/modules/quizz_game/views/quizz_game_main_content_view.dart';
-import 'package:codedelaroute/app/views/widgets/back_nav_button.dart';
+import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
+// import 'package:codedelaroute/app/views/widgets/back_nav_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -57,8 +58,6 @@ class QuizzGameView extends GetView<QuizzGameController> {
     return PopScope(
       canPop: false,
       onPopInvoked: (_) {
-        // TODO add tu veux abandonner
-        print("Oh Ho! Il veut abandonner");
         // Navigator.pop(context, false);
         // return Future.value(false);
         controller.togglePause();
@@ -88,7 +87,32 @@ class QuizzGameView extends GetView<QuizzGameController> {
                 const SizedBox(
                   height: 10,
                 ),
-                const BackNavButton()
+                // const BackNavButton()
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () => Get.back(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Ionicons.chevron_back),
+                            const SizedBox(width: 10),
+                            Text(
+                              'back'.tr,
+                              semanticsLabel: 'back'.tr,
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             );
           }

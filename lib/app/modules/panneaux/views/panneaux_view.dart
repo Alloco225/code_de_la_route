@@ -35,12 +35,10 @@ class PanneauxView extends GetView<PanneauxController> {
         children: [
           Obx(
             () => TitleWidget(
-              title:
-                  // "Panneaux ${controller.categoryName}"
-                  controller.categoryName == null
-                      ? "all_signs".tr
-                      : "all_signs".trParams(
-                          {'category': controller.categoryName ?? ''}),
+              title: controller.categoryName == null
+                  ? "all_signs".tr
+                  : "all_signs"
+                      .trParams({'category': controller.categoryId?.tr ?? ''}),
             ),
           ),
           Expanded(

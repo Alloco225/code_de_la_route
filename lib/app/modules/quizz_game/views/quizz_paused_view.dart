@@ -1,9 +1,8 @@
+import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-
-import '../../../views/widgets/border_button_widget.dart';
-import '../../../views/widgets/button_widget.dart';
 
 class QuizzPausedView extends StatelessWidget {
   final Function() onResume;
@@ -25,14 +24,15 @@ class QuizzPausedView extends StatelessWidget {
                 // color: Colors.grey.withOpacity(.1),
                 borderRadius: BorderRadius.circular(8)),
             margin: const EdgeInsets.symmetric(horizontal: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const TitleWidget(
-                  title: 'PAUSE',
+                TitleWidget(
+                  title: 'pause'.tr,
+                  hasBackButton: false,
                 ),
                 const SizedBox(height: 20),
                 IconButton(
@@ -47,21 +47,20 @@ class QuizzPausedView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BorderButtonWidget(
-                        text: 'Continuer',
-                        icon: Ionicons.play_outline,
-                        color: Colors.white,
-                        backgroundColor: Colors.blue,
-                        onPressed: onResume),
+                    FancyButtonWidget(
+                      onTap: onResume,
+                      color: 'blue',
+                      icon: Ionicons.play_outline,
+                      title: 'continue'.tr.toUpperCase(),
+                    ),
                     const SizedBox(width: 20),
-                    BorderButtonWidget(
-                        text: 'Abandonner',
-                        icon: Ionicons.trash_outline,
-                        color: Colors.white,
-                        backgroundColor: Colors.red,
-                        onPressed: onQuit,
-                        onLongPress: onClose,
-                        ),
+                    FancyButtonWidget(
+                      color: 'red',
+                      onTap: onQuit,
+                      onLongPress: onClose,
+                      icon: Ionicons.trash_outline,
+                      title: 'giveup'.tr.toUpperCase(),
+                    ),
                   ],
                 ),
               ],

@@ -1,13 +1,11 @@
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
-import 'package:codedelaroute/app/views/widgets/app_bar_widget.dart';
 import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../controllers/panneaux_categories_controller.dart';

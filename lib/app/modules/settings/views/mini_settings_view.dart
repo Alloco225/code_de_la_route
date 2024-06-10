@@ -10,7 +10,6 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../../helpers/utils.dart';
 import '../../../routes/app_pages.dart';
 import '../../../views/ui/snackbar.dart';
-import '../../../views/widgets/back_nav_button.dart';
 import '../../auth/submodules/login/views/login_modal_view.dart';
 import '../controllers/settings_controller.dart';
 
@@ -118,7 +117,6 @@ class MiniSettingsView extends GetView<SettingsController> {
                 ],
               ),
             ),
-            const BackNavButton(),
           ],
         ),
       ),

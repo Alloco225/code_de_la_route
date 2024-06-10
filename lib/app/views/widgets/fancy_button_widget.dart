@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 
 class FancyButtonWidget extends StatelessWidget {
   final String color;
-  final String title;
+  final String? title;
+  final IconData? icon;
   final VoidCallback onTap;
+  final VoidCallback? onLongPress;
   final int flex;
+
   const FancyButtonWidget({
     super.key,
     this.color = 'orange',
-    required this.title,
+    this.title,
+    this.icon,
     required this.onTap,
+    this.onLongPress,
     this.flex = 1,
   });
 
@@ -17,98 +22,89 @@ class FancyButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorsMixer = {
       'orange': {
-        'light': Colors.orange.shade400,
-        'dark': Colors.orange.shade700,
+        'light': Colors.orange,
+        'dark': Colors.orange.shade900,
       },
       'blue': {
-        'light': Colors.blue.shade400,
-        'dark': Colors.blue.shade700,
+        'light': Colors.blue,
+        'dark': Colors.blue.shade900,
       },
       'green': {
-        'light': Colors.green.shade400,
-        'dark': Colors.green.shade700,
+        'light': Colors.green,
+        'dark': Colors.green.shade900,
       },
       'red': {
-        'light': Colors.red.shade400,
-        'dark': Colors.red.shade700,
+        'light': Colors.red,
+        'dark': Colors.red.shade900,
+        // 'text': Colors.red.shade900,
       },
       'purple': {
-        'light': Colors.purple.shade400,
-        'dark': Colors.purple.shade700,
+        'light': Colors.purple,
+        'dark': Colors.purple.shade900,
       },
       'yellow': {
-        'light': Colors.yellow.shade400,
-        'dark': Colors.yellow.shade700,
+        'light': Colors.yellow,
+        'dark': Colors.yellow.shade900,
       },
       'pink': {
-        'light': Colors.pink.shade400,
-        'dark': Colors.pink.shade700,
+        'light': Colors.pink,
+        'dark': Colors.pink.shade900,
       },
       'teal': {
-        'light': Colors.teal.shade400,
-        'dark': Colors.teal.shade700,
+        'light': Colors.teal,
+        'dark': Colors.teal.shade900,
       },
       'cyan': {
-        'light': Colors.cyan.shade400,
-        'dark': Colors.cyan.shade700,
+        'light': Colors.cyan,
+        'dark': Colors.cyan.shade900,
       },
       'indigo': {
-        'light': Colors.indigo.shade400,
-        'dark': Colors.indigo.shade700,
+        'light': Colors.indigo,
+        'dark': Colors.indigo.shade900,
       },
       'lime': {
-        'light': Colors.lime.shade400,
-        'dark': Colors.lime.shade700,
+        'light': Colors.lime,
+        'dark': Colors.lime.shade900,
       },
       'amber': {
-        'light': Colors.amber.shade400,
-        'dark': Colors.amber.shade700,
+        'light': Colors.amber,
+        'dark': Colors.amber.shade900,
       },
       'brown': {
-        'light': Colors.brown.shade400,
-        'dark': Colors.brown.shade700,
+        'light': Colors.brown,
+        'dark': Colors.brown.shade900,
       },
       'grey': {
-        'light': Colors.grey.shade400,
-        'dark': Colors.grey.shade700,
+        'light': Colors.grey,
+        'dark': Colors.grey.shade900,
       },
       'blueGrey': {
-        'light': Colors.blueGrey.shade400,
-        'dark': Colors.blueGrey.shade700,
+        'light': Colors.blueGrey,
+        'dark': Colors.blueGrey.shade900,
       },
       'deepOrange': {
-        'light': Colors.deepOrange.shade400,
-        'dark': Colors.deepOrange.shade700,
+        'light': Colors.deepOrange,
+        'dark': Colors.deepOrange.shade900,
       },
       'deepPurple': {
-        'light': Colors.deepPurple.shade400,
-        'dark': Colors.deepPurple.shade700,
+        'light': Colors.deepPurple,
+        'dark': Colors.deepPurple.shade900,
       },
       'lightBlue': {
-        'light': Colors.lightBlue.shade400,
-        'dark': Colors.lightBlue.shade700,
+        'light': Colors.lightBlue,
+        'dark': Colors.lightBlue.shade900,
       },
       'lightGreen': {
-        'light': Colors.lightGreen.shade400,
-        'dark': Colors.lightGreen.shade700,
-      },
-      'orangeAccent': {
-        'light': Colors.orangeAccent.shade400,
-        'dark': Colors.orangeAccent.shade700,
-      },
-      'pinkAccent': {
-        'light': Colors.pinkAccent.shade400,
-        'dark': Colors.pinkAccent.shade700,
-      },
-      'purpleAccent': {
-        'light': Colors.purpleAccent.shade400,
-        'dark': Colors.purpleAccent.shade700,
+        'light': Colors.lightGreen,
+        'dark': Colors.lightGreen.shade900,
       },
     };
+
     return Expanded(
       flex: flex,
       child: GestureDetector(
         onTap: onTap,
+        onLongPress: onLongPress,
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -119,15 +115,25 @@ class FancyButtonWidget extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Center(
-            child: Text(
-              title.toUpperCase(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null)
+                Icon(
+                  icon,
+                  color: colorsMixer[color]!['text'] ?? Colors.white,
+                ),
+              if (icon != null) const SizedBox(width: 10),
+              Text(
+                title!.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: colorsMixer[color]!['text'] ?? Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

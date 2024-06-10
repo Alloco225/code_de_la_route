@@ -11,7 +11,7 @@ class TitleWidget extends StatelessWidget {
   const TitleWidget({
     super.key,
     required this.title,
-    this.hasBackButton = false,
+    this.hasBackButton = true,
     this.paddingTop = 50.0,
     this.paddingBottom = 40.0,
     this.gap = 5.0,
@@ -32,29 +32,30 @@ class TitleWidget extends StatelessWidget {
               fontSize: 30,
             ),
           ),
-          SizedBox(height: gap),
-          InkWell(
-            onTap: () => Get.back(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Icon(
-                  Ionicons.chevron_back,
-                  color: Colors.white.withOpacity(.8),
-                ),
-                Text(
-                  'back'.tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
+          if (hasBackButton) SizedBox(height: gap),
+          if (hasBackButton)
+            InkWell(
+              onTap: () => Get.back(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Icon(
+                    Ionicons.chevron_back,
                     color: Colors.white.withOpacity(.8),
-                    fontSize: 18,
                   ),
-                ),
-              ],
+                  Text(
+                    'back'.tr,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white.withOpacity(.8),
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );

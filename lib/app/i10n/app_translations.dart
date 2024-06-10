@@ -54,6 +54,7 @@ class Messages extends Translations {
           'direction': "Direction",
           'signaling': "Road signs",
           // profile
+          "score": "Score",
           "quizzes": "Quizzes",
           "avg": "Score",
           "achievements": "Achievements",
@@ -69,6 +70,39 @@ class Messages extends Translations {
           "roadmaster_royalty": "Roadmaster Royalty",
           "social_sharer": "Social Sharer",
           "asphalt_apprentice": "Asphalt Apprentice",
+
+          // quizz
+          "question": "Question",
+          "quizz_ended_title": "Quizz ended",
+          "share_my_score": "Share my score",
+          "try_again": "Try again",
+          "correct": "Correct",
+          "wrong": "Wrong",
+          "menu": "Menu",
+          "home": "Home",
+          "no_score_yet": "No score yet",
+
+          "order_question_prompt": "What's the correct order ? ",
+          "image_question_prompt": "What's the name of this sign ?",
+          "quizz_not_found": "Quizz not found",
+
+          "pause": "Game paused",
+          "continue": "Continue",
+          "giveup": "Give up",
+          "yes_boss": "Yes, boss!",
+
+          //
+          'you_wanna_giveup': "Do you want to give up?",
+          'do_you_wanna_giveup': "Do you want to give up ?????",
+          'battle_cry': "iYaaAAARGHHH !!!!",
+          'youre_pathetic': 'You are pathetic !!',
+          'flee_and_flee': 'Flee and flee !!',
+          'flee_again': 'Flee again !!',
+          'always_flee': 'Always flee !!',
+          'flee_and_flee_again': "Flee and flee again !!",
+          'you_dont_have_the_right_to_giveup':
+              "You don't have the right to give up",
+
           ...signKeysEn,
         },
         'fr_FR': {
@@ -119,6 +153,8 @@ class Messages extends Translations {
           "direction": "Direction",
           "signaling": "Panneaux de signalisation",
           // profile
+          "score": "Note",
+
           "quizzes": "Quizzes",
           "avg": "Score",
           "achievements": "Succès",
@@ -132,9 +168,42 @@ class Messages extends Translations {
           "highway_hero": "Héros de l'autoroute",
           "traffic_titan": "Titan du trafic",
           "pavement_pupil": "Élève modèle de la chaussée",
-          "roadmaster_royalty": "Royauté des maîtres de la route",
-          "social_sharer": "Partageur social",
-          "asphalt_apprentice": "Apprenti de l'asphalte",
+          "roadmaster_royalty": "Routier(e) Royal(e)",
+          "social_sharer": "Partageur Professionel",
+          "asphalt_apprentice": "Apprenti de l'Asphalte",
+
+          //
+          "question": "Question",
+          "quizz_ended_title": "Fin du quiz",
+          "share_my_score": "Partager mon score",
+          "try_again": "Réessayer",
+          "correct": "Correct",
+          "wrong": "Faux",
+          "menu": "Menu",
+          "home": "Accueil",
+          "no_score_yet": "Pas encore noté",
+
+          "order_question_prompt": "Quel est l'ordre correct ? ",
+          "image_question_prompt": "De quel panneau s'agit-il ?",
+          "quizz_not_found": "Quiz introuvable",
+
+          "pause": "Jeu en pause",
+          "continue": "Continuer",
+          "giveup": "Abandonner",
+          'yes_boss': "Oui, chef !",
+
+          //
+
+          'you_wanna_giveup': "Tu veux abandonner ?",
+          'do_you_wanna_giveup': "Est-ce que tu veux abandonner ?????",
+          'battle_cry': "iYaaAAARGHHH !!!!",
+          'youre_pathetic': 'Tu es pathétique !!',
+          'flee_and_flee': 'Fuir et fir !!',
+          'flee_again': 'Fir encore !!',
+          'always_flee': 'Toujours fir !!',
+          'flee_and_flee_again': "Fir et t'enfir !!",
+          'you_dont_have_the_right_to_giveup':
+              "Tu n'as pas le droit d'abandonner",
 
           ...signKeysFr,
         },
@@ -185,6 +254,7 @@ class Messages extends Translations {
           "direction": "方向",
           "signaling": "道路標識",
           // profile
+          "score": "スコア",
           "quizzes": "クイズ",
           "avg": "スコア",
           "achievements": "実績",
@@ -207,6 +277,38 @@ class Messages extends Translations {
           "roadmaster_royalty": "ロードマスター ロイヤルティ",
           "social_sharer": "ソーシャル シェアラー",
           "asphalt_apprentice": "アスファルト 見習い",
+
+          // quizz
+          "question": "質問",
+          "quizz_ended_title": "クイズ終了",
+          "share_my_score": "スコアを共有する",
+          "try_again": "もう一度試す",
+          "correct": "正解",
+          "wrong": "間違い",
+          "menu": "メニュー",
+          "home": "ホーム",
+          "no_score_yet": "まだスコアがありません",
+          "order_question_prompt": "正しい順序はどれですか？",
+          "image_question_prompt": "この標識の名前は何ですか？",
+          "quizz_not_found": "クイズが見つかりません",
+
+          "pause": "ゲーム停止",
+          "continue": "続行",
+          "giveup": "諦める",
+          "yes_boss": "はい、ボス!",
+
+          //
+
+          'you_wanna_giveup': "諦めたいか？",
+          'do_you_wanna_giveup': "諦めたいのかよ？？？？",
+          'battle_cry': "iYaaAAARGHHH !!!!",
+          'youre_pathetic': 'あなたは哀れです！！',
+          'flee_and_flee': '逃げて逃げて！！',
+          'flee_again': '再び逃げる！！',
+          'always_flee': 'いつも逃げる！！',
+          'flee_and_flee_again': "逃げて逃げて再び！！",
+          'you_dont_have_the_right_to_giveup': "あなたは諦める権利がないんだ!",
+
           ...signKeysJp,
         },
       };

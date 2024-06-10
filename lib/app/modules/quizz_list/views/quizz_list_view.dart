@@ -15,7 +15,6 @@ import 'package:get_storage/get_storage.dart';
 import '../../../data/services/firestore_service.dart';
 import '../../../helpers/local_storage.dart';
 import '../../../helpers/utils.dart';
-import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/title_widget.dart';
 import '../controllers/quizz_list_controller.dart';
 
@@ -71,25 +70,19 @@ class _QuizzListViewState extends State<QuizzListView> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      key.toCapitalized(),
+                                      key.tr.toCapitalized(),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 25),
                                     ),
-                                    // Text(
-                                    //   "0/${values.length}",
-                                    //   style: const TextStyle(
-                                    //     fontWeight: FontWeight.w400,
-                                    //     fontSize: 23,
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
                               ),
                               Column(children: [
                                 for (var i = 0; i < values.length; i++)
                                   buildQuizzContainer(
-                                      title: values[i].name ?? 'Quizz ${i + 1}',
+                                      title: values[i].name ??
+                                          '${'quizz'.tr} ${i + 1}',
                                       // completionPercentage: 0,
                                       image: values[i].image,
                                       storage: storage,
@@ -179,9 +172,9 @@ class _QuizzListViewState extends State<QuizzListView> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text(
-                                            "Note",
-                                            style: TextStyle(
+                                          Text(
+                                            "score".tr,
+                                            style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w400),
                                           ),
@@ -195,9 +188,9 @@ class _QuizzListViewState extends State<QuizzListView> {
                                         ],
                                       ),
                                     if (score == null) ...[
-                                      const Text(
-                                        "Pas encore noté",
-                                        style: TextStyle(
+                                      Text(
+                                        "no_score_yet".tr,
+                                        style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w400),
                                       ),

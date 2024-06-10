@@ -16,7 +16,7 @@ class PanneauxController extends GetxController {
 
   final _signProvider = SignProvider();
 
-  get categoryId => _categoryId.value;
+  String? get categoryId => _categoryId.value;
   String? get categoryName => _categoryName.value;
   get quizzId => _quizzId.value;
 

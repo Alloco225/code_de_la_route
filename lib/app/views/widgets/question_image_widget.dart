@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../data/models/answer_model.dart';
 import '../../data/models/question_model.dart';
-import '../../helpers/assets.dart';
 import 'button_widget.dart';
 
 class QuestionImageWidget extends StatelessWidget {
@@ -55,8 +55,8 @@ class QuestionImageWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              question.prompt!,
-              semanticsLabel: question.prompt,
+              question.promptKey.tr,
+              semanticsLabel: question.promptKey.tr,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

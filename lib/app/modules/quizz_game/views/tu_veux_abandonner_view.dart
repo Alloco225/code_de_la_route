@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../helpers/assets.dart';
+import '../../../views/widgets/fancy_button_widget.dart';
 
 class TuVeuxAbandonnerView extends StatefulWidget {
   final Function() onClose;
@@ -19,26 +21,27 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
   String titleText = 'Quitter ?';
   bool flash = false;
   final List<Map> subtitles = [
-    {'text': 'Tu veux abandonner ?', 'startTime': 0.1, 'endTime': 2.2},
+    {'text': 'you_wanna_giveup'.tr, 'startTime': 0.1, 'endTime': 2.2},
     {
-      'text': 'Est-ce que tu veux abandonner ?????',
+      'text': 'do_you_wanna_giveup'.tr,
       'startTime': 2.5,
       'endTime': 6.6,
       'flash': true,
     },
-    {'text': 'iYaaAAARGHHH !!!!', 'startTime': 6.5, 'endTime': 9.0},
-    {'text': 'Tu es pathétique !!', 'startTime': 9.0, 'endTime': 10.11},
-    {'text': 'Fuir et fir !!', 'startTime': 10.11, 'endTime': 11.21},
-    {'text': 'Fir encore !!', 'startTime': 11.21, 'endTime': 12.41},
-    {'text': 'Toujours fir !!', 'startTime': 12.41, 'endTime': 13.61},
-    {'text': "Fir et t'enfir !!", 'startTime': 13.61, 'endTime': 14.81},
+    {'text': 'battle_cry'.tr, 'startTime': 6.5, 'endTime': 9.0},
+    {'text': 'youre_pathetic'.tr, 'startTime': 9.0, 'endTime': 10.11},
+    {'text': 'flee_and_flee'.tr, 'startTime': 10.11, 'endTime': 11.21},
+    {'text': 'flee_again'.tr, 'startTime': 11.21, 'endTime': 12.41},
+    {'text': 'always_flee'.tr, 'startTime': 12.41, 'endTime': 13.61},
+    {'text': 'flee_and_flee_again'.tr, 'startTime': 13.61, 'endTime': 14.81},
     {
-      'text': "Tu n'as pas le droit d'abandonner",
+      'text': 'you_dont_have_the_right_to_giveup'.tr,
       'startTime': 14.81,
       'endTime': 20,
       'flash': true,
     },
   ];
+
   // TODO add flash blink animation
 
   late VideoPlayerController _videoPlayerController;
@@ -221,21 +224,12 @@ class _TuVeuxAbandonnerViewState extends State<TuVeuxAbandonnerView> {
               if (hasVideoPlayedCompletely)
                 Align(
                     alignment: Alignment.bottomCenter,
-                    child: InkWell(
-                      onTap: closePage,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.only(bottom: 100),
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            border: Border.all(color: Colors.white, width: 2),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: const Text(
-                          "😅 D'ACCORD CHEF !",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20),
-                          semanticsLabel: "😅 D'ACCORD CHEF",
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 100),
+                      child: FancyButtonWidget(
+                        onTap: closePage,
+                        color: 'red',
+                        title: "😅 ${'yes_boss'.tr}",
                       ),
                     ))
             ],

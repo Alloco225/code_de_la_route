@@ -5,8 +5,8 @@ import 'dart:math' as math;
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
-import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
+import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -212,7 +212,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     if (result.status == ShareResultStatus.success) {
       showSnackbarSuccess("Merci d'avoir partagé", context: context);
       // check if user has social share badge
-      
     }
     return;
   }
@@ -286,10 +285,10 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
-                  "Quizz Terminé",
-                  semanticsLabel: "Quizz Terminé",
-                  style: TextStyle(fontSize: 32, color: Colors.white),
+                Text(
+                  "quizz_ended_title".tr,
+                  semanticsLabel: "quizz_ended_title".tr,
+                  style: const TextStyle(fontSize: 32, color: Colors.white),
                 ),
                 Stack(
                   alignment: Alignment.center,
@@ -323,7 +322,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                               Text(
                                 '/$MARK_TOTAL',
                                 semanticsLabel:
-                                    "Note totale ${score.toStringAsFixed(0)}/$MARK_TOTAL'",
+                                    "${score.toStringAsFixed(0)}/$MARK_TOTAL'",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     fontSize: 64,
@@ -352,10 +351,11 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                     const SizedBox(height: 20),
                     InkWell(
                       onTap: shareScore,
-                      child: const Text(
-                        "Partager mon score",
-                        semanticsLabel: "Partager mon score",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
+                      child: Text(
+                        "share_my_score".tr,
+                        semanticsLabel: "share_my_score".tr,
+                        style:
+                            const TextStyle(fontSize: 24, color: Colors.white),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -376,47 +376,36 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * .15),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(
-                            child: ButtonWidget(
-                              text: "Retour",
-                              icon: Ionicons.arrow_back,
-                              color: Colors.white,
-                              backgroundColor: Colors.blue,
-                              onPressed: widget.onReturnToQuizzList,
-                            ),
+                          FancyButtonWidget(
+                            onTap: widget.onReturnToQuizzList,
+                            color: 'blue',
+                            icon: Ionicons.arrow_back,
+                            title: "back".tr.toUpperCase(),
                           ),
                           const SizedBox(width: 10),
-                          Expanded(
-                            child: ButtonWidget(
-                              text: "Réessayer",
-                              icon: Ionicons.refresh_outline,
-                              color: Colors.white,
-                              backgroundColor: Colors.green,
-                              // onPressed: widget.onRestartQuizz,
-                              onPressed: () => unlockBadge(context),
-                            ),
+                          FancyButtonWidget(
+                            onTap: widget.onRestartQuizz,
+                            color: 'green',
+                            icon: Ionicons.refresh_outline,
+                            title: "try_again".tr.toUpperCase(),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          Expanded(
-                            child: ButtonWidget(
-                              text: "Menu",
-                              icon: Ionicons.home_outline,
-                              color: Colors.white,
-                              backgroundColor: Colors.red,
-                              onPressed: widget.onGoHome,
-                            ),
+                          FancyButtonWidget(
+                            onTap: widget.onGoHome,
+                            color: 'red',
+                            icon: Ionicons.home_outline,
+                            title: "home".tr.toUpperCase(),
                           ),
                         ],
                       ),

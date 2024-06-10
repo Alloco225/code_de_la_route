@@ -8,8 +8,23 @@ class Question {
   String? type;
   String? image;
   List<Answer>? answers;
+  // List<String> images = [];
   String? correctOrder;
   List<String>? correctAnswers;
+
+  String get promptKey {
+    if (correctOrder != null) {
+      return 'order_question_prompt';
+    }
+    if(image != null && image!.isNotEmpty){
+      return 'image_question_prompt';
+    }
+    // if(images.isNotEmpty){
+    //   return 'image_question_prompt';
+    // }
+
+    return 'image_question_prompt';
+  }
 
   Question(
       {this.categoryId,

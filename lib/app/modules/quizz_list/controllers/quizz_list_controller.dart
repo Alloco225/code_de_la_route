@@ -118,18 +118,25 @@ class QuizzListController extends GetxController {
 
         answers.add(Answer(
           signId: sign.id,
-          content: sign.name,
+          // content: sign.name,
+          content: sign.nameKey.tr,
           isCorrect: true,
         ));
         // And other false answers
         int falseAnswerCount = answersPerQuestion - 1;
         if (i >= signs.length - falseAnswerCount) {
           for (var j = i - 1; j >= i - falseAnswerCount; j--) {
-            answers.add(Answer(content: signs[j].name));
+            answers.add(Answer(
+              // content: signs[j].name,
+              content: signs[j].nameKey.tr,
+            ));
           }
         } else {
           for (var j = i + 1; j <= i + falseAnswerCount; j++) {
-            answers.add(Answer(content: signs[j].name));
+            answers.add(Answer(
+              // content: signs[j].name,
+              content: signs[j].nameKey.tr,
+            ));
           }
         }
         // confuuuse the ennemy
@@ -144,7 +151,8 @@ class QuizzListController extends GetxController {
 
           questions.add(Question(
             categoryId: category.id,
-            prompt: "De quel panneau s'agit-il ?",
+            // prompt: "De quel panneau s'agit-il ?",
+            prompt: "image_question_prompt".tr,
             level: sign.level,
             type: "image",
             image: sign.imageUrl,
