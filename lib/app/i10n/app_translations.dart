@@ -1,5 +1,6 @@
 import 'package:codedelaroute/app/i10n/sign_t_keys_en.dart';
 import 'package:codedelaroute/app/i10n/sign_t_keys_fr.dart';
+import 'package:codedelaroute/app/i10n/sign_t_keys_jp.dart';
 import 'package:get/get.dart';
 
 class Messages extends Translations {
@@ -206,6 +207,7 @@ class Messages extends Translations {
           "roadmaster_royalty": "ロードマスター ロイヤルティ",
           "social_sharer": "ソーシャル シェアラー",
           "asphalt_apprentice": "アスファルト 見習い",
+          ...signKeysJp,
         },
       };
 }
