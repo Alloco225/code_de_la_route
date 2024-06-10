@@ -106,7 +106,7 @@ class _AchievementsGridViewState extends State<AchievementsGridView> {
                 ),
                 Column(
                   children: (achievements[index]["name"] as String)
-                      .split("  ")
+                      .split(" ")
                       .map((t) => Text(
                             t,
                             textAlign: TextAlign.center,
