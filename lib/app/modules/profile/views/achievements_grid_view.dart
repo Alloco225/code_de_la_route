@@ -71,20 +71,6 @@ class _AchievementsGridViewState extends State<AchievementsGridView> {
     return Expanded(child: Obx(() => _achievementGrid()));
   }
 
-  __buildAchievementsSection() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          "achievements".tr,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 23),
-        ),
-        _achievementGrid(),
-      ],
-    );
-  }
 
   _achievementGrid() {
     return Expanded(

@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 
 class Messages extends Translations {
+
+  
+
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-          'hello': 'Hello World',
           'login': "Login",
           'email': "Email",
           'password': "Password",
@@ -13,8 +15,15 @@ class Messages extends Translations {
           'no_account_question': "Don't have an account?",
           'register': "Register?",
           'profile': "Profile",
-          'delete_data': "Supprimer mes données",
+          'delete_data': "Delete my data",
+          'delete_data_question': "Delete your data?",
+          'delete_data_confirmation': "Are you sure you want to delete your data?",
+          'yes': 'Yes',
+          'no': 'No',
+          'delete': 'Delete',
+          'cancel': 'Cancel',
           'save': 'OK',
+          
           //
           'settings': "Settings",
           'theme': "Theme",
@@ -52,6 +61,14 @@ class Messages extends Translations {
           "your_rank": "Your rank",
           //
           "logout": "Logout",
+
+          "highway_hero": "Highway hero",
+          "traffic_titan": "Traffic Titan",
+          "pavement_pupil": "Pavement Pupil",
+          "roadmaster_royalty": "Roadmaster Royalty",
+          "social_sharer": "Social Sharer",
+          "asphalt_apprentice": "Asphalt Apprentice",
+
         },
         'fr_FR': {
           'hello': 'Bonjour tout le monde',
@@ -195,12 +212,12 @@ class Messages extends Translations {
           "logout": "ログアウト",
 
 
-          "highway_hero": "ハイウェイヒーロー",
-          "traffic_titan": "トラフィックタイタン",
-          "pavement_pupil": "舗装生徒",
-          "roadmaster_royalty": "ロードマスターロイヤルティ",
-          "social_sharer": "ソーシャルシェアラー",
-          "asphalt_apprentice": "アスファルト見習い",
+          "highway_hero": "ハイウェイ ヒーロー",
+          "traffic_titan": "トラフィック タイタン",
+          "pavement_pupil": "舗装 生徒",
+          "roadmaster_royalty": "ロードマスター ロイヤルティ",
+          "social_sharer": "ソーシャル シェアラー",
+          "asphalt_apprentice": "アスファルト 見習い",
 
 
         },

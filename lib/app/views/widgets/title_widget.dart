@@ -1,4 +1,3 @@
-import 'package:codedelaroute/app/views/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -15,7 +14,7 @@ class TitleWidget extends StatelessWidget {
     this.hasBackButton = false,
     this.paddingTop = 50.0,
     this.paddingBottom = 40.0,
-    this.gap = 10.0,
+    this.gap = 5.0,
   });
 
   @override
@@ -33,7 +32,7 @@ class TitleWidget extends StatelessWidget {
               fontSize: 30,
             ),
           ),
-           SizedBox(height: gap),
+          SizedBox(height: gap),
           InkWell(
             onTap: () => Get.back(),
             child: Row(

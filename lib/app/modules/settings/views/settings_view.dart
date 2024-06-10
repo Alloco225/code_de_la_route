@@ -2,14 +2,11 @@ import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart'
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/theme_settings_modal_view.dart';
-import 'package:codedelaroute/app/views/widgets/button_widget.dart';
-import 'package:codedelaroute/app/views/widgets/container_widget.dart';
 import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -86,17 +83,17 @@ class SettingsView extends GetView<SettingsController> {
                       onTap: () async {
                         openSettingsModal(
                             BottomSheetModalWidget(
-                              title: "Supprimer vos données ?",
+                              title: 'delete_data_question'.tr,
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 15),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      "Attention. Votre score et votre progression seront supprimés",
+                                    Text(
+                                      'delete_data_confirmation'.tr,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 24),
+                                      style: const TextStyle(fontSize: 24),
                                     ),
                                     Row(
                                       children: [

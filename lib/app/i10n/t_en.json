@@ -1,0 +1,1031 @@
+[
+    {
+        "q_signs_0": {
+            "name": "Vertical Signs"
+        }
+    },
+    {
+        "q_signs_1": {
+            "name": "Hand Gestures"
+        }
+    },
+    {
+        "q_signs_2": {
+            "name": "Horizontal Signs"
+        }
+    },
+    {
+        "intersection": {
+            "name": "Intersection"
+        }
+    },
+    {
+        "danger": {
+            "name": "Danger"
+        }
+    },
+    {
+        "obligation": {
+            "name": "Obligation"
+        }
+    },
+    {
+        "interdiction": {
+            "name": "Prohibition"
+        }
+    },
+    {
+        "temporaire": {
+            "name": "Temporary"
+        }
+    },
+    {
+        "indication": {
+            "name": "Indication"
+        }
+    },
+    {
+        "cede_le_passage": {
+            "name": "Yield",
+            "description": "Indicates that drivers must yield to vehicles coming from the priority road."
+        }
+    },
+    {
+        "priorite": {
+            "name": "Priority Road",
+            "description": "Indicates that the road has priority over secondary roads. Drivers must yield to vehicles coming from these roads."
+        }
+    },
+    {
+        "stop": {
+            "name": "Stop",
+            "description": "Requires drivers to come to a complete stop before proceeding. Priority must be given to vehicles coming from the priority road."
+        }
+    },
+    {
+        "vitesse_conseillee": {
+            "name": "Recommended Speed",
+            "description": "Indicates the recommended speed for safely negotiating a curve, bend, or intersection."
+        }
+    },
+    {
+        "fin_interdiction": {
+            "name": "End of Prohibition",
+            "description": "Indicates the end of a previously signaled prohibition."
+        }
+    },
+    {
+        "limitation_vitesse": {
+            "name": "Speed Limit",
+            "description": "Indicates the maximum speed allowed on the road where the sign is placed."
+        }
+    },
+    {
+        "sens_unique": {
+            "name": "One-Way",
+            "description": "Indicates a street where traffic is only allowed in one direction."
+        }
+    },
+    {
+        "intersection_t": {
+            "name": "T-Junction",
+            "description": "Indicates an intersection where one road ends forming a T-junction with another."
+        }
+    },
+    {
+        "circulation_interdite_aux_vehicules_a_moteur": {
+            "name": "No Motor Vehicles",
+            "description": "Indicates that motor vehicle traffic is prohibited in the area."
+        }
+    },
+    {
+        "fin_autoroute": {
+            "name": "End of Motorway",
+            "description": "Indicates the end of a motorway section where the specific motorway rules no longer apply."
+        }
+    },
+    {
+        "cdez_le_passage": {
+            "name": "Yield",
+            "description": "Indicates that drivers must yield to vehicles coming from the priority road."
+        }
+    },
+    {
+        "route_prioritaire": {
+            "name": "Priority Road",
+            "description": "Indicates that the road has priority over secondary roads. Drivers must yield to vehicles coming from these roads."
+        }
+    },
+    {
+        "Stop": {
+            "name": "Stop",
+            "description": "Requires drivers to come to a complete stop before proceeding. Priority must be given to vehicles coming from the priority road."
+        }
+    },
+    {
+        "vitesse_conseille": {
+            "name": "Recommended Speed",
+            "description": "Indicates the recommended speed for safely negotiating a curve, bend, or intersection."
+        }
+    },
+    {
+        "fin_de_linterdiction": {
+            "name": "End of Prohibition",
+            "description": "Indicates the end of a previously signaled prohibition."
+        }
+    },
+    {
+        "limitation_de_vitesse": {
+            "name": "Speed Limit",
+            "description": "Indicates the maximum speed allowed on the road where the sign"
+        }
+    },
+    {
+        "intersection_en_t": {
+            "name": "T-Junction",
+            "description": "Indicates an intersection where one road ends forming a T-junction with another."
+        }
+    },
+    {
+        "circulation_interdite_aux_vhicules__moteur": {
+            "name": "No Motor Vehicles",
+            "description": "Indicates that motor vehicle traffic is prohibited in the area."
+        }
+    },
+    {
+        "fin_de_lautoroute": {
+            "name": "End of Motorway",
+            "description": "Indicates the end of a motorway section where the specific motorway rules no longer apply."
+        }
+    },
+    {
+        "a1a": {
+            "name": "Dangerous Bend to the Right",
+            "description": "Indicates a dangerous bend to the right on the road."
+        }
+    },
+    {
+        "a1b": {
+            "name": "Dangerous Bend to the Left",
+            "description": "Indicates a dangerous bend to the left on the road."
+        }
+    },
+    {
+        "a1c": {
+            "name": "Series of Bends with the First to the Right",
+            "description": "Indicates a series of dangerous bends with the first to the right."
+        }
+    },
+    {
+        "a1d": {
+            "name": "Series of Bends with the First to the Left",
+            "description": "Indicates a series of dangerous bends with the first to the left."
+        }
+    },
+    {
+        "a2a": {
+            "name": "Speed Bump",
+            "description": "Indicates the presence of a speed bump."
+        }
+    },
+    {
+        "a2b": {
+            "name": "Speed Bump",
+            "description": "Indicates the presence of a speed bump."
+        }
+    },
+    {
+        "a3a": {
+            "name": "Road Narrows on the Right",
+            "description": "Indicates a road where the lane narrows on the right side."
+        }
+    },
+    {
+        "a3b": {
+            "name": "Road Narrows on the Left",
+            "description": "Indicates a road where the lane narrows on the left side."
+        }
+    },
+    {
+        "a3": {
+            "name": "Road Narrows on Both Sides",
+            "description": "Indicates a road where the lane narrows on both sides."
+        }
+    },
+    {
+        "a4": {
+            "name": "Slippery Road",
+            "description": "Indicates a slippery road where the vehicle may lose grip."
+        }
+    },
+    {
+        "a6": {
+            "name": "Movable Bridge",
+            "description": "Indicates a movable bridge where caution is required when passing."
+        }
+    },
+    {
+        "a20": {
+            "name": "Exit onto a Quay or Bank",
+            "description": "Indicates an exit onto a quay or bank where caution is required."
+        }
+    },
+    {
+        "a13b": {
+            "name": "Pedestrians Crossing",
+            "description": "Indicates an area where pedestrians may cross the road."
+        }
+    },
+    {
+        "a13a": {
+            "name": "Children Crossing",
+            "description": "Indicates an area where children may cross the road."
+        }
+    },
+    {
+        "a15a1": {
+            "name": "Domestic Animals Crossing",
+            "description": "Indicates an area where domestic animals may cross the road."
+        }
+    },
+    {
+        "a15a2": {
+            "name": "Domestic Animals Crossing",
+            "description": "Indicates an area where domestic animals may cross the road."
+        }
+    },
+    {
+        "a15b": {
+            "name": "Danger, Wild Animals",
+            "description": "Indicates an area where wild animals may cross the road."
+        }
+    },
+    {
+        "danger_cavaliers": {
+            "name": "Horse Riders Crossing",
+            "description": "Indicates an area where horse riders may cross the road."
+        }
+    },
+    {
+        "a16": {
+            "name": "Dangerous Descent (10%)",
+            "description": "Indicates a dangerous descent with a 10% incline where caution is required."
+        }
+    },
+    {
+        "a17": {
+            "name": "Warning of Simulated Traffic Lights",
+            "description": "Indicates an area where simulated traffic lights may be present."
+        }
+    },
+    {
+        "a18": {
+            "name": "Two-Way Traffic",
+            "description": "Indicates a zone where traffic is two-way."
+        }
+    },
+    {
+        "a19": {
+            "name": "Risk of Falling Rocks",
+            "description": "Indicates an area where falling rocks may occur."
+        }
+    },
+    {
+        "a21": {
+            "name": "Cyclists Coming from the Right",
+            "description": "Indicates an exit for cyclists coming from the right."
+        }
+    },
+    {
+        "a14": {
+            "name": "Other Danger",
+            "description": "Indicates a specific danger on the road."
+        }
+    },
+    {
+        "a23": {
+            "name": "Air Hazard",
+            "description": "Indicates an air hazard on the road."
+        }
+    },
+    {
+        "a9": {
+            "name": "Warning of Tram",
+            "description": "Indicates an area where trams may cross the road."
+        }
+    },
+    {
+        "a24": {
+            "name": "Crosswind",
+            "description": "Indicates an area where crosswinds may affect driving."
+        }
+    },
+    {
+        "a7": {
+            "name": "Level Crossing with Barriers",
+            "description": "Indicates a level crossing with barriers where caution is required."
+        }
+    },
+    {
+        "a8": {
+            "name": "Unprotected Level Crossing",
+            "description": "Indicates an unprotected level crossing where caution is required."
+        }
+    },
+    {
+        "ab25": {
+            "name": "Mandatory Roundabout",
+            "description": "You do not have the right of way."
+        }
+    },
+    {
+        "ab6": {
+            "name": "Indication of Priority Road",
+            "description": "Indicates a priority road."
+        }
+    },
+    {
+        "ab7": {
+            "name": "End of Priority Road Indication",
+            "description": "Indicates the end of the priority road indication."
+        }
+    },
+    {
+        "c8": {
+            "name": "Emergency Stop Location",
+            "description": "Indicates the location of an emergency stop."
+        }
+    },
+    {
+        "c2": {
+            "name": "Hospital",
+            "description": "Indicates the presence of a hospital nearby."
+        }
+    },
+    {
+        "c5": {
+            "name": "Taxi Rank",
+            "description": "Indicates the presence of a taxi rank nearby."
+        }
+    },
+    {
+        "c6": {
+            "name": "Bus/Coach Stop",
+            "description": "Indicates a bus or coach stop nearby."
+        }
+    },
+    {
+        "ck1": {
+            "name": "Parking Lot",
+            "description": "Indicates the presence of a parking lot nearby."
+        }
+    },
+    {
+        "c1c": {
+            "name": "Paid Parking",
+            "description": "Indicates paid parking."
+        }
+    },
+    {
+        "c1b": {
+            "name": "Limited Time Parking with Mandatory Disc",
+            "description": "Indicates limited time parking with a mandatory disc."
+        }
+    },
+    {
+        "c20c": {
+            "name": "Tram Crossing",
+            "description": "Indicates the presence of a tram crossing."
+        }
+    },
+    {
+        "c4a": {
+            "name": "Recommended Speed 30km/h",
+            "description": "Indicates the presence of a tram stop nearby."
+        }
+    },
+    {
+        "c12": {
+            "name": "One-Way Traffic",
+            "description": "Indicates a one-way street."
+        }
+    },
+    {
+        "ce15a": {
+            "name": "Fuel Station",
+            "description": "Indicates the presence of a fuel station nearby."
+        }
+    },
+    {
+        "c107": {
+            "name": "Motorway",
+            "description": "Indicates a road reserved for motor vehicles."
+        }
+    },
+    {
+        "c23": {
+            "name": "Regulated Parking for Caravans",
+            "description": "Indicates regulated parking for caravans."
+        }
+    },
+    {
+        "c29c": {
+            "name": "Lane Assignment with Two Lanes in Normal Direction and One in Reverse Direction",
+            "description": "Indicates lane assignment with two lanes in normal direction and one in reverse direction."
+        }
+    },
+    {
+        "c4b": {
+            "name": "End of Recommended Speed 30km/h",
+            "description": "Indicates the end of the recommended speed of 30km/h."
+        }
+    },
+    {
+        "c13a": {
+            "name": "Dead End",
+            "description": "Indicates a dead end or cul-de-sac."
+        }
+    },
+    {
+        "c18": {
+            "name": "I Have Priority Over Opposite Traffic",
+            "description": "Indicates that you have priority over traffic coming from the opposite direction."
+        }
+    },
+    {
+        "c108": {
+            "name": "End of Motorway",
+            "description": "Indicates the end of a road reserved for motor vehicles."
+        }
+    },
+    {
+        "c13b": {
+            "name": "Advance Warning of Dead End or Cul-de-sac",
+            "description": "Indicates an advance warning of a dead end or cul-de-sac."
+        }
+    },
+    {
+        "c13d": {
+            "name": "Dead End with an Exit",
+            "description": "Indicates a dead end with an exit."
+        }
+    },
+    {
+        "c20a": {
+            "name": "Pedestrian Crossing",
+            "description": "Indicates the presence of a pedestrian crossing."
+        }
+    },
+    {
+        "b54": {
+            "name": "Pedestrian Area Entrance",
+            "description": "Indicates the entrance to a pedestrian area."
+        }
+    },
+    {
+        "c111": {
+            "name": "Tunnel Entrance",
+            "description": "Indicates the entrance to a tunnel."
+        }
+    },
+    {
+        "c112": {
+            "name": "Tunnel Exit",
+            "description": "Indicates the exit of a tunnel."
+        }
+    },
+    {
+        "c28": {
+            "name": "Lane Reduction to 3 Lanes",
+            "description": "Indicates a lane reduction to 3 lanes."
+        }
+    },
+    {
+        "c113": {
+            "name": "Cycle Track or Lane for Two- or Three-Wheeled Cycles",
+            "description": "Indicates a cycle track or lane reserved for two- or three-wheeled cycles."
+        }
+    },
+    {
+        "c64d": {
+            "name": "Subscription Payment",
+            "description": "Indicates that payment is by subscription."
+        }
+    },
+    {
+        "b0": {
+            "name": "No Through Road (Both Directions)",
+            "description": "Prohibits vehicle traffic in both directions."
+        }
+    },
+    {
+        "b1": {
+            "name": "One-Way",
+            "description": "Indicates a one-way street where traffic is prohibited in the direction indicated by the sign."
+        }
+    },
+    {
+        "b2b": {
+            "name": "No Right Turn",
+            "description": "Prohibits drivers from turning right at the intersection indicated by the sign."
+        }
+    },
+    {
+        "b2a": {
+            "name": "No Left Turn",
+            "description": "Prohibits drivers from turning left at the intersection indicated by the sign."
+        }
+    },
+    {
+        "b2c": {
+            "name": "No U-Turn",
+            "description": "Prohibits drivers from making a U-turn at the location indicated by the sign."
+        }
+    },
+    {
+        "b3": {
+            "name": "No Overtaking",
+            "description": "Prohibits overtaking of vehicles in the area indicated by the sign."
+        }
+    },
+    {
+        "b3a": {
+            "name": "No Overtaking for Heavy Goods Vehicles",
+            "description": "Prohibits vehicles over 3.5 tonnes from overtaking in the area indicated by the sign."
+        }
+    },
+    {
+        "b8": {
+            "name": "No Heavy Goods Vehicles",
+            "description": "Prohibits heavy goods vehicles."
+        }
+    },
+    {
+        "b4": {
+            "name": "Mandatory Stop at Customs Post",
+            "description": "Mandatory stop at Customs Post"
+        }
+    },
+    {
+        "b5a": {
+            "name": "Mandatory Stop at Gendarmerie Checkpoint",
+            "description": "Mandatory stop at Gendarmerie Checkpoint"
+        }
+    },
+    {
+        "b5b": {
+            "name": "Mandatory Stop at Police Checkpoint",
+            "description": "Mandatory stop at Police Checkpoint"
+        }
+    },
+    {
+        "b5c": {
+            "name": "Mandatory Stop at Toll Booth",
+            "description": "Mandatory stop at Toll Booth"
+        }
+    },
+    {
+        "b7a": {
+            "name": "No Motor Vehicles or Motorcycles",
+            "description": "Prohibits the circulation of motor vehicles and motorcycles in the area indicated by the sign."
+        }
+    },
+    {
+        "b7b": {
+            "name": "No Motor Vehicles",
+            "description": "Prohibits the circulation of all motor vehicles in the area indicated by the sign."
+        }
+    },
+    {
+        "b16": {
+            "name": "No Honking",
+            "description": "Prohibits drivers from honking in the area indicated by the sign."
+        }
+    },
+    {
+        "b9a": {
+            "name": "No Pedestrians",
+            "description": "Prohibits the circulation of pedestrians in the area indicated by the sign."
+        }
+    },
+    {
+        "b9b": {
+            "name": "No Cyclists",
+            "description": "Prohibits the circulation of cyclists in the area indicated by the sign."
+        }
+    },
+    {
+        "b9g": {
+            "name": "No Mopeds",
+            "description": "Prohibits the circulation of mopeds in the area indicated by the sign."
+        }
+    },
+    {
+        "b9h": {
+            "name": "No Motorcycles",
+            "description": "Prohibits the circulation of motorcycles in the area indicated by the sign."
+        }
+    },
+    {
+        "b9f": {
+            "name": "No Public Transport",
+            "description": "Prohibits the circulation of public transport in the area indicated by the sign."
+        }
+    },
+    {
+        "b9c": {
+            "name": "No Animal-Drawn Vehicles",
+            "description": "Prohibits the circulation of animal-drawn vehicles in the area indicated by the sign."
+        }
+    },
+    {
+        "b9d": {
+            "name": "No Agricultural Tractors",
+            "description": "Prohibits the circulation of agricultural tractors in the area indicated by the sign."
+        }
+    },
+    {
+        "b9e": {
+            "name": "No Handcarts",
+            "description": "Prohibits the circulation of handcarts in the area indicated by the sign."
+        }
+    },
+    {
+        "b14": {
+            "name": "Speed Limit 50 km/h",
+            "description": "Indicates a speed limit of 50 km/h in the area indicated by the sign."
+        }
+    },
+    {
+        "b18a": {
+            "name": "No Transport of Explosive Goods",
+            "description": "Prohibits the transport of explosive goods in the area indicated by the sign."
+        }
+    },
+    {
+        "b18c": {
+            "name": "No Transport of Dangerous Goods",
+            "description": "Prohibits the transport of dangerous goods in the area indicated by the sign."
+        }
+    },
+    {
+        "b18bd": {
+            "name": "No Transport of Radioactive Materials",
+            "description": "Prohibits the transport of radioactive materials in the area indicated by the sign."
+        }
+    },
+    {
+        "b12": {
+            "name": "Maximum Vehicle Height 3.5 m",
+            "description": "Prohibits vehicles over 3.5 m high."
+        }
+    },
+    {
+        "b11": {
+            "name": "Maximum Vehicle Width 1.8 m",
+            "description": "Prohibits vehicles over 1.8 m wide."
+        }
+    },
+    {
+        "b13": {
+            "name": "Maximum Vehicle Weight 3.5 Tonnes",
+            "description": "Prohibits vehicles over 3.5 tonnes from circulating in the area indicated by the sign."
+        }
+    },
+    {
+        "b10a": {
+            "name": "Maximum HGV Width 10 m",
+            "description": "Prohibits HGVs over 10 meters wide"
+        }
+    },
+    {
+        "b17": {
+            "name": "Minimum Safe Distance 70 m",
+            "description": "Minimum safe distance to be maintained between two vehicles in circulation 70m"
+        }
+    },
+    {
+        "b31": {
+            "name": "End of Restriction",
+            "description": "Indicates the end of previously indicated restrictions."
+        }
+    },
+    {
+        "b35": {
+            "name": "End of No Honking Zone",
+            "description": "Indicates the end of the no honking zone indicated by the sign."
+        }
+    },
+    {
+        "b34": {
+            "name": "End of No Overtaking Zone",
+            "description": "Indicates the end of the no overtaking zone."
+        }
+    },
+    {
+        "b33": {
+            "name": "End of Speed Limit",
+            "description": "Indicates the end of the previously imposed speed limit."
+        }
+    },
+    {
+        "b34a": {
+            "name": "End of HGV No Overtaking Zone",
+            "description": "Indicates the end of the no overtaking zone for HGVs."
+        }
+    },
+    {
+        "ab4": {
+            "name": "Stop Sign",
+            "description": "Stop. Come to a complete stop."
+        }
+    },
+    {
+        "ab3b": {
+            "name": "Yield Sign",
+            "description": "Yield to oncoming traffic."
+        }
+    },
+    {
+        "ab5": {
+            "name": "Advance Stop Sign",
+            "description": "Yield to oncoming traffic."
+        }
+    },
+    {
+        "ab3a": {
+            "name": "Yield Sign",
+            "description": "Yield to oncoming traffic."
+        }
+    },
+    {
+        "ab1": {
+            "name": "Crossroads",
+            "description": "Intersection of two roads. Priority to the right."
+        }
+    },
+    {
+        "ab2": {
+            "name": "Temporary Priority",
+            "description": "Sign placed on a major road, indicates a minor road, priority to major road"
+        }
+    },
+    {
+        "b21": {
+            "name": "Turn Right Before Sign",
+            "description": "Requires drivers to turn right at the intersection before the sign."
+        }
+    },
+    {
+        "b21a1": {
+            "name": "Pass Obstacle on the Right",
+            "description": "Requires drivers to pass an obstacle on the right."
+        }
+    },
+    {
+        "b21a2": {
+            "name": "Pass Obstacle on the Left",
+            "description": "Requires drivers to pass an obstacle on the left."
+        }
+    },
+    {
+        "b21c1": {
+            "name": "Take Right Lane",
+            "description": "Requires drivers to take the right lane at the next intersection."
+        }
+    },
+    {
+        "b21c2": {
+            "name": "Take Left Lane",
+            "description": "Requires drivers to take the left lane at the next intersection."
+        }
+    },
+    {
+        "b21d1": {
+            "name": "Turn Right or Go Straight",
+            "description": "Requires drivers to either turn right or go straight at the next intersection."
+        }
+    },
+    {
+        "b21d2": {
+            "name": "Turn Left or Go Straight",
+            "description": "Requires drivers to either turn left or go straight at the next intersection."
+        }
+    },
+    {
+        "b21e": {
+            "name": "Turn Right or Left",
+            "description": "Requires drivers to either turn right or left at the next intersection."
+        }
+    },
+    {
+        "b21b": {
+            "name": "Go Straight",
+            "description": "Requires drivers to continue straight at the next intersection."
+        }
+    },
+    {
+        "sens_giratoire_obligatoire": {
+            "name": "Roundabout",
+            "description": "Requires drivers to use the roundabout at the next intersection. You do not have priority."
+        }
+    },
+    {
+        "b22b": {
+            "name": "Mandatory Path for Pedestrians",
+            "description": "Requires pedestrians to use this path."
+        }
+    },
+    {
+        "b22c": {
+            "name": "Mandatory Path for Horse Riders",
+            "description": "Requires horse riders to use this path."
+        }
+    },
+    {
+        "b27a": {
+            "name": "Bus Lane",
+            "description": "Reserves the lane for the exclusive use of buses."
+        }
+    },
+    {
+        "b27b": {
+            "name": "Tram Lane",
+            "description": "Reserves the lane for the exclusive use of trams."
+        }
+    },
+    {
+        "b22a": {
+            "name": "Mandatory Cycle Lane",
+            "description": "Reserves the lane for the exclusive use of cyclists."
+        }
+    },
+    {
+        "b25": {
+            "name": "Minimum Speed Limit 30 km/h",
+            "description": "Requires drivers to adhere to the indicated minimum speed limit of 30 km/h."
+        }
+    },
+    {
+        "b45": {
+            "name": "End of Bus Lane",
+            "description": "Indicates the end of the bus lane."
+        }
+    },
+    {
+        "b40": {
+            "name": "End of Bicycle Lane",
+            "description": "Indicates the end of the bicycle lane."
+        }
+    },
+    {
+        "b43": {
+            "name": "End of Speed Limit",
+            "description": "Indicates the end of the previously imposed speed limit."
+        }
+    },
+    {
+        "ce2a": {
+            "name": "Emergency Call Point",
+            "description": "Indicates the presence of an emergency call point nearby."
+        }
+    },
+    {
+        "indication_installation_accessible_aux_handicapes_physiques": {
+            "name": "Facility Accessible to Physically Disabled Persons",
+            "description": "Indicates the presence of a facility accessible to physically disabled persons nearby."
+        }
+    },
+    {
+        "indication_auberge_de_jeunesse": {
+            "name": "Youth Hostel",
+            "description": "Indicates the presence of a youth hostel nearby."
+        }
+    },
+    {
+        "indication_toilettes_publiques": {
+            "name": "Public Toilets",
+            "description": "Indicates the presence of public toilets nearby."
+        }
+    },
+    {
+        "indication_restaurant": {
+            "name": "Restaurant",
+            "description": "Indicates the presence of a restaurant nearby."
+        }
+    },
+    {
+        "indication_poste_secours_medical": {
+            "name": "First Aid Station",
+            "description": "Indicates the presence of a first aid station nearby."
+        }
+    },
+    {
+        "indication_poste_communication": {
+            "name": "Telecommunications Post",
+            "description": "Indicates the presence of a telecommunications post nearby."
+        }
+    },
+    {
+        "indication_hotel": {
+            "name": "Hotel",
+            "description": "Indicates the presence of a hotel nearby."
+        }
+    },
+    {
+        "indication_cafetaria": {
+            "name": "Cafeteria",
+            "description": "Indicates the presence of a cafeteria nearby."
+        }
+    },
+    {
+        "ak31": {
+            "name": "Danger of Accident Ahead",
+            "description": "Indicates a danger warning of an accident ahead on the road."
+        }
+    },
+    {
+        "e43": {
+            "name": "Yellow Background Cartridges",
+            "description": "Indicates a danger warning of an accident ahead on the road."
+        }
+    },
+    {
+        "kd21a": {
+            "name": "Temporary Sign",
+            "description": "Indicates a temporary sign on the road."
+        }
+    },
+    {
+        "kd21b": {
+            "name": "Temporary Roadway",
+            "description": "Indicates a temporary roadway on the road."
+        }
+    },
+    {
+        "kd43a": {
+            "name": "Temporary Diversion",
+            "description": "Indicates a temporary diversion on the road."
+        }
+    },
+    {
+        "kd69b": {
+            "name": "End of Temporary Diversion",
+            "description": "Indicates the end of a temporary diversion on the road."
+        }
+    },
+    {
+        "ak30": {
+            "name": "Traffic Jam Ahead",
+            "description": "Indicates a traffic jam ahead on the road."
+        }
+    },
+    {
+        "ak2": {
+            "name": "Speed Bump or Hump",
+            "description": "Indicates a speed bump or hump on the road."
+        }
+    },
+    {
+        "ak4": {
+            "name": "Slippery Road",
+            "description": "Indicates a slippery road condition ahead."
+        }
+    },
+    {
+        "ak3": {
+            "name": "Narrow Road",
+            "description": "Indicates a narrow road ahead."
+        }
+    },
+    {
+        "ak14": {
+            "name": "Danger of Unstated Type",
+            "description": "Indicates a danger of unspecified type with additional information provided on a supplementary plate."
+        }
+    },
+    {
+        "ak17": {
+            "name": "Alternating Traffic Lights",
+            "description": "Indicates alternating traffic lights regulating the flow of traffic on the road."
+        }
+    },
+    {
+        "ak22": {
+            "name": "Loose Gravel",
+            "description": "Indicates a danger of loose gravel on the road."
+        }
+    },
+    {
+        "ak32": {
+            "name": "Dense Fog or Smoke",
+            "description": "Indicates dense fog or smoke on the road."
+        }
+    },
+    {
+        "kc119p": {
+            "name": "Temporary Road Closure",
+            "description": "Indicates a temporary road closure ahead."
+        }
+    }
+]

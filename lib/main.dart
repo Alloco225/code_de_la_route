@@ -22,7 +22,7 @@ void main() async {
 
   await GetStorage.init();
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // FirebaseFirestore firestore = FirebaseFirestore.instance;
   log("Loaded App");
 
   await Get.putAsync(() => AuthService().init());

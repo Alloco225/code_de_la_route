@@ -1,0 +1,858 @@
+[
+  {
+    "id": "q_signs_0",
+    "name": "Signalisation Verticale"
+  },
+  {
+    "id": "q_signs_1",
+    "name": "Signalisation Gestuelle"
+  },
+  {
+    "id": "q_signs_2",
+    "name": "Signalisation Horizontale "
+  },
+  {
+    "id": "intersection",
+    "name": "Intersection"
+  },
+  {
+    "id": "danger",
+    "name": "Danger"
+  },
+  {
+    "id": "obligation",
+    "name": "Obligation"
+  },
+  {
+    "id": "interdiction",
+    "name": "Interdiction"
+  },
+  {
+    "id": "temporaire",
+    "name": "Temporaire"
+  },
+  {
+    "id": "indication",
+    "name": "Indication"
+  },
+  {
+    "id": "cede_le_passage",
+    "name": "Cédez le passage",
+    "description": "Indique que les conducteurs doivent céder le passage aux véhicules arrivant sur la route prioritaire."
+  },
+  {
+    "id": "priorite",
+    "name": "Route prioritaire",
+    "description": "Indique que la route est prioritaire par rapport aux routes secondaires. Les conducteurs doivent céder le passage aux véhicules arrivant de ces routes."
+  },
+  {
+    "id": "stop",
+    "name": "Stop",
+    "description": "Oblige les conducteurs à s'arrêter complètement avant de continuer. La priorité doit être cédée aux véhicules arrivant sur la route prioritaire."
+  },
+  {
+    "id": "vitesse_conseillee",
+    "name": "Vitesse conseillée",
+    "description": "Indique la vitesse recommandée pour négocier en toute sécurité une courbe, un virage ou une intersection."
+  },
+  {
+    "id": "fin_interdiction",
+    "name": "Fin de l'interdiction",
+    "description": "Indique la fin d'une interdiction spécifique précédemment signalée."
+  },
+  {
+    "id": "limitation_vitesse",
+    "name": "Limitation de vitesse",
+    "description": "Indique la vitesse maximale autorisée sur la route où le panneau est placé."
+  },
+  {
+    "id": "sens_unique",
+    "name": "Sens unique",
+    "description": "Indique une rue où la circulation n'est autorisée que dans une seule direction."
+  },
+  {
+    "id": "intersection_t",
+    "name": "Intersection en T",
+    "description": "Indique une intersection où une route se termine en formant une intersection en T avec une autre."
+  },
+  {
+    "id": "circulation_interdite_aux_vehicules_a_moteur",
+    "name": "Circulation interdite aux véhicules à moteur",
+    "description": "Indique que la circulation des véhicules à moteur est interdite dans la zone."
+  },
+  {
+    "id": "fin_autoroute",
+    "name": "Fin de l'autoroute",
+    "description": "Indique la fin d'une section d'autoroute où les règles spécifiques de l'autoroute ne s'appliquent plus."
+  },
+  {
+    "id": "cdez_le_passage",
+    "name": "Cédez le passage",
+    "description": "Indique que les conducteurs doivent céder le passage aux véhicules arrivant sur la route prioritaire."
+  },
+  {
+    "id": "route_prioritaire",
+    "name": "Route prioritaire",
+    "description": "Indique que la route est prioritaire par rapport aux routes secondaires. Les conducteurs doivent céder le passage aux véhicules arrivant de ces routes."
+  },
+  {
+    "id": "Stop",
+    "name": "Stop",
+    "description": "Oblige les conducteurs à s'arrêter complètement avant de continuer. La priorité doit être cédée aux véhicules arrivant sur la route prioritaire."
+  },
+  {
+    "id": "vitesse_conseille",
+    "name": "Vitesse conseillée",
+    "description": "Indique la vitesse recommandée pour négocier en toute sécurité une courbe, un virage ou une intersection."
+  },
+  {
+    "id": "fin_de_linterdiction",
+    "name": "Fin de l'interdiction",
+    "description": "Indique la fin d'une interdiction spécifique précédemment signalée."
+  },
+  {
+    "id": "limitation_de_vitesse",
+    "name": "Limitation de vitesse",
+    "description": "Indique la vitesse maximale autorisée sur la route où le panneau est placé."
+  },
+  {
+    "id": "intersection_en_t",
+    "name": "Intersection en T",
+    "description": "Indique une intersection où une route se termine en formant une intersection en T avec une autre."
+  },
+  {
+    "id": "circulation_interdite_aux_vhicules__moteur",
+    "name": "Circulation interdite aux véhicules à moteur",
+    "description": "Indique que la circulation des véhicules à moteur est interdite dans la zone."
+  },
+  {
+    "id": "fin_de_lautoroute",
+    "name": "Fin de l'autoroute",
+    "description": "Indique la fin d'une section d'autoroute où les règles spécifiques de l'autoroute ne s'appliquent plus."
+  },
+  {
+    "id": "a1a",
+    "name": "Virage dangereux à droite",
+    "description": "Indique un virage dangereux à droite sur la route."
+  },
+  {
+    "id": "a1b",
+    "name": "Virage dangereux à gauche",
+    "description": "Indique un virage dangereux à gauche sur la route."
+  },
+  {
+    "id": "a1c",
+    "name": "Succession de virages dont le 1er est à droite",
+    "description": "Indique une succession de virages dangereux dont le 1er est à droite."
+  },
+  {
+    "id": "a1d",
+    "name": "Succession de virages dont le 1er est à gauche",
+    "description": "Indique une succession de virages dangereux dont le 1er est à gauche."
+  },
+  {
+    "id": "a2a",
+    "name": "Cassis ou Dos d'âne",
+    "description": "Indique la présence d'un ralentisseur de type Cassis ou Dos d'âne."
+  },
+  {
+    "id": "a2b",
+    "name": "Ralentisseur de type Dos d'âne",
+    "description": "Indique la présence d'un ralentisseur de type Dos d'âne."
+  },
+  {
+    "id": "a3a",
+    "name": "Chaussée rétrécie par la droite",
+    "description": "Indique une chaussée où la voie se rétrécit du côté droit."
+  },
+  {
+    "id": "a3b",
+    "name": "Chaussée rétrécie par la gauche",
+    "description": "Indique une chaussée où la voie se rétrécit du côté gauche."
+  },
+  {
+    "id": "a3",
+    "name": "Chaussée rétrécie principale",
+    "description": "Indique une chaussée où la voie se rétrécit des deux  côtés."
+  },
+  {
+    "id": "a4",
+    "name": "Chaussée glissante",
+    "description": "Indique une route glissante où le véhicule pourrait perdre de l'adhérence."
+  },
+  {
+    "id": "a6",
+    "name": "Pont mobile",
+    "description": "Indique un pont mobile où la prudence est requise lors du passage."
+  },
+  {
+    "id": "a20",
+    "name": "Débouché sur un quai ou une berge",
+    "description": "Indique un débouché sur un quai ou une berge où la prudence est requise."
+  },
+  {
+    "id": "a13b",
+    "name": "Attention aux piétons",
+    "description": "Indique une zone où des piétons peuvent traverser la route."
+  },
+  {
+    "id": "a13a",
+    "name": "Attention aux enfants",
+    "description": "Indique une zone où des enfants peuvent traverser la route."
+  },
+  {
+    "id": "a15a1",
+    "name": "Attention aux animaux domestiques",
+    "description": "Indique une zone où des animaux domestiques peuvent traverser la route."
+  },
+  {
+    "id": "a15a2",
+    "name": "Attention aux animaux domestiques",
+    "description": "Indique une zone où des animaux domestiques peuvent traverser la route."
+  },
+  {
+    "id": "a15b",
+    "name": "Danger, animal sauvage",
+    "description": "Indique une zone où des animaux sauvages peuvent traverser la route."
+  },
+  {
+    "id": "danger_cavaliers",
+    "name": "Attention aux cavaliers",
+    "description": "Indique une zone où des cavaliers peuvent traverser la route."
+  },
+  {
+    "id": "a16",
+    "name": "Descente dangereuse à 10%",
+    "description": "Indique une descente dangereuse à 10% où la prudence est requise."
+  },
+  {
+    "id": "a17",
+    "name": "Annonce de faux feux tricolores",
+    "description": "Indique une zone où des faux feux tricolores peuvent être présents."
+  },
+  {
+    "id": "a18",
+    "name": "Circulation à double sens",
+    "description": "Indique une zone où la circulation est à double sens."
+  },
+  {
+    "id": "a19",
+    "name": "Risque de chute de pierres",
+    "description": "Indique une zone où des chutes de pierres peuvent se produire."
+  },
+  {
+    "id": "a21",
+    "name": "Débouché de cyclistes venant de droite",
+    "description": "Indique un débouché de cyclistes venant de droite."
+  },
+  {
+    "id": "a14",
+    "name": "Danger particulier",
+    "description": "Indique un danger particulier sur la route."
+  },
+  {
+    "id": "a23",
+    "name": "Danger aerien",
+    "description": "Indique un danger aérien sur la route."
+  },
+  {
+    "id": "a9",
+    "name": "Attention au tramway",
+    "description": "Indique une zone où des tramways peuvent traverser la route."
+  },
+  {
+    "id": "a24",
+    "name": "Vent latéral",
+    "description": "Indique une zone où des vents latéraux peuvent affecter la conduite."
+  },
+  {
+    "id": "a7",
+    "name": "Passage à niveau gardé",
+    "description": "Indique un passage à niveau gardé où la prudence est requise."
+  },
+  {
+    "id": "a8",
+    "name": "Passage à niveau non gardé",
+    "description": "Indique un passage à niveau non gardé où la prudence est requise."
+  },
+  {
+    "id": "ab25",
+    "name": "Sens giratoire obligatoire",
+    "description": "Vous n'avez pas la priorité"
+  },
+  {
+    "id": "ab6",
+    "name": "Indication du caractere prioritaire d'une route",
+    "description": "Indique le caractère prioritaire d'une route."
+  },
+  {
+    "id": "ab7",
+    "name": "Fin de l'indication du caractere prioritaire d'une route",
+    "description": "Indique la fin de l'indication du caractère prioritaire d'une route."
+  },
+  {
+    "id": "c8",
+    "name": "Indication emplacement d arret d urgence",
+    "description": "Indique l'emplacement d'un arrêt d'urgence."
+  },
+  {
+    "id": "c2",
+    "name": "Hôpital",
+    "description": "Indique la présence d'un hôpital à proximité."
+  },
+  {
+    "id": "c5",
+    "name": "Taxis",
+    "description": "Indique la présence d'une gare de taxis à proximité."
+  },
+  {
+    "id": "c6",
+    "name": "Arret aux bus/autos cars",
+    "description": "Indique un arrêt de bus ou d'autocars à proximité."
+  },
+  {
+    "id": "ck1",
+    "name": "Parc de stationnement",
+    "description": "Indique la présence d'un parc de stationnement à proximité."
+  },
+  {
+    "id": "c1c",
+    "name": "Parc de stationnement payant",
+    "description": "Indique un parking payant"
+  },
+  {
+    "id": "c1b",
+    "name": "Parc de stationnement de duréé limitéé avec disque obligatoire",
+    "description": "Indique un parking de durée limitée avec disque obligatoire."
+  },
+  {
+    "id": "c20c",
+    "name": "Traversée de Tramways",
+    "description": "Indique la présence d'une traversée de tramways."
+  },
+  {
+    "id": "c4a",
+    "name": "Vitesse conseillée 30km/h",
+    "description": "Indique la présence d'un arret au tramways à proximité."
+  },
+  {
+    "id": "c12",
+    "name": "Circulation à sens unique",
+    "description": "Indique une zone où la circulation est à sens unique."
+  },
+  {
+    "id": "ce15a",
+    "name": "Poste de distribution de carburant",
+    "description": "Indique la présence d'un poste de distribution de carburant à proximité."
+  },
+  {
+    "id": "c107",
+    "name": "Route pour automobile",
+    "description": "Indique une route réservée aux automobiles."
+  },
+  {
+    "id": "c23",
+    "name": "Stationnement reglémenté pour caravanes",
+    "description": "Indique un stationnement réglementé pour caravanes."
+  },
+  {
+    "id": "c29c",
+    "name": "Affectation des voies dont deux en sens normal et une en sens inverse",
+    "description": "Indique l'affectation des voies dont deux en sens normal et une en sens inverse."
+  },
+  {
+    "id": "c4b",
+    "name": "Fin de vitesse conseillée 30km/h",
+    "description": "Indique la fin de la vitesse conseillée à 30km/h."
+  },
+  {
+    "id": "c13a",
+    "name": "Chemin sans issue",
+    "description": "Indique une un chemin sans issue ou une impasse"
+  },
+  {
+    "id": "c18",
+    "name": "J'ai la priorité par rapport à la  circulation venant en sens inverse",
+    "description": "Indique que vous avez la priorité par rapport à la circulation venant en sens inverse."
+  },
+  {
+    "id": "c108",
+    "name": "Fin de route pour automobile",
+    "description": "Indique la fin d'une route réservée aux automobiles."
+  },
+  {
+    "id": "c13b",
+    "name": "Présignalisation d'un chemin sans issue ou d'une impasse",
+    "description": "Indique la présignalisation d'un chemin sans issue ou d'une impasse."
+  },
+  {
+    "id": "c13d",
+    "name": "Impasse comportant une issue",
+    "description": "Indique une impasse comportant une issue."
+  },
+  {
+    "id": "c20a",
+    "name": "Passage de piétons",
+    "description": "Indique la présence d'un passage de piétons."
+  },
+  {
+    "id": "b54",
+    "name": "Entrée d'aire piétonne",
+    "description": "Indique l'entrée d'une aire piétonne."
+  },
+  {
+    "id": "c111",
+    "name": "Entrée d'un tunnel",
+    "description": "Indique l'entrée d'un tunnel."
+  },
+  {
+    "id": "c112",
+    "name": "Sortie d'un tunnel",
+    "description": "Indique la sortie d'un tunnel."
+  },
+  {
+    "id": "c28",
+    "name": "Reduction du nombre de voies à 3 voies",
+    "description": "Indique une réduction du nombre de voies à 3 voies."
+  },
+  {
+    "id": "c113",
+    "name": "Piste bande cyclable reservee aux cycles à deux ou trois roues",
+    "description": "Indique une piste ou bande cyclable réservée aux cycles à deux ou trois roues."
+  },
+  {
+    "id": "c64d",
+    "name": "Paiement par abonnement",
+    "description": "Indique que le paiement se fait par abonnement."
+  },
+  {
+    "id": "b0",
+    "name": "Circulation interdite dans les deux sens",
+    "description": "Interdit la circulation des véhicules dans les deux sens."
+  },
+  {
+    "id": "b1",
+    "name": "Sens interdit",
+    "description": "Indique une voie à sens interdit où la circulation est interdite dans la direction indiquée."
+  },
+  {
+    "id": "b2b",
+    "name": "Interdiction de tourner à droite",
+    "description": "Interdit aux conducteurs de tourner à droite à l'intersection indiquée par le panneau."
+  },
+  {
+    "id": "b2a",
+    "name": "Interdiction de tourner à gauche",
+    "description": "Interdit aux conducteurs de tourner à gauche à l'intersection indiquée par le panneau."
+  },
+  {
+    "id": "b2c",
+    "name": "Interdiction de faire demi-tour",
+    "description": "Interdit aux conducteurs de faire demi-tour à l'endroit indiqué par le panneau."
+  },
+  {
+    "id": "b3",
+    "name": "Interdiction de dépasser",
+    "description": "Interdit le dépassement des véhicules dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b3a",
+    "name": "Interdiction aux poids lourds de dépasser",
+    "description": "Interdit aux véhicules de plus de 3.5 tonnes de dépasser dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b8",
+    "name": "Acces interdit au poids lourds",
+    "description": "Acces interdit au poids lourds"
+  },
+  {
+    "id": "b4",
+    "name": "Arrêt obligatoire au poste de Douane",
+    "description": "Arrêt obligatoire au poste de Douane"
+  },
+  {
+    "id": "b5a",
+    "name": "Arrêt obligatoire au barrage de la Gendarmerie",
+    "description": "Arrêt obligatoire au barrage de la Gendarmerie"
+  },
+  {
+    "id": "b5b",
+    "name": "Arrêt obligatoire au barrage de la Police",
+    "description": "Arrêt obligatoire au barrage de la Police"
+  },
+  {
+    "id": "b5c",
+    "name": "Arrêt obligatoire au poste de péage",
+    "description": "Arrêt obligatoire au poste de péage"
+  },
+  {
+    "id": "b7a",
+    "name": "Interdiction de circuler aux autos et motos",
+    "description": "Interdit la circulation aux autos et motos dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b7b",
+    "name": "Interdiction de circuler à tous véhicules à moteur",
+    "description": "Interdit la circulation à tous les véhicules à moteur dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b16",
+    "name": "Interdiction de klaxonner",
+    "description": "Interdit aux conducteurs de klaxonner dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9a",
+    "name": "Circulation interdite aux piétons",
+    "description": "Interdit la circulation des piétons dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9b",
+    "name": "Interdiction de circuler aux cyclistes",
+    "description": "Interdit la circulation aux cyclistes dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9g",
+    "name": "Interdiction de circuler aux cyclomoteurs",
+    "description": "Interdit la circulation aux cyclomoteurs dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9h",
+    "name": "Interdiction de circuler aux motocyclettes",
+    "description": "Interdit la circulation aux motocyclettes dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9f",
+    "name": "Interdiction de circuler aux transports en commun",
+    "description": "Interdit la circulation aux transport en commun dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9c",
+    "name": "Interdiction aux véhicules à traction animale",
+    "description": "Interdit la circulation des véhicules à traction animale dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9d",
+    "name": "Interdiction de circuler aux tracteurs agricoles",
+    "description": "Interdit la circulation aux tracteurs agricoles dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b9e",
+    "name": "Interdiction de circuler aux vehicules à bras",
+    "description": "Interdit la circulation aux vehicules à bras dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b14",
+    "name": "Interdiction de dépasser les 50 km/h",
+    "description": "Indique une limitation de vitesse de 50 km/h dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b18a",
+    "name": "Interdiction de transporter des marchandises explosives",
+    "description": "Interdit le transport de marchandises explosives dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b18c",
+    "name": "Interdiction de transporter des marchandises dangereuses",
+    "description": "Interdit le transport de marchandises dangereuses dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b18bd",
+    "name": "Interdiction de transporter des matières radioactives",
+    "description": "Interdit le transport de matières de nature à polluer les eaux dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b12",
+    "name": "Accès interdit aux véhicules dont la hauteur fait plus de 3,5 m",
+    "description": "Interdit aux véhicules de plus de 3,5 m de haut."
+  },
+  {
+    "id": "b11",
+    "name": "Accès interdit aux véhicules dont la largeur fait plus de 1,8 m",
+    "description": "Interdit aux véhicules de plus de 1,8 m de large."
+  },
+  {
+    "id": "b13",
+    "name": "Accès interdit aux véhicules de plus de 3.5 tonnes",
+    "description": "Interdit aux véhicules de plus de 3.5 tonnes de circuler dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b10a",
+    "name": "Accès interdit aux poids lourds dont la largeur dépasse 10 m",
+    "description": "Interdit aux poids lourds dont la largeur dépasse 10 mètres"
+  },
+  {
+    "id": "b17",
+    "name": "Distance de sécurité minimale 70 m",
+    "description": "Distance de sécurité à maintenir entre deux véhicules en circulation 70m"
+  },
+  {
+    "id": "b31",
+    "name": "Fin d'interdiction",
+    "description": "Fin interdictions precedemment signalees."
+  },
+  {
+    "id": "b35",
+    "name": "Fin d'interdiction de klaxonner",
+    "description": "Fin d'interdiction aux conducteurs de klaxonner dans la zone indiquée par le panneau."
+  },
+  {
+    "id": "b34",
+    "name": "Fin interdiction de dépasser",
+    "description": "Indique la fin d'interdiction de dépassement."
+  },
+  {
+    "id": "b33",
+    "name": "Fin limite de vitesse",
+    "description": "Indique la fin d'interdiction de la limite de vitesse."
+  },
+  {
+    "id": "b34a",
+    "name": "Fin interdiction aux poids lourds de dépasser",
+    "description": "Indique la fin d'interdiction de dépassement pour les poids lourds."
+  },
+  {
+    "id": "ab4",
+    "name": "Panneau stop arret a l intersection",
+    "description": "Stop. Arrêtez-vous."
+  },
+  {
+    "id": "ab3b",
+    "name": "Panneau cédez le passage à l'intersection",
+    "description": "Cédez le passage"
+  },
+  {
+    "id": "ab5",
+    "name": "Panneau presignalisation de stop",
+    "description": "Cédez le passage"
+  },
+  {
+    "id": "ab3a",
+    "name": "Panneau  cédez le passage à l'intersection",
+    "description": "Cédez le passage"
+  },
+  {
+    "id": "ab1",
+    "name": "Panneau  intersection de voie",
+    "description": "Intersection de voie. Priorité à droite."
+  },
+  {
+    "id": "ab2",
+    "name": "Priorité ponctuelle",
+    "description": "Signal placé sur une route à grande circulation, annonce une route secondaire, priorité à la grande circulation"
+  },
+  {
+    "id": "b21",
+    "name": "Tourner à droite avant le panneau",
+    "description": "Oblige les conducteurs à tourner à droite à l'intersection avant le panneau."
+  },
+  {
+    "id": "b21a1",
+    "name": "Contourner l'obstacle par la droite",
+    "description": "Oblige les conducteurs à contourner un obstacle par la droite"
+  },
+  {
+    "id": "b21a2",
+    "name": "Contourner l'obstacle par la gauche",
+    "description": "Oblige les conducteurs à contourner un obstacle par la gauche"
+  },
+  {
+    "id": "b21c1",
+    "name": "Prendre la voie de droite",
+    "description": "Oblige les conducteurs à prendre la voie de droite à l'intersection suivante."
+  },
+  {
+    "id": "b21c2",
+    "name": "Prendre la voie de gauche",
+    "description": "Oblige les conducteurs à prendre la voie de gauche à l'intersection suivante."
+  },
+  {
+    "id": "b21d1",
+    "name": "Tourner à droite ou aller tout droit",
+    "description": "Oblige les conducteurs à tourner soit à droite ou à aller tout droit à l'intersection suivante."
+  },
+  {
+    "id": "b21d2",
+    "name": "Tourner à gauche ou aller tout droit",
+    "description": "Oblige les conducteurs à tourner soit à gauche ou à aller tout droit à l'intersection suivante."
+  },
+  {
+    "id": "b21e",
+    "name": "Tourner à droite ou à gauche",
+    "description": "Oblige les conducteurs à tourner à droite ou à gauche à l'intersection suivante."
+  },
+  {
+    "id": "b21b",
+    "name": "Tout droit",
+    "description": "Oblige les conducteurs à continuer tout droit à l'intersection suivante."
+  },
+  {
+    "id": "sens_giratoire_obligatoire",
+    "name": "Sens giratoire obligatoire",
+    "description": "Oblige les conducteurs à emprunter le sens giratoire à l'intersection suivante. Vous n'avez pas la priorité"
+  },
+  {
+    "id": "b22b",
+    "name": "Chemin obligatoire aux piétons",
+    "description": "Oblige les pieton à emprunter le ce chemin."
+  },
+  {
+    "id": "b22c",
+    "name": "Chemin obligatoire aux cavaliers",
+    "description": "Oblige les cavaliers à emprunter le ce chemin."
+  },
+  {
+    "id": "b27a",
+    "name": "Circulation des vehicules de transport en commun uniquement",
+    "description": "Réserve la voie pour la circulation exclusive des vehicules de transport en commun."
+  },
+  {
+    "id": "b27b",
+    "name": "Circulation des tramways uniquement",
+    "description": "Réserve la voie pour la circulation exclusive des tramways."
+  },
+  {
+    "id": "b22a",
+    "name": "Piste ou bande cyclable obligatoire",
+    "description": "Réserve la voie pour la circulation exclusive des vehicules de transport en commun."
+  },
+  {
+    "id": "b25",
+    "name": "Vitesse minimale imposée 30km/h",
+    "description": "Oblige les conducteurs à respecter la limite minimale de vitesse indiquée à 30km/h."
+  },
+  {
+    "id": "b45",
+    "name": "Fin de voie réservée aux transports en commun",
+    "description": "Indique la fin de la voie réservée aux transports en commun"
+  },
+  {
+    "id": "b40",
+    "name": "Fin de piste cyclable",
+    "description": "Indique la fin de la piste cyclable."
+  },
+  {
+    "id": "b43",
+    "name": "Fin de limitation de vitesse",
+    "description": "Indique la fin de la limitation de vitesse imposée précédemment."
+  },
+  {
+    "id": "ce2a",
+    "name": "Poste d'appel d'urgence",
+    "description": "Indique la présence d'un poste d'appel d'urgence à proximité."
+  },
+  {
+    "id": "indication_installation_accessible_aux_handicapes_physiques",
+    "name": "Installation accessible aux handicapés physiques",
+    "description": "Indique la présence d'une installation accessible aux handicapés physiques à proximité."
+  },
+  {
+    "id": "indication_auberge_de_jeunesse",
+    "name": "Auberge de jeunesse",
+    "description": "Indique la présence d'une auberge de jeunesse à proximité."
+  },
+  {
+    "id": "indication_toilettes_publiques",
+    "name": "Toilettes Publiques",
+    "description": "Indique la présence de toilettes publiques à proximité."
+  },
+  {
+    "id": "indication_restaurant",
+    "name": "Restaurant",
+    "description": "Indique la présence d'un restaurant à proximité."
+  },
+  {
+    "id": "indication_poste_secours_medical",
+    "name": "Poste de secours médical",
+    "description": "Indique la présence d'un poste de secours à proximité."
+  },
+  {
+    "id": "indication_poste_communication",
+    "name": "Poste de télécommunication",
+    "description": "Indique la présence d'un poste de télécommunication à proximité."
+  },
+  {
+    "id": "indication_hotel",
+    "name": "Hôtel",
+    "description": "Indique la présence d'un hôtel à proximité."
+  },
+  {
+    "id": "indication_cafetaria",
+    "name": "Cafétariat",
+    "description": "Indique la présence d'une cafétaria à proximité."
+  },
+  {
+    "id": "ak31",
+    "name": "Danger annonce d'un accident",
+    "description": "Indique un danger annonçant un accident sur la route."
+  },
+  {
+    "id": "e43",
+    "name": "Cartouches à fond jaune",
+    "description": "Indique un danger annonçant un accident sur la route."
+  },
+  {
+    "id": "kd21a",
+    "name": "Panneau temporaire",
+    "description": "Indique un panneau temporaire sur la route."
+  },
+  {
+    "id": "kd21b",
+    "name": "Voierie temporaire",
+    "description": "Indique une voierie temporaire sur la route."
+  },
+  {
+    "id": "kd43a",
+    "name": "Deviation temporaire",
+    "description": "Indique une déviation temporaire sur la route."
+  },
+  {
+    "id": "kd69b",
+    "name": "Fin deviation temporaire",
+    "description": "Indique la fin d'une déviation temporaire sur la route."
+  },
+  {
+    "id": "ak30",
+    "name": "Annonce d'un bouchon",
+    "description": "Indique un bouchon sur la route."
+  },
+  {
+    "id": "ak2",
+    "name": "Cassis ou dos d'ane",
+    "description": "Indique la présence d'un cassis ou d'un dos d'âne sur la route."
+  },
+  {
+    "id": "ak4",
+    "name": "Chaussée glissante",
+    "description": "Indique une chaussée glissante sur la route."
+  },
+  {
+    "id": "ak3",
+    "name": "Chaussée rétrécie",
+    "description": "Indique une chaussée rétrécie sur la route."
+  },
+  {
+    "id": "ak14",
+    "name": "Danger dont la nature peut être précisée par un panonceau",
+    "description": "Indique un danger dont la nature peut être précisée par un panonceau."
+  },
+  {
+    "id": "ak17",
+    "name": "Feu tricolores reglant une circulation alternée",
+    "description": "Indique un feu tricolore régulant une circulation alternée sur la route."
+  },
+  {
+    "id": "ak22",
+    "name": "Risque de projection de gravillons",
+    "description": "Indique un risque de projection de gravillons sur la route."
+  },
+  {
+    "id": "ak32",
+    "name": "Risque de brouillard ou fumees épaisses",
+    "description": "Indique un risque de brouillard ou de fumées épaisses sur la route."
+  },
+  {
+    "id": "kc119p",
+    "name": "Rue barrée temporaire",
+    "description": "Indique une rue barrée temporaire sur la route."
+  }
+]

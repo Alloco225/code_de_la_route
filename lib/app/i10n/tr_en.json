@@ -1,0 +1,751 @@
+[
+    {
+        "q_signs_0": {
+            "name": "Vertical Signage"
+        }
+    },
+    {
+        "q_signs_1": {
+            "name": "Gestural Signage"
+        }
+    },
+    {
+        "q_signs_2": {
+            "name": "Horizontal Signage"
+        }
+    },
+    {
+        "intersection": {
+            "name": "Intersection"
+        }
+    },
+    {
+        "danger": {
+            "name": "Danger"
+        }
+    },
+    {
+        "obligation": {
+            "name": "Obligation"
+        }
+    },
+    {
+        "interdiction": {
+            "name": "Prohibition"
+        }
+    },
+    {
+        "temporaire": {
+            "name": "Temporary"
+        }
+    },
+    {
+        "indication": {
+            "name": "Indication"
+        }
+    },
+    {
+        "cede_le_passage": {
+            "name": "Yield",
+            "description": "Indicates that drivers must yield to vehicles on the main road."
+        }
+    },
+    {
+        "priorite": {
+            "name": "Priority Road",
+            "description": "Indicates that the road has priority over secondary roads. Drivers must yield to vehicles coming from these roads."
+        }
+    },
+    {
+        "stop": {
+            "name": "Stop",
+            "description": "Requires drivers to come to a complete stop before proceeding. Priority must be yielded to vehicles on the main road."
+        }
+    },
+    {
+        "vitesse_conseillee": {
+            "name": "Recommended Speed",
+            "description": "Indicates the recommended speed for safely negotiating a curve, turn, or intersection."
+        }
+    },
+    {
+        "fin_interdiction": {
+            "name": "End of Prohibition",
+            "description": "Indicates the end of a previously signaled specific prohibition."
+        }
+    },
+    {
+        "limitation_vitesse": {
+            "name": "Speed Limit",
+            "description": "Indicates the maximum permitted speed on the road where the sign is placed."
+        }
+    },
+    {
+        "sens_unique": {
+            "name": "One-Way",
+            "description": "Indicates a street where traffic is only allowed in one direction."
+        }
+    },
+    {
+        "intersection_t": {
+            "name": "T-Intersection",
+            "description": "Indicates an intersection where a road ends, forming a T-junction with another road."
+        }
+    },
+    {
+        "circulation_interdite_aux_vehicules_a_moteur": {
+            "name": "No Motor Vehicles",
+            "description": "Indicates that motor vehicle traffic is prohibited in the area."
+        }
+    },
+    {
+        "fin_autoroute": {
+            "name": "End of Motorway",
+            "description": "Indicates the end of a motorway section where specific motorway rules no longer apply."
+        }
+    },
+    {
+        "cdez_le_passage": {
+            "name": "Yield",
+            "description": "Indicates that drivers must yield to vehicles on the main road."
+        }
+    },
+    {
+        "route_prioritaire": {
+            "name": "Priority Road",
+            "description": "Indicates that the road has priority over secondary roads. Drivers must yield to vehicles coming from these roads."
+        }
+    },
+    {
+        "Stop": {
+            "name": "Stop",
+            "description": "Requires drivers to come to a complete stop before proceeding. Priority must be yielded to vehicles on the main road."
+        }
+    },
+    {
+        "vitesse_conseille": {
+            "name": "Recommended Speed",
+            "description": "Indicates the recommended speed for safely negotiating a curve, turn, or intersection."
+        }
+    },
+    {
+        "fin_de_linterdiction": {
+            "name": "End of Prohibition",
+            "description": "Indicates the end of a previously signaled specific prohibition."
+        }
+    },
+    {
+        "limitation_de_vitesse": {
+            "name": "Speed Limit",
+            "description": "Indicates the maximum permitted speed on the road where the sign is placed."
+        }
+    },
+    {
+        "intersection_en_t": {
+            "name": "T-Intersection",
+            "description": "Indicates an intersection where a road ends, forming a T-junction with another road."
+        }
+    },
+    {
+        "circulation_interdite_aux_vhicules__moteur": {
+            "name": "No Motor Vehicles",
+            "description": "Indicates that motor vehicle traffic is prohibited in the area."
+        }
+    },
+    {
+        "fin_de_lautoroute": {
+            "name": "End of Motorway",
+            "description": "Indicates the end of a motorway section where specific motorway rules no longer apply."
+        }
+    },
+    {
+        "a1a": {
+            "name": "Dangerous Curve to the Right",
+            "description": "Indicates a dangerous curve to the right on the road."
+        }
+    },
+    {
+        "a1b": {
+            "name": "Dangerous Curve to the Left",
+            "description": "Indicates a dangerous curve to the left on the road."
+        }
+    },
+    {
+        "a1c": {
+            "name": "Series of Curves Starting with Right",
+            "description": "Indicates a series of dangerous curves starting with a right turn."
+        }
+    },
+    {
+        "a1d": {
+            "name": "Series of Curves Starting with Left",
+            "description": "Indicates a series of dangerous curves starting with a left turn."
+        }
+    },
+    {
+        "a2a": {
+            "name": "Speed Bump or Hump",
+            "description": "Indicates the presence of a speed bump or hump."
+        }
+    },
+    {
+        "a2b": {
+            "name": "Hump",
+            "description": "Indicates the presence of a hump."
+        }
+    },
+    {
+        "a3a": {
+            "name": "Road Narrows on the Right",
+            "description": "Indicates a road where the lane narrows on the right side."
+        }
+    },
+    {
+        "a3b": {
+            "name": "Road Narrows on the Left",
+            "description": "Indicates a road where the lane narrows on the left side."
+        }
+    },
+    {
+        "a3": {
+            "name": "Road Narrows",
+            "description": "Indicates a road where the lane narrows on both sides."
+        }
+    },
+    {
+        "a4": {
+            "name": "Slippery Road",
+            "description": "Indicates a slippery road where vehicles might lose traction."
+        }
+    },
+    {
+        "a6": {
+            "name": "Swing Bridge",
+            "description": "Indicates a swing bridge where caution is required when passing."
+        }
+    },
+    {
+        "a20": {
+            "name": "Quay or Shore",
+            "description": "Indicates an opening onto a quay or shore where caution is required."
+        }
+    },
+    {
+        "a13b": {
+            "name": "Pedestrian Crossing",
+            "description": "Indicates a zone where pedestrians may cross the road."
+        }
+    },
+    {
+        "a13a": {
+            "name": "Children Crossing",
+            "description": "Indicates a zone where children may cross the road."
+        }
+    },
+    {
+        "a15a1": {
+            "name": "Domestic Animals Crossing",
+            "description": "Indicates a zone where domestic animals may cross the road."
+        }
+    },
+    {
+        "a15a2": {
+            "name": "Domestic Animals Crossing",
+            "description": "Indicates a zone where domestic animals may cross the road."
+        }
+    },
+    {
+        "a15b": {
+            "name": "Wild Animals Crossing",
+            "description": "Indicates a zone where wild animals may cross the road."
+        }
+    },
+    {
+        "danger_cavaliers": {
+            "name": "Equestrians Crossing",
+            "description": "Indicates a zone where equestrians may cross the road."
+        }
+    },
+    {
+        "a16": {
+            "name": "Dangerous Descent 10%",
+            "description": "Indicates a dangerous descent at 10% where caution is required."
+        }
+    },
+    {
+        "a17": {
+            "name": "Fake Traffic Lights",
+            "description": "Indicates a zone where fake traffic lights may be present."
+        }
+    },
+    {
+        "a18": {
+            "name": "Two-Way Traffic",
+            "description": "Indicates a zone where traffic is two-way."
+        }
+    },
+    {
+        "a19": {
+            "name": "Falling Rocks",
+            "description": "Indicates a zone where falling rocks may occur."
+        }
+    },
+    {
+        "a21": {
+            "name": "Cyclists from the Right",
+            "description": "Indicates cyclists emerging from the right."
+        }
+    },
+    {
+        "a14": {
+            "name": "Specific Danger",
+            "description": "Indicates a specific danger on the road."
+        }
+    },
+    {
+        "a23": {
+            "name": "Air Danger",
+            "description": "Indicates an air danger on the road."
+        }
+    },
+    {
+        "a9": {
+            "name": "Tramway",
+            "description": "Indicates a zone where a tramway crosses or runs parallel to the road."
+        }
+    },
+    {
+        "d1": {
+            "name": "Right Directional Arrow",
+            "description": "Indicates a direction to follow to the right."
+        }
+    },
+    {
+        "d2a": {
+            "name": "Roundabout",
+            "description": "Indicates a roundabout where traffic must circulate in a specific direction."
+        }
+    },
+    {
+        "d2b": {
+            "name": "Large Roundabout",
+            "description": "Indicates a large roundabout where traffic must circulate in a specific direction."
+        }
+    },
+    {
+        "d3": {
+            "name": "Left Directional Arrow",
+            "description": "Indicates a direction to follow to the left."
+        }
+    },
+    {
+        "d4a": {
+            "name": "Mandatory Right",
+            "description": "Indicates a mandatory turn to the right."
+        }
+    },
+    {
+        "d4b": {
+            "name": "Mandatory Left",
+            "description": "Indicates a mandatory turn to the left."
+        }
+    },
+    {
+        "d5": {
+            "name": "Forward Mandatory",
+            "description": "Indicates a mandatory forward direction."
+        }
+    },
+    {
+        "d6": {
+            "name": "Roundabout"
+        }
+    },
+    {
+        "d7": {
+            "name": "Roundabout"
+        }
+    },
+    {
+        "d11": {
+            "name": "Passage on the Right"
+        }
+    },
+    {
+        "d12": {
+            "name": "Passage on the Left"
+        }
+    },
+    {
+        "d13a": {
+            "name": "Left Turn"
+        }
+    },
+    {
+        "d13b": {
+            "name": "Right Turn"
+        }
+    },
+    {
+        "d14a": {
+            "name": "Forward Left Turn"
+        }
+    },
+    {
+        "d14b": {
+            "name": "Forward Right Turn"
+        }
+    },
+    {
+        "d15a": {
+            "name": "Pedestrian Zone"
+        }
+    },
+    {
+        "d15b": {
+            "name": "Cyclist Zone"
+        }
+    },
+    {
+        "d15c": {
+            "name": "Cyclist and Pedestrian Zone"
+        }
+    },
+    {
+        "d16": {
+            "name": "Bus Lane"
+        }
+    },
+    {
+        "d17": {
+            "name": "Reserved Lane"
+        }
+    },
+    {
+        "d20a": {
+            "name": "Chains"
+        }
+    },
+    {
+        "d20b": {
+            "name": "Snow Chains"
+        }
+    },
+    {
+        "d21a": {
+            "name": "Motorway"
+        }
+    },
+    {
+        "d21b": {
+            "name": "End of Motorway"
+        }
+    },
+    {
+        "d22": {
+            "name": "Recommended Speed"
+        }
+    },
+    {
+        "d23": {
+            "name": "City Center"
+        }
+    },
+    {
+        "d24a": {
+            "name": "Truck Prohibition"
+        }
+    },
+    {
+        "d24b": {
+            "name": "Truck Allowed"
+        }
+    },
+    {
+        "e1": {
+            "name": "Parking"
+        }
+    },
+    {
+        "e2": {
+            "name": "Bus Stop"
+        }
+    },
+    {
+        "e3": {
+            "name": "Reserved Parking"
+        }
+    },
+    {
+        "e4": {
+            "name": "End of Parking Prohibition"
+        }
+    },
+    {
+        "e5": {
+            "name": "Taxi Stop"
+        }
+    },
+    {
+        "f1": {
+            "name": "Hospital"
+        }
+    },
+    {
+        "f2": {
+            "name": "Police"
+        }
+    },
+    {
+        "f3": {
+            "name": "First Aid"
+        }
+    },
+    {
+        "f4": {
+            "name": "Airport"
+        }
+    },
+    {
+        "f5": {
+            "name": "Gas Station"
+        }
+    },
+    {
+        "f6": {
+            "name": "Garage"
+        }
+    },
+    {
+        "f7": {
+            "name": "Hotel"
+        }
+    },
+    {
+        "f8": {
+            "name": "Camping"
+        }
+    },
+    {
+        "f9": {
+            "name": "Restaurant"
+        }
+    },
+    {
+        "f10": {
+            "name": "Picnic Area"
+        }
+    },
+    {
+        "f11": {
+            "name": "Toilet"
+        }
+    },
+    {
+        "g1a": {
+            "name": "Distance Indication"
+        }
+    },
+    {
+        "g1b": {
+            "name": "Direction Indication"
+        }
+    },
+    {
+        "g1c": {
+            "name": "Indication of Distance to City Center"
+        }
+    },
+    {
+        "g1d": {
+            "name": "Road Type Indication"
+        }
+    },
+    {
+        "g2": {
+            "name": "Kilometer Mark"
+        }
+    },
+    {
+        "g3": {
+            "name": "Street Name"
+        }
+    },
+    {
+        "g4": {
+            "name": "Route Number"
+        }
+    },
+    {
+        "g5": {
+            "name": "Dead End"
+        }
+    },
+    {
+        "h1": {
+            "name": "Tunnel"
+        }
+    },
+    {
+        "h2": {
+            "name": "Bridge"
+        }
+    },
+    {
+        "h3": {
+            "name": "Viaduct"
+        }
+    },
+    {
+        "h4": {
+            "name": "Pedestrian Overpass"
+        }
+    },
+    {
+        "h5": {
+            "name": "Pedestrian Underpass"
+        }
+    },
+    {
+        "i1a": {
+            "name": "Give Way to Right",
+            "description": "Indicates that the driver must give way to vehicles approaching from the right."
+        }
+    },
+    {
+        "i1b": {
+            "name": "Give Way to Left",
+            "description": "Indicates that the driver must give way to vehicles approaching from the left."
+        }
+    },
+    {
+        "i2": {
+            "name": "Yield"
+        }
+    },
+    {
+        "j1": {
+            "name": "Yield to Oncoming Traffic"
+        }
+    },
+    {
+        "j2": {
+            "name": "Priority Over Oncoming Traffic"
+        }
+    },
+    {
+        "k1": {
+            "name": "No Entry"
+        }
+    },
+    {
+        "k2": {
+            "name": "No Motor Vehicles"
+        }
+    },
+    {
+        "k3": {
+            "name": "No Trucks"
+        }
+    },
+    {
+        "k4": {
+            "name": "No Buses"
+        }
+    },
+    {
+        "k5": {
+            "name": "No Cycles"
+        }
+    },
+    {
+        "k6": {
+            "name": "No Pedestrians"
+        }
+    },
+    {
+        "k7": {
+            "name": "No Vehicles Carrying Dangerous Goods"
+        }
+    },
+    {
+        "k8": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k9": {
+            "name": "No Vehicles with Trailers"
+        }
+    },
+    {
+        "k10": {
+            "name": "No Vehicles Over 2m"
+        }
+    },
+    {
+        "k11": {
+            "name": "No Vehicles Over 3.5t Except for Local Delivery"
+        }
+    },
+    {
+        "k12": {
+            "name": "No Vehicles Over 3.5t Except for Local Delivery"
+        }
+    },
+    {
+        "k13": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k14": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k15": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k16": {
+            "name": "No Vehicles Over 3.5t Except for Local Delivery"
+        }
+    },
+    {
+        "k17": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k18": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k19": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k20": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k21": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k22": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    },
+    {
+        "k23": {
+            "name": "No Vehicles Over 3.5t"
+        }
+    }
+]

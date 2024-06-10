@@ -8,11 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../../../views/ui/snackbar.dart';
 import '../../../views/widgets/container_widget.dart';
-import '../../auth/submodules/auth/views/auth_modal_view.dart';
 import '../../auth/submodules/login/controllers/login_controller.dart';
 
 class AchievementsScreen extends StatelessWidget {
@@ -41,9 +38,6 @@ class AchievementsScreen extends StatelessWidget {
             return _buildAuthCTA(context);
           }
 
-          Map<String, dynamic> userData =
-              userSnapshot.data!.data() as Map<String, dynamic>;
-          Map<String, dynamic> achievements = userData['achievements'] ?? {};
 
           return FutureBuilder<QuerySnapshot>(
               future:
@@ -103,7 +97,7 @@ class AchievementsScreen extends StatelessWidget {
                                     ),
                                     Column(
                                       children:
-                                          (achievementData["title"] as String)
+                                          (achievementData["key"].tr ?? achievementData["title"] as String)
                                               .split(" ")
                                               .map((t) => Text(
                                                     t,
@@ -139,22 +133,8 @@ class AchievementsScreen extends StatelessWidget {
   }
 
   Widget _buildAuthCTA(context) {
-    final authController = Get.find<AuthController>();
     final loginController = Get.find<LoginController>();
-    openAuthModal() async {
-      bool? loggedIn = await showMaterialModalBottomSheet(
-        expand: false,
-        context: context,
-        backgroundColor: Colors.transparent,
-        // builder: (context) => const ModalInsideModal());
-        builder: (context) => const AuthModalView(),
-      );
-      if (loggedIn == true) {
-        showSnackbarSuccess("User in !", context: context);
-      } else {
-        showSnackbarError("Could not log in !", context: context);
-      }
-    }
+    
 
     return ContainerWidget(
       color: Colors.blueGrey.shade800.withOpacity(.9),
