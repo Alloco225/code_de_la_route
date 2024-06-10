@@ -110,21 +110,6 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         ),
                         if (authController.isAuth) const SizedBox(width: 15),
-                        if (authController.isAuth)
-                          InkWell(
-                            onTap: () => authController.logOut(),
-                            child: ContainerWidget(
-                              child: Row(
-                                children: [
-                                  Text("logout".tr),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  const Icon(Ionicons.log_out_outline),
-                                ],
-                              ),
-                            ),
-                          ),
                       ],
                     ),
                   ),

@@ -1,18 +1,20 @@
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
+import 'package:codedelaroute/app/modules/settings/views/theme_settings_modal_view.dart';
+import 'package:codedelaroute/app/views/widgets/button_widget.dart';
+import 'package:codedelaroute/app/views/widgets/container_widget.dart';
+import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../helpers/utils.dart';
-import '../../../routes/app_pages.dart';
-import '../../../views/ui/snackbar.dart';
-import '../../../views/widgets/back_nav_button.dart';
-import '../../auth/submodules/login/views/login_modal_view.dart';
+import '../../../views/widgets/bottom_sheet_modal_widget.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -27,87 +29,115 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TitleWidget(title: "settings".tr),
+            TitleWidget(
+              title: "settings".tr,
+              gap: 5,
+            ),
             Expanded(
               child: Column(
                 children: [
                   const Spacer(),
-                  Row(children: [
-                    buildSettingTile(
-                      title: "music".tr,
-                      icon: Ionicons.musical_note_outline,
-                      value: null,
+                  Obx(
+                    () => buildSettingTile(
+                      title: "language".tr,
+                      icon: Ionicons.globe_outline,
+                      value: (controller.lang.selectedLanguage?.id ?? '')
+                          .toUpperCase(),
                       flex: 1,
-                      onTap: () => openSettingsModal(AudioSettingsModalView(),
-                          context: context),
+                      onTap: () => showMaterialModalBottomSheet(
+                        expand: false,
+                        enableDrag: false,
+                        isDismissible: true,
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => LanguageSettingsModalView(),
+                      ),
                     ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Obx(
-                      () => buildSettingTile(
-                        title: "language".tr,
-                        icon: Ionicons.globe_outline,
-                        value: (controller.lang.selectedLanguage?.id ?? '')
-                            .toUpperCase(),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  buildSettingTile(
+                    title: "audio".tr,
+                    icon: Ionicons.musical_note_outline,
+                    value: null,
+                    flex: 1,
+                    onTap: () => openSettingsModal(AudioSettingsModalView(),
+                        context: context),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  buildSettingTile(
+                    title: "theme".tr,
+                    icon: Ionicons.sunny_outline,
+                    value: "dark".tr,
+                    flex: 0,
+                    onTap: () => openSettingsModal(ThemeSettingsModalView(),
+                        context: context),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  buildSettingTile(
+                      flex: 1,
+                      title: "delete_data".tr,
+                      icon: Ionicons.trash_outline,
+                      onTap: () async {
+                        openSettingsModal(
+                            BottomSheetModalWidget(
+                              title: "Supprimer vos données ?",
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 15),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      "Attention. Votre score et votre progression seront supprimés",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 24),
+                                    ),
+                                    Row(
+                                      children: [
+                                        FancyButtonWidget(
+                                          title: 'delete'.tr,
+                                          color: 'red',
+                                          onTap: () {},
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        FancyButtonWidget(
+                                          title: 'cancel'.tr,
+                                          color: 'grey',
+                                          onTap: () => Get.back(),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            context: context);
+                      }),
+                  const SizedBox(height: 15),
+                  if (auth.isAuth)
+                    buildSettingTile(
                         flex: 1,
-                        onTap: () => showMaterialModalBottomSheet(
-                          expand: false,
-                          enableDrag: false,
-                          isDismissible: true,
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) => LanguageSettingsModalView(),
-                        ),
-                        // onTap: () => showSnackbarInfo(
-                        //     "La traduction sera disponible dans la prochaine version",
-                        //     context: context),
-                      ),
+                        title: "logout".tr,
+                        icon: Ionicons.log_out_outline,
+                        onTap: () async {
+                          auth.logOut();
+                        }),
+                  if (auth.isAuth)
+                    const SizedBox(
+                      height: 15,
                     ),
-                  ]),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildSettingTile(
-                        title: "theme".tr,
-                        icon: Ionicons.sunny_outline,
-                        value: "dark".tr,
-                        flex: 0,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      buildSettingTile(
-                          flex: 1,
-                          title: "delete_data".tr,
-                          icon: Ionicons.trash_outline,
-                          onTap: () async {}),
-                      const SizedBox(width: 15),
-                      buildSettingTile(
-                          flex: 1,
-                          title: "profile".tr,
-                          icon: Ionicons.log_out_outline,
-                          onTap: () async {
-                            auth.logOut();
-                          }),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   const Spacer(),
                 ],
               ),
             ),
-            const BackNavButton(),
           ],
         ),
       ),
@@ -121,45 +151,42 @@ class SettingsView extends GetView<SettingsController> {
     VoidCallback? onTap,
     flex = 0,
   }) {
-    return Expanded(
-      flex: flex,
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          decoration: BoxDecoration(
-              color: Colors.blueGrey.shade800,
-              border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(8)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                icon,
-                size: 35,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: value == null
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.spaceBetween,
-                children: [
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: Colors.blueGrey.shade800,
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(
+              icon,
+              size: 35,
+            ),
+            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 20),
+                ),
+                if (value != null) const SizedBox(width: 10),
+                if (value != null)
                   Text(
-                    title,
+                    value,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 20),
                   ),
-                  if (value != null) const SizedBox(width: 10),
-                  if (value != null)
-                    Text(
-                      value,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                ],
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );

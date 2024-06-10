@@ -3,6 +3,7 @@ import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_cont
 import 'package:codedelaroute/app/modules/settings/controllers/audio_settings_controller.dart';
 import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/modules/settings/controllers/settings_controller.dart';
+import 'package:codedelaroute/app/modules/settings/controllers/theme_settings_controller.dart.dart';
 
 import '/app/modules/auth/submodules/login/controllers/login_controller.dart';
 import '/app/modules/auth/submodules/register/controllers/register_controller.dart';
@@ -22,6 +23,9 @@ class HomeBinding extends Bindings {
     );
     Get.put<LanguageSettingsController>(
       LanguageSettingsController(),
+    );
+    Get.put<ThemeSettingsController>(
+      ThemeSettingsController(),
     );
     Get.put<AudioSettingsController>(
       AudioSettingsController(),

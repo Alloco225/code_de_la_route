@@ -1,4 +1,3 @@
-import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/data/models/language_model.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
@@ -30,7 +29,7 @@ class LanguageSettingsModalView extends GetView<SettingsController> {
             ? const Text("Already Signed In")
             : Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,

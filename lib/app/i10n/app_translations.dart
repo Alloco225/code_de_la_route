@@ -13,12 +13,15 @@ class Messages extends Translations {
           'no_account_question': "Don't have an account?",
           'register': "Register?",
           'profile': "Profile",
+          'delete_data': "Supprimer mes données",
+          'save': 'OK',
           //
           'settings': "Settings",
           'theme': "Theme",
           'dark': "Dark",
           'light': "Light",
           'music': "Music",
+          'audio': "Audio",
           'language': "Language",
           'on': "Yes",
           'off': "Non",
@@ -156,6 +159,7 @@ class Messages extends Translations {
           'no_account_question': "アカウントをお持ちでないですか？",
           'register': "登録しますか？",
           'profile': "プロフィール",
+          'delete_data': "データを削除",
           //
           'settings': "設定",
           'theme': "テーマ",
@@ -189,6 +193,7 @@ class Messages extends Translations {
           "authenticate": "ログインまたはアカウント作成",
           "your_rank": "あなたのランク",
           "logout": "ログアウト",
+
 
           "highway_hero": "ハイウェイヒーロー",
           "traffic_titan": "トラフィックタイタン",
