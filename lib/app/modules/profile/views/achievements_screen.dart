@@ -38,7 +38,6 @@ class AchievementsScreen extends StatelessWidget {
             return _buildAuthCTA(context);
           }
 
-
           return FutureBuilder<QuerySnapshot>(
               future:
                   FirebaseFirestore.instance.collection('achievements').get(),
@@ -74,6 +73,11 @@ class AchievementsScreen extends StatelessWidget {
                       bool unlocked =
                           userAchievements[achievementId]?['unlocked'] ?? false;
 
+                      String title = achievementData["title"];
+                      String key = achievementData["key"];
+
+                      title = key.tr ?? title;
+
                       return InkWell(
                         onTap: () async {
                           await authController.unlockAchievement(
@@ -96,16 +100,15 @@ class AchievementsScreen extends StatelessWidget {
                                       id: achievementData["badge"],
                                     ),
                                     Column(
-                                      children:
-                                          (achievementData["key"].tr ?? achievementData["title"] as String)
-                                              .split(" ")
-                                              .map((t) => Text(
-                                                    t,
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                        fontSize: 14),
-                                                  ))
-                                              .toList(),
+                                      children: title
+                                          .split(" ")
+                                          .map((t) => Text(
+                                                t,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    fontSize: 14),
+                                              ))
+                                          .toList(),
                                     ),
                                   ],
                                 ),
@@ -134,7 +137,6 @@ class AchievementsScreen extends StatelessWidget {
 
   Widget _buildAuthCTA(context) {
     final loginController = Get.find<LoginController>();
-    
 
     return ContainerWidget(
       color: Colors.blueGrey.shade800.withOpacity(.9),

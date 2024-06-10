@@ -45,7 +45,7 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                         padding: const EdgeInsets.all(20),
                         child: Text(
                           // controller.sign.id!.tr.toCapitalized(),
-                          controller.sign.name!.tr.toCapitalized(),
+                          controller.sign.nameKey.tr.toCapitalized(),
                           // controller.sign.name!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
@@ -69,7 +69,7 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           child: Text(
-                            controller.sign.description ?? '',
+                            controller.sign.descriptionKey.tr ?? '',
                             textAlign: TextAlign.center,
                             style: const TextStyle(fontSize: 25),
                           ),

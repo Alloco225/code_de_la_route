@@ -125,6 +125,7 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   Widget _rankWidget() {
+    // String rankTitle = "your_rank".tr;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -132,7 +133,11 @@ class ProfileView extends GetView<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("your_rank".tr),
-            const Text("Traffic Titan"),
+            Text("traffic_titan".tr,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                )),
           ],
         ),
         Container(

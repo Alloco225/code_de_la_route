@@ -16,6 +16,9 @@ class Sign {
       this.level,
       this.description});
 
+  String get nameKey => "${id!}_name";
+  String get descriptionKey => "${id!}_description";
+
   String get imageUrl {
     if (image == null || image == "" || image == ".jpg") {
       return 'assets/images/favicon.png';

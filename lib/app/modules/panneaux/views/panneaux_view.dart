@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../../../data/models/sign_model.dart';
 import '../../../helpers/utils.dart';
-import '../../../views/widgets/back_nav_button.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../controllers/panneaux_controller.dart';
 
@@ -77,7 +76,7 @@ class PanneauxView extends GetView<PanneauxController> {
                                         height: 10,
                                       ),
                                       Text(
-                                        element.name ?? '--',
+                                        element.nameKey.tr ?? '--',
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w400,
@@ -95,7 +94,6 @@ class PanneauxView extends GetView<PanneauxController> {
                     )
                   ]),
           )),
-          const BackNavButton(),
         ],
       ),
     ));
