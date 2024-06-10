@@ -64,12 +64,12 @@ class Messages extends Translations {
           "your_rank": "Your rank",
           "logout": "Logout",
           // achievements
-          "highway_hero": "Highway hero",
-          "traffic_titan": "Traffic Titan",
-          "pavement_pupil": "Pavement Pupil",
-          "roadmaster_royalty": "Roadmaster Royalty",
-          "social_sharer": "Social Sharer",
-          "asphalt_apprentice": "Asphalt Apprentice",
+          "highway_hero": "Highway  Hero",
+          "traffic_titan": "Traffic  Titan",
+          "pavement_pupil": "Pavement  Pupil",
+          "roadmaster_royalty": "Roadmaster  Royalty",
+          "social_sharer": "Social  Sharer",
+          "asphalt_apprentice": "Asphalt  Apprentice",
 
           // quizz
           "question": "Question",
@@ -157,7 +157,7 @@ class Messages extends Translations {
 
           "quizzes": "Quizzes",
           "avg": "Score",
-          "achievements": "Succès",
+          "achievements": "Badges",
           "username": "Nom d'utilisateur",
           "authenticate_cta_achivements":
               "Connectez-vous pour débloquer les succès",
@@ -165,12 +165,12 @@ class Messages extends Translations {
           "your_rank": "Votre classement",
           "logout": "Déconnexion",
           // achievements
-          "highway_hero": "Héros de l'autoroute",
-          "traffic_titan": "Titan du trafic",
-          "pavement_pupil": "Élève modèle de la chaussée",
-          "roadmaster_royalty": "Routier(e) Royal(e)",
-          "social_sharer": "Partageur Professionel",
-          "asphalt_apprentice": "Apprenti de l'Asphalte",
+          "highway_hero": "As de  l'autoroute",
+          "traffic_titan": "Titan du  trafic",
+          "pavement_pupil": "Élève de la  chaussée",
+          "roadmaster_royalty": "Routier.e  Royal.e",
+          "social_sharer": "Pro du  Partage",
+          "asphalt_apprentice": "Apprenti de  l'Asphalte",
 
           //
           "question": "Question",
@@ -264,19 +264,19 @@ class Messages extends Translations {
           "your_rank": "あなたのランク",
           "logout": "ログアウト",
           // achievements
-          // "highway_hero": "ハイウェイ ヒーロー",
-          // "traffic_titan": "交通 タイタン",
-          // "pavement_pupil": "路面の 模範生",
-          // "roadmaster_royalty": "ロードマスター ロイヤルティ",
-          // "social_sharer": "ソーシャル シェアー",
-          // "asphalt_apprentice": "アスファルト 見習い",
+          // "highway_hero": "ハイウェイ  ヒーロー",
+          // "traffic_titan": "交通  タイタン",
+          // "pavement_pupil": "路面の  模範生",
+          // "roadmaster_royalty": "ロードマスター  ロイヤルティ",
+          // "social_sharer": "ソーシャル  シェアー",
+          // "asphalt_apprentice": "アスファルト  見習い",
 
-          "highway_hero": "ハイウェイ ヒーロー",
-          "traffic_titan": "トラフィック タイタン",
-          "pavement_pupil": "舗装 生徒",
-          "roadmaster_royalty": "ロードマスター ロイヤルティ",
-          "social_sharer": "ソーシャル シェアラー",
-          "asphalt_apprentice": "アスファルト 見習い",
+          "highway_hero": "ハイウェイ  ヒーロー",
+          "traffic_titan": "トラフィック  タイタン",
+          "pavement_pupil": "舗装  生徒",
+          "roadmaster_royalty": "ロードマスター  ロイヤルティ",
+          "social_sharer": "ソーシャル  シェアラー",
+          "asphalt_apprentice": "アスファルト  見習い",
 
           // quizz
           "question": "質問",

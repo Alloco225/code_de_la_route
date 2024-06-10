@@ -51,7 +51,7 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Column(
         children: [
           TitleWidget(

@@ -71,7 +71,6 @@ class _AchievementsGridViewState extends State<AchievementsGridView> {
     return Expanded(child: Obx(() => _achievementGrid()));
   }
 
-
   _achievementGrid() {
     return Expanded(
       child: GridView.count(
@@ -107,7 +106,7 @@ class _AchievementsGridViewState extends State<AchievementsGridView> {
                 ),
                 Column(
                   children: (achievements[index]["name"] as String)
-                      .split(" ")
+                      .split("  ")
                       .map((t) => Text(
                             t,
                             textAlign: TextAlign.center,
