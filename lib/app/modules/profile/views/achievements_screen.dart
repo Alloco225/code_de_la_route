@@ -99,16 +99,21 @@ class AchievementsScreen extends StatelessWidget {
                                       iconString: achievementData["icon"],
                                       id: achievementData["badge"],
                                     ),
-                                    Column(
-                                      children: title
-                                          .split(" ")
-                                          .map((t) => Text(
-                                                t,
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                    fontSize: 14),
-                                              ))
-                                          .toList(),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Wrap(
+                                        alignment: WrapAlignment.center,
+                                        children: title
+                                            .split("  ")
+                                            .map((t) => Text(
+                                                  "$t ",
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                      fontSize: 14),
+                                                ))
+                                            .toList(),
+                                      ),
                                     ),
                                   ],
                                 ),
