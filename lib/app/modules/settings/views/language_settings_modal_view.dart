@@ -25,73 +25,71 @@ class LanguageSettingsModalView extends GetView<SettingsController> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Obx(
-        () => authController.isAuth
-            ? const Text("Already Signed In")
-            : Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Text(
-                          "language".tr.toUpperCase(),
-                          style: const TextStyle(
-                              fontSize: 27, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView(
-                            shrinkWrap: true,
-                            children: controller.lang.languages
-                                .map((language) => _buildLanguageTile(
-                                      language: language,
-                                      isSelected: controller.lang
-                                          .isLanguageSelected(language),
-                                      onTap: () => controller.lang
-                                          .selectLanguage(language),
-                                    ))
-                                .toList()),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.orange.shade400,
-                            border: Border.all(
-                              width: 3,
-                              color: Colors.orange.shade700,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "save".tr.toUpperCase(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
+        () => Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    "language".tr.toUpperCase(),
+                    style: const TextStyle(
+                        fontSize: 27, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
+                Expanded(
+                  child: ListView(
+                      shrinkWrap: true,
+                      children: controller.lang.languages
+                          .map((language) => _buildLanguageTile(
+                                language: language,
+                                isSelected: controller.lang
+                                    .isLanguageSelected(language),
+                                onTap: () =>
+                                    controller.lang.selectLanguage(language),
+                              ))
+                          .toList()),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade400,
+                      border: Border.all(
+                        width: 3,
+                        color: Colors.orange.shade700,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "save".tr.toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

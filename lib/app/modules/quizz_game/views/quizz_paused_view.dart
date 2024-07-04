@@ -44,24 +44,30 @@ class QuizzPausedView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FancyButtonWidget(
-                      onTap: onResume,
-                      color: 'blue',
-                      icon: Ionicons.play_outline,
-                      title: 'continue'.tr.toUpperCase(),
-                    ),
-                    const SizedBox(width: 20),
-                    FancyButtonWidget(
-                      color: 'red',
-                      onTap: onQuit,
-                      onLongPress: onClose,
-                      icon: Ionicons.trash_outline,
-                      title: 'giveup'.tr.toUpperCase(),
-                    ),
-                  ],
+                Container(
+                  child: Column(
+                    children: [
+                      FancyButtonWidget(
+                        flex: 0,
+                        onTap: onResume,
+                        color: 'blue',
+                        icon: Ionicons.play_outline,
+                        title: 'continue'.tr.toUpperCase(),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                        height: 20,
+                      ),
+                      FancyButtonWidget(
+                        flex: 0,
+                        color: 'red',
+                        onTap: onQuit,
+                        onLongPress: onClose,
+                        icon: Ionicons.trash_outline,
+                        title: 'giveup'.tr.toUpperCase(),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

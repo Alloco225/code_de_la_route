@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:codedelaroute/app/data/json_data_provider.dart';
 import 'package:codedelaroute/app/data/models/language_model.dart';
 import 'package:codedelaroute/app/data/providers/language_provider.dart';
+import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +21,8 @@ class LanguageSettingsController extends GetxController {
   final _languages = <Language>[].obs;
   List<Language> get languages => _languages.value;
   get selectedLanguage => _selectedLanguage.value;
+
+  final quizzListController = Get.find<QuizzListController>();
 
   @override
   void onInit() async {
@@ -46,6 +48,8 @@ class LanguageSettingsController extends GetxController {
     var locale = Locale(lang.locale!.split('_')[0], lang.locale!.split('_')[1]);
     log("selectedLanguage $locale");
     Get.updateLocale(locale);
+    // Update the quizz list questions
+    quizzListController.setupQuizzList();
   }
 
   saveLanguage() {

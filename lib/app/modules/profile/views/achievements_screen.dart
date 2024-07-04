@@ -59,82 +59,79 @@ class AchievementsScreen extends StatelessWidget {
                 Map<String, dynamic> userAchievements =
                     userData['achievements'] ?? {};
 
-                return Expanded(
-                  child: GridView.count(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    childAspectRatio: .9,
-                    children: achievementsSnapshot.data!.docs.map((doc) {
-                      String achievementId = doc.id;
-                      Map<String, dynamic> achievementData =
-                          doc.data() as Map<String, dynamic>;
-                      bool unlocked =
-                          userAchievements[achievementId]?['unlocked'] ?? false;
+                return GridView.count(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  childAspectRatio: .9,
+                  children: achievementsSnapshot.data!.docs.map((doc) {
+                    String achievementId = doc.id;
+                    Map<String, dynamic> achievementData =
+                        doc.data() as Map<String, dynamic>;
+                    bool unlocked =
+                        userAchievements[achievementId]?['unlocked'] ?? false;
 
-                      String title = achievementData["title"];
-                      String key = achievementData["key"];
+                    String title = achievementData["title"];
+                    String key = achievementData["key"];
 
-                      title = key.tr ?? title;
+                    title = key.tr ?? title;
 
-                      return InkWell(
-                        onTap: () async {
-                          await authController.unlockAchievement(
-                              user!.uid, achievementId);
-                          log("unlocking achievement");
-                        },
-                        child: ContainerWidget(
-                          padding: EdgeInsets.zero,
-                          child: Stack(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    BadgeWidget(
-                                      iconString: achievementData["icon"],
-                                      id: achievementData["badge"],
+                    return InkWell(
+                      onTap: () async {
+                        await authController.unlockAchievement(
+                            user!.uid, achievementId);
+                        log("unlocking achievement");
+                      },
+                      child: ContainerWidget(
+                        padding: EdgeInsets.zero,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  BadgeWidget(
+                                    iconString: achievementData["icon"],
+                                    id: achievementData["badge"],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    child: Wrap(
+                                      alignment: WrapAlignment.center,
+                                      children: title
+                                          .split("  ")
+                                          .map((t) => Text(
+                                                "$t ",
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    fontSize: 14),
+                                              ))
+                                          .toList(),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Wrap(
-                                        alignment: WrapAlignment.center,
-                                        children: title
-                                            .split("  ")
-                                            .map((t) => Text(
-                                                  "$t ",
-                                                  textAlign: TextAlign.center,
-                                                  style: const TextStyle(
-                                                      fontSize: 14),
-                                                ))
-                                            .toList(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              if (!unlocked)
-                                Positioned.fill(
-                                  child: ContainerWidget(
-                                      hasBorder: false,
-                                      color: Colors.black.withOpacity(.4),
-                                      child: Icon(
-                                        Ionicons.lock_closed,
-                                        color: Colors.white.withOpacity(.9),
-                                        size: 42,
-                                      )),
-                                ),
-                            ],
-                          ),
+                            ),
+                            if (!unlocked)
+                              Positioned.fill(
+                                child: ContainerWidget(
+                                    hasBorder: false,
+                                    color: Colors.black.withOpacity(.4),
+                                    child: Icon(
+                                      Ionicons.lock_closed,
+                                      color: Colors.white.withOpacity(.9),
+                                      size: 42,
+                                    )),
+                              ),
+                          ],
                         ),
-                      );
-                    }).toList(),
-                  ),
+                      ),
+                    );
+                  }).toList(),
                 );
               });
         });

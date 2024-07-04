@@ -37,6 +37,15 @@ class QuizzListController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
+    setupQuizzList();
+
+    print("QuizzList onInit ");
+    print("QuizzList onReady");
+  }
+
+  setupQuizzList() async {
+    print("setupQuizzList");
+
     _isLoading.value = true;
     // _quizzList.value = await QuizzesProvider().loadAllQuizzes();
     _quizzList.value = await loadQuizzesFromSignCategories();
@@ -57,11 +66,11 @@ class QuizzListController extends GetxController {
 
     await Future.delayed(Duration(seconds: Random().nextInt(1)));
     _isLoading.value = false;
+
+    print(_quizzes.value[0].questions[0].answers?[0].content);
     // selectedCategory = CATEGORIES.firstWhere((el) => el.id == categoryId);
     // quizzes.value = QUIZZES.where((el) => el.categoryId == categoryId).toList();
-    print("QuizzList onInit ");
     // log("QuizzList onInit ${quizzesJson.length}");
-    print("QuizzList onReady");
   }
 
   Future<double?> loadScore(String quizzId) async {
