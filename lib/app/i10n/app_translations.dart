@@ -19,6 +19,8 @@ class Messages extends Translations {
           'delete_data_question': "Delete your data?",
           'delete_data_confirmation':
               "Are you sure you want to delete your data?",
+          "logout_question": "Do you want to log out?",
+          "logout_confirmation": "Are you sure you want to log out?",
           'yes': 'Yes',
           'no': 'No',
           'delete': 'Delete',
@@ -118,6 +120,9 @@ class Messages extends Translations {
           "delete_data_question": "Supprimer vos données ?",
           "delete_data_confirmation":
               "Êtes-vous sûr de vouloir supprimer vos données ?",
+          "logout_question": "Voulez-vous vous déconnecter ?",
+          "logout_confirmation": "Êtes-vous sûr de vouloir vous déconnecter ?",
+
           "yes": "Oui",
           "no": "Non",
           "delete": "Supprimer",
@@ -219,6 +224,8 @@ class Messages extends Translations {
           "delete_data": "データを削除",
           "delete_data_question": "データを削除しますか？",
           "delete_data_confirmation": "データを削除してもよろしいですか？",
+          "logout_question": "ログアウトしますか？",
+          "logout_confirmation": "本当にログアウトしてもよろしいですか？",
           "yes": "はい",
           "no": "いいえ",
           "delete": "削除",

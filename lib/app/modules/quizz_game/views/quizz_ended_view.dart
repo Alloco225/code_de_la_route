@@ -134,12 +134,23 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     // newAchievement = true;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (math.Random().nextDouble() > .3) {
-        // showSnackbarSuccess("Achievement unlocked", context: context);
-        // showSnackbarAchievement("Achievement unlocked", context: context);
-        // Your code HERE
-        // Flutter will wait until the current build is completed before executing this code.
+      // Check for points based achievements
+
+      if (_authController.authUser == null) {
+        showSnackbarInfo(
+          "authenticate_cta_achivements".tr,
+          context: context,
+        );
+        return;
       }
+      // _authController.checkAndUnlockAchievements(_authController.authUser.uid, userProgress)
+      // if (math.Random().nextDouble() > .3) {
+
+      // showSnackbarSuccess("Achievement unlocked", context: context);
+      // showSnackbarAchievement("Achievement unlocked", context: context);
+      // Your code HERE
+      // Flutter will wait until the current build is completed before executing this code.
+      // }
     });
 
     setState(() {});
@@ -258,15 +269,34 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     },
   ];
 
-  unlockBadge(BuildContext context) {
+  unlockBadge(BuildContext context) async {
+    print("unlockBadge");
     // showSnackbarAchievement(context: context);
-    showSnackbarAchievement(
-      context: context,
-      id: "red",
-      message: "Asphalt Apprentice Unlocked",
-    );
+    // Check if badge is already unlocked
+    if (_authController.authUser == null) {
+      showSnackbarInfo(
+        "authenticate_cta_achivements".tr,
+        context: context,
+      );
+      return;
+    }
 
-    setState(() {});
+    _authController
+        .unlockAchievementByKey(_authController.authUser!.uid, 'social_sharer')
+        .then((res) {
+      if (!res) {
+        print("could not unlock achievement");
+        return;
+      }
+
+      showSnackbarAchievement(
+        context: context,
+        id: "red",
+        message: "Asphalt Apprentice Unlocked",
+      );
+
+      setState(() {});
+    });
   }
 
   @override

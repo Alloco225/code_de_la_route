@@ -83,52 +83,28 @@ class SettingsView extends GetView<SettingsController> {
                       onTap: () async {
                         openSettingsModal(
                             BottomSheetModalWidget(
+                              maxHeight: .3,
                               title: 'delete_data_question'.tr,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 15),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'delete_data_confirmation'.tr,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 24),
-                                    ),
-                                    Row(
-                                      children: [
-                                        FancyButtonWidget(
-                                          title: 'delete'.tr,
-                                          color: 'red',
-                                          onTap: () {},
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        FancyButtonWidget(
-                                          title: 'cancel'.tr,
-                                          color: 'grey',
-                                          onTap: () => Get.back(),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
+                              child: buildDeleteAccountConfirmation(),
                             ),
                             context: context);
                       }),
                   const SizedBox(height: 15),
                   if (auth.isAuth)
-                    buildSettingTile(
-                        flex: 1,
-                        title: "logout".tr,
-                        icon: Ionicons.log_out_outline,
-                        onTap: () async {
-                          await auth.logOut();
-                          
-                          Get.back();
-                        }),
+                  buildSettingTile(
+                      flex: 1,
+                      title: "logout".tr,
+                      icon: Ionicons.log_out_outline,
+                      onTap: () async {
+                        // await show
+                        openSettingsModal(
+                            BottomSheetModalWidget(
+                              maxHeight: .3,
+                              title: 'logout_question'.tr,
+                              child: _buildLogoutConfirmationModal(),
+                            ),
+                            context: context);
+                      }),
                   if (auth.isAuth)
                     const SizedBox(
                       height: 15,
@@ -139,6 +115,75 @@ class SettingsView extends GetView<SettingsController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildDeleteAccountConfirmation() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'delete_data_confirmation'.tr,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 24),
+          ),
+          Row(
+            children: [
+              FancyButtonWidget(
+                title: 'delete'.tr,
+                color: 'red',
+                onTap: () {},
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FancyButtonWidget(
+                title: 'cancel'.tr,
+                color: 'grey',
+                onTap: () => Get.back(),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLogoutConfirmationModal() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'logout_confirmation'.tr,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 24),
+          ),
+          Row(
+            children: [
+              FancyButtonWidget(
+                title: 'logout'.tr,
+                color: 'red',
+                onTap: () async {
+                  await auth.logOut();
+                  Get.back();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FancyButtonWidget(
+                title: 'cancel'.tr,
+                color: 'grey',
+                onTap: () => Get.back(),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
