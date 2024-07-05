@@ -138,14 +138,15 @@ class QuizzListController extends GetxController {
             answers.add(Answer(
               // content: signs[j].name,
               content: signs[j].nameKey.tr,
+              isCorrect: signs[j].nameKey == sign.nameKey,
             ));
           }
         } else {
           for (var j = i + 1; j <= i + falseAnswerCount; j++) {
             answers.add(Answer(
-              // content: signs[j].name,
-              content: signs[j].nameKey.tr,
-            ));
+                // content: signs[j].name,
+                content: signs[j].nameKey.tr,
+                isCorrect: signs[j].nameKey == sign.nameKey));
           }
         }
         // confuuuse the ennemy
@@ -173,6 +174,7 @@ class QuizzListController extends GetxController {
         if (questions.length == questionsPerQuizz || i == signs.length - 1) {
           String quizzId = "q_${category.id}_${quizzes.length}";
           double? score = await loadScore(quizzId);
+          questions.shuffle();
           quizzes.add(Quizz(
             id: quizzId,
             score: score,

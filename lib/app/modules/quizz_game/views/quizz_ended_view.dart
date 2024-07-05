@@ -159,11 +159,12 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     }
   }
 
-  void _calculateAndSaveAverageScore() async {
+  Future<double> _calculateAndSaveAverageScore() async {
     double averageScore = await firestoreService.calculateAverageScore();
 
     // Save average score online
     await firestoreService.saveAverageScore(averageScore);
+    return averageScore;
   }
 
   Future<void> _saveLearnedSigns(List<String> signIds) async {

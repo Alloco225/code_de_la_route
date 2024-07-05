@@ -40,7 +40,7 @@ class ProfileStatsView extends StatelessWidget {
               child: _buildStatItem(
                 "avg".tr,
                 total: 20,
-                current: controller.avgScore,
+                current: controller.avgScore.toStringAsFixed(2),
               ),
             ),
           ],
