@@ -4,6 +4,7 @@ import 'package:codedelaroute/app/modules/settings/views/language_settings_modal
 import 'package:codedelaroute/app/modules/settings/views/theme_settings_modal_view.dart';
 import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -90,21 +91,22 @@ class SettingsView extends GetView<SettingsController> {
                             context: context);
                       }),
                   const SizedBox(height: 15),
-                  if (auth.isAuth)
-                  buildSettingTile(
-                      flex: 1,
-                      title: "logout".tr,
-                      icon: Ionicons.log_out_outline,
-                      onTap: () async {
-                        // await show
-                        openSettingsModal(
-                            BottomSheetModalWidget(
-                              maxHeight: .3,
-                              title: 'logout_question'.tr,
-                              child: _buildLogoutConfirmationModal(),
-                            ),
-                            context: context);
-                      }),
+                  Obx(() => auth.isAuth
+                      ? buildSettingTile(
+                          flex: 1,
+                          title: "logout".tr,
+                          icon: Ionicons.log_out_outline,
+                          onTap: () async {
+                            // await show
+                            openSettingsModal(
+                                BottomSheetModalWidget(
+                                  maxHeight: .3,
+                                  title: 'logout_question'.tr,
+                                  child: _buildLogoutConfirmationModal(),
+                                ),
+                                context: context);
+                          })
+                      : Container()),
                   if (auth.isAuth)
                     const SizedBox(
                       height: 15,
@@ -169,7 +171,8 @@ class SettingsView extends GetView<SettingsController> {
                 title: 'logout'.tr,
                 color: 'red',
                 onTap: () async {
-                  await auth.logOut();
+                  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+                  await firebaseAuth.signOut();
                   Get.back();
                 },
               ),

@@ -10,6 +10,8 @@ import '../mixins/cache_manager.dart';
 
 class AuthController extends GetxController with CacheManager {
   final firebaseAuthService = FirebaseAuthService();
+
+
   final storage = GetStorage();
 
   final _isAuth = false.obs;
@@ -148,10 +150,17 @@ class AuthController extends GetxController with CacheManager {
   //   }
   // }
 
+
   Future<void> logOut() async {
-    _authUser.value = null;
-    _isAuth.value = false;
-    await removeToken();
+    try {
+      _authUser.value = null;
+      _isAuth.value = false;
+      await removeToken();
+      log('User signed out successfully.');
+    } catch (e) {
+      log('Error signing out: $e');
+      rethrow;
+    }
   }
 
   void checkLoginStatus() {
