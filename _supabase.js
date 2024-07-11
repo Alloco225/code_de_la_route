@@ -1,0 +1,8 @@
+
+let supabaseConfig = {
+  SUPABASE_URL: 'https://nwscokevcagftjozlkrt.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53c2Nva2V2Y2FnZnRqb3psa3J0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ1MDk0MTIsImV4cCI6MjAzMDA4NTQxMn0.zMtz4stf49I6Gnr0MS8w4xp98_6hIO5jPhJGF2vztT4',
+  SUPABASE_SERVICE_ROLE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53c2Nva2V2Y2FnZnRqb3psa3J0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ1MDk0MTIsImV4cCI6MjAzMDA4NTQxMn0.zMtz4stf49I6Gnr0MS8w4xp98_6hIO5jPhJGF2vztT4',
+};
+
+export default supabaseConfig;
