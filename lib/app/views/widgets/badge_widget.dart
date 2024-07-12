@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -43,4 +44,12 @@ final Map<String, IconData> iconIndex = {
   "Ionicons.golf": Ionicons.golf,
   "Ionicons.diamond": Ionicons.diamond,
   "Ionicons.earth": Ionicons.earth,
+};
+final Map<String, Color> colorIndex = {
+  "red": Colors.red.shade300,
+  "silver": Colors.grey.shade300,
+  "yellow": Colors.yellow.shade300,
+  "orange": Colors.orange.shade300,
+  "brown": Colors.brown.shade300,
+  "green": Colors.green.shade300,
 };

@@ -1,6 +1,6 @@
 import 'package:codedelaroute/app/views/widgets/badge_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:get/get.dart';
 
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -19,41 +19,31 @@ void showSnackbarSuccess(String message, {required BuildContext context}) {
 
 void showSnackbarAchievement({
   required BuildContext context,
-  String? id,
-  String? message,
+  String? title,
+  required String badge_id,
+  required String badge_icon,
 }) {
   Widget widget = CustomSnackBar.success(
-    message: "Asphalt Apprentice Unlocked",
-    backgroundColor: Colors.red.shade300,
+    message: "${'new_achievement'.tr}\n${'$title'.tr}",
+    textAlign: TextAlign.left,
+    backgroundColor: colorIndex[badge_id] ?? Colors.blue.shade300,
     iconRotationAngle: 25,
-    iconPositionLeft: -20,
-    iconPositionTop: -10,
-    icon: const SizedBox(
+    iconPositionLeft: -10,
+    iconPositionTop: -5,
+    icon: SizedBox(
       height: 100,
       width: 100,
       child: BadgeWidget(
-        id: "red",
-        icon: Ionicons.egg,
-      ),
-    ),
-  );
-  widget = CustomSnackBar.success(
-    message: "Asphalt Apprentice Unlocked",
-    backgroundColor: Colors.purple.shade300,
-    iconRotationAngle: 25,
-    iconPositionLeft: -20,
-    iconPositionTop: -10,
-    icon: const SizedBox(
-      height: 100,
-      width: 100,
-      child: BadgeWidget(
-        id: "purple",
-        icon: Ionicons.planet,
+        id: badge_id,
+        iconString: badge_icon,
       ),
     ),
   );
 
-  showTopSnackBar(Overlay.of(context), widget);
+  showTopSnackBar(
+    Overlay.of(context), widget,
+    // displayDuration: const Duration(minutes: 5)
+  );
 }
 
 void showSnackbar(

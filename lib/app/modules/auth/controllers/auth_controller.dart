@@ -11,7 +11,6 @@ import '../mixins/cache_manager.dart';
 class AuthController extends GetxController with CacheManager {
   final firebaseAuthService = FirebaseAuthService();
 
-
   final storage = GetStorage();
 
   final _isAuth = false.obs;
@@ -52,38 +51,48 @@ class AuthController extends GetxController with CacheManager {
     });
   }
 
-  Future<bool> unlockAchievementByKey(String userId, String key) async {
+  Future<Map?> unlockAchievementByKey(String userId, String key) async {
     log("Unlocking achievement with key $key for user $userId");
 
     // Fetch the user's document
-    DocumentReference userDoc =
-        FirebaseFirestore.instance.collection('users').doc(userId);
+    DocumentReference userDoc = _firestore.collection('users').doc(userId);
     DocumentSnapshot userSnapshot = await userDoc.get();
 
     // Check if the user's document exists
     if (!userSnapshot.exists) {
-      return false;
+      log("user snapshot not found");
+      return null;
     }
 
-    Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
-    Map<String, dynamic> achievements = userData['achievements'] ?? {};
+    Map? achievement = await getAchievementByKey(key);
+    log("achievement $achievement");
+    if (achievement == null) return null;
 
-    // Find the achievement with the specified key and update it
-    achievements.forEach((achievementId, achievementData) {
-      if (achievementData['key'] == key) {
-        achievements[achievementId] = {
-          ...achievementData,
-          'unlocked': true,
-          'dateUnlocked': FieldValue.serverTimestamp(),
-        };
+    Map userData = userSnapshot.data() as Map;
+    log("User $userData");
+    if (userData.containsKey('achievements')) {
+      log("user achievments");
+      Map<String, dynamic> achievements = userData['achievements'];
+      log("user achievments list $achievements");
+
+      // Check if the achievement with the specific key is unlocked
+      bool alreadyUnlocked = achievements.containsKey(achievement['id']) &&
+          achievements[achievement['id']]['unlocked'] == true;
+
+      if (alreadyUnlocked) {
+        log("Achievement already unlocked");
+        return null;
+      }
+    }
+
+    await userDoc.update({
+      "achievements.${achievement['id']}": {
+        'unlocked': true,
+        'dateUnlocked': FieldValue.serverTimestamp(),
       }
     });
 
-    // Update the user's achievements in Firestore
-    await userDoc.update({
-      'achievements': achievements,
-    });
-    return true;
+    return achievement;
   }
 
   Future<void> checkAndUnlockAchievements(
@@ -108,6 +117,30 @@ class AuthController extends GetxController with CacheManager {
       if (conditionsMet) {
         await unlockAchievement(userId, achievementId);
       }
+    }
+  }
+
+  Future<Map<String, dynamic>?> getAchievementByKey(String key) async {
+    try {
+      CollectionReference achievements =
+          FirebaseFirestore.instance.collection('achievements');
+      QuerySnapshot querySnapshot =
+          await achievements.where('key', isEqualTo: key).get();
+
+      if (querySnapshot.docs.isEmpty) {
+        return null; // No achievement found with the provided key
+      }
+
+      // Assuming key is unique, so we take the first result
+      DocumentSnapshot achievementDoc = querySnapshot.docs.first;
+      Map<String, dynamic> achievementData =
+          achievementDoc.data() as Map<String, dynamic>;
+      achievementData['id'] = achievementDoc.id;
+
+      return achievementData;
+    } catch (e) {
+      print('Error getting achievement by key: $e');
+      return null;
     }
   }
 
@@ -149,7 +182,6 @@ class AuthController extends GetxController with CacheManager {
   //     }
   //   }
   // }
-
 
   Future<void> logOut() async {
     try {

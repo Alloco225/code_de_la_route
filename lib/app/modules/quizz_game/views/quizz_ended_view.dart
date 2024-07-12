@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:math' as math;
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
@@ -17,7 +16,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/services/firestore_service.dart';
 import '../../../helpers/local_storage.dart';
-import '../../../views/widgets/button_widget.dart';
 import '../../auth/controllers/auth_controller.dart';
 
 class QuizzEndedView extends StatefulWidget {
@@ -100,7 +98,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     // Save score online
 
-    _saveScore(score);
+    await _saveScore(score);
 
     log("correct answers ${widget.correctAnswers}");
     List<String> correctlyAnsweredSigns = widget.correctAnswers
@@ -135,7 +133,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Check for points based achievements
-
+      // Check for achievements and reset list for themwkd qskdkq mlkdfiqsdndi
       if (_authController.authUser == null) {
         showSnackbarInfo(
           "authenticate_cta_achivements".tr,
@@ -219,13 +217,11 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
   void shareScore() async {
     String stringText = shareData.values.join('\n');
+    Share.share(stringText).then((result) {
+      if (result.status != ShareResultStatus.success) return;
 
-    var result = await Share.share(stringText);
-    if (result.status == ShareResultStatus.success) {
-      showSnackbarSuccess("Merci d'avoir partagé", context: context);
-      // check if user has social share badge
-    }
-    return;
+      unlockSocialShareAchievement(context);
+    });
   }
 
   void onCoffettiCompositionLoaded(composition) {
@@ -269,32 +265,25 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     },
   ];
 
-  unlockBadge(BuildContext context) async {
-    print("unlockBadge");
-    // showSnackbarAchievement(context: context);
-    // Check if badge is already unlocked
-    if (_authController.authUser == null) {
-      showSnackbarInfo(
-        "authenticate_cta_achivements".tr,
-        context: context,
-      );
-      return;
-    }
+  unlockSocialShareAchievement(BuildContext context) async {
+    print("unlockSocialShareAchievement");
+    // _authController.getAchievementByKey('pavement_pupil').then((achievement) {
+    // print("social_sharer $achievement");
 
     _authController
         .unlockAchievementByKey(_authController.authUser!.uid, 'social_sharer')
-        .then((res) {
-      if (!res) {
-        print("could not unlock achievement");
+        .then((achievement) {
+      if (achievement == null) {
+        log("could not unlock achievement");
         return;
       }
-
+      log("Achievement found");
       showSnackbarAchievement(
         context: context,
-        id: "red",
-        message: "Asphalt Apprentice Unlocked",
+        badge_id: achievement['badge'],
+        title: achievement['key'],
+        badge_icon: achievement['icon'],
       );
-
       setState(() {});
     });
   }
@@ -368,7 +357,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                 Column(
                   children: [
                     InkWell(
-                      onTap: shareScore,
+                      // onTap: shareScore,
+                      onTap: () => unlockSocialShareAchievement(context),
                       child: Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
