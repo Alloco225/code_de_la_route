@@ -270,6 +270,14 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     // _authController.getAchievementByKey('pavement_pupil').then((achievement) {
     // print("social_sharer $achievement");
 
+    if (_authController.authUser == null) {
+      showSnackbarInfo(
+        "authenticate_cta_achivements".tr,
+        context: context,
+      );
+      return;
+    }
+
     _authController
         .unlockAchievementByKey(_authController.authUser!.uid, 'social_sharer')
         .then((achievement) {

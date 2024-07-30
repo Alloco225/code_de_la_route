@@ -114,19 +114,20 @@ class HomeView extends GetView<HomeController> {
                   color: Colors.white,
                 ),
               ),
-              Wrap(children: [
+              Wrap(alignment: WrapAlignment.center, runSpacing: 10, children: [
                 InkWell(
                   onTap: () => launchURL(_cguURL),
                   child: const Text(
                     "Conditions d'utilisation",
+                    textAlign: TextAlign.center,
                     style: TextStyle(decoration: TextDecoration.underline),
                   ),
                 ),
-                const SizedBox(width: 10),
                 InkWell(
                   onTap: () => launchURL(_privacyURL),
                   child: const Text(
                     "Politique de confidentialité",
+                    textAlign: TextAlign.center,
                     style: TextStyle(decoration: TextDecoration.underline),
                   ),
                 ),
@@ -142,7 +143,7 @@ class HomeView extends GetView<HomeController> {
                     child: InkWell(
                       onTap: () => launchURL(_authorURL),
                       child: const Text(
-                        "amane",
+                        "あ",
                         style: TextStyle(decoration: TextDecoration.underline),
                       ),
                     ),
@@ -158,113 +159,103 @@ class HomeView extends GetView<HomeController> {
 
     return Scaffold(
         backgroundColor: Colors.blueGrey.shade700,
-        body: Stack(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Positioned.fill(
+            const SizedBox(
+              height: 45,
+            ),
+            InkWell(
+              onTap: openCredits,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Image.asset('assets/images/logo.png'),
+              ),
+            ),
+            ConstrainedBox(
+                constraints:
+                    const BoxConstraints(minHeight: 10, maxHeight: 45)),
+            Expanded(
+                child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * .2),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const SizedBox(
-                    height: 45,
-                  ),
-                  InkWell(
-                    onTap: openCredits,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Image.asset('assets/images/logo.png'),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 45,
-                  ),
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * .2),
-                    child: Column(
+                  ...menuElements.map(
+                    (element) => Column(
                       children: [
-                        ...menuElements.map(
-                          (element) => Column(
-                            children: [
-                              InkWell(
-                                onTap: () => Get.toNamed(element['route']),
-                                splashColor: Colors.blueGrey.shade100,
-                                child: ContainerWidget(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 15,
+                        InkWell(
+                          onTap: () => Get.toNamed(element['route']),
+                          splashColor: Colors.blueGrey.shade100,
+                          child: ContainerWidget(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 15,
+                            ),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    element['icon'],
+                                    size: 32,
                                   ),
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          element['icon'],
-                                          size: 32,
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          (element['text'] as String)
-                                              .tr
-                                              .toUpperCase(),
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 25,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    (element['text'] as String)
+                                        .tr
+                                        .toUpperCase(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 25,
+                                      color: Colors.white,
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-                            ],
+                            ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 25,
                         ),
                       ],
                     ),
-                  )),
-                  InkWell(
-                    onTap: openCredits,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            children: [
-                              const Text(
-                                "あ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white,
-                                    fontSize: 22),
-                              ),
-                              Text(
-                                "v$VERSION",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white,
-                                    fontSize: 22),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+                  ),
                 ],
               ),
-            ),
-            Positioned(
-              bottom: 30,
-              child: Container(),
-            ),
+            )),
+            InkWell(
+              onTap: openCredits,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        const Text(
+                          "あ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              fontSize: 22),
+                        ),
+                        Text(
+                          "v$VERSION",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              fontSize: 22),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ));
   }

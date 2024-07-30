@@ -1,4 +1,4 @@
-import 'package:codedelaroute/app/data/db/db_data.dart';
+// import 'package:codedelaroute/app/data/db/db_data.dart';
 import 'package:codedelaroute/app/data/models/sign_category_model.dart';
 import 'package:get/get.dart';
 

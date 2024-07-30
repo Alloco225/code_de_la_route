@@ -47,9 +47,12 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                           // controller.sign.id!.tr.toCapitalized(),
                           controller.sign.nameKey.tr.toCapitalized(),
                           // controller.sign.name!,
+
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              fontSize: 27, fontWeight: FontWeight.bold),
+                              height: 1.2,
+                              fontSize: 27,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                       Image.asset(
@@ -63,15 +66,26 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                       Expanded(
                         child: Container(
                           alignment: Alignment.center,
+                          constraints: BoxConstraints(
+                              minHeight:
+                                  MediaQuery.of(context).size.height * .2),
                           decoration: BoxDecoration(
                               color: Colors.blueGrey.shade800,
                               borderRadius: BorderRadius.circular(4)),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: Text(
-                            controller.sign.descriptionKey.tr ?? '',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 25),
+                              vertical: 5, horizontal: 5),
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 5),
+                            children: [
+                              Text(
+                                controller.sign.descriptionKey.tr ?? '',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       )
