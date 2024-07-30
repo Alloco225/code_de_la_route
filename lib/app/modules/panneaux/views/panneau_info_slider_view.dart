@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
 import 'package:codedelaroute/app/modules/panneaux/controllers/panneaux_controller.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +44,13 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(20),
-                        child: Text(
+                        child: AutoSizeText(
                           // controller.sign.id!.tr.toCapitalized(),
                           controller.sign.nameKey.tr.toCapitalized(),
                           // controller.sign.name!,
 
                           textAlign: TextAlign.center,
+                          maxLines: 2,
                           style: const TextStyle(
                               height: 1.2,
                               fontSize: 27,
@@ -74,18 +76,13 @@ class PanneauInfoSliderModalView extends GetView<PanneauxController> {
                               borderRadius: BorderRadius.circular(4)),
                           padding: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 5),
-                          child: ListView(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            children: [
-                              Text(
-                                controller.sign.descriptionKey.tr ?? '',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ],
+                          child: AutoSizeText(
+                            controller.sign.descriptionKey.tr ?? '',
+                            maxLines: 4,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 25,
+                            ),
                           ),
                         ),
                       )

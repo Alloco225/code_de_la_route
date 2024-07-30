@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore: ^4.17.3
   shared_preferences: ^2.2.3
   animated_flip_counter: ^0.3.4
+  auto_size_text: ^3.0.0
 
 dev_dependencies: 
   flutter_lints: 3.0.2
