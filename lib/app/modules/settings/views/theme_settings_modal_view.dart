@@ -17,7 +17,7 @@ class ThemeSettingsModalView extends GetView<SettingsController> {
     return Container(
         constraints: BoxConstraints(
           minHeight: MediaQuery.of(context).size.height * .2,
-          maxHeight: MediaQuery.of(context).size.height * .4,
+          maxHeight: MediaQuery.of(context).size.height * .45,
         ),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(

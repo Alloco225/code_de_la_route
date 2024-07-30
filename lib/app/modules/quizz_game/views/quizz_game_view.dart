@@ -1,6 +1,4 @@
 import 'package:codedelaroute/app/modules/quizz_game/views/quizz_game_main_content_view.dart';
-import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
-// import 'package:codedelaroute/app/views/widgets/back_nav_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

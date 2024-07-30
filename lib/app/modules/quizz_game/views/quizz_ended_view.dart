@@ -221,6 +221,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       if (result.status != ShareResultStatus.success) return;
 
       unlockSocialShareAchievement(context);
+
+      setState(() {});
     });
   }
 
@@ -365,8 +367,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
                 Column(
                   children: [
                     InkWell(
-                      // onTap: shareScore,
-                      onTap: () => unlockSocialShareAchievement(context),
+                      onTap: shareScore,
+                      // onTap: () => unlockSocialShareAchievement(context),
                       child: Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
@@ -55,28 +56,28 @@ class SettingsView extends GetView<SettingsController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  buildSettingTile(
-                    title: "audio".tr,
-                    icon: Ionicons.musical_note_outline,
-                    value: null,
-                    flex: 1,
-                    onTap: () => openSettingsModal(AudioSettingsModalView(),
-                        context: context),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  buildSettingTile(
-                    title: "theme".tr,
-                    icon: Ionicons.sunny_outline,
-                    value: "dark".tr,
-                    flex: 0,
-                    onTap: () => openSettingsModal(ThemeSettingsModalView(),
-                        context: context),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  // buildSettingTile(
+                  //   title: "audio".tr,
+                  //   icon: Ionicons.musical_note_outline,
+                  //   value: null,
+                  //   flex: 1,
+                  //   onTap: () => openSettingsModal(AudioSettingsModalView(),
+                  //       context: context),
+                  // ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
+                  // buildSettingTile(
+                  //   title: "theme".tr,
+                  //   icon: Ionicons.sunny_outline,
+                  //   value: "dark".tr,
+                  //   flex: 0,
+                  //   onTap: () => openSettingsModal(ThemeSettingsModalView(),
+                  //       context: context),
+                  // ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
                   buildSettingTile(
                       flex: 1,
                       title: "delete_data".tr,
@@ -84,7 +85,7 @@ class SettingsView extends GetView<SettingsController> {
                       onTap: () async {
                         openSettingsModal(
                             BottomSheetModalWidget(
-                              maxHeight: .3,
+                              maxHeight: .4,
                               title: 'delete_data_question'.tr,
                               child: buildDeleteAccountConfirmation(),
                             ),
@@ -127,8 +128,9 @@ class SettingsView extends GetView<SettingsController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          AutoSizeText(
             'delete_data_confirmation'.tr,
+            maxLines: 2,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 24),
           ),

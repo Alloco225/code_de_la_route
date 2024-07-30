@@ -1,9 +1,7 @@
-import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
-import 'package:flutter/foundation.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../../data/services/firestore_service.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../controllers/profile_controller.dart';
 
@@ -54,13 +52,15 @@ class ProfileStatsView extends StatelessWidget {
   Widget _buildStatItem(String title, {dynamic current, dynamic total}) {
     return Column(
       children: [
-        Text(
+        AutoSizeText(
           title,
+          maxLines: 1,
           style: const TextStyle(fontSize: 21),
         ),
         if (current != null && total != null)
-          Text(
+          AutoSizeText(
             "$current/$total",
+            maxLines: 1,
             style: const TextStyle(fontSize: 20),
           ),
       ],

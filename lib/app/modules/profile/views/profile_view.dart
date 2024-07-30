@@ -51,18 +51,60 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
       child: Column(
         children: [
-          TitleWidget(
-            title: "profile".tr,
-            paddingTop: 20,
-            paddingBottom: 5,
-            gap: 0,
+          const SizedBox(
+            height: 25,
           ),
-          Obx(
-            () => Expanded(
-              child: Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () => Get.back(),
+                    child: Icon(
+                      Ionicons.chevron_back,
+                      color: Colors.white.withOpacity(.8),
+                    ),
+                  ),
+                  Text(
+                    "profile".tr,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                ],
+              ),
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () => Get.toNamed(Routes.SETTINGS),
+                      child: const ContainerWidget(
+                        child: Row(
+                          children: [
+                            Icon(Ionicons.settings_outline),
+                          ],
+                        ),
+                      ),
+                    ),
+                    if (authController.isAuth) const SizedBox(width: 15),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Obx(
+              () => Column(
                 children: [
                   const SizedBox(height: 20),
                   Column(
@@ -88,36 +130,10 @@ class ProfileView extends GetView<ProfileController> {
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 23),
                   ),
-                  Obx(
-                    () => Expanded(
-                        child:
-                            AchievementsScreen(user: authController.authUser)),
+                  Expanded(
+                    child: Obx(() =>
+                        AchievementsScreen(user: authController.authUser)),
                   ),
-                  const SizedBox(height: 15),
-                  Obx(
-                    () => Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () => Get.toNamed(Routes.SETTINGS),
-                          child: ContainerWidget(
-                            child: Row(
-                              children: [
-                                Text("settings".tr),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Icon(Ionicons.settings_outline),
-                              ],
-                            ),
-                          ),
-                        ),
-                        if (authController.isAuth) const SizedBox(width: 15),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
                 ],
               ),
             ),

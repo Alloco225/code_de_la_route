@@ -137,6 +137,7 @@ class FirestoreService {
       }
     }
 
+    log('Updated signs to upload $currentSigns');
     await saveLearnedSigns(updatedSigns);
   }
 }

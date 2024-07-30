@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetModalWidget extends StatelessWidget {
@@ -35,8 +36,9 @@ class BottomSheetModalWidget extends StatelessWidget {
                 if (title != null)
                   Padding(
                     padding: const EdgeInsets.all(20),
-                    child: Text(
+                    child: AutoSizeText(
                       title!.toUpperCase(),
+                      maxLines: 2,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 27, fontWeight: FontWeight.bold),

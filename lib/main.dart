@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codedelaroute/app/const/theme.dart';
 import 'package:codedelaroute/app/modules/settings/controllers/theme_settings_controller.dart.dart';
 import 'package:firebase_core/firebase_core.dart';

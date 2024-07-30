@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/views/widgets/badge_widget.dart';
 import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
@@ -34,9 +35,9 @@ class AchievementsScreen extends StatelessWidget {
           if (userSnapshot.hasError) {
             return Center(child: Text('Error: ${userSnapshot.error}'));
           }
-          if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
-            return _buildAuthCTA(context);
-          }
+          // if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
+          //   return _buildAuthCTA(context);
+          // }
 
           return FutureBuilder<QuerySnapshot>(
               future:
@@ -54,8 +55,10 @@ class AchievementsScreen extends StatelessWidget {
                   return const Center(child: Text('No achievements found.'));
                 }
 
-                Map<String, dynamic> userData =
-                    userSnapshot.data!.data() as Map<String, dynamic>;
+                Map<String, dynamic> userData = {};
+                if (userSnapshot.hasData && userSnapshot.data?.data() != null) {
+                  userData = userSnapshot.data?.data() as Map<String, dynamic>;
+                }
                 Map<String, dynamic> userAchievements =
                     userData['achievements'] ?? {};
 
@@ -64,7 +67,7 @@ class AchievementsScreen extends StatelessWidget {
                   crossAxisCount: 3,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
-                  childAspectRatio: .9,
+                  childAspectRatio: .8,
                   children: achievementsSnapshot.data!.docs.map((doc) {
                     String achievementId = doc.id;
                     Map<String, dynamic> achievementData =
@@ -77,58 +80,51 @@ class AchievementsScreen extends StatelessWidget {
 
                     title = key.tr ?? title;
 
-                    return InkWell(
-                      onTap: () async {
-                        await authController.unlockAchievement(
-                            user!.uid, achievementId);
-                        log("unlocking achievement");
-                      },
-                      child: ContainerWidget(
-                        padding: EdgeInsets.zero,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  BadgeWidget(
-                                    iconString: achievementData["icon"],
-                                    id: achievementData["badge"],
+                    return ContainerWidget(
+                      padding: EdgeInsets.zero,
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                BadgeWidget(
+                                  iconString: achievementData["icon"],
+                                  id: achievementData["badge"],
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Wrap(
+                                    alignment: WrapAlignment.center,
+                                    children: title
+                                        .split("  ")
+                                        .map((t) => AutoSizeText(
+                                              "$t ",
+                                              maxLines: 2,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                  height: 1.1, fontSize: 14),
+                                            ))
+                                        .toList(),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child: Wrap(
-                                      alignment: WrapAlignment.center,
-                                      children: title
-                                          .split("  ")
-                                          .map((t) => Text(
-                                                "$t ",
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                    fontSize: 14),
-                                              ))
-                                          .toList(),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            if (!unlocked)
-                              Positioned.fill(
-                                child: ContainerWidget(
-                                    hasBorder: false,
-                                    color: Colors.black.withOpacity(.4),
-                                    child: Icon(
-                                      Ionicons.lock_closed,
-                                      color: Colors.white.withOpacity(.9),
-                                      size: 42,
-                                    )),
-                              ),
-                          ],
-                        ),
+                          ),
+                          if (!unlocked)
+                            Positioned.fill(
+                              child: ContainerWidget(
+                                  hasBorder: false,
+                                  color: Colors.black.withOpacity(.4),
+                                  child: Icon(
+                                    Ionicons.lock_closed,
+                                    color: Colors.white.withOpacity(.9),
+                                    size: 42,
+                                  )),
+                            ),
+                        ],
                       ),
                     );
                   }).toList(),

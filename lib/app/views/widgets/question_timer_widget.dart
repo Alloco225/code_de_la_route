@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -106,8 +107,9 @@ class _QuestionTimerWidgetState extends State<QuestionTimerWidget> {
             width: 30,
             child: GestureDetector(
               onTap: widget.devPauseTimer,
-              child: Text(
+              child: AutoSizeText(
                 widget.time.toStringAsFixed(0),
+                maxLines: 1,
                 semanticsLabel: widget.time.toStringAsFixed(0),
                 textAlign: TextAlign.right,
                 style: const TextStyle(

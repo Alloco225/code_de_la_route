@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,8 +55,9 @@ class QuestionImageWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            AutoSizeText(
               question.promptKey.tr,
+              maxLines: 1,
               semanticsLabel: question.promptKey.tr,
               style: const TextStyle(
                 color: Colors.white,

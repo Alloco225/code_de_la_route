@@ -11,13 +11,11 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../helpers/utils.dart';
 import '../../../views/widgets/container_widget.dart';
-import '../../auth/services/auth_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
-  final _authService = Get.find<AuthService>();
   final authController = Get.find<AuthController>();
 
   final VERSION = "2.6.1";
@@ -59,9 +57,9 @@ class HomeView extends GetView<HomeController> {
     },
   ];
 
-  final String _privacyURL = "https://amane.dev/privacy";
-  final String _cguURL = "https://amane.dev/privacy";
-  final String _authorURL = "https://amane.dev";
+  final String _privacyURL = "https://cdlr.amane.dev/terms/";
+  final String _cguURL = "https://cdlr.amane.dev/terms/";
+  final String _authorURL = "https://amane.dev";  
 
   @override
   Widget build(BuildContext context) {

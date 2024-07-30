@@ -1,11 +1,6 @@
-import 'package:codedelaroute/app/modules/settings/controllers/language_settings_controller.dart';
 import 'package:codedelaroute/app/data/extensions.dart';
-import 'package:codedelaroute/app/data/models/language_model.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
-import 'package:codedelaroute/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -22,7 +17,7 @@ class AudioSettingsModalView extends GetView<SettingsController> {
     return Container(
         constraints: BoxConstraints(
           minHeight: MediaQuery.of(context).size.height * .2,
-          maxHeight: MediaQuery.of(context).size.height * .4,
+          maxHeight: MediaQuery.of(context).size.height * .45,
         ),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
