@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
@@ -46,6 +47,8 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   dynamic _confettiComposition;
   final _authController = Get.find<AuthController>();
   final _gameController = Get.find<QuizzGameController>();
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late FirestoreService firestoreService =
       FirestoreService(_authController.userId!);
@@ -112,7 +115,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     _saveLearnedSigns(correctlyAnsweredSigns);
 
-    _calculateAndSaveAverageScore();
+    final averageScore = await _calculateAndSaveAverageScore();
 
     // save score
     // if (quizzId != null) {
@@ -130,6 +133,23 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     // Check for achievements
 
     // newAchievement = true;
+    List<Map> unlockedAchievements = [];
+
+    try {
+      unlockedAchievements = await _authController.checkAndUnlockAchievements(
+          _authController.userId!, averageScore);
+
+      // Update user's rank in Firestore
+      // DocumentReference userDoc = _firestore.collection('users').doc(_authController.userId);
+      // await userDoc.update({
+      //   'rank': userRank,
+      //   'lastUpdated': FieldValue.serverTimestamp(),
+      // });
+
+      // log('User rank updated to: $userRank');
+    } catch (e) {
+      log('Error updating user rank: $e');
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Check for points based achievements
@@ -141,7 +161,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
         );
         return;
       }
-      // _authController.checkAndUnlockAchievements(_authController.authUser.uid, userProgress)
+
       // if (math.Random().nextDouble() > .3) {
 
       // showSnackbarSuccess("Achievement unlocked", context: context);
@@ -149,12 +169,26 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
       // Your code HERE
       // Flutter will wait until the current build is completed before executing this code.
       // }
+      for (var achievement in unlockedAchievements) {
+        _showAchievementSnackbar(achievement);
+      }
     });
 
     setState(() {});
     if (score == MARK_TOTAL) {
       throwConfetti();
     }
+  }
+
+  Future<void> _showAchievementSnackbar(achievement) async {
+    showSnackbarAchievement(
+      context: context,
+      badge_id: achievement['badge'],
+      title: achievement['key'],
+      badge_icon: achievement['icon'],
+    );
+    setState(() {});
+    await Future.delayed(const Duration(seconds: 2));
   }
 
   Future<void> _saveScore(double score) async {

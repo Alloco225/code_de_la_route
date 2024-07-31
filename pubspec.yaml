@@ -1,5 +1,5 @@
 name: codedelaroute
-version: 2.8.2+8 #google_sign_in
+version: 2.9.2+8 #google_sign_in
 publish_to: none
 description: A new Flutter project.
 environment: 

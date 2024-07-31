@@ -117,11 +117,11 @@ class ProfileView extends GetView<ProfileController> {
                       const SizedBox(height: 10),
                       if (authController.isAuth) const ProfileStatsView(),
                       const SizedBox(height: 10),
-                      if (authController.isAuth)
-                        ContainerWidget(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: _rankWidget(),
-                        ),
+                      // if (authController.isAuth)
+                      //   ContainerWidget(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 10),
+                      //     child: _rankWidget(),
+                      //   ),
                     ],
                   ),
                   const SizedBox(height: 10),

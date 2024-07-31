@@ -106,7 +106,7 @@ class FancyButtonWidget extends StatelessWidget {
         onTap: onTap,
         onLongPress: onLongPress,
         child: Container(
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
           decoration: BoxDecoration(
             color: colorsMixer[color]!['light'],
             border: Border.all(

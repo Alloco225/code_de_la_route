@@ -18,7 +18,8 @@ class HomeView extends GetView<HomeController> {
 
   final authController = Get.find<AuthController>();
 
-  final VERSION = "2.6.1";
+  final VERSION = "2.9.2";
+  final VERSION_DATE = "23/05/2024";
 
   final List menuElements = [
     {
@@ -59,7 +60,7 @@ class HomeView extends GetView<HomeController> {
 
   final String _privacyURL = "https://cdlr.amane.dev/terms/";
   final String _cguURL = "https://cdlr.amane.dev/terms/";
-  final String _authorURL = "https://amane.dev";  
+  final String _authorURL = "https://amane.dev";
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +131,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ]),
-              Text("Version $VERSION du 23/05/2024"),
+              Text("Version $VERSION du $VERSION_DATE"),
               RichText(
                 text: TextSpan(children: [
                   const TextSpan(
@@ -178,6 +179,7 @@ class HomeView extends GetView<HomeController> {
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * .2),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ...menuElements.map(
                     (element) => Column(
