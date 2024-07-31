@@ -3,7 +3,6 @@ import 'package:codedelaroute/app/modules/profile/views/profile_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/auth/submodules/register/bindings/register_binding.dart';
-import '../modules/auth/submodules/register/views/register_view.dart';
 import '../modules/course_detail/bindings/course_detail_binding.dart';
 import '../modules/course_detail/views/course_detail_view.dart';
 import '../modules/course_list/bindings/course_list_binding.dart';

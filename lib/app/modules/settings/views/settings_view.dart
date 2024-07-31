@@ -14,6 +14,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../helpers/utils.dart';
 import '../../../views/widgets/bottom_sheet_modal_widget.dart';
+import '../../profile/controllers/profile_controller.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -103,7 +104,7 @@ class SettingsView extends GetView<SettingsController> {
                                 BottomSheetModalWidget(
                                   maxHeight: .3,
                                   title: 'logout_question'.tr,
-                                  child: _buildLogoutConfirmationModal(),
+                                  child: const LogoutModalConfirmation(),
                                 ),
                                 context: context);
                           })
@@ -118,43 +119,6 @@ class SettingsView extends GetView<SettingsController> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildLogoutConfirmationModal() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'logout_confirmation'.tr,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 24),
-          ),
-          Row(
-            children: [
-              FancyButtonWidget(
-                title: 'logout'.tr,
-                color: 'red',
-                onTap: () async {
-                  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-                  await firebaseAuth.signOut();
-                  Get.back();
-                },
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              FancyButtonWidget(
-                title: 'cancel'.tr,
-                color: 'grey',
-                onTap: () => Get.back(),
-              ),
-            ],
-          )
-        ],
       ),
     );
   }
@@ -298,8 +262,62 @@ class _DeleteAccountConfirmationState extends State<DeleteAccountConfirmation> {
                   // await auth.deleteUserAccount();
                   await auth.deleteUserAccountData();
 
-                  showSnackbarSuccess("data_deleted", context: context);
+                  ProfileController profileController =
+                      Get.find<ProfileController>();
+                  profileController.resetStats();
+
+                  showSnackbarSuccess("data_deleted".tr, context: context);
+
                   Get.toNamed(Routes.HOME);
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FancyButtonWidget(
+                title: 'cancel'.tr,
+                color: 'grey',
+                onTap: () => Get.back(),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class LogoutModalConfirmation extends StatefulWidget {
+  const LogoutModalConfirmation({super.key});
+
+  @override
+  State<LogoutModalConfirmation> createState() =>
+      _LogoutModalConfirmationState();
+}
+
+class _LogoutModalConfirmationState extends State<LogoutModalConfirmation> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'logout_confirmation'.tr,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 24),
+          ),
+          Row(
+            children: [
+              FancyButtonWidget(
+                title: 'logout'.tr,
+                color: 'red',
+                onTap: () async {
+                  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+                  await firebaseAuth.signOut();
+                  showSnackbarSuccess("logged_out".tr, context: context);
+                  Get.back();
                 },
               ),
               const SizedBox(

@@ -1,11 +1,7 @@
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../data/exceptions/http_exception.dart';
-import '../../modules/auth/services/auth_service.dart';
 import '../widgets/a_grappler.dart';
 import '../widgets/make_dismissable.dart';
 
@@ -43,7 +39,6 @@ class _AuthenticationSheetState extends State<AuthenticationSheet>
   late final _passwordFocusNode;
   late final _passwordConfirmFocusNode;
 
-  late final _authService;
 
   Map textData = {
     AuthMode.Login: {
@@ -97,7 +92,6 @@ class _AuthenticationSheetState extends State<AuthenticationSheet>
     _passwordFocusNode = FocusNode();
     _passwordConfirmFocusNode = FocusNode();
 
-    _authService = AuthService();
 
     //
     _authMode = AuthMode.Register;

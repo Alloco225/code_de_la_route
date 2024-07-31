@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SearchSheet extends StatefulWidget {
-  SearchSheet({Key? key}) : super(key: key);
+  const SearchSheet({super.key});
 
   @override
   _SearchSheetState createState() => _SearchSheetState();
@@ -19,8 +16,8 @@ class _SearchSheetState extends State<SearchSheet> {
   // late final Geodesy geodesy;
 
   //
-  bool _showMore = false;
-  bool _isSearching = false;
+  final bool _showMore = false;
+  final bool _isSearching = false;
 
   @override
   void initState() {
@@ -31,7 +28,7 @@ class _SearchSheetState extends State<SearchSheet> {
     // geodesy = Geodesy();
 
     // Focus on Input
-    Future.delayed(Duration(seconds: 2))
+    Future.delayed(const Duration(seconds: 2))
         .then((value) => _searchFocusNode.requestFocus());
     super.initState();
   }
@@ -52,7 +49,7 @@ class _SearchSheetState extends State<SearchSheet> {
     return DraggableScrollableSheet(
       initialChildSize: 1,
       builder: (_, controller) => Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
@@ -64,7 +61,7 @@ class _SearchSheetState extends State<SearchSheet> {
             //   marginTop: 40,
             //   marginBottom: 30,
             // ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             // SearchBar
             Container(
               width: MediaQuery.of(context).size.width * .8,
@@ -105,18 +102,18 @@ class _SearchSheetState extends State<SearchSheet> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             //
-            Divider(
+            const Divider(
               color: Colors.grey,
               height: 0,
             ),
 
             // Place types
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               color: Colors.grey[50],
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // ...mapDataController.placeCategories
@@ -152,9 +149,9 @@ class _SearchSheetState extends State<SearchSheet> {
             // Place types Show more
             if (_showMore)
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 color: Colors.grey[50],
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // ...mapDataController.placeCategories
@@ -178,19 +175,19 @@ class _SearchSheetState extends State<SearchSheet> {
               ),
 
             //
-            Divider(
+            const Divider(
               color: Colors.grey,
               height: 0,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Favorite places
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               height: 50,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: [
+                children: const [
                   //
                   AFavoritePlace(
                     name: "Travail",
@@ -227,16 +224,16 @@ class _SearchSheetState extends State<SearchSheet> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
-            Divider(
+            const SizedBox(height: 10),
+            const Divider(
               color: Colors.grey,
               height: 0,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: const Row(
                 children: [
                   Icon(Icons.history),
                   SizedBox(
@@ -246,7 +243,7 @@ class _SearchSheetState extends State<SearchSheet> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             // Recent searches
@@ -273,7 +270,7 @@ class _SearchSheetState extends State<SearchSheet> {
             //         trailing: Text("$distanceText"),
             //         onTap: () {
             //           //
-                      
+
             //           Navigator.of(context).pop();
 
             //           print(">> result tap");
@@ -311,7 +308,8 @@ class AFavoritePlace extends StatelessWidget {
   final String name;
   final String? value;
 
-  AFavoritePlace({
+  const AFavoritePlace({
+    super.key,
     this.onTap,
     this.icon,
     required this.name,
@@ -328,6 +326,8 @@ class AFavoritePlace extends StatelessWidget {
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(5),
           ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -340,19 +340,17 @@ class AFavoritePlace extends StatelessWidget {
                   icon ?? Icons.location_on,
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("$name"),
+                  Text(name),
                   if (value != null) Text("$value"),
                 ],
               ),
             ],
           ),
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          margin: EdgeInsets.symmetric(horizontal: 5),
         ),
       ),
     );

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codedelaroute/app/helpers/utils.dart';
 import 'package:codedelaroute/app/modules/quizz_game/controllers/quizz_game_controller.dart';
 import 'package:codedelaroute/app/views/ui/snackbar.dart';
@@ -47,8 +46,6 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
   dynamic _confettiComposition;
   final _authController = Get.find<AuthController>();
   final _gameController = Get.find<QuizzGameController>();
-
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late FirestoreService firestoreService =
       FirestoreService(_authController.userId!);

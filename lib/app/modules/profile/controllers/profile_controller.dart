@@ -59,4 +59,10 @@ class ProfileController extends GetxController {
           .then((value) => _learnedSignCount.value = value.length);
     }
   }
+
+  resetStats() {
+    _avgScore.value = 0.0;
+    _totalSignCount.value = 0;
+    _acedQuizzCount.value = 0;
+  }
 }
