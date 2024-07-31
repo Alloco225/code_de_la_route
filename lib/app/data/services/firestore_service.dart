@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_controller.dart';
+import 'package:get/get.dart';
 
 class FirestoreService {
   final String userId;
@@ -51,6 +53,8 @@ class FirestoreService {
   Future<double> calculateAverageScore() async {
     Map<String, double> scoresMap = await getAllScores();
 
+    QuizzListController quizzListController = Get.find<QuizzListController>();
+
     if (scoresMap.isEmpty) {
       return 0; // Return 0 if there are no scores
     }
@@ -58,8 +62,10 @@ class FirestoreService {
     double totalSum =
         scoresMap.values.reduce((value, element) => value + element);
     int totalCount = scoresMap.length;
+    totalCount = quizzListController.quizzList.length;
 
-    return totalSum / totalCount;
+    double avg = totalSum / totalCount;
+    return avg.toPrecision(1);
   }
 
   Future<void> saveAverageScore(double averageScore) async {
@@ -120,6 +126,7 @@ class FirestoreService {
   }
 
   Future<void> saveLearnedSigns(List<String> signs) async {
+    try {} catch (e) {}
     await FirebaseFirestore.instance.collection('users').doc(userId).update({
       'learned_signs': signs,
     });

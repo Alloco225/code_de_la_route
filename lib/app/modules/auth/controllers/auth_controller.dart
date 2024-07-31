@@ -25,8 +25,35 @@ class AuthController extends GetxController with CacheManager {
     log("logUser !!! $user, $token");
     log("userInfo !!! ${user?.displayName}, ${user?.email}, ${user?.photoURL}");
     _isAuth.value = true;
+
+    if (user != null) {
+      await _checkAndCreateUserDocument(user.uid, user.email!);
+    }
     //Token is cached
     await saveToken(token);
+  }
+
+  Future<void> _checkAndCreateUserDocument(String userId, String email) async {
+    final DocumentReference userDoc =
+        _firestore.collection('users').doc(userId);
+
+    try {
+      DocumentSnapshot docSnapshot = await userDoc.get();
+
+      if (!docSnapshot.exists) {
+        await userDoc.set({
+          'email': email,
+          'learned_signs': [],
+          'achievements': {},
+          'averageScore': 0,
+        });
+        print('User document created.');
+      } else {
+        print('User document already exists.');
+      }
+    } catch (e) {
+      print('Error checking or creating user document: $e');
+    }
   }
 
   updateUser(User? user) {
@@ -191,8 +218,7 @@ class AuthController extends GetxController with CacheManager {
       // Delete the user document from Firestore
       DocumentReference userDoc = _firestore.collection('users').doc(userId);
 
-
-    // Reference to the quizzes subcollection
+      // Reference to the quizzes subcollection
       CollectionReference quizzesCollection = userDoc.collection('quizzes');
 
       // Fetch all documents in the quizzes subcollection
