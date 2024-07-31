@@ -18,8 +18,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  await GetStorage.init();
+  try {
+    await GetStorage.init();
+  } catch (e) {
+    log("Error initiating stoage");
+  }
 
   // FirebaseFirestore firestore = FirebaseFirestore.instance;
   log("Loaded App");

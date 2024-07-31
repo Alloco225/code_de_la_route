@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
-import 'package:codedelaroute/app/modules/settings/views/audio_settings_modal_view.dart';
 import 'package:codedelaroute/app/modules/settings/views/language_settings_modal_view.dart';
-import 'package:codedelaroute/app/modules/settings/views/theme_settings_modal_view.dart';
+import 'package:codedelaroute/app/routes/app_pages.dart';
+import 'package:codedelaroute/app/views/ui/snackbar.dart';
 import 'package:codedelaroute/app/views/widgets/fancy_button_widget.dart';
 import 'package:codedelaroute/app/views/widgets/title_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -87,7 +87,7 @@ class SettingsView extends GetView<SettingsController> {
                             BottomSheetModalWidget(
                               maxHeight: .4,
                               title: 'delete_data_question'.tr,
-                              child: buildDeleteAccountConfirmation(),
+                              child: const DeleteAccountConfirmation(),
                             ),
                             context: context);
                       }),
@@ -118,40 +118,6 @@ class SettingsView extends GetView<SettingsController> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget buildDeleteAccountConfirmation() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AutoSizeText(
-            'delete_data_confirmation'.tr,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 24),
-          ),
-          Row(
-            children: [
-              FancyButtonWidget(
-                title: 'delete'.tr,
-                color: 'red',
-                onTap: () {},
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              FancyButtonWidget(
-                title: 'cancel'.tr,
-                color: 'grey',
-                onTap: () => Get.back(),
-              ),
-            ],
-          )
-        ],
       ),
     );
   }
@@ -292,6 +258,59 @@ class _ModalInsideModalState extends State<ModalInsideModal> {
               style: const TextStyle(fontSize: 25),
               textAlign: TextAlign.center,
             ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class DeleteAccountConfirmation extends StatefulWidget {
+  const DeleteAccountConfirmation({super.key});
+
+  @override
+  State<DeleteAccountConfirmation> createState() =>
+      _DeleteAccountConfirmationState();
+}
+
+class _DeleteAccountConfirmationState extends State<DeleteAccountConfirmation> {
+  final auth = Get.find<AuthController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AutoSizeText(
+            'delete_data_confirmation'.tr,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 24),
+          ),
+          Row(
+            children: [
+              FancyButtonWidget(
+                title: 'delete'.tr,
+                color: 'red',
+                onTap: () async {
+                  // await auth.deleteUserAccount();
+                  await auth.deleteUserAccountData();
+
+                  showSnackbarSuccess("data_deleted", context: context);
+                  Get.toNamed(Routes.HOME);
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FancyButtonWidget(
+                title: 'cancel'.tr,
+                color: 'grey',
+                onTap: () => Get.back(),
+              ),
+            ],
           )
         ],
       ),

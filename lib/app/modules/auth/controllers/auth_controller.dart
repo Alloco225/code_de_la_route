@@ -171,4 +171,44 @@ class AuthController extends GetxController with CacheManager {
       _isAuth.value = true;
     }
   }
+
+  Future<void> deleteUserAccount() async {
+    log("logout user");
+    try {
+      if (authUser != null) {
+        await authUser!.delete();
+        log('User account deleted successfully.');
+      } else {
+        log('No user is currently signed in.');
+      }
+    } catch (e) {
+      log('Error deleting user account: $e');
+    }
+  }
+
+  Future<void> deleteUserAccountData() async {
+    try {
+      // Delete the user document from Firestore
+      DocumentReference userDoc = _firestore.collection('users').doc(userId);
+
+
+    // Reference to the quizzes subcollection
+      CollectionReference quizzesCollection = userDoc.collection('quizzes');
+
+      // Fetch all documents in the quizzes subcollection
+      QuerySnapshot quizzesSnapshot = await quizzesCollection.get();
+
+      // Delete each document in the quizzes subcollection
+      for (DocumentSnapshot quizDoc in quizzesSnapshot.docs) {
+        await quizDoc.reference.delete();
+      }
+      await userDoc.delete();
+
+      storage.erase();
+
+      log('User account data deleted successfully.');
+    } catch (e) {
+      log('Error deleting user account data: $e');
+    }
+  }
 }

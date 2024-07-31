@@ -84,6 +84,8 @@ class Messages extends Translations {
           "menu": "Menu",
           "home": "Home",
           "no_score_yet": "No score yet",
+          "data_deleted": "Data deleted",
+          "logged_out": "Logged out",
 
           "order_question_prompt": "What's the correct order ? ",
           "image_question_prompt": "What's the name of this sign ?",
@@ -161,6 +163,8 @@ class Messages extends Translations {
           "signaling": "Panneaux de signalisation",
           // profile
           "score": "Note",
+          "data_deleted": "Données supprimées",
+          "logged_out": "Déconnecté.e",
 
           "quizzes": "Quizzes",
           "avg": "Score",
@@ -273,6 +277,8 @@ class Messages extends Translations {
           "authenticate": "ログインまたはアカウントを作成",
           "your_rank": "あなたのランク",
           "logout": "ログアウト",
+          "data_deleted": "データが削除されました",
+          "logged_out": "ログアウトしました",
           // achievements
           // "highway_hero": "ハイウェイ ヒーロー",
           // "traffic_titan": "交通 タイタン",
