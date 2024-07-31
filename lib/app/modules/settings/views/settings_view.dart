@@ -239,6 +239,12 @@ class DeleteAccountConfirmation extends StatefulWidget {
 
 class _DeleteAccountConfirmationState extends State<DeleteAccountConfirmation> {
   final auth = Get.find<AuthController>();
+  bool isLoading = false;
+  setLoading() {
+    setState(() {
+      isLoading = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +264,9 @@ class _DeleteAccountConfirmationState extends State<DeleteAccountConfirmation> {
               FancyButtonWidget(
                 title: 'delete'.tr,
                 color: 'red',
+                isLoading: isLoading,
                 onTap: () async {
+                  setLoading();
                   // await auth.deleteUserAccount();
                   await auth.deleteUserAccountData();
 
@@ -296,6 +304,13 @@ class LogoutModalConfirmation extends StatefulWidget {
 }
 
 class _LogoutModalConfirmationState extends State<LogoutModalConfirmation> {
+  bool isLoading = false;
+  setLoading() {
+    setState(() {
+      isLoading = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -313,7 +328,9 @@ class _LogoutModalConfirmationState extends State<LogoutModalConfirmation> {
               FancyButtonWidget(
                 title: 'logout'.tr,
                 color: 'red',
+                isLoading: isLoading,
                 onTap: () async {
+                  setLoading();
                   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
                   await firebaseAuth.signOut();
                   showSnackbarSuccess("logged_out".tr, context: context);

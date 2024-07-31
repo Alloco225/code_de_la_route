@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../const/theme.dart';
+
 class FancyButtonWidget extends StatelessWidget {
   final String color;
   final String? title;
@@ -7,6 +9,7 @@ class FancyButtonWidget extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
   final int flex;
+  final bool isLoading;
 
   const FancyButtonWidget({
     super.key,
@@ -16,6 +19,7 @@ class FancyButtonWidget extends StatelessWidget {
     required this.onTap,
     this.onLongPress,
     this.flex = 1,
+    this.isLoading = false,
   });
 
   @override
@@ -118,6 +122,15 @@ class FancyButtonWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              if (isLoading)
+                const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
+              if (isLoading) const SizedBox(width: 10),
               if (icon != null)
                 Icon(
                   icon,

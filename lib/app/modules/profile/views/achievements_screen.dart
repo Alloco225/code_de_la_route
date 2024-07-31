@@ -1,15 +1,16 @@
-import 'dart:developer';
-
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:codedelaroute/app/const/theme%20copy.dart';
 import 'package:codedelaroute/app/modules/auth/controllers/auth_controller.dart';
 import 'package:codedelaroute/app/views/widgets/badge_widget.dart';
 import 'package:codedelaroute/app/views/widgets/loading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../../const/theme.dart';
 import '../../../views/widgets/container_widget.dart';
 import '../../auth/submodules/login/controllers/login_controller.dart';
 
@@ -22,7 +23,7 @@ class AchievementsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (user == null) {
-      return _buildAuthCTA(context);
+      return const LoginButton();
     }
 
     return FutureBuilder<DocumentSnapshot>(
@@ -36,7 +37,7 @@ class AchievementsScreen extends StatelessWidget {
             return Center(child: Text('Error: ${userSnapshot.error}'));
           }
           // if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
-          //   return _buildAuthCTA(context);
+          //   return LoginButton(context);
           // }
 
           return FutureBuilder<QuerySnapshot>(
@@ -132,8 +133,25 @@ class AchievementsScreen extends StatelessWidget {
               });
         });
   }
+}
 
-  Widget _buildAuthCTA(context) {
+class LoginButton extends StatefulWidget {
+  const LoginButton({super.key});
+
+  @override
+  State<LoginButton> createState() => _LoginButtonState();
+}
+
+class _LoginButtonState extends State<LoginButton> {
+  bool isLoading = false;
+  setLoading() {
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final loginController = Get.find<LoginController>();
 
     return ContainerWidget(
@@ -150,7 +168,10 @@ class AchievementsScreen extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () => loginController.signInWithGoogle(context),
+            onTap: () {
+              setLoading();
+              loginController.signInWithGoogle(context);
+            },
             child: ContainerWidget(
               child: Center(
                 child: Row(
@@ -170,6 +191,18 @@ class AchievementsScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    if (isLoading)
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    if (isLoading)
+                      const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
                   ],
                 ),
               ),
