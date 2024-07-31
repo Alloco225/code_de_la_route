@@ -103,6 +103,11 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     await _saveScore(score);
 
+    setState(() {});
+    if (score == MARK_TOTAL) {
+      throwConfetti();
+    }
+
     log("correct answers ${widget.correctAnswers}");
     List<String> correctlyAnsweredSigns = widget.correctAnswers
         .where((el) => el['signId'] != null)
@@ -116,7 +121,10 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     _saveLearnedSigns(correctlyAnsweredSigns);
 
     final averageScore = await _calculateAndSaveAverageScore();
+    log("average score $averageScore");
 
+    final completionPercentage = (averageScore * 100) / MARK_TOTAL;
+    log("completion percentage $completionPercentage");
     // save score
     // if (quizzId != null) {
     //   _quizzListController.updateQuizzScore(quizzId, score);
@@ -133,62 +141,42 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
     // Check for achievements
 
     // newAchievement = true;
-    List<Map> unlockedAchievements = [];
 
-    try {
-      unlockedAchievements = await _authController.checkAndUnlockAchievements(
-          _authController.userId!, averageScore);
-
-      // Update user's rank in Firestore
-      // DocumentReference userDoc = _firestore.collection('users').doc(_authController.userId);
-      // await userDoc.update({
-      //   'rank': userRank,
-      //   'lastUpdated': FieldValue.serverTimestamp(),
-      // });
-
-      // log('User rank updated to: $userRank');
-    } catch (e) {
-      log('Error updating user rank: $e');
-    }
+    setState(() {});
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Check for points based achievements
-      // Check for achievements and reset list for themwkd qskdkq mlkdfiqsdndi
-      if (_authController.authUser == null) {
-        showSnackbarInfo(
-          "authenticate_cta_achivements".tr,
-          context: context,
-        );
-        return;
-      }
+      log("\n\n\naddPostFrameCallback");
+      _authController
+          .checkAndUnlockAchievements(
+              _authController.userId!, completionPercentage)
+          .then((unlockedAchievements) {
+        log("addPostFrameCallback checkAndUnlockAchievements");
+        // Check for points based achievements
+        if (_authController.authUser == null) {
+          showSnackbarInfo(
+            "authenticate_cta_achivements".tr,
+            context: context,
+          );
+          setState(() {});
+          return;
+        }
 
-      // if (math.Random().nextDouble() > .3) {
-
-      // showSnackbarSuccess("Achievement unlocked", context: context);
-      // showSnackbarAchievement("Achievement unlocked", context: context);
-      // Your code HERE
-      // Flutter will wait until the current build is completed before executing this code.
-      // }
-      for (var achievement in unlockedAchievements) {
-        _showAchievementSnackbar(achievement);
-      }
+        log("generating snackbars for the achievements");
+        for (var achievement in unlockedAchievements) {
+          log("snackbar for achievement ${achievement['key']}");
+          // _showAchievementSnackbar(achievement);
+          setState(() {
+            showSnackbarAchievement(
+              context: context,
+              badge_id: achievement['badge'],
+              title: achievement['key'],
+              badge_icon: achievement['icon'],
+            );
+          });
+          Future.delayed(const Duration(seconds: 1));
+        }
+      });
     });
-
-    setState(() {});
-    if (score == MARK_TOTAL) {
-      throwConfetti();
-    }
-  }
-
-  Future<void> _showAchievementSnackbar(achievement) async {
-    showSnackbarAchievement(
-      context: context,
-      badge_id: achievement['badge'],
-      title: achievement['key'],
-      badge_icon: achievement['icon'],
-    );
-    setState(() {});
-    await Future.delayed(const Duration(seconds: 2));
   }
 
   Future<void> _saveScore(double score) async {
@@ -207,7 +195,7 @@ class _QuizzEndedViewState extends State<QuizzEndedView>
 
     // Save average score online
     await firestoreService.saveAverageScore(averageScore);
-    return averageScore;
+    return averageScore * 1.0;
   }
 
   Future<void> _saveLearnedSigns(List<String> signIds) async {

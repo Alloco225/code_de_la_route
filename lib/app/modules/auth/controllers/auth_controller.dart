@@ -107,47 +107,29 @@ class AuthController extends GetxController with CacheManager {
           achievementDoc.data() as Map<String, dynamic>;
 
       String achievementId = achievementDoc.id;
+      String achievementKey = achievement['key'];
 
-      double? requiredProgress =
+      int? requiredProgress =
           achievement['conditions']['completedQuizzPercentage'];
       //
       if (requiredProgress == null) {
         continue;
       }
       if (userAverageScore >= requiredProgress) {
-        await unlockAchievement(userId, achievementId);
-        unlockedAchievements.add(achievement);
+        // await unlockAchievement(userId, achievementId);
+        Map? unlockedAchievement =
+            await unlockAchievementByKey(userId, achievementKey);
+        if (unlockedAchievement != null) {
+          unlockedAchievements.add(unlockedAchievement);
+        }
       }
     }
 
     return unlockedAchievements;
   }
-  // Future<void> checkAndUnlockAchievements(
-  //     String userId, Map<String, dynamic> userProgress) async {
-  //   // Fetch all achievements
-  //   QuerySnapshot achievementsSnapshot =
-  //       await _firestore.collection('achievements').get();
-
-  //   for (var achievementDoc in achievementsSnapshot.docs) {
-  //     Map<String, dynamic> achievement =
-  //         achievementDoc.data() as Map<String, dynamic>;
-  //     String achievementId = achievementDoc.id;
-  //     Map<String, dynamic> conditions = achievement['conditions'];
-
-  //     // Check if the user meets the conditions to unlock this achievement
-  //     bool conditionsMet = conditions.entries.every((condition) {
-  //       String key = condition.key;
-  //       dynamic value = condition.value;
-  //       return userProgress[key] >= value;
-  //     });
-
-  //     if (conditionsMet) {
-  //       await unlockAchievement(userId, achievementId);
-  //     }
-  //   }
-  // }
 
   Future<Map<String, dynamic>?> getAchievementByKey(String key) async {
+    log("getAchievementByKey $key");
     try {
       CollectionReference achievements =
           FirebaseFirestore.instance.collection('achievements');
@@ -166,49 +148,10 @@ class AuthController extends GetxController with CacheManager {
 
       return achievementData;
     } catch (e) {
-      print('Error getting achievement by key: $e');
+      log('Error getting achievement by key: $e');
       return null;
     }
   }
-
-  // Future<void> checkAndUnlockAchievements_(
-  //     String userId, Map<String, dynamic> userProgress) async {
-  //   // Fetch all achievements
-  //   QuerySnapshot achievementsSnapshot =
-  //       await FirebaseFirestore.instance.collection('achievements').get();
-
-  //   // Fetch user's unlocked achievements
-  //   DocumentSnapshot userDoc =
-  //       await FirebaseFirestore.instance.collection('users').doc(userId).get();
-  //   List<String> unlockedAchievements = [];
-  //   if (userDoc.exists && userDoc.data()['achievements'] != null) {
-  //     unlockedAchievements = List<String>.from(userDoc['unlockedAchievements']);
-  //   }
-
-  //   for (var achievementDoc in achievementsSnapshot.docs) {
-  //     String achievementId = achievementDoc.id;
-
-  //     // Skip if the achievement is already unlocked
-  //     if (unlockedAchievements.contains(achievementId)) {
-  //       continue;
-  //     }
-
-  //     Map<String, dynamic> achievement =
-  //         achievementDoc.data() as Map<String, dynamic>;
-  //     Map<String, dynamic> conditions = achievement['conditions'];
-
-  //     // Check if the user meets the conditions to unlock this achievement
-  //     bool conditionsMet = conditions.entries.every((condition) {
-  //       String key = condition.key;
-  //       dynamic value = condition.value;
-  //       return userProgress[key] >= value;
-  //     });
-
-  //     if (conditionsMet) {
-  //       await unlockAchievement(userId, achievementId);
-  //     }
-  //   }
-  // }
 
   Future<void> logOut() async {
     try {
