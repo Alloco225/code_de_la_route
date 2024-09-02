@@ -15,13 +15,29 @@
         </router-link>
       </div>
     </main>
+
+    <footer class="bg-white p-4 shadow-md">
+      <div class="flex justify-between items-center w-full">
+        <button
+          class="flex gap-2 justify-center items-center bg-black bg-opacity-50 hover:bg-opacity-100 rounded px-3 py-2 text-white"
+          @click="$router.back()"
+        >
+          <ion-icon name="chevron-back-outline"></ion-icon> Retour
+        </button>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
 export default {
   name: 'LearnSigns',
-
+  async created() {
+    console.log('created panneaux')
+  },
+  async mounted() {
+    console.log('mounted panneaux')
+  },
   computed: {
     categories() {
       return this.$store.state.categories.list
