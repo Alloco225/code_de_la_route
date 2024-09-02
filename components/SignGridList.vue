@@ -57,7 +57,7 @@
           </div>
         </button>
         <div class="absolute left-0 right-0">
-          <div class="flex justify-between items-center w-full">
+          <div class="flex justify-between items-center w-full px-3">
             <button
               class="w-10 h-10 flex justify-center items-center bg-black bg-opacity-50 hover:bg-opacity-100 text-white rounded-full"
               @click="prevSign"
