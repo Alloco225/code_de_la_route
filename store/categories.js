@@ -2,6 +2,8 @@
 import QuizzDataService from "~/services/QuizzDataService"
 import CategoryDataService from "~/services/CategoryDataService"
 import { CATEGORIES } from '~/resources/db.js'
+
+console.log(CATEGORIES)
 const state = () => ({
   list:  CATEGORIES,
 })
