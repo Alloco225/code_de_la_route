@@ -2,6 +2,7 @@
   <div class="bg-white flex flex-col h-full px-5 py-5">
     <header class="text-center flex justify-between items-end">
       <button
+        @click="$router.go(-1)"
         class="w-8 h-8 flex justify-center items-center bg-black bg-opacity-70 hover:bg-opacity-100 text-white rounded-full"
       >
         <ion-icon name="chevron-back-outline"></ion-icon>

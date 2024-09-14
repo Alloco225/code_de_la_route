@@ -4,7 +4,7 @@
     :class="[isLoading('initApp') ? 'justify-center' : 'justify-between']"
   >
     <div
-      class="mt-5 md:my-10 text-white text-center px-2 transition duration-200 ease-out"
+      class="mt-5 md:my-10 mx-5 text-white text-center px-2 transition duration-200 ease-out"
     >
       <img src="/logo.png" alt="" class="h-auto w-full" />
       <span>v0.8.3</span>
