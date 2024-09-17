@@ -3,7 +3,7 @@
       class="mx-2 p-5 flex flex-col gap-3 justify-center items-center text-gray-300 rounded bg-opacity-10 bg-white h-full"
       >
       <ion-icon name="search-outline" style="font-size: 64px"></ion-icon>
-      <h2 class="text-xl">Wow such empty</h2>
+      <h2 class="text-xl">Quizz non trouvé</h2>
 
       <button
         @click="$router.back()"

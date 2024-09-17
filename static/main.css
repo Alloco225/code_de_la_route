@@ -1,8 +1,14 @@
 html, body, #__nuxt, #__layout {
   height: 100dvh !important;
+  font-family: 'Product Sans Regular', sans-serif !important;
 }
 
-
+.font-genos {
+  font-family: 'Genos', sans-serif !important;
+}
+.font-product-sans {
+  font-family: 'Product Sans', sans-serif !important;
+}
 /* TRANSITIONS */
 
 /* we will explain what these classes do next! */

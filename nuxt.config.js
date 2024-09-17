@@ -26,11 +26,15 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
+      { rel: 'stylesheet', href: '/fonts/style.css' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap' },
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&display=swap' },
+
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Product+Sans:wght@100;300;400;500;700;900&display=swap' },
       { rel: 'stylesheet', href: '/main.css' },
-
-
-
     ],
     script: [
       { type:"module", src:"https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"},

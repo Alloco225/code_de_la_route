@@ -1,15 +1,11 @@
 <template>
-  <div>
-    quizzes list
-  </div>
+  <div>quizzes list</div>
 </template>
 
 <script>
 export default {
-  name: 'Quizzes',
-}
+  name: "Quizzes",
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
