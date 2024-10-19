@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     showSign(sign) {
-      this.currentSign = sign
+      // this.currentSign = sign
     },
     hideSign() {
       this.currentSign = false

@@ -6,7 +6,7 @@
     <div
       class="mt-5 md:my-10 mx-5 text-white text-center px-2 transition duration-200 ease-out"
     >
-      <img src="/logo.png" alt="" class="h-auto w-full" />
+      <img src="/logo.png" alt="" class="h-auto w-32 mx-auto" />
       <h1 class="font-genos text-5xl font-medium">Code de la Route</h1>
       <span>v0.8.3</span>
     </div>

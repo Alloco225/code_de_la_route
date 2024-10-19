@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white flex flex-col h-full px-5 py-5">
+  <div class="bg-gray-700 flex flex-col h-full px-5 py-5">
     <header class="text-center flex justify-between items-end">
       <button
         @click="$router.go(-1)"
@@ -15,7 +15,7 @@
       </button>
     </header>
     <div class="pt-10">
-      <section class="flex flex-col items-center text-center">
+      <section class="flex flex-col items-center text-center text-white">
         <img
           :src="userProfile.photoURL ?? '/favicon.png'"
           alt="User Avatar"
@@ -28,7 +28,7 @@
       <section
         class="grid grid-cols-3 items-center text-center mt-5 rounded border mx-5"
       >
-        <div class="flex flex-col items-center text-center gap-2 p-3">
+        <div class="flex flex-conl items-center text-center gap-2 p-3">
           <strong>Panneaux</strong>
           <p>{{ userProfile.signs + '/' + totalPanneaux }}</p>
         </div>

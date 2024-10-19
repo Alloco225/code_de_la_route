@@ -27,7 +27,9 @@ export default {
     ],
     link: [
       { rel: 'stylesheet', href: '/fonts/style.css' },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'stylesheet', href: '/css/global.css' },
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'icon', href: '/favicon.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap' },
