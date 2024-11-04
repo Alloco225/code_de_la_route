@@ -18,9 +18,10 @@ class HomeView extends GetView<HomeController> {
 
   final authController = Get.find<AuthController>();
 
-  final VERSION = "2.9.3";
+  final VERSION = "2.9.7+10";
   // final VERSION_DATE = "31/07/2024";
-  final VERSION_DATE = "23/05/2024";
+  // final VERSION_DATE = "23/05/2024";
+  final VERSION_DATE = "03/11/2024";
 
   final List menuElements = [
     {

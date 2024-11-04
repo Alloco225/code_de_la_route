@@ -1,7 +1,7 @@
 name: codedelaroute
-version: 2.9.6+9 #achievements_loaders
+version: 2.9.7+10 #target 34
 publish_to: none
-description: A new Flutter project.
+description: Code de la Route
 environment: 
   sdk: '>=3.3.3 <4.0.0'
 
