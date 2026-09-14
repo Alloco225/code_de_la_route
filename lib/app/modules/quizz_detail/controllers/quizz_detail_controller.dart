@@ -5,8 +5,8 @@ import 'package:codedelaroute/app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-import '../../../data/db/db_data.dart';
 import '../../../data/models/quizz_model.dart';
+import '../../quizz_list/controllers/quizz_list_controller.dart';
 
 class QuizzDetailController extends GetxController {
   final _quizz = (null as Quizz?).obs;
@@ -29,7 +29,8 @@ class QuizzDetailController extends GetxController {
     categoryId = routeParams?['categoryId'];
     quizzId = routeParams?['quizzId'];
 
-    _quizz.value = QUIZZES.firstWhereOrNull(
+    final quizzListController = Get.find<QuizzListController>();
+    _quizz.value = quizzListController.quizzes.firstWhereOrNull(
         (el) => el.categoryId == categoryId && el.id == quizzId);
 
     isLoading = false;

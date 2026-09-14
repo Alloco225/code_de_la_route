@@ -5,7 +5,6 @@ import 'package:codedelaroute/app/modules/quizz_list/controllers/quizz_list_cont
 import 'package:get/get.dart';
 
 import '../../../const/game_settings.dart';
-import '../../../data/db/db_data.dart';
 import '../../../data/models/answer_model.dart';
 import '../../../data/models/question_model.dart';
 import '../../../data/models/quizz_model.dart';
